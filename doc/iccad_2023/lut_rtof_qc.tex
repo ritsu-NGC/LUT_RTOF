@@ -1,0 +1,13 @@
+\Qcircuit @C=1em @R=1em @!R { \\
+  \lstick{{x}_{1}}  & \qw              & \qw              & \qw              & \qw              & \qw              & \qw              & \multigate{6}{3} & \qw              & \qw  & \ghost{}\\
+  \lstick{{x}_{2}}  & \multigate{2}{1} & \qw              & \qw              & \qw              & \qw              & \qw              & \ghost{3}        & \multigate{2}{1} & \qw  & \ghost{}\\ 
+  \lstick{{x}_{3}}  & \ghost{1}        & \qw              & \qw              & \qw              & \qw              & \qw              & \ghost{3}        & \ghost{1}        & \qw  & \ghost{}\\
+  \lstick{{x}_{4}}  & \ghost{1}        & \multigate{1}{2} & \qw              & \qw              & \qw              & \multigate{1}{2} & \ghost{3}        & \ghost{1}        & \qw  & \ghost{}\\
+  \lstick{{x}_{5}}  & \qw              & \ghost{2}        & \qw              & \qw              & \qw              &\ghost{2}         & \ghost{3}        & \qw              & \qw  & \ghost{}\\
+  \lstick{\ket{0}} & \qw              & \qw              & \qw              & \qw              & \qw              & \qw              & \ghost{3}        & \qw              & \qw  & \ghost{}\\
+  \lstick{\ket{0}} & \targ \qwx[-3]   & \qw              & \multigate{1}{4} & \qw              & \multigate{1}{4} & \qw              & \ghost{3}        &\targ \qwx[-3]    & \qw  & \ghost{}\\
+  \lstick{\ket{0}} & \qw              & \targ \qwx[-3]   & \ghost{4}        & \multigate{1}{5} & \ghost{4}        & \targ \qwx[-3] & \targ \qwx[-1]     & \qw              & \qw  & \push{{y}_1} \qw\\
+  \lstick{\ket{0}} & \qw              & \qw              & \targ \qwx[-1]   & \ghost{5}        & \targ \qwx[-1]   & \qw              & \qw              & \qw              & \qw  & \ghost{}\\
+  \lstick{\ket{0}} & \qw              & \qw              & \qw              & \targ \qwx[-1]   & \qw              & \qw              & \qw              & \qw              & \qw  & \push{{y}_2} \qw\\   
+}
+

@@ -1,0 +1,82 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{float}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{amsmath,amssymb,amsfonts}
+% \usepackage{algorithmic}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[T1]{fontenc}
+\usepackage{mdframed}
+\usepackage{algorithm, algpseudocode} % texlive-science
+\usepackage[braket, qm]{qcircuit}
+
+
+\usepackage[braket, qm]{qcircuit}
+\usepackage{tikz}
+%
+\input{img/defs}
+%\usepackage{floatrow}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\algrenewcommand\algorithmicindent{0.5em}%
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%\renewcommand{\baselinestretch}{1.05}
+%\makeatletter
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+%\makeatother
+
+\begin{document}
+
+\title{Optimizing LUT-based Quantum Circuit Synthesis using Relative Phase Boolean Operations
+}
+\author{\IEEEauthorblockN{1\textsuperscript{st} David Clarino}
+  \IEEEauthorblockA{\textit{Graduate School of} \\
+    \textit{Information Science and Engineering} \\
+    \textit{Ritsumeikan University}\\
+    Kusatsu, Japan \\
+    dizzy@ngc.is.ritsumei.ac.jp}
+  \and
+  \IEEEauthorblockN{2\textsuperscript{nd} Naoya Asada}
+  \IEEEauthorblockA{\textit{Graduate School of } \\
+    \textit{Information Science and Engineering} \\
+    \textit{Ritsumeikan University}\\
+    Kusatsu, Japan \\
+    sousai@ngc.is.ritsumei.ac.jp}
+  \and
+  \IEEEauthorblockN{3\textsuperscript{rd} Shigeru Yamashita}
+  \IEEEauthorblockA{\textit{Graduate School of} \\
+    \textit{ Information Science and Engineering} \\
+    \textit{Ritsumeikan University}\\
+    Kusatsu, Japan\\
+    ger@ngc.is.ritsumei.ac.jp}  
+}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\begin{IEEEkeywords}
+relative-phase Toffoli gates (RTOF), S gate, circuit optimization
+\end{IEEEkeywords}
+
+
+\input{Intro.tex}
+\input{Pre.tex}
+\input{Pro.tex}
+\input{Exp.tex}
+\input{Concl.tex}
+\vspace{0.5cm}
+\bibliographystyle{plain}
+\bibliography{ref}
+%\vspace{12pt}
+\end{document}

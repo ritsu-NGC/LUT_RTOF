@@ -1,0 +1,15 @@
+\newcommand*\rtofstarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,minimum width=16pt] (char) {S};}}
+\newcommand*\rtofsdgtarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt] (char) {S$^{\dagger}$};}}
+\newcommand*\rtoftarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt] (char) {\phantom{S$^{\dagger}$}};}}
+\newcommand*\rtofsctrl{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,fill=black, minimum width=3pt] (char) {};}}
+\newcommand*\rtofsctrlo{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,fill=white, minimum width=3pt] (char) {};}}
+
+\newcommand*\ctrlrtofs[1]{\push{\rtofsctrl}\qwx[#1]\qw}
+\newcommand*\ctrlortofs[1]{\push{\rtofsctrlo}\qwx[#1]\qw}
+\newcommand*\targrtofs{\push{\rtofstarg}\qw}
+\newcommand*\targrtof{\push{\rtoftarg}\qw}

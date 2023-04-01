@@ -1,0 +1,51 @@
+\begin{figure}[t]
+  \label{fig-rtof3}
+\end{figure}
+\begin{figure}[t]
+  \label{fig-nrtof}
+  \begin{center}
+    \input{img/fig-nrtof}
+  \end{center}
+  \caption{N-controlled RTOF gate}
+\end{figure}
+\begin{figure}[t]
+  \label{fig-urtof}
+  \begin{center}
+    \input{img/fig-urtof}
+  \end{center}
+  \caption{U-controlled RTOF gate}
+\end{figure}
+\begin{figure}[t]
+  \label{fig-f-dot-g}
+  \begin{center}
+    \input{img/fig-f-dot-g}
+  \end{center}
+  \caption{Generalization of Fig.\ref{fig-urtof}, which also implements the Boolean product of two functions}
+\end{figure}
+\begin{figure}[t]
+  \label{fig-shannon}
+\end{figure}
+
+
+\section{Proposed Method}
+
+\subsection{Realizing Arbitrarily Controlled NOT Functions Up To A Relative Phase}
+\label{Subsec:UNOT}
+To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF gate depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a n-input Toffoli gate as depicted in Fig.~\ref{fig-nrtof} which was observed by Maslov ~\cite{bib-rtof-maslov}. As noted by Maslov, we can ostensibly continue this indefinitely for n-input Toffoli gates until we arrive at a canonical 3 input example. We can generalize this n-input Toffoli to an arbitrarily controlled NOT gate as depicted in ~\ref{fig-urtof}. It is easy to see this without further proof: we can imagine implementing the Boolean function separately and then routing its input to an input bit via a clean ancilla.
+
+We can further generalize this. Recall from \label{Sec:bool-const} that a Toffoli realizes a Boolean product of its inputs on its output. Just like above, we can use the same reasoning to generalize both inputs into arbitrary Boolean functions ~\cite{bib-amy-phase-state} . This means that we can use the construction in ~\ref{fig-f-dot-g} to realize a product between two arbitrary Boolean functions up to a relative phase. 
+
+
+\subsection{Using Shannon Decomposition To Realize Arbitrarily Controlled Single Target Gates}
+
+Recall the Shannon Decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$. Using the constructions in ~\ref{Subsec:UNOT}, we thus have a way to recursively construct arbitrary Boolean Functions up to a relative phase as a single target controlled NOT gate.
+
+First, from the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$\footnote{note that as with any Shannon decomposition, we can decompose using an arbitrary variable order. We will treat variable order in ~\ref{Sec:exp}}. We then take ~\ref{fig-bool-or} and replace the inputs with our inputs, and the Toffoli gates with RTOFs (and their decomposition). Finally, we take ~\ref{fig-f-dot-g} to insert our function, and we get the construction in Fig.~\ref{fig-shannon}. As noted in ~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process until we are left with a simple CNOT as our U-controlled NOT expression. 
+
+\begin{example}
+  
+\end{example}
+
+\subsection{Synthesizing A Boolean Function Using LHRS and Shannon Decomposition RTOF}
+
+First, a LUT network is synthesized from the Boolean expression using existing LUT-Network decomposition methods, including any uncomputation logic. Then, this LUT network is parsed by our algorithm, creating quantum circuits implementing relative phase versions of the partial Boolean functions in each cluster with an uncompute pair, and exact versions in each cluster (using an ESOP-based synthesis method) without an uncompute pair. These are then recombined into a quantum circuit
