@@ -95,3 +95,10 @@ class BlifReadTests(object):
     def test_blif_read(self):
         qc_args = blif_read('/home/dclarino/share/size/cavlc_size_2022.blif')
         assert 1 == 0
+
+    def test_lut_node_synth(self):
+        test_lut = lut_node("test",["x3","x1","x2"],"f")
+        test_lut.func = test_lut.bdd.add_expr("(x3 & x1 & x2) | (~x3 & ~(~x1 & ~x2))")
+        print("DCDEBUG " + str(list(test_lut.bdd.pick_iter(test_lut.func))))
+        test_lut.synth()
+        assert test_lut.cost == 16
