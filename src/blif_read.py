@@ -95,11 +95,8 @@ class lut_node:
         self.qc   = ret_val[0]
 
     def do_synth(self,func,var_order,qc):
-        print("DCDEBUG " + var_order[0] + " " + str(list(self.bdd.pick_iter(func))))
-        print("DCDEBUG var_order len " + var_order[0] + " " + str(len(var_order)))
         #if len(func) == 1 or len(var_order) == 1:
         if func == self.bdd.add_expr('True') or len(var_order) == 1:
-            print("DCDEBUG return CNOT")
             #return CNOT
             return [qc, 0]
         else:
@@ -109,16 +106,13 @@ class lut_node:
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func0 != self.bdd.add_expr('False'):
                 synth0 = self.do_synth(synth_func0,var_order[1:],qc)
-                print("DCDEBUG " + var_order[0] + " synth0 " + str(synth0[1]))
                 ret_arr = [qc,ret_arr[1] + synth0[1] + 4]
             synth_func1 = self.bdd.let({var_order[0]:True},func)
             if synth_func1 == self.bdd.add_expr('True'):
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func1 != self.bdd.add_expr('False'):
                 synth1 = self.do_synth(synth_func1,var_order[1:],qc)
-                print("DCDEBUG " + var_order[0] + " synth1 " + str(synth1[1]))
                 ret_arr = [qc,ret_arr[1] + synth1[1] + 4]
 
-            print("DCDEBUG " + var_order[0] + " add_val " + str(ret_arr[1]))
 
             return ret_arr
