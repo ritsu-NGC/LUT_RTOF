@@ -35,10 +35,11 @@ def blif_read(fpath):
     qc_args["count"]     = 0
     while keep_reading:
         line = file1.readline()
-        if len(line) == 0:
+        if len(line) == 0 or ".end" in line:
             keep_reading = 0
             break
         else:
+
             qc_args = proc_line(qc_args,line)
     
     if(qc_args["state"] == "func_info"):
@@ -63,27 +64,12 @@ def proc_line(qc_args,line):
         qc_args["outputs"] = line.split()[1:]
     elif line.split()[0] == '.names':
         #
-        #print("DCDEBUG " + str())
-        print("DCDEBUG " + line)
         if line.split()[1] == "$false" or line.split()[1] == "$true" or line.split()[1] == "$undef":
             return qc_args
         if (qc_args["state"] != "node_info"):
             if(qc_args["state"] == "func_info"):
-                #print("DCDEBUG sizeof node" + str(sys.getsizeof(qc_args["nodes"][-1])))
-                #print("DCDEBUG sizeof qc_args" + str(sys.getsizeof(qc_args)))                
-                #print("DCDEBUG switch ")
                 qc_args["nodes"][-1].synth()
                 qc_args["nodes"][-1].synth_cf()
-                # snapshot  = tracemalloc.take_snapshot()
-                # display_top(snapshot)
-                # top_stats = snapshot.statistics('traceback')
-                # stat      = top_stats[0]
-
-                # print("%s memory blocks: %.1f KiB" % (stat.count, stat.size / 1024))
-                # for line2 in stat.traceback.format():
-                #     print(line2)
-
-                #qc_args["nodes"][-1].bdd._bdd.__del__()
                 qc_args["nodes"][-1].func = None
                 qc_args["nodes"][-1].bdd  = None
 
@@ -91,16 +77,13 @@ def proc_line(qc_args,line):
             qc_args["state"] = "node_info"
             qc_args["nodes"].append(lut_node("node" + str(count),line.split()[1:-1],line.split()[-1]))
             qc_args["count"] += 1
-    elif not line[0] == "#":
+    elif not line[0] == "#" and not '.end' in line:
         if(qc_args["state"] == "node_info"):
             qc_args["state"] = "func_info"
         if(qc_args["state"] == "func_info"):
             qc_args["nodes"][-1].add_sop_expr(line)
 
     if(qc_args["state"] == "func_info"):
-        #print("DCDEBUG sizeof node" + str(sys.getsizeof(qc_args["nodes"][-1])))
-        #print("DCDEBUG sizeof qc_args" + str(sys.getsizeof(qc_args)))                
-        #print("DCDEBUG switch ")
         qc_args["nodes"][-1].synth()
         qc_args["nodes"][-1].synth_cf()
 
@@ -166,9 +149,7 @@ class lut_node:
         self.qc   = ret_val[0]
 
     def do_synth(self,func,var_order,qc):
-        #if len(func) == 1 or len(var_order) == 1:
         if func == self.bdd.add_expr('True') or len(var_order) == 1:
-            #return CNOT
             return [qc, 0]
         else:
             synth_func0 = self.bdd.let({var_order[0]:False},func)
@@ -190,11 +171,9 @@ class lut_node:
 
     def synth_cf(self):
         qc = QuantumCircuit(1)
-        #print('DCDEBUG synth CF')
         self.cf_qc   = ClassicalFunction(dedent(iter_to_bool(self.bdd,self.func))).synth()
         self.cf_cost = conventional_cost(self.cf_qc,[self._fanout])
         self.cf_qc   = None
-        #DCDEBUG
         gc.collect()
 
 def display_top(snapshot, key_type='lineno', limit=10):
