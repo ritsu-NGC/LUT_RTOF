@@ -2,7 +2,8 @@ from blif_read import comp_methods
 import sys
 import time
 import glob
-
+def write_latex(fpath,results):
+    print("results")
 def run_tests(rundir):
     #benchmark_circuits = glob.glob(rundir + "/*.blif")
     benchmark_circuits = [str(rundir + "/priority_size_2022.blif"),
@@ -24,15 +25,16 @@ def run_tests(rundir):
     #                       str(rundir + "/bar_size_2015.blif"),
     #                       str(rundir + "/arbiter_size_2022.blif"),
     #                       str(rundir + "/adder_size_2022.blif")]
+    results = []
     for circuit in benchmark_circuits:
         start = time.time()
         print(circuit.split('/')[-1].split('.')[0])
         result_tmp = comp_methods(circuit)
         results.append(result_tmp)
-        print(results['Circuit'] + " cost " + str(costs['Proposed']))
-        print(results['Circuit'] + " cf_cost " + str(costs['ESOP']))
+        print(result_tmp['Circuit'] + " cost " + str(result_tmp['Proposed']))
+        print(result_tmp['Circuit'] + " cf_cost " + str(result_tmp['ESOP']))
 
-    #write_latex('table.tex',results)
+    write_latex('table.tex',results)
 
 if __name__ == '__main__':
     rundir = sys.argv[1]

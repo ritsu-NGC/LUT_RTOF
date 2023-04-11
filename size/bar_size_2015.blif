@@ -1,16 +1,16 @@
 # Benchmark "bar" written by ABC on Wed Aug 29 15:21:19 2018
 .model bar
-.inputs a[0] a[1] a[2] a[3] a[4] a[5] a[6] a[7] a[8] a[9] a[10] a[11] a[12] \
- a[13] a[14] a[15] a[16] a[17] a[18] a[19] a[20] a[21] a[22] a[23] a[24] \
- a[25] a[26] a[27] a[28] a[29] a[30] a[31] a[32] a[33] a[34] a[35] a[36] \
- a[37] a[38] a[39] a[40] a[41] a[42] a[43] a[44] a[45] a[46] a[47] a[48] \
- a[49] a[50] a[51] a[52] a[53] a[54] a[55] a[56] a[57] a[58] a[59] a[60] \
- a[61] a[62] a[63] a[64] a[65] a[66] a[67] a[68] a[69] a[70] a[71] a[72] \
- a[73] a[74] a[75] a[76] a[77] a[78] a[79] a[80] a[81] a[82] a[83] a[84] \
- a[85] a[86] a[87] a[88] a[89] a[90] a[91] a[92] a[93] a[94] a[95] a[96] \
- a[97] a[98] a[99] a[100] a[101] a[102] a[103] a[104] a[105] a[106] a[107] \
- a[108] a[109] a[110] a[111] a[112] a[113] a[114] a[115] a[116] a[117] \
- a[118] a[119] a[120] a[121] a[122] a[123] a[124] a[125] a[126] a[127] \
+.inputs inpa[0] inpa[1] inpa[2] inpa[3] inpa[4] inpa[5] inpa[6] inpa[7] inpa[8] inpa[9] inpa[10] inpa[11] inpa[12] \
+ inpa[13] inpa[14] inpa[15] inpa[16] inpa[17] inpa[18] inpa[19] inpa[20] inpa[21] inpa[22] inpa[23] inpa[24] \
+ inpa[25] inpa[26] inpa[27] inpa[28] inpa[29] inpa[30] inpa[31] inpa[32] inpa[33] inpa[34] inpa[35] inpa[36] \
+ inpa[37] inpa[38] inpa[39] inpa[40] inpa[41] inpa[42] inpa[43] inpa[44] inpa[45] inpa[46] inpa[47] inpa[48] \
+ inpa[49] inpa[50] inpa[51] inpa[52] inpa[53] inpa[54] inpa[55] inpa[56] inpa[57] inpa[58] inpa[59] inpa[60] \
+ inpa[61] inpa[62] inpa[63] inpa[64] inpa[65] inpa[66] inpa[67] inpa[68] inpa[69] inpa[70] inpa[71] inpa[72] \
+ inpa[73] inpa[74] inpa[75] inpa[76] inpa[77] inpa[78] inpa[79] inpa[80] inpa[81] inpa[82] inpa[83] inpa[84] \
+ inpa[85] inpa[86] inpa[87] inpa[88] inpa[89] inpa[90] inpa[91] inpa[92] inpa[93] inpa[94] inpa[95] inpa[96] \
+ inpa[97] inpa[98] inpa[99] inpa[100] inpa[101] inpa[102] inpa[103] inpa[104] inpa[105] inpa[106] inpa[107] \
+ inpa[108] inpa[109] inpa[110] inpa[111] inpa[112] inpa[113] inpa[114] inpa[115] inpa[116] inpa[117] \
+ inpa[118] inpa[119] inpa[120] inpa[121] inpa[122] inpa[123] inpa[124] inpa[125] inpa[126] inpa[127] \
  shift[0] shift[1] shift[2] shift[3] shift[4] shift[5] shift[6]
 .outputs result[0] result[1] result[2] result[3] result[4] result[5] \
  result[6] result[7] result[8] result[9] result[10] result[11] result[12] \
@@ -47,22 +47,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[16] a[15] a[14] a[13] shift[0] shift[1] n267
+.names inpa[16] inpa[15] inpa[14] inpa[13] shift[0] shift[1] n267
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[12] a[11] a[10] a[9] shift[0] shift[1] n268
+.names inpa[12] inpa[11] inpa[10] inpa[9] shift[0] shift[1] n268
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[4] a[3] a[2] a[1] shift[0] shift[1] n269
+.names inpa[4] inpa[3] inpa[2] inpa[1] shift[0] shift[1] n269
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[8] a[7] a[6] a[5] shift[0] shift[1] n270
+.names inpa[8] inpa[7] inpa[6] inpa[5] shift[0] shift[1] n270
 ---011 1
 --0-01 1
 -0--10 1
@@ -72,22 +72,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[32] a[31] a[30] a[29] shift[0] shift[1] n272
+.names inpa[32] inpa[31] inpa[30] inpa[29] shift[0] shift[1] n272
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[28] a[27] a[26] a[25] shift[0] shift[1] n273
+.names inpa[28] inpa[27] inpa[26] inpa[25] shift[0] shift[1] n273
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[20] a[19] a[18] a[17] shift[0] shift[1] n274
+.names inpa[20] inpa[19] inpa[18] inpa[17] shift[0] shift[1] n274
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[24] a[23] a[22] a[21] shift[0] shift[1] n275
+.names inpa[24] inpa[23] inpa[22] inpa[21] shift[0] shift[1] n275
 ---011 1
 --0-01 1
 -0--10 1
@@ -97,22 +97,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[64] a[63] a[62] a[61] shift[0] shift[1] n277
+.names inpa[64] inpa[63] inpa[62] inpa[61] shift[0] shift[1] n277
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[60] a[59] a[58] a[57] shift[0] shift[1] n278
+.names inpa[60] inpa[59] inpa[58] inpa[57] shift[0] shift[1] n278
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[52] a[51] a[50] a[49] shift[0] shift[1] n279
+.names inpa[52] inpa[51] inpa[50] inpa[49] shift[0] shift[1] n279
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[56] a[55] a[54] a[53] shift[0] shift[1] n280
+.names inpa[56] inpa[55] inpa[54] inpa[53] shift[0] shift[1] n280
 ---011 1
 --0-01 1
 -0--10 1
@@ -122,22 +122,22 @@
 --1-10 1
 -1--11 1
 0---01 1
-.names a[48] a[47] a[46] a[45] shift[0] shift[1] n282
+.names inpa[48] inpa[47] inpa[46] inpa[45] shift[0] shift[1] n282
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[44] a[43] a[42] a[41] shift[0] shift[1] n283
+.names inpa[44] inpa[43] inpa[42] inpa[41] shift[0] shift[1] n283
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[36] a[35] a[34] a[33] shift[0] shift[1] n284
+.names inpa[36] inpa[35] inpa[34] inpa[33] shift[0] shift[1] n284
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[40] a[39] a[38] a[37] shift[0] shift[1] n285
+.names inpa[40] inpa[39] inpa[38] inpa[37] shift[0] shift[1] n285
 ---111 1
 --1-01 1
 -1--10 1
@@ -152,22 +152,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[80] a[79] a[78] a[77] shift[0] shift[1] n288
+.names inpa[80] inpa[79] inpa[78] inpa[77] shift[0] shift[1] n288
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[76] a[75] a[74] a[73] shift[0] shift[1] n289
+.names inpa[76] inpa[75] inpa[74] inpa[73] shift[0] shift[1] n289
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[68] a[67] a[66] a[65] shift[0] shift[1] n290
+.names inpa[68] inpa[67] inpa[66] inpa[65] shift[0] shift[1] n290
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[72] a[71] a[70] a[69] shift[0] shift[1] n291
+.names inpa[72] inpa[71] inpa[70] inpa[69] shift[0] shift[1] n291
 ---011 1
 --0-01 1
 -0--10 1
@@ -177,22 +177,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[96] a[95] a[94] a[93] shift[0] shift[1] n293
+.names inpa[96] inpa[95] inpa[94] inpa[93] shift[0] shift[1] n293
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[92] a[91] a[90] a[89] shift[0] shift[1] n294
+.names inpa[92] inpa[91] inpa[90] inpa[89] shift[0] shift[1] n294
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[84] a[83] a[82] a[81] shift[0] shift[1] n295
+.names inpa[84] inpa[83] inpa[82] inpa[81] shift[0] shift[1] n295
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[88] a[87] a[86] a[85] shift[0] shift[1] n296
+.names inpa[88] inpa[87] inpa[86] inpa[85] shift[0] shift[1] n296
 ---011 1
 --0-01 1
 -0--10 1
@@ -202,22 +202,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[127] a[126] a[125] a[0] shift[0] shift[1] n298
+.names inpa[127] inpa[126] inpa[125] inpa[0] shift[0] shift[1] n298
 ---000 1
 --0-11 1
 -0--01 1
 0---10 1
-.names a[124] a[123] a[122] a[121] shift[0] shift[1] n299
+.names inpa[124] inpa[123] inpa[122] inpa[121] shift[0] shift[1] n299
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[116] a[115] a[114] a[113] shift[0] shift[1] n300
+.names inpa[116] inpa[115] inpa[114] inpa[113] shift[0] shift[1] n300
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[120] a[119] a[118] a[117] shift[0] shift[1] n301
+.names inpa[120] inpa[119] inpa[118] inpa[117] shift[0] shift[1] n301
 ---011 1
 --0-01 1
 -0--10 1
@@ -227,22 +227,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[112] a[111] a[110] a[109] shift[0] shift[1] n303
+.names inpa[112] inpa[111] inpa[110] inpa[109] shift[0] shift[1] n303
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[108] a[107] a[106] a[105] shift[0] shift[1] n304
+.names inpa[108] inpa[107] inpa[106] inpa[105] shift[0] shift[1] n304
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[100] a[99] a[98] a[97] shift[0] shift[1] n305
+.names inpa[100] inpa[99] inpa[98] inpa[97] shift[0] shift[1] n305
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[104] a[103] a[102] a[101] shift[0] shift[1] n306
+.names inpa[104] inpa[103] inpa[102] inpa[101] shift[0] shift[1] n306
 ---011 1
 --0-01 1
 -0--10 1
@@ -260,22 +260,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[65] a[64] a[63] a[62] shift[0] shift[1] n310
+.names inpa[65] inpa[64] inpa[63] inpa[62] shift[0] shift[1] n310
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[61] a[60] a[59] a[58] shift[0] shift[1] n311
+.names inpa[61] inpa[60] inpa[59] inpa[58] shift[0] shift[1] n311
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[53] a[52] a[51] a[50] shift[0] shift[1] n312
+.names inpa[53] inpa[52] inpa[51] inpa[50] shift[0] shift[1] n312
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[57] a[56] a[55] a[54] shift[0] shift[1] n313
+.names inpa[57] inpa[56] inpa[55] inpa[54] shift[0] shift[1] n313
 ---111 1
 --1-01 1
 -1--10 1
@@ -285,22 +285,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[17] a[16] a[15] a[14] shift[0] shift[1] n315
+.names inpa[17] inpa[16] inpa[15] inpa[14] shift[0] shift[1] n315
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[13] a[12] a[11] a[10] shift[0] shift[1] n316
+.names inpa[13] inpa[12] inpa[11] inpa[10] shift[0] shift[1] n316
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[5] a[4] a[3] a[2] shift[0] shift[1] n317
+.names inpa[5] inpa[4] inpa[3] inpa[2] shift[0] shift[1] n317
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[9] a[8] a[7] a[6] shift[0] shift[1] n318
+.names inpa[9] inpa[8] inpa[7] inpa[6] shift[0] shift[1] n318
 ---111 1
 --1-01 1
 -1--10 1
@@ -310,22 +310,22 @@
 --1-10 1
 -0--11 1
 1---01 1
-.names a[49] a[48] a[47] a[46] shift[0] shift[1] n320
+.names inpa[49] inpa[48] inpa[47] inpa[46] shift[0] shift[1] n320
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[45] a[44] a[43] a[42] shift[0] shift[1] n321
+.names inpa[45] inpa[44] inpa[43] inpa[42] shift[0] shift[1] n321
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[37] a[36] a[35] a[34] shift[0] shift[1] n322
+.names inpa[37] inpa[36] inpa[35] inpa[34] shift[0] shift[1] n322
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[41] a[40] a[39] a[38] shift[0] shift[1] n323
+.names inpa[41] inpa[40] inpa[39] inpa[38] shift[0] shift[1] n323
 ---011 1
 --0-01 1
 -0--10 1
@@ -335,22 +335,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[33] a[32] a[31] a[30] shift[0] shift[1] n325
+.names inpa[33] inpa[32] inpa[31] inpa[30] shift[0] shift[1] n325
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[29] a[28] a[27] a[26] shift[0] shift[1] n326
+.names inpa[29] inpa[28] inpa[27] inpa[26] shift[0] shift[1] n326
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[21] a[20] a[19] a[18] shift[0] shift[1] n327
+.names inpa[21] inpa[20] inpa[19] inpa[18] shift[0] shift[1] n327
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[25] a[24] a[23] a[22] shift[0] shift[1] n328
+.names inpa[25] inpa[24] inpa[23] inpa[22] shift[0] shift[1] n328
 ---111 1
 --1-01 1
 -1--10 1
@@ -365,22 +365,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[81] a[80] a[79] a[78] shift[0] shift[1] n331
+.names inpa[81] inpa[80] inpa[79] inpa[78] shift[0] shift[1] n331
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[77] a[76] a[75] a[74] shift[0] shift[1] n332
+.names inpa[77] inpa[76] inpa[75] inpa[74] shift[0] shift[1] n332
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[69] a[68] a[67] a[66] shift[0] shift[1] n333
+.names inpa[69] inpa[68] inpa[67] inpa[66] shift[0] shift[1] n333
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[73] a[72] a[71] a[70] shift[0] shift[1] n334
+.names inpa[73] inpa[72] inpa[71] inpa[70] shift[0] shift[1] n334
 ---111 1
 --1-01 1
 -1--10 1
@@ -390,22 +390,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[97] a[96] a[95] a[94] shift[0] shift[1] n336
+.names inpa[97] inpa[96] inpa[95] inpa[94] shift[0] shift[1] n336
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[93] a[92] a[91] a[90] shift[0] shift[1] n337
+.names inpa[93] inpa[92] inpa[91] inpa[90] shift[0] shift[1] n337
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[85] a[84] a[83] a[82] shift[0] shift[1] n338
+.names inpa[85] inpa[84] inpa[83] inpa[82] shift[0] shift[1] n338
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[89] a[88] a[87] a[86] shift[0] shift[1] n339
+.names inpa[89] inpa[88] inpa[87] inpa[86] shift[0] shift[1] n339
 ---111 1
 --1-01 1
 -1--10 1
@@ -415,22 +415,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[127] a[126] a[1] a[0] shift[0] shift[1] n341
+.names inpa[127] inpa[126] inpa[1] inpa[0] shift[0] shift[1] n341
 ---110 1
 --1-00 1
 -1--11 1
 1---01 1
-.names a[125] a[124] a[123] a[122] shift[0] shift[1] n342
+.names inpa[125] inpa[124] inpa[123] inpa[122] shift[0] shift[1] n342
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[117] a[116] a[115] a[114] shift[0] shift[1] n343
+.names inpa[117] inpa[116] inpa[115] inpa[114] shift[0] shift[1] n343
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[121] a[120] a[119] a[118] shift[0] shift[1] n344
+.names inpa[121] inpa[120] inpa[119] inpa[118] shift[0] shift[1] n344
 ---111 1
 --1-01 1
 -1--10 1
@@ -440,22 +440,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[113] a[112] a[111] a[110] shift[0] shift[1] n346
+.names inpa[113] inpa[112] inpa[111] inpa[110] shift[0] shift[1] n346
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[109] a[108] a[107] a[106] shift[0] shift[1] n347
+.names inpa[109] inpa[108] inpa[107] inpa[106] shift[0] shift[1] n347
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[101] a[100] a[99] a[98] shift[0] shift[1] n348
+.names inpa[101] inpa[100] inpa[99] inpa[98] shift[0] shift[1] n348
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[105] a[104] a[103] a[102] shift[0] shift[1] n349
+.names inpa[105] inpa[104] inpa[103] inpa[102] shift[0] shift[1] n349
 ---111 1
 --1-01 1
 -1--10 1
@@ -473,22 +473,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[66] a[65] a[64] a[63] shift[0] shift[1] n353
+.names inpa[66] inpa[65] inpa[64] inpa[63] shift[0] shift[1] n353
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[62] a[61] a[60] a[59] shift[0] shift[1] n354
+.names inpa[62] inpa[61] inpa[60] inpa[59] shift[0] shift[1] n354
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[54] a[53] a[52] a[51] shift[0] shift[1] n355
+.names inpa[54] inpa[53] inpa[52] inpa[51] shift[0] shift[1] n355
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[58] a[57] a[56] a[55] shift[0] shift[1] n356
+.names inpa[58] inpa[57] inpa[56] inpa[55] shift[0] shift[1] n356
 ---011 1
 --0-01 1
 -0--10 1
@@ -498,22 +498,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[18] a[17] a[16] a[15] shift[0] shift[1] n358
+.names inpa[18] inpa[17] inpa[16] inpa[15] shift[0] shift[1] n358
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[14] a[13] a[12] a[11] shift[0] shift[1] n359
+.names inpa[14] inpa[13] inpa[12] inpa[11] shift[0] shift[1] n359
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[6] a[5] a[4] a[3] shift[0] shift[1] n360
+.names inpa[6] inpa[5] inpa[4] inpa[3] shift[0] shift[1] n360
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[10] a[9] a[8] a[7] shift[0] shift[1] n361
+.names inpa[10] inpa[9] inpa[8] inpa[7] shift[0] shift[1] n361
 ---011 1
 --0-01 1
 -0--10 1
@@ -523,22 +523,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[50] a[49] a[48] a[47] shift[0] shift[1] n363
+.names inpa[50] inpa[49] inpa[48] inpa[47] shift[0] shift[1] n363
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[46] a[45] a[44] a[43] shift[0] shift[1] n364
+.names inpa[46] inpa[45] inpa[44] inpa[43] shift[0] shift[1] n364
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[38] a[37] a[36] a[35] shift[0] shift[1] n365
+.names inpa[38] inpa[37] inpa[36] inpa[35] shift[0] shift[1] n365
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[42] a[41] a[40] a[39] shift[0] shift[1] n366
+.names inpa[42] inpa[41] inpa[40] inpa[39] shift[0] shift[1] n366
 ---011 1
 --0-01 1
 -0--10 1
@@ -548,22 +548,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[34] a[33] a[32] a[31] shift[0] shift[1] n368
+.names inpa[34] inpa[33] inpa[32] inpa[31] shift[0] shift[1] n368
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[30] a[29] a[28] a[27] shift[0] shift[1] n369
+.names inpa[30] inpa[29] inpa[28] inpa[27] shift[0] shift[1] n369
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[22] a[21] a[20] a[19] shift[0] shift[1] n370
+.names inpa[22] inpa[21] inpa[20] inpa[19] shift[0] shift[1] n370
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[26] a[25] a[24] a[23] shift[0] shift[1] n371
+.names inpa[26] inpa[25] inpa[24] inpa[23] shift[0] shift[1] n371
 ---011 1
 --0-01 1
 -0--10 1
@@ -578,22 +578,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[82] a[81] a[80] a[79] shift[0] shift[1] n374
+.names inpa[82] inpa[81] inpa[80] inpa[79] shift[0] shift[1] n374
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[78] a[77] a[76] a[75] shift[0] shift[1] n375
+.names inpa[78] inpa[77] inpa[76] inpa[75] shift[0] shift[1] n375
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[70] a[69] a[68] a[67] shift[0] shift[1] n376
+.names inpa[70] inpa[69] inpa[68] inpa[67] shift[0] shift[1] n376
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[74] a[73] a[72] a[71] shift[0] shift[1] n377
+.names inpa[74] inpa[73] inpa[72] inpa[71] shift[0] shift[1] n377
 ---011 1
 --0-01 1
 -0--10 1
@@ -603,22 +603,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[98] a[97] a[96] a[95] shift[0] shift[1] n379
+.names inpa[98] inpa[97] inpa[96] inpa[95] shift[0] shift[1] n379
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[94] a[93] a[92] a[91] shift[0] shift[1] n380
+.names inpa[94] inpa[93] inpa[92] inpa[91] shift[0] shift[1] n380
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[86] a[85] a[84] a[83] shift[0] shift[1] n381
+.names inpa[86] inpa[85] inpa[84] inpa[83] shift[0] shift[1] n381
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[90] a[89] a[88] a[87] shift[0] shift[1] n382
+.names inpa[90] inpa[89] inpa[88] inpa[87] shift[0] shift[1] n382
 ---011 1
 --0-01 1
 -0--10 1
@@ -628,22 +628,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[127] a[2] a[1] a[0] shift[0] shift[1] n384
+.names inpa[127] inpa[2] inpa[1] inpa[0] shift[0] shift[1] n384
 ---001 1
 --0-10 1
 -0--00 1
 0---11 1
-.names a[126] a[125] a[124] a[123] shift[0] shift[1] n385
+.names inpa[126] inpa[125] inpa[124] inpa[123] shift[0] shift[1] n385
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[118] a[117] a[116] a[115] shift[0] shift[1] n386
+.names inpa[118] inpa[117] inpa[116] inpa[115] shift[0] shift[1] n386
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[122] a[121] a[120] a[119] shift[0] shift[1] n387
+.names inpa[122] inpa[121] inpa[120] inpa[119] shift[0] shift[1] n387
 ---011 1
 --0-01 1
 -0--10 1
@@ -653,22 +653,22 @@
 --1-10 1
 -1--11 1
 1---01 1
-.names a[114] a[113] a[112] a[111] shift[0] shift[1] n389
+.names inpa[114] inpa[113] inpa[112] inpa[111] shift[0] shift[1] n389
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[110] a[109] a[108] a[107] shift[0] shift[1] n390
+.names inpa[110] inpa[109] inpa[108] inpa[107] shift[0] shift[1] n390
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[102] a[101] a[100] a[99] shift[0] shift[1] n391
+.names inpa[102] inpa[101] inpa[100] inpa[99] shift[0] shift[1] n391
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[106] a[105] a[104] a[103] shift[0] shift[1] n392
+.names inpa[106] inpa[105] inpa[104] inpa[103] shift[0] shift[1] n392
 ---011 1
 --0-01 1
 -0--10 1
@@ -686,22 +686,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[67] a[66] a[65] a[64] shift[0] shift[1] n396
+.names inpa[67] inpa[66] inpa[65] inpa[64] shift[0] shift[1] n396
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[63] a[62] a[61] a[60] shift[0] shift[1] n397
+.names inpa[63] inpa[62] inpa[61] inpa[60] shift[0] shift[1] n397
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[55] a[54] a[53] a[52] shift[0] shift[1] n398
+.names inpa[55] inpa[54] inpa[53] inpa[52] shift[0] shift[1] n398
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[59] a[58] a[57] a[56] shift[0] shift[1] n399
+.names inpa[59] inpa[58] inpa[57] inpa[56] shift[0] shift[1] n399
 ---111 1
 --1-01 1
 -1--10 1
@@ -711,22 +711,22 @@
 --1-10 1
 -0--11 1
 0---01 1
-.names a[51] a[50] a[49] a[48] shift[0] shift[1] n401
+.names inpa[51] inpa[50] inpa[49] inpa[48] shift[0] shift[1] n401
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[47] a[46] a[45] a[44] shift[0] shift[1] n402
+.names inpa[47] inpa[46] inpa[45] inpa[44] shift[0] shift[1] n402
 ---011 1
 --0-01 1
 -0--10 1
 0---00 1
-.names a[39] a[38] a[37] a[36] shift[0] shift[1] n403
+.names inpa[39] inpa[38] inpa[37] inpa[36] shift[0] shift[1] n403
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[43] a[42] a[41] a[40] shift[0] shift[1] n404
+.names inpa[43] inpa[42] inpa[41] inpa[40] shift[0] shift[1] n404
 ---111 1
 --1-01 1
 -1--10 1
@@ -736,22 +736,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[19] a[18] a[17] a[16] shift[0] shift[1] n406
+.names inpa[19] inpa[18] inpa[17] inpa[16] shift[0] shift[1] n406
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[15] a[14] a[13] a[12] shift[0] shift[1] n407
+.names inpa[15] inpa[14] inpa[13] inpa[12] shift[0] shift[1] n407
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[7] a[6] a[5] a[4] shift[0] shift[1] n408
+.names inpa[7] inpa[6] inpa[5] inpa[4] shift[0] shift[1] n408
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[11] a[10] a[9] a[8] shift[0] shift[1] n409
+.names inpa[11] inpa[10] inpa[9] inpa[8] shift[0] shift[1] n409
 ---111 1
 --1-01 1
 -1--10 1
@@ -761,22 +761,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[35] a[34] a[33] a[32] shift[0] shift[1] n411
+.names inpa[35] inpa[34] inpa[33] inpa[32] shift[0] shift[1] n411
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[31] a[30] a[29] a[28] shift[0] shift[1] n412
+.names inpa[31] inpa[30] inpa[29] inpa[28] shift[0] shift[1] n412
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[23] a[22] a[21] a[20] shift[0] shift[1] n413
+.names inpa[23] inpa[22] inpa[21] inpa[20] shift[0] shift[1] n413
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[27] a[26] a[25] a[24] shift[0] shift[1] n414
+.names inpa[27] inpa[26] inpa[25] inpa[24] shift[0] shift[1] n414
 ---111 1
 --1-01 1
 -1--10 1
@@ -791,22 +791,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[115] a[114] a[113] a[112] shift[0] shift[1] n417
+.names inpa[115] inpa[114] inpa[113] inpa[112] shift[0] shift[1] n417
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[111] a[110] a[109] a[108] shift[0] shift[1] n418
+.names inpa[111] inpa[110] inpa[109] inpa[108] shift[0] shift[1] n418
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[103] a[102] a[101] a[100] shift[0] shift[1] n419
+.names inpa[103] inpa[102] inpa[101] inpa[100] shift[0] shift[1] n419
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[107] a[106] a[105] a[104] shift[0] shift[1] n420
+.names inpa[107] inpa[106] inpa[105] inpa[104] shift[0] shift[1] n420
 ---111 1
 --1-01 1
 -1--10 1
@@ -816,22 +816,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[99] a[98] a[97] a[96] shift[0] shift[1] n422
+.names inpa[99] inpa[98] inpa[97] inpa[96] shift[0] shift[1] n422
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[95] a[94] a[93] a[92] shift[0] shift[1] n423
+.names inpa[95] inpa[94] inpa[93] inpa[92] shift[0] shift[1] n423
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[87] a[86] a[85] a[84] shift[0] shift[1] n424
+.names inpa[87] inpa[86] inpa[85] inpa[84] shift[0] shift[1] n424
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[91] a[90] a[89] a[88] shift[0] shift[1] n425
+.names inpa[91] inpa[90] inpa[89] inpa[88] shift[0] shift[1] n425
 ---111 1
 --1-01 1
 -1--10 1
@@ -841,22 +841,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[3] a[2] a[1] a[0] shift[0] shift[1] n427
+.names inpa[3] inpa[2] inpa[1] inpa[0] shift[0] shift[1] n427
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[127] a[126] a[125] a[124] shift[0] shift[1] n428
+.names inpa[127] inpa[126] inpa[125] inpa[124] shift[0] shift[1] n428
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[119] a[118] a[117] a[116] shift[0] shift[1] n429
+.names inpa[119] inpa[118] inpa[117] inpa[116] shift[0] shift[1] n429
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[123] a[122] a[121] a[120] shift[0] shift[1] n430
+.names inpa[123] inpa[122] inpa[121] inpa[120] shift[0] shift[1] n430
 ---111 1
 --1-01 1
 -1--10 1
@@ -866,22 +866,22 @@
 --0-10 1
 -0--11 1
 0---01 1
-.names a[83] a[82] a[81] a[80] shift[0] shift[1] n432
+.names inpa[83] inpa[82] inpa[81] inpa[80] shift[0] shift[1] n432
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[79] a[78] a[77] a[76] shift[0] shift[1] n433
+.names inpa[79] inpa[78] inpa[77] inpa[76] shift[0] shift[1] n433
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[71] a[70] a[69] a[68] shift[0] shift[1] n434
+.names inpa[71] inpa[70] inpa[69] inpa[68] shift[0] shift[1] n434
 ---111 1
 --1-01 1
 -1--10 1
 1---00 1
-.names a[75] a[74] a[73] a[72] shift[0] shift[1] n435
+.names inpa[75] inpa[74] inpa[73] inpa[72] shift[0] shift[1] n435
 ---111 1
 --1-01 1
 -1--10 1
