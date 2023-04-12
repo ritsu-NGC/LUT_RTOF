@@ -39,7 +39,7 @@ def blif_read(fpath):
             keep_reading = 0
             break
         else:
-
+            print("DCDEBUG line == .end " + str(line == '.end'))
             qc_args = proc_line(qc_args,line)
     
     if(qc_args["state"] == "func_info"):
@@ -64,10 +64,15 @@ def proc_line(qc_args,line):
         qc_args["outputs"] = line.split()[1:]
     elif line.split()[0] == '.names':
         #
+        #print("DCDEBUG " + str())
+        print("DCDEBUG " + line)
         if line.split()[1] == "$false" or line.split()[1] == "$true" or line.split()[1] == "$undef":
             return qc_args
         if (qc_args["state"] != "node_info"):
             if(qc_args["state"] == "func_info"):
+                #print("DCDEBUG sizeof node" + str(sys.getsizeof(qc_args["nodes"][-1])))
+                #print("DCDEBUG sizeof qc_args" + str(sys.getsizeof(qc_args)))                
+                #print("DCDEBUG switch ")
                 qc_args["nodes"][-1].synth()
                 qc_args["nodes"][-1].synth_cf()
                 qc_args["nodes"][-1].func = None
@@ -84,6 +89,9 @@ def proc_line(qc_args,line):
             qc_args["nodes"][-1].add_sop_expr(line)
 
     if(qc_args["state"] == "func_info"):
+        #print("DCDEBUG sizeof node" + str(sys.getsizeof(qc_args["nodes"][-1])))
+        #print("DCDEBUG sizeof qc_args" + str(sys.getsizeof(qc_args)))                
+        #print("DCDEBUG switch ")
         qc_args["nodes"][-1].synth()
         qc_args["nodes"][-1].synth_cf()
 
@@ -120,7 +128,8 @@ class lut_node:
         self.cost    = 0
         for inp in self._fanin:
             self.bdd.declare(inp)
-
+        if len(self._fanin) == 0:
+            self.bdd.declare(self._fanout)
         self.func    = self.bdd.add_expr('False')
 
     def add_sop_expr(self,line):
@@ -128,15 +137,21 @@ class lut_node:
         self.func = self.func | sop_expr
 
     def str_to_bdd(self,line,bdd_vars,bdd):
+        
+        print("DCDEBUG bdd_vars " + str(bdd_vars))
         line_arr = line.split()
+        print("DCDEBUG line_arr " + str(line_arr))
         count    = 0
         expr_str = ""
+        if len(bdd_vars) == 0:
+            return bdd.add_expr("True")
         for kbit in line_arr[0]:
-            if count > 0:
+            print("DCDEBUG count " + str(count))
+            if count > 0 and not kbit == "-" and not expr_str == "":
                 expr_str += " & "
             if kbit == "1":
                 expr_str += bdd_vars[count]
-            else:
+            elif kbit == "0":
                 expr_str += "~" + bdd_vars[count]
             count += 1
         return bdd.add_expr(expr_str)
@@ -149,7 +164,9 @@ class lut_node:
         self.qc   = ret_val[0]
 
     def do_synth(self,func,var_order,qc):
+        #if len(func) == 1 or len(var_order) == 1:
         if func == self.bdd.add_expr('True') or len(var_order) == 1:
+            #return CNOT
             return [qc, 0]
         else:
             synth_func0 = self.bdd.let({var_order[0]:False},func)
@@ -171,9 +188,15 @@ class lut_node:
 
     def synth_cf(self):
         qc = QuantumCircuit(1)
-        self.cf_qc   = ClassicalFunction(dedent(iter_to_bool(self.bdd,self.func))).synth()
-        self.cf_cost = conventional_cost(self.cf_qc,[self._fanout])
-        self.cf_qc   = None
+        #print('DCDEBUG synth CF')
+        if len(self._fanin) == 0:
+            self.cf_qc   = qc
+            self.cf_cost = 0
+        else:
+            self.cf_qc   = ClassicalFunction(dedent(iter_to_bool(self.bdd,self.func))).synth()
+            self.cf_cost = conventional_cost(self.cf_qc,[self._fanout])
+            self.cf_qc   = None
+        #DCDEBUG
         gc.collect()
 
 def display_top(snapshot, key_type='lineno', limit=10):
