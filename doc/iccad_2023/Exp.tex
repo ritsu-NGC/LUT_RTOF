@@ -2,9 +2,9 @@
 
 \subsection{Methodology}
 
-Boolean functions are randomly generated and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. This LUT network is then parsed according to the algorithm and converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}. The exact synthesis for the unbalanced networks are conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. This LUT network is then parsed according to LHRS and converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
 
-The results are compared against two other methods. First, we use ClassicalFunction to generate the entire Boolean function and decompose any MCT gates using the relative phase implementations in ~\cite{bib-rtof-maslov}. This represents what we believe to be the state of the art and so is a baseline for comparison for the subsequent methods. We then implement the LHRS method in ~\cite{bib-lhrs-soeken}, using ClassicalFunction to implement the LUT functions to approximate their method.
+The results are compared the LHRS method in ~\cite{bib-lhrs-soeken}, using ClassicalFunction as the ESOP-based synthesis method to implement the LUT functions to approximate their method.
 
 
 
