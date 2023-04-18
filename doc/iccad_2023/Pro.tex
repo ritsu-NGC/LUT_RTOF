@@ -22,13 +22,13 @@
   \end{center}
   \caption{Generalization of Fig.\ref{fig-urtof}, which also implements the Boolean product of two functions}
 \end{figure}
-\begin{figure}[t]
+\begin{figure*}[t]
   \label{fig-shannon}
   \begin{center}
     \input{img/fig-shannon}
   \end{center}
   \caption{The circuit for Shannon Decomposition}
-\end{figure}
+\end{figure*}
 
 
 \section{Proposed Method}
@@ -58,9 +58,11 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
   In our second example, we will attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$. For the $F(x_3 = 1,x_2,x_1)$ case, we note that decomposing this is just for a 3-input Toffoli gate so we use the RTOF decomposition method. For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that isn't a straightforward sum of products expression. We now move on to the next level\footnote{The variable order here is chosen to best illustrate the working of the method. We will treat optimal variable order later}. We see that $F(x_3 = 1,x_2=0,x_1) = x_1$ and so that gives us the $x_1$-controlled NOT gate, which is just a regular RTOF. We also have $F(x_3 = 1,x_2=1,x_1) = True$ which creates a True-controlled-NOT gate, which is just a NOT gate. We now compose our resulting circuits in ~\ref{fig-func-decomp} \footnote{The reader may note that this gate order is NOT symmetric i.e. the NOT and the RTOF do not commute with each other. However, the difference is entirely in phase space, and since this will just be reversed in the uncomputation logic, we treat them as interchangeable}
 \end{example}
 
-\subsection{Optimizing the RTOF}
+\subsection{Optimizing the RTOF by BDD}
 \label{Subsec:rtof-opt}
-As can already be seen, the Shannon decomposition method lends itself naturally to representation by Binary Decision Diagrams (BDDs). Representing our Boolean functions as BDDs gives us an easy way to traverse down the Shannon decomposition tree merely by traversing the BDD in the same direction and feeding the next node in the traversal as your input function to the next iteration of the recursive loop. One other thing that this means is that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is trivial to count the T-gate cost of the function merely by counting the number of nodes in the BDD that represents it.
+As can already be seen, the Shannon decomposition method lends itself naturally to representation by Binary Decision Diagrams (BDDs). Representing our Boolean functions as BDDs gives us an easy way to traverse down the Shannon decomposition tree merely by traversing the BDD in the same direction and feeding the next node in the traversal as your input function to the next iteration of the recursive loop.
+
+One other thing that this means is that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is trivial to count the T-gate cost of the function merely by counting the number of nodes in the BDD that represents it.
 
 This now gives us a way of optimizing our circuit. Recall that we discuss variable orders earlier. Because the cost of the decomposed circuit scales directly with the BDD, it is enough to find a variable order that minimizes the number of nodes in the BDD and to simply use that. Further, since the Shannon decomposed branches are now independent of each other, we can choose a different variable order for every succeeding level, and we can solve it that way.
 
