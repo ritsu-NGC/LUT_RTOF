@@ -6,6 +6,31 @@ Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-
 
 The results are compared the LHRS method in ~\cite{bib-lhrs-soeken}, using ClassicalFunction as the ESOP-based synthesis method to implement the LUT functions to approximate their method.
 
+\begin{table*}[t]
+  \large
+   \begin{center}
+     \caption{Experimental Results}
+     \scalebox{0.7}{
+       \begin{tabular}{c|c|c}
+         \hline
+        Circuit\_Name & Proposed & LHRS\\ \hline
+        priority\_size\_2022 & 3888 & 17340 \\
+        int2float\_size\_2022 & 2684 & 4516 \\
+        i2c\_size\_2022 & 9388 & 16432\\
+        dec\_size\_2018 & 10084 & 18100\\
+        ctrl\_size\_2022 & 2088 & 2576\\
+        cavlc\_size\_2022 & 8976 & 20764\\
+        bar\_size\_2015 & 139168 & 42808\\
+        arbiter\_size\_2022 & 8076 &  30916 \\
+        adder\_size\_2022 &11248 & 1624 \\\hline
+       \end{tabular}
+     }
+     \label{table-results}
+     \end{center}
+\vspace*{0.25cm}
+ \end{table*}
+
+
 
 
 
