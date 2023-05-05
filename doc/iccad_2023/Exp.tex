@@ -2,7 +2,7 @@
 
 \subsection{Methodology}
 
-Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. This LUT network is then parsed according to LHRS and converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. This LUT network is coverted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
 
 The results are compared the LHRS method in ~\cite{bib-lhrs-soeken}, using ClassicalFunction as the ESOP-based synthesis method to implement the LUT functions to approximate their method.
 
@@ -14,15 +14,14 @@ The results are compared the LHRS method in ~\cite{bib-lhrs-soeken}, using Class
        \begin{tabular}{c|c|c}
          \hline
         Circuit\_Name & Proposed & LHRS\\ \hline
-        priority\_size\_2022 & 3888 & 17340 \\
-        int2float\_size\_2022 & 2684 & 4516 \\
-        i2c\_size\_2022 & 9388 & 16432\\
-        dec\_size\_2018 & 10084 & 18100\\
-        ctrl\_size\_2022 & 2088 & 2576\\
-        cavlc\_size\_2022 & 8976 & 20764\\
-        bar\_size\_2015 & 139168 & 42808\\
-        arbiter\_size\_2022 & 8076 &  30916 \\
-        adder\_size\_2022 &11248 & 1624 \\\hline
+        priority\_size\_2022  & 17488  & 100928  \\ \hline
+        int2float\_size\_2022 & 11016  & 25840   \\ \hline
+        i2c\_size\_2022       & 64488  & 89320   \\ \hline
+        dec\_size\_2018       & 28008  & 112224  \\ \hline
+        ctrl\_size\_2022      & 6600   & 13976   \\ \hline
+        cavlc\_size\_2022     & 33712  & 110800  \\ \hline
+        bar\_size\_2015       & 454368 & 177920  \\ \hline
+        arbiter\_size\_2022   & 43688  & 170672  \\ \hline
        \end{tabular}
      }
      \label{table-results}
