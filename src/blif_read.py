@@ -1,14 +1,22 @@
 from qiskit import QuantumCircuit,QuantumRegister
 from qiskit.circuit.classicalfunction import classical_function,ClassicalFunction
+from qiskit.circuit.library import TGate, HGate, SGate
+#from qiskit.quantum_info.random import unitary_group
+from qiskit.transpiler.passes.synthesis import UnitarySynthesis
+from qiskit.quantum_info.synthesis import TwoQubitBasisDecomposer
+from qiskit.extensions.unitary import UnitaryGate
 from qiskit.circuit.classicalfunction.types import Int1
 from dd import cudd
 from textwrap import dedent
 from tweedledum.synthesis import linear_synth
+from qiskit import transpile
+
 #DCDEBUG
 import tracemalloc
 import linecache
 import os
-
+import numpy
+import numpy.linalg
 
 #from src.circuit_to_logic import *
 import logging
@@ -20,7 +28,7 @@ import gc
 sys.path.append(os.path.join('../src'))
 
 from circuit_synthesis import iter_to_bool
-from calc_cost import all_toffoli,conventional_cost
+from calc_cost import all_toffoli,conventional_cost,dirty_barenco_cost
 
 def blif_read(fpath):
     #tracemalloc.start(10)
@@ -101,21 +109,41 @@ def comp_methods(fpath):
     qc_args = blif_read(fpath)
     cost    = 0
     cf_cost = 0
+    us_cost = 0    
+    need_ancilla = 0
+    tot_anc  = 0
     ret_vars = {}
     ret_vars['Circuit'] = fpath.split('/')[-1].split('.')[0]
+    num_out_gates = 0
+    
     for gate in qc_args["nodes"]:
         #gate.synth()
         #gate.synth_cf()
+    
+        
         if gate._fanout in qc_args["outputs"]:
-            cost += gate.cost
+            cost += gate.cf_cost
+            cf_cost += gate.cf_cost
+            us_cost += gate.us_cost
+            num_out_gates += 1
         else:
             cost += gate.cost * 2
-        if gate._fanout in qc_args["outputs"]:
-            cf_cost += gate.cf_cost
-        else:
             cf_cost += gate.cf_cost * 2
+            us_cost += gate.us_cost * 2
+
+        if gate.det == -1:
+            need_ancilla += -1
+
+
+        tot_anc += gate.cf_anc
+
     ret_vars['Proposed'] = cost
     ret_vars['ESOP'] = cf_cost
+    ret_vars['UnitarySynthesis'] = us_cost    
+    ret_vars['NeedAncilla'] = need_ancilla
+    ret_vars['TotalAncilla'] = tot_anc
+    ret_vars['NumOuts'] = num_out_gates
+    
     return ret_vars
 
         
@@ -130,23 +158,58 @@ class lut_node:
             self.bdd.declare(inp)
         if len(self._fanin) == 0:
             self.bdd.declare(self._fanout)
+        #print("DCDEBUG fanin " + str(self._fanin))
+        #print("DCDEBUG fanout " + str(self._fanout))        
+        #self.matrix = [[0 for x in range(2 ** (len(self._fanin) + 1))] for y in range (2 ** (len(self._fanin) + 1))]
+        self.matrix = numpy.zeros((2 ** (len(self._fanin) + 1), 2 ** (len(self._fanin) + 1)),dtype=int)
+        for i in range(2 ** (len(self._fanin) + 1)):
+            self.matrix[i][i] = 1
         self.func    = self.bdd.add_expr('False')
 
     def add_sop_expr(self,line):
         sop_expr  = self.str_to_bdd(line,self._fanin,self.bdd)
+        self.set_matrix(line)
         self.func = self.func | sop_expr
 
+    def set_matrix(self,line):
+        bit_strings = []
+
+        for x in line[0]:
+            temp_strings = []
+            if x == '-':
+                temp_strings.append('0')
+                temp_strings.append('1')
+            else:
+                temp_strings.append(x)
+            new_strings = []
+            if len(bit_strings) > 0:
+                for string in bit_strings:
+                    for new_bit in temp_strings:
+                        new_strings.append(string + new_bit)
+            else:
+                for new_bit in temp_strings:
+                    new_strings.append(new_bit)
+            bit_strings = new_strings
+        #print("DCDEBUG " + str(bit_strings))
+        #print("DCDEBUG " + str(self.matrix))        
+        for string in bit_strings:
+            self.matrix[int(string + '0',2),int(string + '1',2)] = 1
+            self.matrix[int(string + '0',2),int(string + '0',2)] = 0
+            self.matrix[int(string + '1',2),int(string + '0',2)] = 1
+            self.matrix[int(string + '1',2),int(string + '1',2)] = 0
+
+        #print("DCDEBUG " + str(self.matrix))        
     def str_to_bdd(self,line,bdd_vars,bdd):
         
-        print("DCDEBUG bdd_vars " + str(bdd_vars))
+        #print("DCDEBUG bdd_vars " + str(bdd_vars))
         line_arr = line.split()
-        print("DCDEBUG line_arr " + str(line_arr))
+        #print("DCDEBUG line_arr " + str(line_arr))
         count    = 0
         expr_str = ""
         if len(bdd_vars) == 0:
             return bdd.add_expr("True")
         for kbit in line_arr[0]:
-            print("DCDEBUG count " + str(count))
+            #print("DCDEBUG count " + str(count))
             if count > 0 and not kbit == "-" and not expr_str == "":
                 expr_str += " & "
             if kbit == "1":
@@ -159,11 +222,12 @@ class lut_node:
     def synth(self):
         qc = QuantumCircuit(1)
         var_order = self._fanin
+        cudd.reorder(self.bdd)
         ret_val = self.do_synth(self.func,var_order,qc)
         self.cost = ret_val[1]
         self.qc   = ret_val[0]
 
-    def do_synth(self,func,var_order,qc):
+    def do_synth(self,func,var_order,qc,unbalanced=False):
         #if len(func) == 1 or len(var_order) == 1:
         if func == self.bdd.add_expr('True') or len(var_order) == 1:
             #return CNOT
@@ -171,32 +235,66 @@ class lut_node:
         else:
             synth_func0 = self.bdd.let({var_order[0]:False},func)
             ret_arr = [qc,0]
+            if unbalanced == True:
+                fact = 1
+            else:
+                fact = 2
+
             if synth_func0 == self.bdd.add_expr('True'):
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func0 != self.bdd.add_expr('False'):
-                synth0 = self.do_synth(synth_func0,var_order[1:],qc)
-                ret_arr = [qc,ret_arr[1] + synth0[1] + 4]
+                synth0 = self.do_synth(synth_func0,var_order[1:],qc,not unbalanced)
+                ret_arr = [qc,ret_arr[1] + fact * synth0[1] + 4]
             synth_func1 = self.bdd.let({var_order[0]:True},func)
             if synth_func1 == self.bdd.add_expr('True'):
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func1 != self.bdd.add_expr('False'):
-                synth1 = self.do_synth(synth_func1,var_order[1:],qc)
-                ret_arr = [qc,ret_arr[1] + synth1[1] + 4]
+                synth1 = self.do_synth(synth_func1,var_order[1:],qc,not unbalanced)
+                ret_arr = [qc,ret_arr[1] + fact * synth1[1] + 4]
 
 
             return ret_arr
 
     def synth_cf(self):
-        qc = QuantumCircuit(1)
+        qc           = QuantumCircuit(1)
+        self.det     = numpy.linalg.det(self.matrix)
         #print('DCDEBUG synth CF')
         if len(self._fanin) == 0:
             self.cf_qc   = qc
             self.cf_cost = 0
+            self.cf_anc  = 0
+            self.us_cost = 0
         else:
             self.cf_qc   = ClassicalFunction(dedent(iter_to_bool(self.bdd,self.func))).synth()
-            self.cf_cost = conventional_cost(self.cf_qc,[self._fanout])
+            cf_cost_tmp  = dirty_barenco_cost(self.cf_qc,[self._fanout])
+            self.cf_cost = cf_cost_tmp[0]
+            f = open('cf.tex','w')
+            #print(self.cf_qc.draw(output="latex_source"),file=f)
             self.cf_qc   = None
-        #DCDEBUG
+            self.cf_anc  = cf_cost_tmp[1]
+            self.us_cost = 0
+            # #decomposer   = TwoQubitBasisDecomposer([CXGate(), XGate(), TGate()])
+            # #synthesizer  = UnitarySynthesis(['x','cx','t'])
+            #self.us_qc   = synthesizer.synthesize(self.matrix)
+            #print("DCDEBUG det " + str(self.det))
+            if self.det == 1 and False:
+                self.us_qc   = QuantumCircuit(len(self._fanin) + 1)
+                terms        = numpy.append(self._fanin,self._fanout)
+                new_terms    = list(range(0,len(self._fanin) + 1))
+                #print("DCDEBUG qubits " + str(terms))
+                #print("DCDEBUG numqubits " + str(len(self.us_qc.qubits)))
+                unitary_gate = UnitaryGate(self.matrix)
+                #print("DCDEBUG unitary_gate " + str(unitary_gate))
+                self.us_qc.append(unitary_gate,new_terms)
+                #print(self.us_qc.draw()) #DCDEBUG
+                
+                temp_qc      = transpile(self.us_qc,basis_gates=['u3','cx','u'])
+                tot_ops      = temp_qc.count_ops()
+                #print("DCDEBUG count_ops" + str(dict(tot_ops)))
+                self.us_cost += dict(tot_ops)['u3'] + dict(tot_ops)['u']
+            else:
+                self.us_cost += cf_cost_tmp[0]
+            #DCDEBUG
         gc.collect()
 
 def display_top(snapshot, key_type='lineno', limit=10):
