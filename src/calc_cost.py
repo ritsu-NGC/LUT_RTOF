@@ -22,6 +22,7 @@ def all_toffoli(qc):
 
 def conventional_cost(qc, output):
     Tcount = 0
+    anc    = 0
     qc_gates = retrieve_gates(qc)
     for type, qubit_list in qc_gates:
         if len(qubit_list) == 3:
@@ -30,12 +31,25 @@ def conventional_cost(qc, output):
             else:
                 Tcount += 4
         elif len(qubit_list) > 3:
+            anc    += (len(qubit_list)-3)
             Tcount += (len(qubit_list)-3) * 2 * 4
             if qubit_list[-1] in output:
                 Tcount += 7
             else:
                 Tcount += 4
-    return Tcount
+    return [Tcount,anc]
+
+def dirty_barenco_cost(qc, output):
+    Tcount = 0
+    anc    = 0
+    qc_gates = retrieve_gates(qc)
+    for type, qubit_list in qc_gates:
+        n_qubits = len(qubit_list) + 2
+        if n_qubits < 5:
+            Tcount += (2 ** n_qubits)
+        else:
+            Tcount += 8 * (n_qubits - 5) * 7
+    return [Tcount,anc]
 
 
 def toffoli_to_rtof(qc):

@@ -11,5 +11,9 @@ costs = comp_methods(filename)
 #except:
 #    snapshot = tracemalloc.take_snapshot()
 #    print(snapshot)
-print("cost " + str(costs['Proposed']))
-print("cf_cost " + str(costs['ESOP']))
+for field in costs:
+    print(field + " " + str(costs[field]))
+# print("cost " + str(costs['Proposed']))
+# print("cf_cost " + str(costs['ESOP']))
+# print("NeedAncilla " + str(costs['NeedAncilla']))
+# print("TotalAncilla " + str(costs['TotalAncilla']))
