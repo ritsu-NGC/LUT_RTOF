@@ -57,15 +57,16 @@ As qubits are famously prone to error and perturbation, it is often useful to co
 
 {\it Relative-phase Toffoli gates (RTOF)}~\cite{bib-rtof-maslov} have been proposed as an alternative implementation of a Toffoli gate in the decomposition of a multiple-control Toffoli gate. An RTOF can calculate the same logic function as a Toffoli gate and reduces the T-gate count by 3, as can be seen in Fig. ~\ref{fig-rtof}. However it introduces a {\it relative phase} among its output quantum states. Because of the relative phase errors, we cannot simply replace a Toffoli gate with an RTOF in general. Rather, RTOFs can be utilized when we decompose a multiple-control Toffoli gate because the relative phase errors can be canceled between two RTOFs in the decomposition. Maslov further posits that not just Toffoli gates but generalized controlled U functions can take advantage of the fact that Boolean functions implemented up to a relative phase used in tandem can optimize the overall circuit.
 
-Another important recent result is the development of LUT-based Hierarchical Reversible Logis Synthesis (LHRS) ~\cite{bib-lhrs-soeken}. This helps map complicated Boolean functions into cascading series of gates, which then lend themselves naturally to creating compute-uncompute pairs that can be exploited to reduce T-count.
+Another important idea recently is LUT-based quantum logic synthesis, such as the one proposed in ~\cite{bib-lhrs-soeken}. This helps map complicated Boolean functions into cascading series of gates, which help minimize the ancilla qubits that will be needed to store intermediate computation values.
 
 \noindent {\bf Our Contribution.} 
 We proposed a method to improve LHRS by exploiting the ability of relative phase implementations of Boolean functions to reduce the T-count in the circuit. Among our contributions:
 \begin{itemize}
 \item A novel method to synthesize a Boolean function up to a relative phase by utilizing recursion and Shannon Decomposition
-\item A method to optimize T-count in Quantum Boolean Functions by using LHRS and tandem pairs of relative phase quantum Boolean circuits and their inverses
+\item A method to generate a Quantum Boolean Circuit from a Boolean Logic Network representation 
+
 \end{itemize}
-Our methods are compared both to the existing LHRS and to other known synthesis methods. We find that on average this improves T-count by DCTODO\%. However many cases remain where it underperforms previous methods. Nonetheless, we demonstrate its advantage for the majority of cases.
+Our methods are compared to a naive. We find that on average this improves T-count by DCTODO\%. However many cases remain where it underperforms previous methods. Nonetheless, we demonstrate its advantage for the majority of cases.
 
 The paper is structured as follows. Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Then Section~\ref{Sec:Exist} lays out some motivations for the research we are going to conduct. Section~\ref{Sec:proposed} follows with our proposed method, including our novel method to realize functions up to a relative phase without any additional ancillae, and then its use with the LHRS. Then, Our experimental results in Section~\ref{Sec:exp} can confirm that our method can indeed reduce the T-count of quantum Boolean circuits. Finally Section~\ref{Sec:concl} concludes the paper with our conclusions and future work.
 
