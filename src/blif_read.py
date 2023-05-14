@@ -115,7 +115,8 @@ def comp_methods(fpath):
     ret_vars = {}
     ret_vars['Circuit'] = fpath.split('/')[-1].split('.')[0]
     num_out_gates = 0
-    
+    tot_gates = 0
+    tot_nodes = 0
     for gate in qc_args["nodes"]:
         #gate.synth()
         #gate.synth_cf()
@@ -126,23 +127,26 @@ def comp_methods(fpath):
             cf_cost += gate.cf_cost
             us_cost += gate.us_cost
             num_out_gates += 1
+            tot_gates += 1
         else:
             cost += gate.cost * 2
             cf_cost += gate.cf_cost * 2
             us_cost += gate.us_cost * 2
-
+            tot_gates += 2
         if gate.det == -1:
             need_ancilla += -1
 
-
+        tot_nodes += gate.num_nodes
         tot_anc += gate.cf_anc
 
     ret_vars['Proposed'] = cost
     ret_vars['ESOP'] = cf_cost
-    ret_vars['UnitarySynthesis'] = us_cost    
-    ret_vars['NeedAncilla'] = need_ancilla
-    ret_vars['TotalAncilla'] = tot_anc
+    #ret_vars['UnitarySynthesis'] = us_cost    
+    #ret_vars['NeedAncilla'] = need_ancilla
+    #ret_vars['TotalAncilla'] = tot_anc
+    ret_vars['TotGates'] = tot_gates
     ret_vars['NumOuts'] = num_out_gates
+    ret_vars['AvgNodes'] = round(tot_nodes / tot_gates)
     
     return ret_vars
 
@@ -221,13 +225,14 @@ class lut_node:
 
     def synth(self):
         qc = QuantumCircuit(1)
+        self.num_nodes = len(self.func)
         var_order = self._fanin
         cudd.reorder(self.bdd)
         ret_val = self.do_synth(self.func,var_order,qc)
         self.cost = ret_val[1]
         self.qc   = ret_val[0]
 
-    def do_synth(self,func,var_order,qc,unbalanced=False):
+    def do_synth(self,func,var_order,qc,unbalanced=False,do_unbalanced=False):
         #if len(func) == 1 or len(var_order) == 1:
         if func == self.bdd.add_expr('True') or len(var_order) == 1:
             #return CNOT
@@ -243,13 +248,13 @@ class lut_node:
             if synth_func0 == self.bdd.add_expr('True'):
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func0 != self.bdd.add_expr('False'):
-                synth0 = self.do_synth(synth_func0,var_order[1:],qc,not unbalanced)
+                synth0 = self.do_synth(synth_func0,var_order[1:],qc,do_unbalanced ^ unbalanced,do_unbalanced)
                 ret_arr = [qc,ret_arr[1] + fact * synth0[1] + 4]
             synth_func1 = self.bdd.let({var_order[0]:True},func)
             if synth_func1 == self.bdd.add_expr('True'):
                 ret_arr = [qc,ret_arr[1]]
             elif synth_func1 != self.bdd.add_expr('False'):
-                synth1 = self.do_synth(synth_func1,var_order[1:],qc,not unbalanced)
+                synth1 = self.do_synth(synth_func1,var_order[1:],qc,do_unbalanced ^ unbalanced, do_unbalanced)
                 ret_arr = [qc,ret_arr[1] + fact * synth1[1] + 4]
 
 
