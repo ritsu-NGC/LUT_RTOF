@@ -27,7 +27,7 @@
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-%\renewcommand{\baselinestretch}{1.05}
+\renewcommand{\baselinestretch}{1.1}
 %\makeatletter
 \newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
 \newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
@@ -37,8 +37,8 @@
 
 \title{Optimizing LUT-based Quantum Circuit Synthesis using Relative Phase Boolean Operations
 }
-\author{\IEEEauthorblockN{1\textsuperscript{st} David Clarino}
-  \IEEEauthorblockA{\textit{Graduate School of} \\
+\author{\IEEEauthorblockN{\phantom{1\textsuperscript{st} David Clarino}}
+  \IEEEauthorblockA{\phantom{\textit{Graduate School of}} \\
     \textit{Information Science and Engineering} \\
     \textit{Ritsumeikan University}\\
     Kusatsu, Japan \\
@@ -49,20 +49,19 @@
     \textit{Information Science and Engineering} \\
     \textit{Ritsumeikan University}\\
     Kusatsu, Japan \\
-    sousai@ngc.is.ritsumei.ac.jp}
+    accel@ngc.is.ritsumei.ac.jp}
   \and
   \IEEEauthorblockN{3\textsuperscript{rd} Shigeru Yamashita}
   \IEEEauthorblockA{\textit{Graduate School of} \\
     \textit{ Information Science and Engineering} \\
     \textit{Ritsumeikan University}\\
     Kusatsu, Japan\\
-    ger@ngc.is.ritsumei.ac.jp}  
+    ger@ngc.is.ritsumei.ac.jp}
 }
 
 \maketitle
-
 \begin{abstract}
-We present an enhancement to LUT-based Hierarchical Reversible Logic Synthesis (LHRS) based on recent research on relative-phase Toffoli gates (RTOF). We apply recent results that show that using a reversible function in pairs of compute/uncompute gates, to LHRS, which has cascading series of compute/uncompute pairs, to minimize the T-gate count of the resulting circuit. Additionally, we extend one of known recursive methods to create an n-input Toffoli gate up to a relative phase, to be able to synthesize arbitrary Boolean functions up to a phase with no ancilla by using Shannon decomposition. The combination of these two contributions gives us a method that can outperform many of the existing benchmarks that our experiments show can be as much as DCTODO\%
+  LUT-based synthesis methods have recently been proposed as a way to synthesize Quantum Boolean Circuits in an ancilla constrained environment. Other results have also shown that allowing a relative phase when implementing Quantum Boolean Circuits yields an advantage in T-count without additional ancilla qubits, which is advantageous in the fault-tolerant quantum computing paradigm. We propose a method that utilizes both LUT-based synthesis and Relative Phase Quantum Boolean Circuits that minimize the T-count while minimizing the ancilla required to implement them. We leverage recent results regarding Relative Phase versions of Boolean functions and the Shannon decomposition to propose a novel method to synthesize arbitrary Boolean functions up to a Relative Phase. We then utilize this method to synthesize Boolean logic inside each LUT as a relative phase Quantum Boolean Circuit and show that the resulting Quantum Circuit has a clear advantage in T-count to using it over more naive methods. 
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -72,6 +71,7 @@ relative-phase Toffoli gates (RTOF), S gate, circuit optimization, LUT, synthesi
 
 \input{Intro.tex}
 \input{Pre.tex}
+\input{Mot.tex}
 \input{Pro.tex}
 \input{Exp.tex}
 \input{Concl.tex}

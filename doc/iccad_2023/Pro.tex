@@ -1,33 +1,50 @@
-\begin{figure}[t]
+\begin{figure*}[t]
   \label{fig-rtof3}
-\end{figure}
-\begin{figure}[t]
+\end{figure*}
+\begin{figure*}[t]
   \label{fig-nrtof}
   \begin{center}
     \input{img/fig-nrtof}
   \end{center}
   \caption{N-controlled RTOF gate}
-\end{figure}
-\begin{figure}[t]
-  \label{fig-urtof}
-  \begin{center}
-    \input{img/fig-urtof}
-  \end{center}
-  \caption{U-controlled RTOF gate}
-\end{figure}
-\begin{figure}[t]
-  \label{fig-f-dot-g}
-  \begin{center}
-    \input{img/fig-f-dot-g}
-  \end{center}
-  \caption{Generalization of Fig.\ref{fig-urtof}, which also implements the Boolean product of two functions}
-\end{figure}
+\end{figure*}
+
 \begin{figure*}[t]
-  \label{fig-shannon}
-  \begin{center}
-    \input{img/fig-shannon-amy}
-  \end{center}
-  \caption{The circuit for Shannon Decomposition}
+  \label{fig-func-decomp}
+  \begin{minipage}{\linewidth}[t]
+      \begin{center}
+        \input{img/fig-func-decomp}
+      \end{center}
+  \end{minipage}
+\end{figure*}
+
+
+\begin{figure*}[ht]
+  \begin{minipage}{.46\linewidth}[t]
+    \label{fig-f-dot-g}
+    \begin{center}
+      \input{img/fig-f-dot-g-in}
+    \end{center}
+    \caption{Generalization of Fig.\ref{fig-urtof}, which also implements the Boolean product of two functions}
+  \end{minipage}
+  \begin{minipage}{.46\linewidth}[t]
+    \label{fig-urtof}
+    \begin{center}
+      \input{img/fig-urtof}
+    \end{center}
+    \caption{U-controlled RTOF gate}
+  \end{minipage}
+\end{figure*}
+\begin{figure*}[t]
+  \begin{minipage}{\linewidth}[t]
+    \label{fig-shannon}
+    \begin{center}
+      \scalebox{0.8} {
+        \input{img/fig-shannon-amy}
+      }
+    \end{center}
+    \caption{The circuit for Shannon Decomposition}
+  \end{minipage}
 \end{figure*}
 \begin{figure*}[t]
   \label{fig-cx-star}
@@ -35,13 +52,23 @@
   \end{center}
   \caption{The $C-X^{*}$ gate from \cite{bib-amy-phase-state}}
 \end{figure*}
+%% \begin{figure*}[t]
+%%   \begin{minipage}{.46\linewidth}[t]
+%%     \label{fig-lut-network}
+%%     \begin{center}
+%%       \input{img/fig-lut-network}
+%%     \end{center}
+%%   \end{minipage}
+  
+%% \end{figure*}
+
 
 
 \section{Proposed Method}
 
 \subsection{Realizing Arbitrarily Controlled NOT Functions Up To A Relative Phase}
 \label{Subsec:UNOT}
-To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF gate depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a n-input Toffoli gate as depicted in Fig.~\ref{fig-nrtof} which was observed by Maslov ~\cite{bib-rtof-maslov}. However, as noted in ~\cite{bib-amy-phase-state}, the introduction of a relative phase here will result have an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the construction that is depicted in ~\ref{fig-cx-star}. We can generalize this n-input Toffoli to an arbitrarily controlled NOT gate as depicted in ~\ref{fig-urtof}. It is easy to see this without further proof: we can imagine implementing the Boolean function separately and then routing its input to an input bit via a clean ancilla.
+To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF gate depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a n-input Toffoli gate as depicted in Fig.~\ref{fig-nrtof} which was observed by Maslov ~\cite{bib-rtof-maslov}. However, as noted in ~\cite{bib-amy-phase-state}, the introduction of a relative phase here will have an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the construction that is depicted in ~\cite{bib-amy-phase-state} ~\ref{fig-cx-star}. We can generalize this n-input Toffoli to an arbitrarily controlled NOT gate as depicted in ~\ref{fig-urtof}. It is easy to see this without further proof: we can imagine implementing the Boolean function separately and then routing its input to a CNOT control bit via a clean ancilla.
 
 We can further generalize this. Recall from \label{Sec:bool-const} that a Toffoli realizes a Boolean product of its inputs on its output. Just like above, we can use the same reasoning to generalize both inputs into arbitrary Boolean functions ~\cite{bib-amy-phase-state} . This means that we can use the construction in ~\ref{fig-f-dot-g} to realize a product between two arbitrary Boolean functions up to a relative phase. 
 
@@ -49,6 +76,8 @@ We can further generalize this. Recall from \label{Sec:bool-const} that a Toffol
 \subsection{Using Shannon Decomposition To Realize Arbitrarily Controlled Single Target Gates}
 
 Recall the Shannon Decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$. Using the constructions in ~\ref{Subsec:UNOT}, we thus have a way to recursively construct arbitrary Boolean Functions up to a relative phase as a single target controlled NOT gate.
+
+As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$. This means that we can implement this function as a series of Toffoli gates. Generalizing to U-controlled NOT gates, we get the construction in ~\ref{fig-bool-or}.
 
 First, from the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$\footnote{note that as with any Shannon decomposition, we can decompose using an arbitrary variable order. We will treat variable order in ~\ref{Sec:exp}}. We then take ~\ref{fig-bool-or} and replace the inputs with our inputs, and the Toffoli gates with RTOFs (and their decomposition). Finally, we take ~\ref{fig-f-dot-g} to insert our function, and we get the construction in Fig.~\ref{fig-shannon}. As noted in ~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process until we are left with a simple CNOT as our U-controlled NOT expression.
 
@@ -64,11 +93,16 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
   In our second example, we will attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$. For the $F(x_3 = 1,x_2,x_1)$ case, we note that decomposing this is just for a 3-input Toffoli gate so we use the RTOF decomposition method. For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that isn't a straightforward sum of products expression. We now move on to the next level\footnote{The variable order here is chosen to best illustrate the working of the method. We will treat optimal variable order later}. We see that $F(x_3 = 1,x_2=0,x_1) = x_1$ and so that gives us the $x_1$-controlled NOT gate, which is just a regular RTOF. We also have $F(x_3 = 1,x_2=1,x_1) = True$ which creates a True-controlled-NOT gate, which is just a NOT gate. We now compose our resulting circuits in ~\ref{fig-func-decomp} \footnote{The reader may note that this gate order is NOT symmetric i.e. the NOT and the RTOF do not commute with each other. However, the difference is entirely in phase space, and since this will just be reversed in the uncomputation logic, we treat them as interchangeable}
 \end{example}
 
-\subsection{Optimizing the RTOF by BDD}
-\label{Subsec:rtof-opt}
+\subsection{Shannon Decomposition Cost and BDD representation}
+
+As is already apparent from the diagram, each variable that the function is dependent on roughly doubles the T-count, such that the total cost $C \propto 2^n$. This is in line with Barenco et al \ref{bib-barenco-elementary}, who posit that the T-count of a gate is exponential with respect to the number of inputs. As can also be seen from the diagram, each level has a linear dependence on the number of nodes at each level, so the relative complexity of the function also factors into the cost. In an environment where dirty ancilla are assumed to be plentiful, it is therefore desireable to limit these implementations to smaller numbers of input qubits i.e. smaller LUT-sizes. 
+
 As can already be seen, the Shannon decomposition method lends itself naturally to representation by Binary Decision Diagrams (BDDs). Representing our Boolean functions as BDDs gives us an easy way to traverse down the Shannon decomposition tree merely by traversing the BDD in the same direction and feeding the next node in the traversal as your input function to the next iteration of the recursive loop.
 
 One other thing that this means is that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is trivial to count the T-gate cost of the function merely by counting the number of nodes in the BDD that represents it.
+
+\subsection{Optimizing the RTOF by BDD}
+\label{Subsec:rtof-opt}
 
 This now gives us a way of optimizing our circuit. Recall that we discuss variable orders earlier. Because the cost of the decomposed circuit scales directly with the BDD, it is enough to find a variable order that minimizes the number of nodes in the BDD and to simply use that. Further, since the Shannon decomposed branches are now independent of each other, we can choose a different variable order for every succeeding level, and we can solve it that way.
 
@@ -99,9 +133,10 @@ Knowing this, we are now ready to define our algorithm to define an arbitrary Bo
   \end{algorithmic}
   
 \end{algorithm}
+
 \subsection{Synthesizing A Boolean Function Using LHRS and Shannon Decomposition RTOF}
 
-Using the algorithm defined in the previous subsection, we are now ready to improve the LHRS. First, a LUT network is synthesized from the Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by LHRS to create a quantum circuit of U-controlled-NOT gates (UCNOT). This QC is then parsed by our algorithm, decomposing each UCNOT into relative phhase versions of the partial Boolean functions in each cluster if the UCNOT if they do not act on an output bit, and exact versions in each cluster (using an ESOP-based synthesis method) without an uncompute pair. These are then recombined into a quantum circuit.
+Using the algorithm defined in the previous subsection, we are now ready to improve the LHRS. First, a LUT network is synthesized from the Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by the algorithm to create a quantum circuit of U-controlled-NOT gates (UCNOT). This QC is then parsed by our algorithm, synthesizing each UCNOT into relative phhase versions of the partial Boolean functions in each cluster if they do not act on an output bit, and exact versions in each cluster without an uncompute pair. These are then recombined into a quantum circuit.
 
 \begin{algorithm}[tbp]
   \caption{lut\_synthesis}

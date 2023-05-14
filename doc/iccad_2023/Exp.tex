@@ -2,37 +2,41 @@
 
 \subsection{Methodology}
 
-Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. This LUT network is coverted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+Boolean functions are taken from benchmarks and fed into the abc tool \cite{bib-abc} which generates a LUT-network with LUT size of at most 6 variables. We choose 6 because, as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is coverted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
 
-These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because we are operating in an ancilla constrained paradigm, any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}.
+These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because we are operating in an ancilla constrained paradigm, any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the Proposed numbers for any output node that requires an exact implementation.
 
+The table below details four sets of Numbers: Proposed is the T-count of the circuit using the proposed method. ESOP is the T-count of the circuit using the ``naive'' method. TotGates details how many LUT-nodes there were in a circuit. NumOuts details how many output nodes there were. The latter two taken together show much of the logic in a given quantum circuit is implemented using Algorithm \ref{algo-shannon}. Finally, we have AvgNodes, which denotes the average complexity of each gate. 
 
 \begin{table*}[t]
   \large
    \begin{center}
      \caption{Experimental Results}
      \scalebox{1.0}{
-       \begin{tabular}{|c|c|c|c|c|c|c|}
+       \begin{tabular}{|c|c|c|c|c|c|}
          \hline
-         Circuit & Proposed & ESOP & UnitarySynthesis & NeedAncilla & TotalAncilla & NumOuts \\
+         Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
          \hline
-         priority\_size\_2022 & 15800 & 93128 & 93128 & -82 & 0 & 8 \\
+         priority\_size\_2022 & 17256 & 98280 & 180 & 8 & 3 \\
          \hline
-         int2float\_size\_2022 & 10720 & 25544 & 25544 & -1 & 0 & 7 \\
+         int2float\_size\_2022 & 10512 & 22792 & 33 & 7 & 6 \\
          \hline
-         i2c\_size\_2022 & 73280 & 99232 & 99232 & -111 & 0 & 141 \\
+         i2c\_size\_2022 & 69952 & 94992 & 251 & 141 & 5 \\
          \hline
-         dec\_size\_2018 & 28008 & 112224 & 112224 & -264 & 0 & 11 \\
+         dec\_size\_2018 & 28008 & 112224 & 517 & 11 & 4 \\
          \hline
-         ctrl\_size\_2022 & 6936 & 16472 & 16472 & -13 & 0 & 4 \\
+         ctrl\_size\_2022 & 6712 & 14568 & 48 & 4 & 3 \\
          \hline
-         cavlc\_size\_2022 & 35560 & 118056 & 118056 & -8 & 0 & 11 \\
+         cavlc\_size\_2022 & 34720 & 122800 & 97 & 11 & 6 \\
          \hline
-         bar\_size\_2015 & 454416 & 175344 & 175344 & 0 & 0 & 6 \\
+         bar\_size\_2015 & 454464 & 181216 & 1018 & 6 & 4 \\
          \hline
-         arbiter\_size\_2022 & 43552 & 168216 & 168216 & -265 & 0 & 129 \\
+         arbiter\_size\_2022 & 44864 & 169624 & 417 & 129 & 4 \\
+         \hline
+         adder\_size\_2022 & 4976 & 4976 & 129 & 129 & 7 \\
          \hline
        \end{tabular}
+
      }
      \label{table-results}
      \end{center}
@@ -41,7 +45,7 @@ These results are then compared to a naive implementation of the LUT-based synth
 
 \subsection{Analysis}
 
-We see that in most cases the proposed method is better than the naive method by a factor of two. 
+We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2022. It is not currently known where this savings take place. It can be theorized that the share of relative phase circuits vs ESOP circuits would be to blame, but those with a high shares of relative phase circuits both perform better worse (bar\_size\_2015) and better (dec\_size\_2018) than the ESOP method. 
 
 
 

@@ -28,7 +28,7 @@
       % $+\frac{\pi}{2}, +\pi, -\frac{\pi}{2}$だけ変化する．
 \begin{figure*}[ht]
   \def\@captype{table}
-  \begin{minipage}[ht]{.24\textwidth}
+  \begin{minipage}[ht]{.46\textwidth}
     \begin{center}
        %\scalebox{0.7}[1]{
         \begin{tabular}{c|c}      \hline
@@ -46,6 +46,15 @@
         \captionof{table}{Added phases by an RTOF.}
         \label{table-rtof}
   \end{minipage}
+  \begin{minipage}[ht]{.46\textwidth}
+    \begin{center}
+      \includegraphics[width=5cm]{img/toffoli-f.eps}
+      \caption{Functional representations for the output of a Toffoli gate.}
+      \label{toffoli-f}
+    \end{center}
+  \end{minipage}
+
+  
   %
  \end{figure*}
 
@@ -53,20 +62,18 @@
 
 Boolean functions are often used as essential components in quantum algorithms, such as oracles and cost functions; these are often calculated using the circuit model called {\it quantum Boolean circuits}~\cite{bib-circuit}. To realize such quantum Boolean circuits, a Toffoli gate is often used as a logic primitive. However, as three qubit operations do not occur naturally in the two level systems that modern quantum computers are made of, these Toffoli gates have to be in turn, composed of physically realizable gates, such as NOT, CNOT, and T. (e.g., the Clifford+T~\cite{bib-gates} basis gate set), as depicted in Fig.~\ref{toffoli}
 
-As qubits are famously prone to error and perturbation, it is often useful to consider a {\it fault-tolerant} implementation of quantum computation, one which could detect and correct errors ~\cite{bib-mike-and-ike}. Unfortunately, in the fault-tolerant paradigm, T-gates incur much higher cost than other gate types. This is because non-Clifford gates like the T gate cannot simply be connected transversally between encoded code blocks of qubits. Many of the most prominent implementations employ state purification and gate teleportation, among other things. Because of its relatively outsized cost compared to Clifford gates, it has the possibility of overwhelming the base cost of a particular circuit implementation. As T gates are key to quantum advantage ~\cite{bib-qc-adv}, decreasing T-gates has been identified as of paramount importance in bridging the gap between theoretical models of quantum computation and their physically realizable counterparts, and many propositions have been made to decrease their number in a given circuit.
+As qubits are famously prone to error and perturbation, it is often useful to consider a {\it fault-tolerant} implementation of quantum computation, one which could detect and correct errors ~\cite{bib-mike-and-ike}. Unfortunately, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gate types. Many of the most prominent implementations employ state purification and gate teleportation, among others. Because of its relatively outsized cost compared to Clifford gates, it has the possibility of overwhelming the base cost of a particular circuit implementation. As T gates are key to quantum advantage, due to the Gottesman-Knill Theorem, decreasing the number of T-gates (T-count) has been identified as of paramount importance in bridging the gap between theoretical models of quantum computation and their physically realizable counterparts, and many propositions have been made to decrease their number in a given circuit.
 
-{\it Relative-phase Toffoli gates (RTOF)}~\cite{bib-rtof-maslov} have been proposed as an alternative implementation of a Toffoli gate in the decomposition of a multiple-control Toffoli gate. An RTOF can calculate the same logic function as a Toffoli gate and reduces the T-gate count by 3, as can be seen in Fig. ~\ref{fig-rtof}. However it introduces a {\it relative phase} among its output quantum states. Because of the relative phase errors, we cannot simply replace a Toffoli gate with an RTOF in general. Rather, RTOFs can be utilized when we decompose a multiple-control Toffoli gate because the relative phase errors can be canceled between two RTOFs in the decomposition. Maslov further posits that not just Toffoli gates but generalized controlled U functions can take advantage of the fact that Boolean functions implemented up to a relative phase used in tandem can optimize the overall circuit.
-
-Another important idea recently is LUT-based quantum logic synthesis, such as the one proposed in ~\cite{bib-lhrs-soeken}. This helps map complicated Boolean functions into cascading series of gates, which help minimize the ancilla qubits that will be needed to store intermediate computation values.
+Our research seeks to leverage recent results in relative phase implementations of Boolean functions ~\cite{bib-rtof-maslov} ~\cite{bib-amy-phase-state} and LUT-based quantum circuit synthesis to reduce T-count in a a qubit constrained environment.
 
 \noindent {\bf Our Contribution.} 
-We proposed a method to improve LHRS by exploiting the ability of relative phase implementations of Boolean functions to reduce the T-count in the circuit. Among our contributions:
+We propose a method that reduces the number of T-gates in a Quantum LUT Network by exploiting relative phase Boolean functions. Among our contributions:
 \begin{itemize}
-\item A novel method to synthesize a Boolean function up to a relative phase by utilizing recursion and Shannon Decomposition
-\item A method to generate a Quantum Boolean Circuit from a Boolean Logic Network representation 
+\item A novel method to synthesize a Boolean function up to a relative phase by utilizing relative phase constructions and Shannon Decomposition
+\item A method to generate a Quantum Boolean Circuit from a Boolean Logic Network representation leveraging the above method to reduce T-count
 
 \end{itemize}
-Our methods are compared to a naive. We find that on average this improves T-count by DCTODO\%. However many cases remain where it underperforms previous methods. Nonetheless, we demonstrate its advantage for the majority of cases.
+Our methods are compared to a naive synthesis of each LUT node that utilizes an ESOP-based method to synthesize each Boolean function exactly as a Quantum Boolean Circuit. We find that on average, for similar usage of ancilla qubits, this improves T-count by DCTODO\%. While there remain a few exceptions to its advantage, its advantage in the majority of cases we have tested points to more resea
 
 The paper is structured as follows. Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Then Section~\ref{Sec:Exist} lays out some motivations for the research we are going to conduct. Section~\ref{Sec:proposed} follows with our proposed method, including our novel method to realize functions up to a relative phase without any additional ancillae, and then its use with the LHRS. Then, Our experimental results in Section~\ref{Sec:exp} can confirm that our method can indeed reduce the T-count of quantum Boolean circuits. Finally Section~\ref{Sec:concl} concludes the paper with our conclusions and future work.
 
