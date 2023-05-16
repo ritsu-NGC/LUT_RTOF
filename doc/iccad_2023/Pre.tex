@@ -27,17 +27,13 @@ We denote the primary inputs of a circuit by $x_1, x_2, \cdots,x_{n}$  when we h
  \label{Sec:bool-const}
 We will be using a few common constructions to realize certain Boolean operations as quantum circuits. Fig.~\ref{fig-bool-or} depicts how putting the output of two Toffoli or CNOT gates in series on the same output qubit will create a Boolean sum of their controls, while ~\ref{fig-bool-and} depicts how putting their outputs in parallel on the controls of a Toffoli gate will produce their Boolean product on the Toffoli gate's output (assuming a clean ancilla). We will be using these facts in the next section. 
 
-\subsection{Relative-Phase Boolean Gates}
+\subsection{Relative-Phase Boolean Functions}
 
-A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof} has two control bits and one target bit. It inverts the basis state of the target bit (i.e., $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the both control bits are $\ket{11}$. A Toffoli gate consists of 7 T gates as shown in Fig.~\ref{toffoli} whereas an RTOF consists of 4 T gates as shown in Fig.~\ref{rtof}. One may notice that the version of the RTOF that is used here is similar to the n-controlled-iX gate from ~\cite{bib-selinger-rtof} for $n=2$, with one less CNOT gate. As noted in ~\cite{bib-rtof}, removing this gate only affects the phase, so it only transforms an RTOF gate into another RTOF gate. We will subsume this
+A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov} has two control bits and one target bit. It inverts the basis state of the target bit (i.e., $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the both control bits are $\ket{11}$. A Toffoli gate consists of 7 T gates as shown in Fig.~\ref{toffoli} whereas an RTOF consists of 4 T gates as shown in Fig.~\ref{rtof}. One may notice that the version of the RTOF that is used here is similar to the n-controlled-iX gate from ~\cite{bib-selinger-rtof} for $n=2$, with one less CNOT gate. As noted in ~\cite{bib-rtof}, removing this gate only affects the phase, so it only transforms an RTOF gate into another RTOF gate. We will subsume this
 
 As depicted in Fig.~\ref{rtof}, an RTOF has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Table~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
 
 One of the results from ~\cite{bib-rtof} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
-
-\subsection{Relative-Phase Boolean Functions}
-
-As an extension of the RTOF
 
 \subsection{Boolean Logic Network}
 
@@ -51,7 +47,7 @@ A logic function can be decomposed into such a Boolean Logic Network, and its no
  \label{Sec:Exist}
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
 \label{Sec:lhrs}
-Previous Research ~\cite{bib-soeken-lhrs} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean Network to a function-controlled NOT gate, and then cascades them together to create the output. Because the U-controlled NOT gates act on ancillas, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+Previous Research ~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean Network to a function-controlled NOT gate, and then cascades them together to create the output. Because the U-controlled NOT gates act on ancillas, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
 
 \subsection{Using RTOF to decompose MCT gates}
 Existing research ~\cite{bib-rtof} finds an advantage to using RTOFs in synthesizing and decomposing logic functions, particularly MCTs. For the sake of brevity, we will only detail their results here that we will use.
