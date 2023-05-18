@@ -1,8 +1,10 @@
 \section{Experimental Results}
-
+\label{Sec:exp}
 \subsection{Methodology}
 
-Boolean functions are taken from the EPFL Combinational Benchmark Suite \cite{bib-abc} which consist of a LUT-network with LUT size of at most 6 variables. We choose 6 because, as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is coverted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic. The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality. Because the variables are limited to 6, we use an exhaustive search to determine the optimal variable order. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+Boolean functions are taken from the EPFL Combinational Benchmark Suite \cite{bib-abc} which consist of a LUT-network with LUT size of at most 6 variables. We choose 6 because, as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic.
+
+The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
 
 These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the Proposed method for any output node that requires an exact implementation.
 
@@ -13,10 +15,10 @@ The table below details four sets of Numbers: Proposed is the T-count of the cir
    \begin{center}
      \caption{Experimental Results}
      \scalebox{1.0}{
-       \begin{tabular}{|c|c|c|c|c|c|}
-         \hline
+       \begin{tabular}{c|c|c|c|c|c}
+         \Hline
          Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
-         \hline
+         \Hline
          priority\_size\_2022 & 17256 & 98280 & 180 & 8 & 3 \\
          \hline
          int2float\_size\_2022 & 10512 & 22792 & 33 & 7 & 6 \\

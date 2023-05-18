@@ -15,7 +15,7 @@
       \begin{center}
         \input{img/fig-func-decomp}
       \end{center}
-      \label{Decomposition of the function in Example 2}
+      \caption{Decomposition of the function in Example 2}
   \end{minipage}
 \end{figure*}
 
@@ -80,10 +80,10 @@ Recall the Shannon Decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cd
 
 As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$. This means that we can implement this function as a series of Toffoli gates. Generalizing to U-controlled NOT gates, we get the construction in ~\ref{fig-bool-or}.
 
-First, from the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$\footnote{note that as with any Shannon decomposition, we can decompose using an arbitrary variable order. We will treat variable order in ~\ref{Sec:exp}}. We then take ~\ref{fig-bool-or} and replace the inputs with our inputs, and the Toffoli gates with RTOFs (and their decomposition). Finally, we take ~\ref{fig-f-dot-g} to insert our function, and we get the construction in Fig.~\ref{fig-shannon}. As noted in ~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process until we are left with a simple CNOT as our U-controlled NOT expression.
+First, from the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As with any Shannon decomposition, we can decompose using an arbitrary variable order. We will treat variable order in ~\ref{Sec:exp}. We then take ~\ref{fig-bool-or} and replace the inputs with our inputs, and the Toffoli gates with RTOFs (and their decomposition). Finally, we take ~\ref{fig-f-dot-g} to insert our function, and we get the construction in Fig.~\ref{fig-shannon}. As noted in ~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process until we are left with a simple CNOT as our U-controlled NOT expression.
 
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. If it is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of the Shannon decomposition evaluations to either ``True'' or ``False'', we can merely replace it with a NOT gate or an identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the function. As we will see in the next example, we can express the relative-phase Toffoli construction in ~\cite{bib-amy-phase-state} as a special case of this construction
-\begin{algorithm}[h]
+\begin{algorithm}[tbp]
   \caption{shannon\_decomp}
   \label{algo-shannon}
   \begin{algorithmic}
@@ -105,6 +105,7 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
 \end{algorithm}
 
 \begin{example}
+  \label{
   Starting with $F(x_0,x_1,\cdots,x_n) = x_0 \cdot x_1 \cdot \cdots \cdot x_n$ we can decompose this into $F(x_0,x_1,\cdots,x_n) = x_0 \cdot F(x_0=1,x_1,\cdots,x_n) + \bar{x_o} \cdot F(x_0=0,x_1,\cdots,x_n) = x_0 \cdot x_1 \cdot \cdots \cdot x_n$.
 
   The first stage of this decomposition thus just looks like the decomposition in ~\ref{bib-rtof-maslov}. We can see that if we proceed down the Shannon decomposition, one or the other side of the equation will always evaluate to 0. Therefore it simplifies to the ~\ref{bib-rtof-maslov}. In fact, it generalizes it slightly because it also automatically handles the case where $F(\cdots , x_k=0 , \cdots) \neq 0$, meaning this method can decompose MPMCT gates as well. The corresponding decomposition is expressed in ~\ref{fig-rtof-decomp}
@@ -117,7 +118,7 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
   First, we For the $F(x_3 = 1,x_2,x_1)$ case, we note that decomposing this is just for a 3-input Toffoli gate so we use the RTOF decomposition method. For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that isn't a straightforward sum of products expression. We now move on to the next level\footnote{The variable order here is chosen to best illustrate the working of the method. We will treat optimal variable order later}. We see that $F(x_3 = 1,x_2=0,x_1) = x_1$ and so that gives us the $x_1$-controlled NOT gate, which is just a regular RTOF. We also have $F(x_3 = 1,x_2=1,x_1) = True$ which creates a True-controlled-NOT gate, which is just a NOT gate. We now compose our resulting circuits in ~\ref{fig-func-decomp} \footnote{The reader may note that this gate order is NOT symmetric i.e. the NOT and the RTOF do not commute with each other. However, the difference is entirely in phase space, and since this will just be reversed in the uncomputation logic, we treat them as interchangeable}
 \end{example}
 
-\begin{algorithm}[h]
+\begin{algorithm}[tbp]
   \caption{lut\_synthesis}
   \label{algo-lut}
   \begin{algorithmic}
