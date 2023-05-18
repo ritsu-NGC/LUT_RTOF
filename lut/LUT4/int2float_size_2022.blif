@@ -1,218 +1,218 @@
 # Benchmark "top" written by ABC on Wed May 17 22:01:58 2023
 .model top
-.inputs B[0] B[1] B[2] B[3] B[4] B[5] B[6] B[7] B[8] B[9] B[10]
-.outputs M[0] M[1] M[2] M[3] E[0] E[1] E[2]
-.names new_n32_ B[2] B[3] new_n33_ new_n31_
+.inputs inB[0] inB[1] inB[2] inB[3] inB[4] inB[5] inB[6] inB[7] inB[8] inB[9] inB[10]
+.outputs outM[0] outM[1] outM[2] outM[3] E[0] E[1] E[2]
+.names new_n32_ inB[2] inB[3] new_n33_ new_n31_
 -010 1
 -100 1
 0--0 1
-.names B[7] B[9] B[10] new_n32_
+.names inB[7] inB[9] inB[10] new_n32_
 000 1
-.names B[5] B[9] B[7] B[10] new_n33_
+.names inB[5] inB[9] inB[7] inB[10] new_n33_
 --01 1
 -010 1
 01-0 1
-.names B[9] B[10] new_n34_
+.names inB[9] inB[10] new_n34_
 00 1
-.names B[5] B[6] new_n44_
+.names inB[5] inB[6] new_n44_
 00 1
-.names B[7] B[8] new_n50_
+.names inB[7] inB[8] new_n50_
 00 1
-.names new_n54_ new_n56_ B[9] B[7] new_n53_
+.names new_n54_ new_n56_ inB[9] inB[7] new_n53_
 -011 0
 -110 0
 1--1 0
-.names new_n55_ B[8] new_n54_
+.names new_n55_ inB[8] new_n54_
 00 1
-.names B[3] B[4] B[9] B[5] new_n55_
+.names inB[3] inB[4] inB[9] inB[5] new_n55_
 -001 0
 0-01 0
 11-0 0
-.names B[5] B[6] new_n56_
+.names inB[5] inB[6] new_n56_
 11 1
-.names B[6] B[7] new_n58_
+.names inB[6] inB[7] new_n58_
 11 1
-.names B[4] B[5] new_n60_
+.names inB[4] inB[5] new_n60_
 11 1
-.names new_n64_ new_n73_ B[4] B[7] new_n63_
+.names new_n64_ new_n73_ inB[4] inB[7] new_n63_
 -101 1
 1-00 1
-.names new_n128_ new_n71_ B[6] new_n68_ new_n64_
+.names new_n128_ new_n71_ inB[6] new_n68_ new_n64_
 0001 1
-.names new_n70_ B[6] new_n69_ B[5] new_n68_
+.names new_n70_ inB[6] new_n69_ inB[5] new_n68_
 --00 0
 01-1 0
-.names B[4] B[6] B[2] new_n69_
+.names inB[4] inB[6] inB[2] new_n69_
 -01 1
 1-1 1
-.names B[0] B[2] B[4] new_n70_
+.names inB[0] inB[2] inB[4] new_n70_
 -01 1
 0-0 1
-.names B[5] B[4] new_n72_ new_n71_
+.names inB[5] inB[4] new_n72_ new_n71_
 011 1
-.names B[0] B[6] B[2] new_n72_
+.names inB[0] inB[6] inB[2] new_n72_
 001 1
-.names new_n68_ B[6] new_n73_
+.names new_n68_ inB[6] new_n73_
 01 1
-.names new_n73_ new_n64_ B[3] new_n75_ new_n74_
+.names new_n73_ new_n64_ inB[3] new_n75_ new_n74_
 -101 1
 0011 1
-.names B[7] B[4] new_n75_
+.names inB[7] inB[4] new_n75_
 01 1
-.names B[7] B[5] B[3] new_n83_
+.names inB[7] inB[5] inB[3] new_n83_
 011 1
 .names new_n87_ new_n90_ new_n86_
 00 1
-.names new_n89_ B[7] new_n88_ new_n56_ new_n87_
+.names new_n89_ inB[7] new_n88_ new_n56_ new_n87_
 -100 1
 0-01 1
-.names B[6] B[7] B[9] B[10] new_n88_
+.names inB[6] inB[7] inB[9] inB[10] new_n88_
 -001 1
 0-01 1
-.names B[9] B[7] B[4] B[10] new_n89_
+.names inB[9] inB[7] inB[4] inB[10] new_n89_
 -000 1
 -110 1
 1--0 1
-.names B[6] B[10] B[7] B[9] new_n90_
+.names inB[6] inB[10] inB[7] inB[9] new_n90_
 -001 1
 0-01 1
-.names B[8] B[9] B[10] new_n92_
+.names inB[8] inB[9] inB[10] new_n92_
 000 1
-.names new_n94_ new_n95_ B[3] new_n34_ M[3]
+.names new_n94_ new_n95_ inB[3] new_n34_ outM[3]
 -101 0
 1-01 0
-.names B[2] new_n58_ new_n60_ B[8] new_n94_
+.names inB[2] new_n58_ new_n60_ inB[8] new_n94_
 0111 1
-.names B[4] B[5] B[6] new_n50_ new_n95_
+.names inB[4] inB[5] inB[6] new_n50_ new_n95_
 0001 1
-.names new_n98_ new_n100_ B[8] B[9] new_n97_
+.names new_n98_ new_n100_ inB[8] inB[9] new_n97_
 0000 1
-.names new_n64_ new_n99_ new_n75_ B[3] new_n98_
+.names new_n64_ new_n99_ new_n75_ inB[3] new_n98_
 -111 1
 1-11 1
 .names new_n70_ new_n56_ new_n99_
 01 1
-.names B[5] B[7] new_n101_ B[6] new_n100_
+.names inB[5] inB[7] new_n101_ inB[6] new_n100_
 -0-1 0
 -01- 0
 1-11 0
-.names B[3] B[5] B[4] new_n101_
+.names inB[3] inB[5] inB[4] new_n101_
 -01 1
 1-1 1
 .names new_n103_ new_n86_ new_n104_ new_n50_ new_n102_
 -1-1 1
 -11- 1
 0-01 1
-.names B[2] B[3] new_n103_
+.names inB[2] inB[3] new_n103_
 11 1
-.names B[2] B[3] B[7] B[8] new_n104_
+.names inB[2] inB[3] inB[7] inB[8] new_n104_
 -111 1
 1-11 1
 .names new_n109_ new_n102_ new_n34_ E[1]
 --0 1
 01- 1
-.names B[1] B[2] new_n110_ new_n44_ new_n109_
+.names inB[1] inB[2] new_n110_ new_n44_ new_n109_
 ---0 0
 111- 0
-.names B[0] B[3] B[4] new_n110_
+.names inB[0] inB[3] inB[4] new_n110_
 111 1
 .names new_n102_ new_n32_ E[2]
 11 0
-.names new_n117_ B[9] B[10] B[8] new_n112_
+.names new_n117_ inB[9] inB[10] inB[8] new_n112_
 -111 1
 1000 1
-.names new_n112_ B[6] new_n31_ new_n119_ M[0]
+.names new_n112_ inB[6] new_n31_ new_n119_ outM[0]
 ---0 1
 111- 1
-.names B[1] B[4] B[6] B[0] new_n114_
+.names inB[1] inB[4] inB[6] inB[0] new_n114_
 -001 0
 0-01 0
 1100 0
-.names B[6] B[1] B[2] new_n115_
+.names inB[6] inB[1] inB[2] new_n115_
 001 1
 010 1
-.names new_n115_ new_n114_ B[5] new_n116_
+.names new_n115_ new_n114_ inB[5] new_n116_
 -10 1
 0-1 1
-.names new_n116_ B[3] B[4] B[7] new_n117_
+.names new_n116_ inB[3] inB[4] inB[7] new_n117_
 -001 1
 -111 1
 1--0 1
-.names new_n117_ B[4] B[5] B[8] new_n118_
+.names new_n117_ inB[4] inB[5] inB[8] new_n118_
 -011 1
 -101 1
 0--0 1
-.names new_n118_ B[6] new_n31_ new_n34_ new_n119_
+.names new_n118_ inB[6] new_n31_ new_n34_ new_n119_
 -000 1
 -110 1
 0--1 1
 .names new_n128_ new_n71_ new_n68_ new_n123_
 001 1
-.names B[6] B[4] new_n123_ new_n83_ new_n124_
+.names inB[6] inB[4] new_n123_ new_n83_ new_n124_
 -111 0
 0001 0
-.names new_n63_ new_n74_ B[5] new_n130_ new_n125_
+.names new_n63_ new_n74_ inB[5] new_n130_ new_n125_
 --11 1
 00-1 1
-.names new_n125_ new_n124_ new_n92_ new_n132_ M[2]
+.names new_n125_ new_n124_ new_n92_ new_n132_ outM[2]
 --01 0
 11-1 0
-.names B[0] B[4] B[1] B[5] new_n127_
+.names inB[0] inB[4] inB[1] inB[5] new_n127_
 --11 1
 1100 1
-.names B[6] B[2] new_n127_ new_n128_
+.names inB[6] inB[2] new_n127_ new_n128_
 011 1
-.names B[6] B[3] B[5] B[7] new_n129_
+.names inB[6] inB[3] inB[5] inB[7] new_n129_
 -010 0
 0111 0
 1-01 0
 10-1 0
-.names B[5] B[6] new_n129_ B[4] new_n130_
+.names inB[5] inB[6] new_n129_ inB[4] new_n130_
 --01 0
 11-0 0
-.names new_n87_ B[7] B[10] B[8] new_n131_
+.names new_n87_ inB[7] inB[10] inB[8] new_n131_
 -000 1
 0101 1
 1-00 1
-.names B[8] new_n87_ new_n131_ B[9] new_n132_
+.names inB[8] new_n87_ new_n131_ inB[9] new_n132_
 --01 0
 11-0 0
-.names new_n102_ B[9] new_n90_ new_n87_ new_n133_
+.names new_n102_ inB[9] new_n90_ new_n87_ new_n133_
 -0-1 1
 -100 1
 0-00 1
-.names new_n133_ B[8] B[10] new_n97_ E[0]
+.names new_n133_ inB[8] inB[10] new_n97_ E[0]
 -000 0
 0-00 0
-.names B[0] B[1] B[4] B[2] new_n135_
+.names inB[0] inB[1] inB[4] inB[2] new_n135_
 -011 1
 -10- 1
 0-11 1
 11-0 1
-.names B[1] B[2] B[7] B[3] new_n136_
+.names inB[1] inB[2] inB[7] inB[3] new_n136_
 -001 1
 0-01 1
 1100 1
-.names B[7] new_n135_ new_n136_ B[5] new_n137_
+.names inB[7] new_n135_ new_n136_ inB[5] new_n137_
 --11 1
 01-0 1
-.names B[2] B[3] B[7] B[4] new_n139_
+.names inB[2] inB[3] inB[7] inB[4] new_n139_
 -001 1
 0-01 1
 1100 1
-.names B[4] B[5] new_n139_ B[8] new_n140_
+.names inB[4] inB[5] new_n139_ inB[8] new_n140_
 --00 0
 11-1 0
-.names B[5] B[4] new_n137_ B[8] new_n142_
+.names inB[5] inB[4] new_n137_ inB[8] new_n142_
 --10 1
 11-1 1
-.names new_n140_ new_n142_ B[9] B[6] new_n143_
+.names new_n140_ new_n142_ inB[9] inB[6] new_n143_
 -100 0
 1-01 0
-.names B[9] B[8] new_n58_ new_n144_
+.names inB[9] inB[8] new_n58_ new_n144_
 -00 0
 011 0
-.names new_n53_ new_n143_ new_n144_ B[10] M[1]
+.names new_n53_ new_n143_ new_n144_ inB[10] outM[1]
 --01 0
 11-0 0
 .end

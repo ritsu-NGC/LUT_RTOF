@@ -1,11 +1,7 @@
 # Benchmark "top" written by ABC on Wed May 17 22:01:57 2023
 .model top
-.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] \
- op_ext[1]
-.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] \
- alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] \
- alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz \
- jump Cin invA invB sign mem_write sel_wb
+.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] op_ext[1]
+.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz jump cin invA invB sign mem_write sel_wb
 .names new_n36_ opcode[3] opcode[4] sel_reg_dst[0]
 000 1
 011 1
@@ -106,7 +102,7 @@
 011 1
 .names opcode[0] new_n61_ opcode[1] bltz
 011 1
-.names new_n77_ new_n79_ opcode[3] Cin
+.names new_n77_ new_n79_ opcode[3] cin
 -11 1
 1-1 1
 .names new_n78_ opcode[2] opcode[0] new_n77_
@@ -116,9 +112,9 @@
 0-1 1
 .names new_n54_ opcode[2] opcode[4] new_n79_
 011 1
-.names alu_op[1] opcode[2] Cin invA
+.names alu_op[1] opcode[2] cin invA
 001 1
-.names alu_op[1] opcode[2] Cin invB
+.names alu_op[1] opcode[2] cin invB
 -11 1
 1-1 1
 .names opcode[2] opcode[0] opcode[1] new_n83_ mem_write

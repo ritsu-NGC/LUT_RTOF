@@ -1,11 +1,7 @@
 # Benchmark "top" written by ABC on Wed May 17 22:02:39 2023
 .model top
-.inputs totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] \
- totalcoeffs[4] ctable[0] ctable[1] ctable[2] trailingones[0] \
- trailingones[1]
-.outputs coeff_token[0] coeff_token[1] coeff_token[2] coeff_token[3] \
- coeff_token[4] coeff_token[5] ctoken_len[0] ctoken_len[1] ctoken_len[2] \
- ctoken_len[3] ctoken_len[4]
+.inputs totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] totalcoeffs[4] ctable[0] ctable[1] ctable[2] trailingones[0] trailingones[1]
+.outputs coeff_token[0] coeff_token[1] coeff_token[2] coeff_token[3] coeff_token[4] coeff_token[5] ctoken_len[0] ctoken_len[1] ctoken_len[2] ctoken_len[3] ctoken_len[4]
 .names ctable[2] new_n24_ new_n49_ new_n59_ totalcoeffs[4] coeff_token[0]
 ---1- 1
 --0-0 1
@@ -21,8 +17,7 @@
 .names new_n29_ new_n32_ new_n31_ new_n27_ new_n26_
 -000 1
 0-00 1
-.names ctable[1] totalcoeffs[1] trailingones[0] totalcoeffs[3] new_n28_ \
- new_n27_
+.names ctable[1] totalcoeffs[1] trailingones[0] totalcoeffs[3] new_n28_ new_n27_
 -1001 1
 00011 1
 10111 1
@@ -33,8 +28,7 @@
 0011 1
 .names totalcoeffs[3] ctable[1] new_n30_
 11 1
-.names ctable[1] trailingones[0] new_n28_ totalcoeffs[1] totalcoeffs[3] \
- new_n31_
+.names ctable[1] trailingones[0] new_n28_ totalcoeffs[1] totalcoeffs[3] new_n31_
 -0010 1
 00001 1
 1-010 1
@@ -51,42 +45,36 @@
 .names totalcoeffs[0] trailingones[1] new_n35_
 01 1
 10 1
-.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[3] totalcoeffs[2] \
- trailingones[1] new_n36_
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[3] totalcoeffs[2] trailingones[1] new_n36_
 -0011 0
 00100 0
 1-011 0
 10-11 0
-.names totalcoeffs[2] ctable[0] totalcoeffs[0] trailingones[1] \
- totalcoeffs[1] new_n37_
+.names totalcoeffs[2] ctable[0] totalcoeffs[0] trailingones[1] totalcoeffs[1] new_n37_
 -0-00 0
 -00-1 0
 0-000 0
 .names new_n40_ new_n41_ new_n39_ totalcoeffs[2] new_n38_
 -101 1
 1-00 1
-.names trailingones[0] totalcoeffs[0] ctable[1] totalcoeffs[2] new_n32_ \
- new_n39_
+.names trailingones[0] totalcoeffs[0] ctable[1] totalcoeffs[2] new_n32_  new_n39_
 -1101 1
 00001 1
 10011 1
-.names totalcoeffs[3] trailingones[0] ctable[1] trailingones[1] \
- totalcoeffs[0] new_n40_
+.names totalcoeffs[3] trailingones[0] ctable[1] trailingones[1]  totalcoeffs[0] new_n40_
 -0011 0
 -1001 0
 0-101 0
 01-10 0
 1-111 0
-.names trailingones[1] trailingones[0] totalcoeffs[0] ctable[1] \
- totalcoeffs[3] new_n41_
+.names trailingones[1] trailingones[0] totalcoeffs[0] ctable[1] totalcoeffs[3] new_n41_
 --110 0
 11-01 0
 .names new_n45_ totalcoeffs[0] totalcoeffs[1] new_n46_ new_n43_ new_n42_
 ----0 0
 --10- 0
 01--- 0
-.names trailingones[0] new_n44_ totalcoeffs[2] ctable[0] totalcoeffs[3] \
- new_n43_
+.names trailingones[0] new_n44_ totalcoeffs[2] ctable[0] totalcoeffs[3] new_n43_
 --001 1
 --100 1
 -0-0- 1
@@ -95,13 +83,11 @@
 .names totalcoeffs[0] totalcoeffs[1] new_n44_
 00 1
 11 1
-.names ctable[0] totalcoeffs[2] totalcoeffs[1] totalcoeffs[3] \
- trailingones[0] new_n45_
+.names ctable[0] totalcoeffs[2] totalcoeffs[1] totalcoeffs[3] trailingones[0] new_n45_
 -1001 0
 -1010 0
 0-100 0
-.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[2] \
- ctable[0] new_n46_
+.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[2] ctable[0] new_n46_
 -0010 0
 01001 0
 1-110 0
@@ -123,14 +109,12 @@
 .names new_n53_ totalcoeffs[2] new_n54_ trailingones[1] new_n52_
 --00 0
 00-- 0
-.names ctable[2] totalcoeffs[1] totalcoeffs[0] trailingones[0] \
- trailingones[1] new_n53_
+.names ctable[2] totalcoeffs[1] totalcoeffs[0] trailingones[0] trailingones[1] new_n53_
 -1001 0
 -1111 0
 0--01 0
 1-1-0 0
-.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[0] trailingones[0] \
- ctable[2] new_n54_
+.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[0] trailingones[0] ctable[2] new_n54_
 -1100 0
 00001 0
 00110 0
@@ -138,8 +122,7 @@
 1-000 0
 .names ctable[2] trailingones[0] new_n55_
 00 1
-.names new_n35_ totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[1] \
- new_n56_
+.names new_n35_ totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[1] new_n56_
 --010 1
 --100 1
 -0--0 1
@@ -147,8 +130,7 @@
 1---0 1
 .names new_n58_ ctable[2] ctable[0] trailingones[0] new_n57_
 0011 1
-.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] ctable[1] \
- trailingones[1] new_n58_
+.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] ctable[1] trailingones[1] new_n58_
 00011 1
 .names new_n60_ trailingones[0] ctable[0] new_n78_ new_n59_
 0001 1
@@ -162,8 +144,7 @@
 001 1
 .names new_n63_ totalcoeffs[2] new_n62_
 00 1
-.names totalcoeffs[1] trailingones[0] totalcoeffs[3] totalcoeffs[0] \
- trailingones[1] new_n63_
+.names totalcoeffs[1] trailingones[0] totalcoeffs[3] totalcoeffs[0] trailingones[1] new_n63_
 -1000 0
 00111 0
 10011 0
@@ -177,19 +158,16 @@
 .names totalcoeffs[1] totalcoeffs[2] trailingones[0] new_n66_
 000 1
 111 1
-.names trailingones[0] totalcoeffs[2] totalcoeffs[1] totalcoeffs[3] \
- trailingones[1] new_n67_
+.names trailingones[0] totalcoeffs[2] totalcoeffs[1] totalcoeffs[3] trailingones[1] new_n67_
 ---00 0
 -0011 0
 -11-- 0
 0---- 0
 .names totalcoeffs[0] totalcoeffs[2] new_n68_
 01 1
-.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[3] \
- new_n69_
+.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[3] new_n69_
 0001 1
-.names totalcoeffs[1] trailingones[1] trailingones[0] totalcoeffs[3] \
- totalcoeffs[2] new_n70_
+.names totalcoeffs[1] trailingones[1] trailingones[0] totalcoeffs[3] totalcoeffs[2] new_n70_
 -0010 1
 01000 1
 01011 1
@@ -204,18 +182,15 @@
 .names totalcoeffs[2] totalcoeffs[0] new_n69_ new_n74_ new_n75_ new_n73_
 --001 1
 11-01 1
-.names totalcoeffs[2] trailingones[0] trailingones[1] totalcoeffs[3] \
- totalcoeffs[1] new_n74_
+.names totalcoeffs[2] trailingones[0] trailingones[1] totalcoeffs[3] totalcoeffs[1] new_n74_
 00011 1
 11101 1
-.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[2] \
- new_n75_
+.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[2] new_n75_
 -00- 1
 -110 1
 0--0 1
 1--1 1
-.names totalcoeffs[3] totalcoeffs[1] totalcoeffs[0] trailingones[1] \
- trailingones[0] new_n76_
+.names totalcoeffs[3] totalcoeffs[1] totalcoeffs[0] trailingones[1] trailingones[0] new_n76_
 -0101 0
 -1111 0
 00000 0
@@ -224,8 +199,7 @@
 00 1
 .names ctable[2] new_n79_ new_n78_
 01 1
-.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] \
- totalcoeffs[4] new_n79_
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] totalcoeffs[4] new_n79_
 00001 1
 .names ctable[2] new_n81_ new_n78_ new_n113_ totalcoeffs[4] coeff_token[1]
 --10- 1
@@ -252,21 +226,17 @@
 0--00 1
 .names totalcoeffs[1] totalcoeffs[0] trailingones[0] new_n86_
 011 1
-.names totalcoeffs[0] totalcoeffs[3] ctable[0] trailingones[0] \
- totalcoeffs[1] new_n87_
+.names totalcoeffs[0] totalcoeffs[3] ctable[0] trailingones[0] totalcoeffs[1] new_n87_
 -1001 1
 0-111 1
-.names totalcoeffs[3] trailingones[0] ctable[0] ctable[1] totalcoeffs[0] \
- new_n88_
+.names totalcoeffs[3] trailingones[0] ctable[0] ctable[1] totalcoeffs[0] new_n88_
 -0111 1
 0-111 1
-.names trailingones[0] ctable[1] totalcoeffs[1] totalcoeffs[3] ctable[0] \
- new_n89_
+.names trailingones[0] ctable[1] totalcoeffs[1] totalcoeffs[3] ctable[0] new_n89_
 -0000 0
 00011 0
 11111 0
-.names totalcoeffs[1] ctable[1] ctable[0] totalcoeffs[3] trailingones[0] \
- new_n90_
+.names totalcoeffs[1] ctable[1] ctable[0] totalcoeffs[3] trailingones[0] new_n90_
 --001 0
 --1-0 0
 00-00 0
@@ -275,8 +245,7 @@
 .names totalcoeffs[2] totalcoeffs[1] ctable[0] new_n92_
 -00 0
 011 0
-.names ctable[0] totalcoeffs[1] totalcoeffs[2] trailingones[1] \
- trailingones[0] new_n93_
+.names ctable[0] totalcoeffs[1] totalcoeffs[2] trailingones[1] trailingones[0] new_n93_
 ---01 1
 011-1 1
 .names new_n98_ new_n97_ new_n95_ new_n84_ new_n94_
@@ -287,12 +256,10 @@
 1111 1
 .names trailingones[0] totalcoeffs[2] new_n96_
 01 1
-.names totalcoeffs[1] totalcoeffs[2] trailingones[0] trailingones[1] \
- new_n97_
+.names totalcoeffs[1] totalcoeffs[2] trailingones[0] trailingones[1] new_n97_
 0011 1
 1100 1
-.names trailingones[0] trailingones[1] totalcoeffs[1] totalcoeffs[2] \
- new_n98_
+.names trailingones[0] trailingones[1] totalcoeffs[1] totalcoeffs[2] new_n98_
 -101 0
 -110 0
 0-00 0
@@ -303,8 +270,7 @@
 ----0 0
 --00- 0
 00--- 0
-.names new_n102_ totalcoeffs[0] totalcoeffs[3] ctable[1] ctable[0] \
- new_n101_
+.names new_n102_ totalcoeffs[0] totalcoeffs[3] ctable[1] ctable[0] new_n101_
 -1111 0
 00100 0
 01-11 0
@@ -318,27 +284,23 @@
 .names totalcoeffs[1] totalcoeffs[0] totalcoeffs[3] new_n103_
 -10 1
 001 1
-.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] \
- trailingones[1] new_n104_
+.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] trailingones[1] new_n104_
 00011 1
-.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[2] \
- trailingones[1] new_n105_
+.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[2] trailingones[1] new_n105_
 --001 0
 --100 0
 -0-01 0
 -001- 0
 00--0 0
 11111 0
-.names trailingones[1] totalcoeffs[3] totalcoeffs[2] totalcoeffs[0] \
- totalcoeffs[1] new_n106_
+.names trailingones[1] totalcoeffs[3] totalcoeffs[2] totalcoeffs[0] totalcoeffs[1] new_n106_
 --000 1
 --111 1
 -0-11 1
 -1-00 1
 011-0 1
 1011- 1
-.names ctable[0] new_n102_ totalcoeffs[0] totalcoeffs[3] ctable[1] \
- new_n110_
+.names ctable[0] new_n102_ totalcoeffs[0] totalcoeffs[3] ctable[1] new_n110_
 -0000 1
 -1100 1
 0-110 1
@@ -349,8 +311,7 @@
 0011 0
 0101 0
 1110 0
-.names trailingones[1] trailingones[0] totalcoeffs[0] totalcoeffs[1] \
- totalcoeffs[2] new_n112_
+.names trailingones[1] trailingones[0] totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] new_n112_
 -0001 0
 -0110 0
 0-001 0
@@ -362,8 +323,7 @@
 1--11 1
 .names new_n42_ new_n115_ new_n114_
 01 1
-.names new_n116_ new_n121_ new_n118_ trailingones[1] totalcoeffs[4] \
- new_n115_
+.names new_n116_ new_n121_ new_n118_ trailingones[1] totalcoeffs[4] new_n115_
 ---01 1
 --010 1
 -01-1 1
@@ -378,13 +338,11 @@
 .names new_n119_ new_n77_ new_n120_ totalcoeffs[3] new_n118_
 --00 0
 01-- 0
-.names trailingones[0] totalcoeffs[3] totalcoeffs[0] totalcoeffs[1] \
- new_n119_
+.names trailingones[0] totalcoeffs[3] totalcoeffs[0] totalcoeffs[1] new_n119_
 -001 0
 -100 0
 1-10 0
-.names totalcoeffs[0] trailingones[0] totalcoeffs[1] ctable[0] \
- totalcoeffs[2] new_n120_
+.names totalcoeffs[0] trailingones[0] totalcoeffs[1] ctable[0] totalcoeffs[2] new_n120_
 --0-0 0
 --101 0
 01-10 0
@@ -396,8 +354,7 @@
 001- 0
 .names new_n124_ new_n126_ new_n127_ ctable[1] trailingones[1] new_n123_
 00000 1
-.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] \
- new_n125_ new_n124_
+.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] new_n125_ new_n124_
 00011 1
 00101 1
 11001 1
@@ -405,12 +362,10 @@
 .names totalcoeffs[1] totalcoeffs[3] ctable[0] new_n125_
 001 1
 010 1
-.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[0] \
- totalcoeffs[0] new_n126_
+.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[0] totalcoeffs[0] new_n126_
 00001 1
 11111 1
-.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] \
- ctable[0] new_n127_
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[0] new_n127_
 00000 1
 .names totalcoeffs[0] totalcoeffs[3] ctable[0] trailingones[0] new_n128_
 0001 0
@@ -419,18 +374,15 @@
 --011 0
 -0-10 0
 1-0-1 0
-.names new_n131_ totalcoeffs[1] totalcoeffs[0] ctable[0] new_n132_ \
- new_n130_
+.names new_n131_ totalcoeffs[1] totalcoeffs[0] ctable[0] new_n132_ new_n130_
 --001 0
 --111 0
 01--- 0
-.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] \
- ctable[0] new_n131_
+.names totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] trailingones[0] ctable[0] new_n131_
 -1101 0
 00001 0
 10010 0
-.names totalcoeffs[1] totalcoeffs[3] totalcoeffs[2] trailingones[0] \
- new_n132_
+.names totalcoeffs[1] totalcoeffs[3] totalcoeffs[2] trailingones[0] new_n132_
 0011 1
 .names new_n83_ new_n78_ new_n94_ new_n148_ new_n134_ coeff_token[2]
 ---10 1
@@ -438,8 +390,7 @@
 .names new_n143_ new_n136_ new_n135_ ctable[0] new_n134_
 --01 0
 00-0 0
-.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[0] new_n38_ totalcoeffs[3] \
- new_n135_
+.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[0] new_n38_ totalcoeffs[3] new_n135_
 --100 1
 -0-0- 1
 -1111 1
@@ -454,27 +405,23 @@
 00-1 0
 .names ctable[1] new_n32_ new_n28_ new_n138_
 011 1
-.names totalcoeffs[2] totalcoeffs[1] trailingones[1] totalcoeffs[3] \
- ctable[1] new_n139_
+.names totalcoeffs[2] totalcoeffs[1] trailingones[1] totalcoeffs[3] ctable[1] new_n139_
 --110 1
 -01-1 1
 -1001 1
 0--11 1
 1--01 1
-.names totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] trailingones[1] \
- ctable[1] new_n140_
+.names totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] trailingones[1] ctable[1] new_n140_
 -0011 1
 1-101 1
 10--1 1
-.names totalcoeffs[1] totalcoeffs[2] trailingones[0] trailingones[1] \
- new_n142_ new_n141_
+.names totalcoeffs[1] totalcoeffs[2] trailingones[0] trailingones[1] new_n142_ new_n141_
 00011 1
 00101 1
 11001 1
 .names totalcoeffs[3] ctable[1] new_n142_
 00 1
-.names totalcoeffs[1] new_n144_ ctable[0] ctable[2] totalcoeffs[0] \
- new_n143_
+.names totalcoeffs[1] new_n144_ ctable[0] ctable[2] totalcoeffs[0] new_n143_
 -0011 1
 -1--0 1
 0-010 1
@@ -482,8 +429,7 @@
 -1-0 1
 -11- 1
 0-11 1
-.names ctable[1] totalcoeffs[1] totalcoeffs[2] trailingones[1] \
- totalcoeffs[3] new_n145_
+.names ctable[1] totalcoeffs[1] totalcoeffs[2] trailingones[1] totalcoeffs[3] new_n145_
 -1000 0
 -1011 0
 -1101 0
@@ -493,8 +439,7 @@
 .names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[1] new_n146_
 0011 1
 1100 1
-.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[1] \
- trailingones[1] new_n147_
+.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] ctable[1] trailingones[1] new_n147_
 --100 1
 -0001 1
 -11-0 1
@@ -505,8 +450,7 @@
 .names new_n149_ ctable[0] new_n142_ ctable[2] totalcoeffs[4] new_n148_
 ---00 1
 001-0 1
-.names trailingones[0] trailingones[1] totalcoeffs[0] totalcoeffs[1] \
- totalcoeffs[2] new_n149_
+.names trailingones[0] trailingones[1] totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] new_n149_
 -0001 0
 -0010 0
 0-001 0
@@ -521,8 +465,7 @@
 .names new_n156_ totalcoeffs[1] new_n153_ new_n152_
 -01 1
 1-1 1
-.names new_n154_ new_n155_ trailingones[1] trailingones[0] totalcoeffs[2] \
- new_n153_
+.names new_n154_ new_n155_ trailingones[1] trailingones[0] totalcoeffs[2] new_n153_
 -1000 0
 -1111 0
 1--10 0
@@ -532,31 +475,26 @@
 .names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] new_n155_
 001 1
 010 1
-.names totalcoeffs[2] trailingones[0] trailingones[1] ctable[0] \
- totalcoeffs[0] new_n156_
+.names totalcoeffs[2] trailingones[0] trailingones[1] ctable[0] totalcoeffs[0] new_n156_
 -11-0 1
 -111- 1
 0-001 1
 10-10 1
-.names totalcoeffs[2] totalcoeffs[3] ctable[2] totalcoeffs[4] new_n158_ \
- coeff_token[4]
+.names totalcoeffs[2] totalcoeffs[3] ctable[2] totalcoeffs[4] new_n158_ coeff_token[4]
 -1001 1
 00011 1
 1-001 1
-.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] ctable[0] ctable[1] \
- new_n158_
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] ctable[0] ctable[1] new_n158_
 -1111 1
 00011 1
 1-111 1
 .names new_n160_ ctable[0] ctable[1] coeff_token[5]
 111 1
-.names totalcoeffs[2] totalcoeffs[3] new_n161_ ctable[2] totalcoeffs[4] \
- new_n160_
+.names totalcoeffs[2] totalcoeffs[3] new_n161_ ctable[2] totalcoeffs[4] new_n160_
 -1000 1
 00001 1
 1-000 1
-.names totalcoeffs[0] ctable[0] totalcoeffs[1] totalcoeffs[2] \
- totalcoeffs[3] new_n161_
+.names totalcoeffs[0] ctable[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] new_n161_
 --010 1
 --100 1
 -1-10 1
@@ -578,19 +516,15 @@
 1-1 1
 .names new_n167_ new_n168_ new_n169_ totalcoeffs[3] new_n166_
 0000 1
-.names new_n96_ totalcoeffs[0] totalcoeffs[1] ctable[0] trailingones[1] \
- new_n167_
+.names new_n96_ totalcoeffs[0] totalcoeffs[1] ctable[0] trailingones[1] new_n167_
 01111 1
-.names totalcoeffs[1] totalcoeffs[2] trailingones[1] totalcoeffs[0] \
- new_n168_
+.names totalcoeffs[1] totalcoeffs[2] trailingones[1] totalcoeffs[0] new_n168_
 -110 1
 0001 1
-.names totalcoeffs[0] trailingones[1] totalcoeffs[1] ctable[0] \
- totalcoeffs[2] new_n169_
+.names totalcoeffs[0] trailingones[1] totalcoeffs[1] ctable[0] totalcoeffs[2] new_n169_
 00011 1
 00100 1
-.names totalcoeffs[1] ctable[0] trailingones[0] totalcoeffs[0] \
- totalcoeffs[2] new_n170_
+.names totalcoeffs[1] ctable[0] trailingones[0] totalcoeffs[0] totalcoeffs[2] new_n170_
 -1000 0
 00001 0
 00111 0
@@ -603,20 +537,17 @@
 .names new_n173_ new_n174_ new_n175_ totalcoeffs[1] new_n172_
 --01 1
 00-0 1
-.names totalcoeffs[0] totalcoeffs[2] trailingones[1] trailingones[0] \
- totalcoeffs[3] new_n173_
+.names totalcoeffs[0] totalcoeffs[2] trailingones[1] trailingones[0] totalcoeffs[3] new_n173_
 -0001 1
 01111 1
 1-001 1
 10-11 1
-.names totalcoeffs[0] totalcoeffs[2] trailingones[0] totalcoeffs[3] \
- trailingones[1] new_n174_
+.names totalcoeffs[0] totalcoeffs[2] trailingones[0] totalcoeffs[3] trailingones[1] new_n174_
 --001 1
 -0-01 1
 -1-00 1
 0-100 1
-.names totalcoeffs[0] totalcoeffs[2] trailingones[0] totalcoeffs[3] \
- trailingones[1] new_n175_
+.names totalcoeffs[0] totalcoeffs[2] trailingones[0] totalcoeffs[3] trailingones[1] new_n175_
 -00-0 0
 -1-01 0
 -110- 0
@@ -649,15 +580,13 @@
 00--- 0
 .names totalcoeffs[1] trailingones[0] trailingones[1] new_n182_
 001 1
-.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] trailingones[0] \
- new_n183_
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] trailingones[0] new_n183_
 -0-1 0
 -01- 0
 0-11 0
 .names totalcoeffs[0] totalcoeffs[3] totalcoeffs[2] new_n184_
 001 1
-.names trailingones[0] totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] \
- trailingones[1] new_n185_
+.names trailingones[0] totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] trailingones[1] new_n185_
 -0001 0
 -0110 0
 -1100 0
@@ -666,8 +595,7 @@
 1-001 0
 .names ctable[1] ctable[2] new_n186_
 00 1
-.names trailingones[1] totalcoeffs[3] trailingones[0] totalcoeffs[0] \
- totalcoeffs[1] new_n187_
+.names trailingones[1] totalcoeffs[3] trailingones[0] totalcoeffs[0] totalcoeffs[1] new_n187_
 -0101 0
 0-010 0
 01-10 0
@@ -679,14 +607,12 @@
 .names new_n198_ totalcoeffs[2] new_n199_ new_n197_
 -11 1
 1-1 1
-.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[1] \
- trailingones[1] new_n198_
+.names totalcoeffs[3] totalcoeffs[0] trailingones[0] totalcoeffs[1] trailingones[1] new_n198_
 -0000 0
 00011 0
 01100 0
 11101 0
-.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[2] \
- totalcoeffs[3] new_n199_
+.names totalcoeffs[1] trailingones[0] trailingones[1] totalcoeffs[2] totalcoeffs[3] new_n199_
 -0010 0
 00101 0
 01001 0
@@ -718,16 +644,13 @@
 .names trailingones[0] trailingones[1] new_n208_
 01 1
 10 1
-.names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] \
- new_n208_ new_n209_
+.names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] new_n208_ new_n209_
 -0110 1
 0-1-0 1
 01-10 1
-.names totalcoeffs[2] trailingones[0] trailingones[1] totalcoeffs[1] \
- totalcoeffs[3] new_n210_
+.names totalcoeffs[2] trailingones[0] trailingones[1] totalcoeffs[1] totalcoeffs[3] new_n210_
 00011 1
-.names totalcoeffs[0] totalcoeffs[3] trailingones[1] totalcoeffs[2] \
- trailingones[0] new_n211_
+.names totalcoeffs[0] totalcoeffs[3] trailingones[1] totalcoeffs[2] trailingones[0] new_n211_
 00001 0
 00010 0
 01110 0
@@ -739,8 +662,7 @@
 .names ctable[1] new_n160_ new_n214_ ctoken_len[2] ctoken_len[3]
 --00 1
 01-1 1
-.names new_n160_ new_n197_ ctable[1] totalcoeffs[3] totalcoeffs[2] \
- new_n214_
+.names new_n160_ new_n197_ ctable[1] totalcoeffs[3] totalcoeffs[2] new_n214_
 --011 1
 -0000 1
 1-000 1
@@ -753,16 +675,14 @@
 .names ctable[0] new_n216_ ctable[1] new_n217_
 -01 1
 0-1 1
-.names totalcoeffs[0] trailingones[0] trailingones[1] totalcoeffs[2] \
- new_n218_
+.names totalcoeffs[0] trailingones[0] trailingones[1] totalcoeffs[2] new_n218_
 0000 1
 0011 1
 0101 1
 1100 1
 .names totalcoeffs[3] new_n218_ ctable[2] new_n219_
 011 1
-.names totalcoeffs[0] totalcoeffs[3] trailingones[0] trailingones[1] \
- new_n220_
+.names totalcoeffs[0] totalcoeffs[3] trailingones[0] trailingones[1] new_n220_
 0001 1
 0010 1
 1100 1

@@ -1,11 +1,7 @@
 # Benchmark "top" written by ABC on Wed May 17 21:58:54 2023
 .model top
-.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] \
- op_ext[1]
-.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] \
- alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] \
- alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz \
- jump Cin invA invB sign mem_write sel_wb
+.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] op_ext[1]
+.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz jump cin invA invB sign mem_write sel_wb
 .names new_n98_ new_n39_ sel_reg_dst[0]
 01 1
 .names opcode[3] opcode[4] new_n39_
@@ -85,9 +81,9 @@
 11 1
 .names opcode[0] new_n73_ opcode[1] bltz
 011 1
-.names alu_op[1] opcode[2] Cin invA
+.names alu_op[1] opcode[2] cin invA
 001 1
-.names alu_op[1] opcode[2] Cin invB
+.names alu_op[1] opcode[2] cin invB
 -11 1
 1-1 1
 .names opcode[0] opcode[1] new_n94_ mem_write
@@ -128,7 +124,7 @@
 .names new_n66_ opcode[2] new_n108_ opcode[3] new_n109_
 --01 1
 01-1 1
-.names opcode[3] new_n62_ new_n109_ opcode[4] Cin
+.names opcode[3] new_n62_ new_n109_ opcode[4] cin
 --11 1
 11-0 1
 .names new_n66_ opcode[2] opcode[3] opcode[4] alu_op[2]

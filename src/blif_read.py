@@ -17,6 +17,7 @@ import linecache
 import os
 import numpy
 import numpy.linalg
+import time
 
 #from src.circuit_to_logic import *
 import logging
@@ -108,7 +109,9 @@ def proc_line(qc_args,line):
 def comp_methods(fpath):
     qc_args = blif_read(fpath)
     cost    = 0
+    pr_time = 0
     cf_cost = 0
+    cf_time = 0
     us_cost = 0    
     need_ancilla = 0
     tot_anc  = 0
@@ -120,16 +123,18 @@ def comp_methods(fpath):
     for gate in qc_args["nodes"]:
         #gate.synth()
         #gate.synth_cf()
-    
-        
         if gate._fanout in qc_args["outputs"]:
             cost += gate.cf_cost
             cf_cost += gate.cf_cost
             us_cost += gate.us_cost
+            pr_time += gate.cf_time
+            cf_time += gate.cf_time
             num_out_gates += 1
             tot_gates += 1
         else:
-            cost += gate.cost * 2
+            cost    += gate.cost * 2
+            pr_time += gate.time
+            cf_time += gate.cf_time
             cf_cost += gate.cf_cost * 2
             us_cost += gate.us_cost * 2
             tot_gates += 2
@@ -139,8 +144,10 @@ def comp_methods(fpath):
         tot_nodes += gate.num_nodes
         tot_anc += gate.cf_anc
 
-    ret_vars['Proposed'] = cost
-    ret_vars['ESOP'] = cf_cost
+    ret_vars['Proposed']   = cost
+    ret_vars['ESOP']       = cf_cost
+    ret_vars['PrTime']     = pr_time
+    ret_vars['ESOPTime']   = cf_time    
     #ret_vars['UnitarySynthesis'] = us_cost    
     #ret_vars['NeedAncilla'] = need_ancilla
     #ret_vars['TotalAncilla'] = tot_anc
@@ -228,9 +235,12 @@ class lut_node:
         self.num_nodes = len(self.func)
         var_order = self._fanin
         cudd.reorder(self.bdd)
+        start = time.time()
         ret_val = self.do_synth(self.func,var_order,qc)
+        end   = time.time()
         self.cost = ret_val[1]
         self.qc   = ret_val[0]
+        self.time = int((end - start)*1000)
 
     def do_synth(self,func,var_order,qc,unbalanced=False,do_unbalanced=False):
         #if len(func) == 1 or len(var_order) == 1:
@@ -269,8 +279,11 @@ class lut_node:
             self.cf_cost = 0
             self.cf_anc  = 0
             self.us_cost = 0
+            self.cf_time = 0
         else:
+            start        = time.time()
             self.cf_qc   = ClassicalFunction(dedent(iter_to_bool(self.bdd,self.func))).synth()
+            end          = time.time()
             cf_cost_tmp  = dirty_barenco_cost(self.cf_qc,[self._fanout])
             self.cf_cost = cf_cost_tmp[0]
             f = open('cf.tex','w')
@@ -278,6 +291,7 @@ class lut_node:
             self.cf_qc   = None
             self.cf_anc  = cf_cost_tmp[1]
             self.us_cost = 0
+            self.cf_time = int((end - start)*1000)
             # #decomposer   = TwoQubitBasisDecomposer([CXGate(), XGate(), TGate()])
             # #synthesizer  = UnitarySynthesis(['x','cx','t'])
             #self.us_qc   = synthesizer.synthesize(self.matrix)
