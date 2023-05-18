@@ -25,6 +25,18 @@
 \newtheorem{example}{Example}
 \algrenewcommand\algorithmicindent{0.5em}%
 
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+%% \def\thickhline{%
+%%   \noalign{\ifnum0=`}\fi\hrule \@height \thickarrayrulewidth \futurelet
+%%   \reserved@a\@xthickhline}
+
+%% \def\hlinewd#1{%
+%% \noalign{\ifnum0=`}\fi\hrule \@height #1 %
+%% \futurelet\reserved@a\@xhline}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \renewcommand{\baselinestretch}{1.1}

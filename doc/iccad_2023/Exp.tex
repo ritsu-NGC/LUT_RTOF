@@ -8,48 +8,169 @@ The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bi
 
 These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the Proposed method for any output node that requires an exact implementation.
 
-The table below details four sets of Numbers: Proposed is the T-count of the circuit using the proposed method. ESOP is the T-count of the circuit using the ``naive'' method. TotGates details how many LUT-nodes there were in a circuit. NumOuts details how many output nodes there were. The latter two taken together show much of the logic in a given quantum circuit is implemented using Algorithm \ref{algo-shannon}. Finally, we have AvgNodes, which denotes the average complexity of each gate. 
-
-\begin{table*}[t]
-  \large
-   \begin{center}
-     \caption{Experimental Results}
-     \scalebox{1.0}{
-       \begin{tabular}{c|c|c|c|c|c}
-         \Hline
-         Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
-         \Hline
-         priority\_size\_2022 & 17256 & 98280 & 180 & 8 & 3 \\
-         \hline
-         int2float\_size\_2022 & 10512 & 22792 & 33 & 7 & 6 \\
-         \hline
-         i2c\_size\_2022 & 69952 & 94992 & 251 & 141 & 5 \\
-         \hline
-         dec\_size\_2018 & 28008 & 112224 & 517 & 11 & 4 \\
-         \hline
-         ctrl\_size\_2022 & 6712 & 14568 & 48 & 4 & 3 \\
-         \hline
-         cavlc\_size\_2022 & 34720 & 122800 & 97 & 11 & 6 \\
-         \hline
-         bar\_size\_2015 & 454464 & 181216 & 1018 & 6 & 4 \\
-         \hline
-         arbiter\_size\_2022 & 44864 & 169624 & 417 & 129 & 4 \\
-         \hline
-         adder\_size\_2022 & 4976 & 4976 & 129 & 129 & 7 \\
-         \hline
-       \end{tabular}
-
-     }
-     \label{table-results}
-     \end{center}
-\vspace*{0.25cm}
- \end{table*}
+The table below uses three sets of Numbers: vsLUTXESOP compares the T-count of the Proposed method for each X-input LUT size with synthesizing each LUT using ESOP based methods. This measures the effectiveness of the Shannon Decomposition Method in replacing exact logic. We also measure vsLUT6ESOP which compares the Proposed method for different LUT-sizes with the ESOP Method for 6 input LUT (LUT6). Comparing to LUT6 gives us a measure of the effect of LUT-size on the overall T-count. Finally, we also measure the execution time ExecTime in seconds of each method. 
 
 \subsection{Analysis}
 
-We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2015. It is not currently known where this savings take place. It can be theorized that the share of relative phase circuits vs ESOP circuits would be to blame, but those with a high shares of relative phase circuits both perform better worse (bar\_size\_2015) and better (dec\_size\_2018) than the ESOP method. 
+We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2015. Looking at the LUTXESOP numbers, it is not always clear that at smaller LUT-sizes, the Shannon Decomposition Method produces much fewer T-gates than the equivalent ESOP method, but looking at vsLUT6ESOP, we see using both the Shannon Decomposition Method in conjunction with smaller LUT-sizes yields a clear advantage in most of the cases we see. 
 
 
 
+\begin{table*}[t]
+  \begin{center}
+    \caption{Experimental Results}
+    \scalebox{1.0}{ 
+      \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
+        \hline
+        & vsLUTXESOP &  &  & & vsLUT6ESOP   &  & & ExecTime(s)   &  & & \\ \hline
+        Circuit & LUT6 & LUT5 & LUT4 & LUT3 & LUT5 & LUT4 & LUT3 & LUT6 & LUT5 & LUT4 & LUT3 \\ \hline
+        priority\_size\_2022 & 73.25 & 8.91 & 38.78 & 38.31 & 48.62 & 80.66 & 84 & 15 & 8 & 5 & 0* \\ \hline
+        int2float\_size\_2022 & 5.84 & 18.07 & 18.54 & 6.03 & 6.27 & 60.02 & 64.66 & 13 & 3 & 6 & 0* \\ \hline
+        i2c\_size\_2022 & 5.73 & 2.1 & 22.35 & 15.09 & 31.99 & 69.31 & 76.66 & 115 & 31 & 20 & 11 \\ \hline
+        dec\_size\_2018 & -0.11 & 17.97 & 23.05 & 20.2 & 59.31 & 68.51 & 84.18 & 12 & 7 & 19 & 21 \\ \hline
+        ctrl\_size\_2022 & 0.63 & 3.81 & 38.89 & 40.8 & -12.28 & 48.78 & 59.47 & 10 & 5 & 3 & 1 \\ \hline
+        cavlc\_size\_2022 & 36.53 & 25.68 & 38.61 & 30.84 & 40.28 & 70.22 & 71.37 & 77 & 31 & 2 & 2 \\ \hline
+        bar\_size\_2015 & -615 & -49.74 & -581.92 & -533.33 & -40.41 & 78.78 & 78.8 & 405 & 219 & 29 & 36 \\ \hline
+        arbiter\_size\_2022 & 65.15 & 6.43 & 35.12 & 39.59 & 36.58 & 73.03 & 83.37 & 54 & 49 & 10 & 21 \\ \hline
+      \end{tabular}
+    }
+  \end{center}
+\end{table*}
+%% \begin{table*}[t]
+%%   \large
+%%    \begin{center}
+%%      \caption{LUT6 Experimental Results}
+%%      \scalebox{1.0}{
+%%        \begin{tabular}{|c|c|c|c|c|c|}
+%%          \hline
+%%          Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
+%%          \hline
+%%          priority\_size\_2022 & 27160 & 89800 & 180 & 8 & 3 \\
+%%          \hline
+%%          int2float\_size\_2022 & 21776 & 25528 & 33 & 7 & 6 \\
+%%          \hline
+%%          i2c\_size\_2022 & 89440 & 93584 & 251 & 141 & 5 \\
+%%          \hline
+%%          dec\_size\_2018 & 63288 & 112224 & 517 & 11 & 4 \\
+%%          \hline
+%%          ctrl\_size\_2022 & 12096 & 17712 & 48 & 4 & 3 \\
+%%          \hline
+%%          cavlc\_size\_2022 & 74064 & 113616 & 97 & 11 & 6 \\
+%%          \hline
+%%          bar\_size\_2015 & 1265472 & 180000 & 1018 & 6 & 4 \\
+%%          \hline
+%%          arbiter\_size\_2022 & 61328 & 176728 & 417 & 129 & 4 \\
+%%          \hline
+%%          adder\_size\_2022 & 4912 & 4912 & 129 & 129 & 7 \\
+%%          \hline
+%%        \end{tabular}
+%%      }
+%%      \label{table-results6}
+%%      \end{center}
+%% \vspace*{0.25cm}
+%%  \end{table*}
 
+%% \begin{table*}[t]
+%%   \large
+%%    \begin{center}
+%%      \caption{LUT3 Experimental Results}
+%%      \scalebox{1.0}{
+%%        \begin{tabular}{|c|c|c|c|c|c|}
+%%          \hline
+%%          Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
+%%          \hline
+%%          priority\_size\_2022 & 15960 & 25328 & 400 & 8 & 2 \\
+%%          \hline
+%%          int2float\_size\_2022 & 7984 & 8480 & 149 & 7 & 2 \\
+%%          \hline
+%%          i2c\_size\_2022 & 22656 & 33088 & 709 & 11 & 2 \\
+%%          \hline
+%%          dec\_size\_2018 & 5312 & 19376 & 647 & 11 & 2 \\
+%%          \hline
+%%          ctrl\_size\_2022 & 3216 & 6544 & 104 & 4 & 2 \\
+%%          \hline
+%%          cavlc\_size\_2022 & 33904 & 47936 & 560 & 4 & 2 \\
+%%          \hline
+%%          bar\_size\_2015 & 42752 & 6176 & 1786 & 6 & 2 \\
+%%          \hline
+%%          arbiter\_size\_2022 & 30096 & 50080 & 1067 & 7 & 2 \\
+%%          \hline
+%%          adder\_size\_2022 & 16424 & 14912 & 506 & 12 & 2 \\
+%%          \hline
+%%        \end{tabular}
+
+%%      }
+%%      \label{table-results3}
+%%      \end{center}
+%% \vspace*{0.25cm}
+%%  \end{table*}
+
+%% \begin{table*}[t]
+%%   \large
+%%    \begin{center}
+%%      \caption{LUT4 Experimental Results}
+%%      \scalebox{1.0}{
+%%        \begin{tabular}{|c|c|c|c|c|c|}
+%%          \hline
+%%          Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
+%%          \hline
+%%          priority\_size\_2022 & 19064 & 32928 & 378 & 8 & 2 \\
+%%          \hline
+%%          int2float\_size\_2022 & 8976 & 10760 & 139 & 7 & 2 \\
+%%          \hline
+%%          i2c\_size\_2022 & 31424 & 47856 & 615 & 11 & 2 \\
+%%          \hline
+%%          dec\_size\_2018 & 10344 & 38416 & 605 & 11 & 2 \\
+%%          \hline
+%%          ctrl\_size\_2022 & 4064 & 7640 & 96 & 4 & 2 \\
+%%          \hline
+%%          cavlc\_size\_2022 & 35104 & 56488 & 542 & 4 & 2 \\
+%%          \hline
+%%          bar\_size\_2015 & 42736 & 6032 & 1786 & 6 & 2 \\
+%%          \hline
+%%          arbiter\_size\_2022 & 50776 & 84944 & 935 & 7 & 2 \\
+%%          \hline
+%%          adder\_size\_2022 & 39352 & 37104 & 624 & 12 & 2 \\
+%%          \hline
+%%        \end{tabular}
+%%      }
+%%      \label{table-results4}
+%%      \end{center}
+%% \vspace*{0.25cm}
+%%  \end{table*}
+
+%% \begin{table*}[t]
+%%   \large
+%%    \begin{center}
+%%      \caption{LUT5 Experimental Results}
+%%      \scalebox{1.0}{
+%%        \begin{tabular}{|c|c|c|c|c|c|}
+%%          \hline
+%%          Circuit & Proposed & ESOP & TotGates & NumOuts & AvgNodes \\
+%%          \hline
+%%          priority\_size\_2022 & 50800 & 52560 & 330 & 8 & 2 \\
+%%          \hline
+%%          int2float\_size\_2022 & 21576 & 27272 & 121 & 7 & 3 \\
+%%          \hline
+%%          i2c\_size\_2022 & 73960 & 87088 & 503 & 11 & 3 \\
+%%          \hline
+%%          dec\_size\_2018 & 15312 & 48272 & 591 & 11 & 2 \\
+%%          \hline
+%%          ctrl\_size\_2022 & 10136 & 13832 & 52 & 4 & 3 \\
+%%          \hline
+%%          cavlc\_size\_2022 & 71272 & 102504 & 372 & 4 & 3 \\
+%%          \hline
+%%          bar\_size\_2015 & 329360 & 178736 & 1692 & 6 & 3 \\
+%%          \hline
+%%          arbiter\_size\_2022 & 118480 & 128336 & 861 & 7 & 2 \\
+%%          \hline
+%%          adder\_size\_2022 & 114544 & 54128 & 378 & 12 & 3 \\
+%%          \hline
+%%        \end{tabular}
+
+%%      }
+%%      \label{table-results4}
+%%      \end{center}
+%% \vspace*{0.25cm}
+%%  \end{table*}
 
