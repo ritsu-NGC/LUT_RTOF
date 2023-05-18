@@ -1,0 +1,468 @@
+# Benchmark "top" written by ABC on Wed May 17 22:02:40 2023
+.model top
+.inputs A[0] A[1] A[2] A[3] A[4] A[5] A[6] A[7] A[8] A[9] A[10] A[11] A[12] \
+ A[13] A[14] A[15] A[16] A[17] A[18] A[19] A[20] A[21] A[22] A[23] A[24] \
+ A[25] A[26] A[27] A[28] A[29] A[30] A[31] A[32] A[33] A[34] A[35] A[36] \
+ A[37] A[38] A[39] A[40] A[41] A[42] A[43] A[44] A[45] A[46] A[47] A[48] \
+ A[49] A[50] A[51] A[52] A[53] A[54] A[55] A[56] A[57] A[58] A[59] A[60] \
+ A[61] A[62] A[63] A[64] A[65] A[66] A[67] A[68] A[69] A[70] A[71] A[72] \
+ A[73] A[74] A[75] A[76] A[77] A[78] A[79] A[80] A[81] A[82] A[83] A[84] \
+ A[85] A[86] A[87] A[88] A[89] A[90] A[91] A[92] A[93] A[94] A[95] A[96] \
+ A[97] A[98] A[99] A[100] A[101] A[102] A[103] A[104] A[105] A[106] A[107] \
+ A[108] A[109] A[110] A[111] A[112] A[113] A[114] A[115] A[116] A[117] \
+ A[118] A[119] A[120] A[121] A[122] A[123] A[124] A[125] A[126] A[127]
+.outputs P[0] P[1] P[2] P[3] P[4] P[5] P[6] F
+.names new_n139_ new_n201_ new_n212_ new_n192_ new_n215_ P[0]
+---0- 1
+--0-1 1
+01--1 1
+.names new_n140_ A[76] new_n191_ new_n190_ A[81] new_n139_
+--0-0 1
+-1-10 1
+1--10 1
+.names new_n141_ A[72] A[74] A[73] A[75] new_n140_
+--1-0 1
+-1-00 1
+1--00 1
+.names new_n142_ A[66] new_n189_ new_n187_ A[71] new_n141_
+--0-0 1
+-1-10 1
+1--10 1
+.names new_n143_ new_n185_ new_n183_ A[61] new_n186_ new_n142_
+--0-1 1
+-0-01 1
+1--01 1
+.names new_n144_ new_n178_ A[56] new_n181_ new_n182_ new_n143_
+--1-1 1
+-0-11 1
+1--11 1
+.names new_n145_ A[46] new_n177_ new_n175_ A[51] new_n144_
+--0-0 1
+-1-10 1
+1--10 1
+.names new_n146_ new_n173_ new_n170_ A[41] new_n174_ new_n145_
+--0-1 1
+-0-01 1
+1--01 1
+.names new_n147_ new_n167_ A[36] new_n168_ new_n169_ new_n146_
+--1-1 1
+-0-11 1
+1--11 1
+.names new_n148_ A[26] new_n166_ new_n164_ A[31] new_n147_
+--0-0 1
+-1-10 1
+1--10 1
+.names new_n149_ new_n162_ new_n160_ A[21] new_n163_ new_n148_
+--0-1 1
+-0-01 1
+1--01 1
+.names new_n152_ new_n155_ A[16] new_n159_ new_n150_ new_n149_
+--1-1 1
+-1-11 1
+0--11 1
+.names A[17] new_n151_ new_n150_
+01 1
+.names A[18] A[19] new_n151_
+00 1
+.names new_n153_ new_n154_ new_n152_
+11 1
+.names A[14] A[15] new_n153_
+00 1
+.names A[12] A[13] new_n154_
+00 1
+.names new_n156_ A[6] new_n158_ new_n157_ A[11] new_n155_
+--0-0 1
+-1-10 1
+1--10 1
+.names A[1] A[2] A[4] A[3] A[5] new_n156_
+--1-0 1
+-1-00 1
+0--00 1
+.names A[7] A[8] A[9] new_n157_
+000 1
+.names A[8] A[9] A[10] new_n158_
+-10 1
+0-0 1
+.names A[13] A[14] A[15] new_n159_
+-10 1
+0-0 1
+.names A[24] new_n161_ new_n160_
+01 1
+.names A[22] A[23] new_n161_
+00 1
+.names A[18] A[19] A[20] new_n162_
+-10 1
+0-0 1
+.names A[23] A[24] A[25] new_n163_
+-10 1
+0-0 1
+.names A[27] A[30] new_n165_ new_n164_
+001 1
+.names A[28] A[29] new_n165_
+00 1
+.names A[28] A[29] A[30] new_n166_
+-10 1
+0-0 1
+.names A[32] A[33] A[34] A[35] new_n167_
+0000 1
+.names A[33] A[34] A[35] new_n168_
+-10 1
+0-0 1
+.names A[37] A[38] A[39] A[40] new_n169_
+0000 1
+.names new_n171_ new_n172_ new_n170_
+11 1
+.names A[44] A[45] new_n171_
+00 1
+.names A[42] A[43] new_n172_
+00 1
+.names A[38] A[39] A[40] new_n173_
+-10 1
+0-0 1
+.names A[43] A[44] A[45] new_n174_
+-10 1
+0-0 1
+.names A[47] A[50] new_n176_ new_n175_
+001 1
+.names A[48] A[49] new_n176_
+00 1
+.names A[48] A[49] A[50] new_n177_
+-10 1
+0-0 1
+.names new_n179_ new_n180_ new_n178_
+11 1
+.names A[54] A[55] new_n179_
+00 1
+.names A[52] A[53] new_n180_
+00 1
+.names A[53] A[54] A[55] new_n181_
+-10 1
+0-0 1
+.names A[57] A[58] A[59] A[60] new_n182_
+0000 1
+.names A[62] A[63] new_n184_ new_n183_
+001 1
+.names A[64] A[65] new_n184_
+00 1
+.names A[58] A[59] A[60] new_n185_
+-10 1
+0-0 1
+.names A[63] A[64] A[65] new_n186_
+-10 1
+0-0 1
+.names A[67] A[70] new_n188_ new_n187_
+001 1
+.names A[68] A[69] new_n188_
+00 1
+.names A[68] A[69] A[70] new_n189_
+-10 1
+0-0 1
+.names A[77] A[78] A[79] A[80] new_n190_
+0000 1
+.names A[78] A[79] A[80] new_n191_
+-10 1
+0-0 1
+.names new_n193_ A[124] A[126] A[125] A[127] new_n192_
+--1-0 1
+-1-00 1
+1--00 1
+.names new_n194_ A[120] A[122] A[121] A[123] new_n193_
+--1-0 1
+-1-00 1
+1--00 1
+.names new_n195_ A[116] A[118] A[117] A[119] new_n194_
+--1-0 1
+-1-00 1
+1--00 1
+.names new_n196_ A[112] A[114] A[113] A[115] new_n195_
+--1-0 1
+-1-00 1
+1--00 1
+.names A[109] A[110] new_n197_ A[111] new_n196_
+-100 1
+0-00 1
+.names new_n198_ A[106] A[107] new_n200_ new_n197_
+--11 1
+00-1 1
+.names new_n199_ A[102] A[104] A[103] A[105] new_n198_
+--1-0 1
+-1-00 1
+1--00 1
+.names A[97] A[98] A[100] A[99] A[101] new_n199_
+--1-0 1
+-1-00 1
+0--00 1
+.names A[108] A[109] A[110] A[111] new_n200_
+0000 1
+.names new_n202_ new_n211_ new_n201_
+11 1
+.names new_n203_ new_n209_ new_n210_ new_n202_
+111 1
+.names new_n204_ new_n207_ new_n208_ new_n203_
+111 1
+.names new_n205_ new_n206_ new_n204_
+11 1
+.names A[88] A[89] new_n205_
+00 1
+.names A[90] A[91] new_n206_
+00 1
+.names A[94] A[95] new_n207_
+00 1
+.names A[92] A[93] new_n208_
+00 1
+.names A[84] A[85] new_n209_
+00 1
+.names A[86] A[87] new_n210_
+00 1
+.names A[82] A[83] new_n211_
+00 1
+.names A[83] new_n202_ A[94] new_n213_ A[95] new_n212_
+----1 0
+--00- 0
+11--- 0
+.names new_n214_ A[90] A[92] A[91] A[93] new_n213_
+--1-0 1
+-1-00 1
+1--00 1
+.names A[85] A[86] A[88] A[87] A[89] new_n214_
+--1-0 1
+-1-00 1
+0--00 1
+.names new_n216_ new_n220_ new_n215_
+11 1
+.names new_n217_ new_n218_ new_n219_ new_n216_
+111 1
+.names A[104] A[105] A[106] A[107] new_n200_ new_n217_
+00001 1
+.names A[96] A[97] A[98] A[99] new_n218_
+0000 1
+.names A[100] A[101] A[102] A[103] new_n219_
+0000 1
+.names new_n221_ new_n224_ new_n227_ new_n228_ new_n220_
+1111 1
+.names A[122] A[123] new_n222_ new_n223_ new_n221_
+0011 1
+.names A[124] A[125] A[126] A[127] new_n222_
+0000 1
+.names A[120] A[121] new_n223_
+00 1
+.names new_n225_ new_n226_ new_n224_
+11 1
+.names A[118] A[119] new_n225_
+00 1
+.names A[116] A[117] new_n226_
+00 1
+.names A[112] A[113] new_n227_
+00 1
+.names A[114] A[115] new_n228_
+00 1
+.names A[124] A[125] new_n230_ A[126] A[127] P[1]
+----1 1
+---1- 1
+000-- 1
+.names new_n231_ new_n225_ new_n223_ A[122] A[123] new_n230_
+--000 1
+01-00 1
+.names new_n232_ new_n269_ new_n228_ new_n227_ new_n226_ new_n231_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n233_ new_n206_ new_n207_ new_n208_ new_n216_ new_n232_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n234_ new_n211_ new_n210_ new_n209_ new_n205_ new_n233_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n235_ new_n268_ new_n266_ new_n264_ new_n267_ new_n234_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n236_ new_n261_ new_n263_ new_n184_ new_n188_ new_n235_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n237_ new_n260_ new_n179_ new_n180_ new_n257_ new_n236_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n238_ new_n172_ new_n252_ new_n171_ new_n176_ new_n237_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n239_ new_n256_ new_n254_ new_n253_ new_n250_ new_n238_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n240_ new_n161_ new_n248_ new_n249_ new_n165_ new_n239_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n241_ new_n153_ new_n151_ new_n247_ new_n246_ new_n240_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n244_ new_n245_ new_n243_ new_n242_ new_n154_ new_n241_
+--0-1 1
+-1-11 1
+0--11 1
+.names A[8] A[9] new_n242_
+00 1
+.names A[10] A[11] new_n243_
+00 1
+.names A[6] A[7] new_n244_
+00 1
+.names A[2] A[3] A[4] A[5] new_n245_
+-100 1
+1-00 1
+.names A[20] A[21] new_n246_
+00 1
+.names A[16] A[17] new_n247_
+00 1
+.names A[26] A[27] new_n248_
+00 1
+.names A[24] A[25] new_n249_
+00 1
+.names new_n251_ new_n171_ new_n252_ new_n250_
+111 1
+.names A[40] A[41] new_n172_ new_n251_
+001 1
+.names A[46] A[47] new_n252_
+00 1
+.names A[36] A[37] A[38] A[39] new_n167_ new_n253_
+00001 1
+.names new_n255_ A[38] A[39] new_n254_
+000 1
+.names A[34] A[35] A[36] A[37] new_n255_
+-100 1
+1-00 1
+.names A[30] A[31] new_n256_
+00 1
+.names new_n258_ new_n259_ new_n257_
+11 1
+.names A[60] A[61] A[62] A[63] new_n258_
+0000 1
+.names A[56] A[57] A[58] A[59] new_n259_
+0000 1
+.names A[50] A[51] new_n260_
+00 1
+.names new_n262_ A[62] A[63] new_n261_
+000 1
+.names A[58] A[59] A[60] A[61] new_n262_
+-100 1
+1-00 1
+.names A[66] A[67] new_n263_
+00 1
+.names A[72] A[73] A[74] A[75] new_n265_ new_n264_
+00001 1
+.names A[76] A[77] A[78] A[79] new_n265_
+0000 1
+.names A[75] A[74] new_n265_ A[78] A[79] new_n266_
+--000 1
+00-00 1
+.names A[80] A[81] new_n267_
+00 1
+.names A[70] A[71] new_n268_
+00 1
+.names A[102] A[103] new_n272_ new_n217_ new_n270_ new_n269_
+---01 1
+000-1 1
+.names A[107] A[106] new_n200_ new_n271_ new_n270_
+--01 1
+00-1 1
+.names A[110] A[111] new_n227_ new_n271_
+001 1
+.names A[98] A[99] A[100] A[101] new_n272_
+-100 1
+1-00 1
+.names new_n274_ new_n216_ new_n202_ new_n290_ new_n292_ P[2]
+---01 0
+011-1 0
+.names new_n275_ new_n288_ new_n289_ new_n287_ new_n274_
+-001 1
+1-01 1
+.names new_n276_ new_n184_ new_n263_ new_n275_
+011 1
+.names new_n277_ new_n286_ new_n259_ new_n178_ new_n258_ new_n276_
+----0 0
+--10- 0
+01--- 0
+.names new_n278_ new_n251_ new_n171_ new_n252_ new_n277_
+-011 1
+1-11 1
+.names new_n279_ A[36] A[37] A[38] A[39] new_n278_
+00000 1
+.names new_n280_ new_n285_ new_n283_ new_n284_ new_n167_ new_n279_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n282_ new_n281_ new_n152_ A[16] new_n150_ new_n280_
+--001 1
+01-01 1
+.names new_n152_ new_n242_ new_n243_ new_n281_
+111 1
+.names A[4] A[5] new_n244_ new_n282_
+001 1
+.names new_n165_ new_n256_ new_n283_
+11 1
+.names new_n248_ new_n249_ new_n284_
+11 1
+.names new_n161_ new_n246_ new_n285_
+11 1
+.names new_n178_ new_n257_ new_n176_ new_n260_ new_n286_
+1111 1
+.names new_n201_ new_n267_ new_n287_
+11 1
+.names new_n264_ new_n188_ new_n268_ new_n288_
+111 1
+.names A[73] A[74] A[75] A[72] new_n265_ new_n289_
+----0 0
+0000- 0
+.names new_n291_ new_n218_ new_n219_ new_n217_ new_n220_ new_n290_
+--011 1
+01-11 1
+.names new_n204_ new_n207_ new_n208_ new_n291_
+011 1
+.names new_n200_ new_n220_ new_n221_ new_n224_ new_n222_ new_n292_
+----0 0
+--10- 0
+01--- 0
+.names new_n220_ new_n217_ new_n294_ new_n221_ P[3]
+-101 0
+0-01 0
+.names new_n295_ new_n287_ new_n203_ new_n215_ new_n294_
+--01 1
+01-1 1
+.names new_n297_ new_n286_ new_n296_ new_n257_ new_n264_ new_n295_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n288_ new_n184_ new_n263_ new_n296_
+111 1
+.names new_n281_ new_n299_ new_n253_ new_n298_ new_n250_ new_n297_
+--0-1 1
+-0-11 1
+1--11 1
+.names new_n283_ new_n284_ new_n298_
+11 1
+.names A[16] new_n285_ new_n150_ new_n299_
+011 1
+.names new_n287_ new_n216_ new_n301_ new_n220_ P[4]
+-001 0
+1-01 0
+.names new_n303_ new_n253_ new_n250_ new_n286_ P[6] new_n301_
+---00 1
+011-0 1
+.names new_n287_ new_n215_ new_n296_ P[6]
+111 0
+.names new_n298_ new_n299_ new_n303_
+11 1
+.names new_n286_ new_n253_ new_n250_ P[6] new_n215_ P[5]
+---11 0
+111-1 0
+.names P[5] P[6] new_n303_ new_n281_ new_n306_ F
+00111 0
+.names A[0] A[1] A[2] A[3] new_n282_ new_n306_
+00001 1
+.end
