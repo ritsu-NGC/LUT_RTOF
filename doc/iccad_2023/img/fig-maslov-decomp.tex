@@ -1,0 +1,8 @@
+\Qcircuit @C=0.5em @R=0.2em @!R { \\
+  & \multigate{2}{U} & \qw & \qw         & \qw & \multigate{2}{U^{\dagger}} \\
+  & \ghost{U}        & \qw & \qw         & \qw & \ghost{U^{\dagger}}        \\
+  & \ghost{U}        & \qw & \ctrl{2}    & \qw & \ghost{U^{\dagger}}        \\
+  & \targ\qwx[-1]    & \qw & \control\qw & \qw & \targ\qwx[-1]\qw         \\
+  & \qw              & \qw & \targ       & \qw & \qw                      \\
+}
+
