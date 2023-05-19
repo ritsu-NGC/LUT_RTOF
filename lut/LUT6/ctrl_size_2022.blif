@@ -1,11 +1,7 @@
 # Benchmark "top" written by ABC on Thu Apr  7 09:05:33 2022
 .model top
-.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] \
- op_ext[1]
-.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] \
- alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] \
- alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz \
- jump Cin invA invB sign mem_write sel_wb
+.inputs opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] op_ext[0] op_ext[1]
+.outputs sel_reg_dst[0] sel_reg_dst[1] sel_alu_opB[0] sel_alu_opB[1] alu_op[0] alu_op[1] alu_op[2] alu_op_ext[0] alu_op_ext[1] alu_op_ext[2] alu_op_ext[3] halt reg_write sel_pc_opA sel_pc_opB beqz bnez bgez bltz jump cin invA invB sign mem_write sel_wb
 .names opcode[0] opcode[1] opcode[2] opcode[3] opcode[4] sel_reg_dst[0]
 --111 1
 -1-11 1
@@ -23,8 +19,7 @@
 ---01 1
 -0010 1
 000-1 1
-.names op_ext[0] sel_reg_dst[0] alu_op[1] opcode[0] opcode[2] opcode[4] \
- alu_op[0]
+.names op_ext[0] sel_reg_dst[0] alu_op[1] opcode[0] opcode[2] opcode[4] alu_op[0]
 --1100 1
 --1111 1
 -0-111 1
@@ -75,14 +70,14 @@
 01111 1
 .names opcode[0] opcode[4] opcode[2] opcode[3] opcode[1] bltz
 00111 1
-.names op_ext[0] opcode[1] opcode[4] opcode[0] opcode[2] opcode[3] Cin
+.names op_ext[0] opcode[1] opcode[4] opcode[0] opcode[2] opcode[3] cin
 --0101 1
 --1011 1
 -01-11 1
 11-101 1
-.names alu_op[1] opcode[2] Cin invA
+.names alu_op[1] opcode[2] cin invA
 001 1
-.names opcode[2] alu_op[1] Cin invB
+.names opcode[2] alu_op[1] cin invBo
 -11 1
 1-1 1
 .names opcode[2] opcode[3] opcode[0] opcode[1] opcode[4] mem_write

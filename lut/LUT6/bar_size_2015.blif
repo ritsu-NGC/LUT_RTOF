@@ -1,39 +1,7 @@
 # Benchmark "bar" written by ABC on Wed Aug 29 15:21:19 2018
 .model bar
-.inputs inpa[0] inpa[1] inpa[2] inpa[3] inpa[4] inpa[5] inpa[6] inpa[7] inpa[8] inpa[9] inpa[10] inpa[11] inpa[12] \
- inpa[13] inpa[14] inpa[15] inpa[16] inpa[17] inpa[18] inpa[19] inpa[20] inpa[21] inpa[22] inpa[23] inpa[24] \
- inpa[25] inpa[26] inpa[27] inpa[28] inpa[29] inpa[30] inpa[31] inpa[32] inpa[33] inpa[34] inpa[35] inpa[36] \
- inpa[37] inpa[38] inpa[39] inpa[40] inpa[41] inpa[42] inpa[43] inpa[44] inpa[45] inpa[46] inpa[47] inpa[48] \
- inpa[49] inpa[50] inpa[51] inpa[52] inpa[53] inpa[54] inpa[55] inpa[56] inpa[57] inpa[58] inpa[59] inpa[60] \
- inpa[61] inpa[62] inpa[63] inpa[64] inpa[65] inpa[66] inpa[67] inpa[68] inpa[69] inpa[70] inpa[71] inpa[72] \
- inpa[73] inpa[74] inpa[75] inpa[76] inpa[77] inpa[78] inpa[79] inpa[80] inpa[81] inpa[82] inpa[83] inpa[84] \
- inpa[85] inpa[86] inpa[87] inpa[88] inpa[89] inpa[90] inpa[91] inpa[92] inpa[93] inpa[94] inpa[95] inpa[96] \
- inpa[97] inpa[98] inpa[99] inpa[100] inpa[101] inpa[102] inpa[103] inpa[104] inpa[105] inpa[106] inpa[107] \
- inpa[108] inpa[109] inpa[110] inpa[111] inpa[112] inpa[113] inpa[114] inpa[115] inpa[116] inpa[117] \
- inpa[118] inpa[119] inpa[120] inpa[121] inpa[122] inpa[123] inpa[124] inpa[125] inpa[126] inpa[127] \
- shift[0] shift[1] shift[2] shift[3] shift[4] shift[5] shift[6]
-.outputs result[0] result[1] result[2] result[3] result[4] result[5] \
- result[6] result[7] result[8] result[9] result[10] result[11] result[12] \
- result[13] result[14] result[15] result[16] result[17] result[18] \
- result[19] result[20] result[21] result[22] result[23] result[24] \
- result[25] result[26] result[27] result[28] result[29] result[30] \
- result[31] result[32] result[33] result[34] result[35] result[36] \
- result[37] result[38] result[39] result[40] result[41] result[42] \
- result[43] result[44] result[45] result[46] result[47] result[48] \
- result[49] result[50] result[51] result[52] result[53] result[54] \
- result[55] result[56] result[57] result[58] result[59] result[60] \
- result[61] result[62] result[63] result[64] result[65] result[66] \
- result[67] result[68] result[69] result[70] result[71] result[72] \
- result[73] result[74] result[75] result[76] result[77] result[78] \
- result[79] result[80] result[81] result[82] result[83] result[84] \
- result[85] result[86] result[87] result[88] result[89] result[90] \
- result[91] result[92] result[93] result[94] result[95] result[96] \
- result[97] result[98] result[99] result[100] result[101] result[102] \
- result[103] result[104] result[105] result[106] result[107] result[108] \
- result[109] result[110] result[111] result[112] result[113] result[114] \
- result[115] result[116] result[117] result[118] result[119] result[120] \
- result[121] result[122] result[123] result[124] result[125] result[126] \
- result[127]
+.inputs inpa[0] inpa[1] inpa[2] inpa[3] inpa[4] inpa[5] inpa[6] inpa[7] inpa[8] inpa[9] inpa[10] inpa[11] inpa[12] inpa[13] inpa[14] inpa[15] inpa[16] inpa[17] inpa[18] inpa[19] inpa[20] inpa[21] inpa[22] inpa[23] inpa[24] inpa[25] inpa[26] inpa[27] inpa[28] inpa[29] inpa[30] inpa[31] inpa[32] inpa[33] inpa[34] inpa[35] inpa[36] inpa[37] inpa[38] inpa[39] inpa[40] inpa[41] inpa[42] inpa[43] inpa[44] inpa[45] inpa[46] inpa[47] inpa[48] inpa[49] inpa[50] inpa[51] inpa[52] inpa[53] inpa[54] inpa[55] inpa[56] inpa[57] inpa[58] inpa[59] inpa[60] inpa[61] inpa[62] inpa[63] inpa[64] inpa[65] inpa[66] inpa[67] inpa[68] inpa[69] inpa[70] inpa[71] inpa[72] inpa[73] inpa[74] inpa[75] inpa[76] inpa[77] inpa[78] inpa[79] inpa[80] inpa[81] inpa[82] inpa[83] inpa[84] inpa[85] inpa[86] inpa[87] inpa[88] inpa[89] inpa[90] inpa[91] inpa[92] inpa[93] inpa[94] inpa[95] inpa[96] inpa[97] inpa[98] inpa[99] inpa[100] inpa[101] inpa[102] inpa[103] inpa[104] inpa[105] inpa[106] inpa[107] inpa[108] inpa[109] inpa[110] inpa[111] inpa[112] inpa[113] inpa[114] inpa[115] inpa[116] inpa[117] inpa[118] inpa[119] inpa[120] inpa[121] inpa[122] inpa[123] inpa[124] inpa[125] inpa[126] inpa[127] shift[0] shift[1] shift[2] shift[3] shift[4] shift[5] shift[6]
+.outputs result[0] result[1] result[2] result[3] result[4] result[5] result[6] result[7] result[8] result[9] result[10] result[11] result[12] result[13] result[14] result[15] result[16] result[17] result[18] result[19] result[20] result[21] result[22] result[23] result[24] result[25] result[26] result[27] result[28] result[29] result[30] result[31] result[32] result[33] result[34] result[35] result[36] result[37] result[38] result[39] result[40] result[41] result[42] result[43] result[44] result[45] result[46] result[47] result[48] result[49] result[50] result[51] result[52] result[53] result[54] result[55] result[56] result[57] result[58] result[59] result[60] result[61] result[62] result[63] result[64] result[65] result[66] result[67] result[68] result[69] result[70] result[71] result[72] result[73] result[74] result[75] result[76] result[77] result[78] result[79] result[80] result[81] result[82] result[83] result[84] result[85] result[86] result[87] result[88] result[89] result[90] result[91] result[92] result[93] result[94] result[95] result[96] result[97] result[98] result[99] result[100] result[101] result[102] result[103] result[104] result[105] result[106] result[107] result[108] result[109] result[110] result[111] result[112] result[113] result[114] result[115] result[116] result[117] result[118] result[119] result[120] result[121] result[122] result[123] result[124] result[125] result[126] result[127]
 .names n286 n265 shift[6] result[0]
 -01 1
 0-0 1

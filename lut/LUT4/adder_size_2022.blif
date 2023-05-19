@@ -1,0 +1,1384 @@
+# Benchmark "top" written by ABC on Wed May 17 22:01:55 2023
+.model top
+.inputs inpa[0] inpa[1] inpa[2] inpa[3] inpa[4] inpa[5] inpa[6] inpa[7] inpa[8] inpa[9] inpa[10] inpa[11] inpa[12] inpa[13] inpa[14] inpa[15] inpa[16] inpa[17] inpa[18] inpa[19] inpa[20] inpa[21] inpa[22] inpa[23] inpa[24] inpa[25] inpa[26] inpa[27] inpa[28] inpa[29] inpa[30] inpa[31] inpa[32] inpa[33] inpa[34] inpa[35] inpa[36] inpa[37] inpa[38] inpa[39] inpa[40] inpa[41] inpa[42] inpa[43] inpa[44] inpa[45] inpa[46] inpa[47] inpa[48] inpa[49] inpa[50] inpa[51] inpa[52] inpa[53] inpa[54] inpa[55] inpa[56] inpa[57] inpa[58] inpa[59] inpa[60] inpa[61] inpa[62] inpa[63] inpa[64] inpa[65] inpa[66] inpa[67] inpa[68] inpa[69] inpa[70] inpa[71] inpa[72] inpa[73] inpa[74] inpa[75] inpa[76] inpa[77] inpa[78] inpa[79] inpa[80] inpa[81] inpa[82] inpa[83] inpa[84] inpa[85] inpa[86] inpa[87] inpa[88] inpa[89] inpa[90] inpa[91] inpa[92] inpa[93] inpa[94] inpa[95] inpa[96] inpa[97] inpa[98] inpa[99] inpa[100] inpa[101] inpa[102] inpa[103] inpa[104] inpa[105] inpa[106] inpa[107] inpa[108] inpa[109] inpa[110] inpa[111] inpa[112] inpa[113] inpa[114] inpa[115] inpa[116] inpa[117] inpa[118] inpa[119] inpa[120] inpa[121] inpa[122] inpa[123] inpa[124] inpa[125] inpa[126] inpa[127] inpb[0] inpb[1] inpb[2] inpb[3] inpb[4] inpb[5] inpb[6] inpb[7] inpb[8] inpb[9] inpb[10] inpb[11] inpb[12] inpb[13] inpb[14] inpb[15] inpb[16] inpb[17] inpb[18] inpb[19] inpb[20] inpb[21] inpb[22] inpb[23] inpb[24] inpb[25] inpb[26] inpb[27] inpb[28] inpb[29] inpb[30] inpb[31] inpb[32] inpb[33] inpb[34] inpb[35] inpb[36] inpb[37] inpb[38] inpb[39] inpb[40] inpb[41] inpb[42] inpb[43] inpb[44] inpb[45] inpb[46] inpb[47] inpb[48] inpb[49] inpb[50] inpb[51] inpb[52] inpb[53] inpb[54] inpb[55] inpb[56] inpb[57] inpb[58] inpb[59] inpb[60] inpb[61] inpb[62] inpb[63] inpb[64] inpb[65] inpb[66] inpb[67] inpb[68] inpb[69] inpb[70] inpb[71] inpb[72] inpb[73] inpb[74] inpb[75] inpb[76] inpb[77] inpb[78] inpb[79] inpb[80] inpb[81] inpb[82] inpb[83] inpb[84] inpb[85] inpb[86] inpb[87] inpb[88] inpb[89] inpb[90] inpb[91] inpb[92] inpb[93] inpb[94] inpb[95] inpb[96] inpb[97] inpb[98] inpb[99] inpb[100] inpb[101] inpb[102] inpb[103] inpb[104] inpb[105] inpb[106] inpb[107] inpb[108] inpb[109] inpb[110] inpb[111] inpb[112] inpb[113] inpb[114] inpb[115] inpb[116] inpb[117] inpb[118] inpb[119] inpb[120] inpb[121] inpb[122] inpb[123] inpb[124] inpb[125] inpb[126] inpb[127]
+.outputs outf[0] outf[1] outf[2] outf[3] outf[4] outf[5] outf[6] outf[7] outf[8] outf[9] outf[10] outf[11] outf[12] outf[13] outf[14] outf[15] outf[16] outf[17] outf[18] outf[19] outf[20] outf[21] outf[22] outf[23] outf[24] outf[25] outf[26] outf[27] outf[28] outf[29] outf[30] outf[31] outf[32] outf[33] outf[34] outf[35] outf[36] outf[37] outf[38] outf[39] outf[40] outf[41] outf[42] outf[43] outf[44] outf[45] outf[46] outf[47] outf[48] outf[49] outf[50] outf[51] outf[52] outf[53] outf[54] outf[55] outf[56] outf[57] outf[58] outf[59] outf[60] outf[61] outf[62] outf[63] outf[64] outf[65] outf[66] outf[67] outf[68] outf[69] outf[70] outf[71] outf[72] outf[73] outf[74] outf[75] outf[76] outf[77] outf[78] outf[79] outf[80] outf[81] outf[82] outf[83] outf[84] outf[85] outf[86] outf[87] outf[88] outf[89] outf[90] outf[91] outf[92] outf[93] outf[94] outf[95] outf[96] outf[97] outf[98] outf[99] outf[100] outf[101] outf[102] outf[103] outf[104] outf[105] outf[106] outf[107] outf[108] outf[109] outf[110] outf[111] outf[112] outf[113] outf[114] outf[115] outf[116] outf[117] outf[118] outf[119] outf[120] outf[121] outf[122] outf[123] outf[124] outf[125] outf[126] outf[127] cOut
+.names inpa[0] inpb[0] outf[0]
+01 1
+10 1
+.names inpa[0] inpb[0] inpa[1] inpb[1] outf[1]
+-001 1
+-010 1
+0-01 1
+0-10 1
+1100 1
+1111 1
+.names new_n390_ inpa[2] inpb[2] outf[2]
+001 1
+010 1
+100 1
+111 1
+.names inpa[1] inpb[1] inpb[0] inpa[0] new_n390_
+-111 1
+1-11 1
+11-- 1
+.names new_n390_ inpa[2] inpb[2] new_n392_ outf[3]
+-001 1
+-110 1
+0-01 1
+00-1 1
+1-10 1
+11-0 1
+.names inpa[3] inpb[3] new_n392_
+01 1
+10 1
+.names new_n394_ new_n395_ inpa[4] inpb[4] outf[4]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n390_ inpa[2] inpb[2] new_n392_ new_n394_
+-111 1
+1-11 1
+11-1 1
+.names inpa[3] inpb[3] new_n395_
+11 1
+.names new_n397_ inpa[5] inpb[5] outf[5]
+000 1
+011 1
+101 1
+110 1
+.names inpa[4] inpb[4] new_n394_ new_n395_ new_n397_
+-000 1
+0-00 1
+00-- 1
+.names new_n399_ inpa[6] inpb[6] outf[6]
+000 1
+011 1
+101 1
+110 1
+.names new_n397_ inpa[5] inpb[5] new_n399_
+-00 1
+1-0 1
+10- 1
+.names new_n401_ new_n403_ inpa[7] inpb[7] outf[7]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n397_ inpa[5] inpb[5] new_n402_ new_n401_
+-110 1
+0-10 1
+01-0 1
+.names inpa[6] inpb[6] new_n402_
+00 1
+.names inpa[6] inpb[6] new_n403_
+11 1
+.names new_n405_ inpa[8] inpb[8] outf[8]
+000 1
+011 1
+101 1
+110 1
+.names inpa[7] inpb[7] new_n401_ new_n403_ new_n405_
+-000 1
+0-00 1
+00-- 1
+.names new_n405_ inpa[8] inpb[8] new_n407_ outf[9]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[9] inpb[9] new_n407_
+01 1
+10 1
+.names new_n409_ new_n410_ inpa[10] inpb[10] outf[10]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n405_ inpa[8] inpb[8] new_n407_ new_n409_
+-111 1
+0-11 1
+01-1 1
+.names inpa[9] inpb[9] new_n410_
+11 1
+.names new_n412_ inpa[11] inpb[11] outf[11]
+000 1
+011 1
+101 1
+110 1
+.names inpa[10] inpb[10] new_n409_ new_n410_ new_n412_
+-000 1
+0-00 1
+00-- 1
+.names new_n414_ inpa[12] inpb[12] outf[12]
+000 1
+011 1
+101 1
+110 1
+.names new_n412_ inpa[11] inpb[11] new_n414_
+-00 1
+1-0 1
+10- 1
+.names new_n416_ new_n418_ inpa[13] inpb[13] outf[13]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n412_ inpa[11] inpb[11] new_n417_ new_n416_
+-110 1
+0-10 1
+01-0 1
+.names inpa[12] inpb[12] new_n417_
+00 1
+.names inpa[12] inpb[12] new_n418_
+11 1
+.names new_n420_ inpa[14] inpb[14] outf[14]
+000 1
+011 1
+101 1
+110 1
+.names inpa[13] inpb[13] new_n416_ new_n418_ new_n420_
+-000 1
+0-00 1
+00-- 1
+.names new_n420_ inpa[14] inpb[14] new_n422_ outf[15]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[15] inpb[15] new_n422_
+01 1
+10 1
+.names new_n424_ new_n425_ inpa[16] inpb[16] outf[16]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n420_ inpa[14] inpb[14] new_n422_ new_n424_
+-111 1
+0-11 1
+01-1 1
+.names inpa[15] inpb[15] new_n425_
+11 1
+.names new_n427_ inpa[17] inpb[17] outf[17]
+000 1
+011 1
+101 1
+110 1
+.names inpa[16] inpb[16] new_n424_ new_n425_ new_n427_
+-000 1
+0-00 1
+00-- 1
+.names new_n429_ inpa[18] inpb[18] outf[18]
+000 1
+011 1
+101 1
+110 1
+.names new_n427_ inpa[17] inpb[17] new_n429_
+-00 1
+1-0 1
+10- 1
+.names new_n431_ new_n433_ inpa[19] inpb[19] outf[19]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n427_ inpa[17] inpb[17] new_n432_ new_n431_
+-110 1
+0-10 1
+01-0 1
+.names inpa[18] inpb[18] new_n432_
+00 1
+.names inpa[18] inpb[18] new_n433_
+11 1
+.names new_n435_ inpa[20] inpb[20] outf[20]
+000 1
+011 1
+101 1
+110 1
+.names inpa[19] inpb[19] new_n431_ new_n433_ new_n435_
+-000 1
+0-00 1
+00-- 1
+.names new_n435_ inpa[20] inpb[20] new_n437_ outf[21]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[21] inpb[21] new_n437_
+01 1
+10 1
+.names new_n439_ new_n440_ inpa[22] inpb[22] outf[22]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n435_ inpa[20] inpb[20] new_n437_ new_n439_
+-111 1
+0-11 1
+01-1 1
+.names inpa[21] inpb[21] new_n440_
+11 1
+.names new_n442_ inpa[23] inpb[23] outf[23]
+000 1
+011 1
+101 1
+110 1
+.names inpa[22] inpb[22] new_n439_ new_n440_ new_n442_
+-000 1
+0-00 1
+00-- 1
+.names new_n444_ inpa[24] inpb[24] outf[24]
+000 1
+011 1
+101 1
+110 1
+.names new_n442_ inpa[23] inpb[23] new_n444_
+-00 1
+1-0 1
+10- 1
+.names new_n446_ new_n448_ inpa[25] inpb[25] outf[25]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n442_ inpa[23] inpb[23] new_n447_ new_n446_
+-110 1
+0-10 1
+01-0 1
+.names inpa[24] inpb[24] new_n447_
+00 1
+.names inpa[24] inpb[24] new_n448_
+11 1
+.names new_n450_ inpa[26] inpb[26] outf[26]
+000 1
+011 1
+101 1
+110 1
+.names inpa[25] inpb[25] new_n446_ new_n448_ new_n450_
+-000 1
+0-00 1
+00-- 1
+.names new_n450_ inpa[26] inpb[26] new_n452_ outf[27]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[27] inpb[27] new_n452_
+01 1
+10 1
+.names new_n454_ new_n455_ inpa[28] inpb[28] outf[28]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n450_ inpa[26] inpb[26] new_n452_ new_n454_
+-111 1
+0-11 1
+01-1 1
+.names inpa[27] inpb[27] new_n455_
+11 1
+.names new_n457_ inpa[29] inpb[29] outf[29]
+000 1
+011 1
+101 1
+110 1
+.names inpa[28] inpb[28] new_n454_ new_n455_ new_n457_
+-000 1
+0-00 1
+00-- 1
+.names new_n459_ inpa[30] inpb[30] outf[30]
+000 1
+011 1
+101 1
+110 1
+.names new_n457_ inpa[29] inpb[29] new_n459_
+-00 1
+1-0 1
+10- 1
+.names new_n461_ new_n463_ inpa[31] inpb[31] outf[31]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n457_ inpa[29] inpb[29] new_n462_ new_n461_
+-110 1
+0-10 1
+01-0 1
+.names inpa[30] inpb[30] new_n462_
+00 1
+.names inpa[30] inpb[30] new_n463_
+11 1
+.names new_n465_ inpa[32] inpb[32] outf[32]
+000 1
+011 1
+101 1
+110 1
+.names inpa[31] inpb[31] new_n461_ new_n463_ new_n465_
+-000 1
+0-00 1
+00-- 1
+.names new_n465_ inpa[32] inpb[32] new_n467_ outf[33]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[33] inpb[33] new_n467_
+01 1
+10 1
+.names new_n469_ new_n470_ inpa[34] inpb[34] outf[34]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n465_ inpa[32] inpb[32] new_n467_ new_n469_
+-111 1
+0-11 1
+01-1 1
+.names inpa[33] inpb[33] new_n470_
+11 1
+.names new_n472_ inpa[35] inpb[35] outf[35]
+000 1
+011 1
+101 1
+110 1
+.names inpa[34] inpb[34] new_n469_ new_n470_ new_n472_
+-000 1
+0-00 1
+00-- 1
+.names new_n474_ inpa[36] inpb[36] outf[36]
+000 1
+011 1
+101 1
+110 1
+.names new_n472_ inpa[35] inpb[35] new_n474_
+-00 1
+1-0 1
+10- 1
+.names new_n476_ new_n478_ inpa[37] inpb[37] outf[37]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n472_ inpa[35] inpb[35] new_n477_ new_n476_
+-110 1
+0-10 1
+01-0 1
+.names inpa[36] inpb[36] new_n477_
+00 1
+.names inpa[36] inpb[36] new_n478_
+11 1
+.names new_n480_ inpa[38] inpb[38] outf[38]
+000 1
+011 1
+101 1
+110 1
+.names inpa[37] inpb[37] new_n476_ new_n478_ new_n480_
+-000 1
+0-00 1
+00-- 1
+.names new_n480_ inpa[38] inpb[38] new_n482_ outf[39]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[39] inpb[39] new_n482_
+01 1
+10 1
+.names new_n484_ new_n485_ inpa[40] inpb[40] outf[40]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n480_ inpa[38] inpb[38] new_n482_ new_n484_
+-111 1
+0-11 1
+01-1 1
+.names inpa[39] inpb[39] new_n485_
+11 1
+.names new_n487_ inpa[41] inpb[41] outf[41]
+000 1
+011 1
+101 1
+110 1
+.names inpa[40] inpb[40] new_n484_ new_n485_ new_n487_
+-000 1
+0-00 1
+00-- 1
+.names new_n489_ inpa[42] inpb[42] outf[42]
+000 1
+011 1
+101 1
+110 1
+.names new_n487_ inpa[41] inpb[41] new_n489_
+-00 1
+1-0 1
+10- 1
+.names new_n491_ new_n493_ inpa[43] inpb[43] outf[43]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n487_ inpa[41] inpb[41] new_n492_ new_n491_
+-110 1
+0-10 1
+01-0 1
+.names inpa[42] inpb[42] new_n492_
+00 1
+.names inpa[42] inpb[42] new_n493_
+11 1
+.names new_n495_ inpa[44] inpb[44] outf[44]
+000 1
+011 1
+101 1
+110 1
+.names inpa[43] inpb[43] new_n491_ new_n493_ new_n495_
+-000 1
+0-00 1
+00-- 1
+.names new_n495_ inpa[44] inpb[44] new_n497_ outf[45]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[45] inpb[45] new_n497_
+01 1
+10 1
+.names new_n499_ new_n500_ inpa[46] inpb[46] outf[46]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n495_ inpa[44] inpb[44] new_n497_ new_n499_
+-111 1
+0-11 1
+01-1 1
+.names inpa[45] inpb[45] new_n500_
+11 1
+.names new_n502_ inpa[47] inpb[47] outf[47]
+000 1
+011 1
+101 1
+110 1
+.names inpa[46] inpb[46] new_n499_ new_n500_ new_n502_
+-000 1
+0-00 1
+00-- 1
+.names new_n504_ inpa[48] inpb[48] outf[48]
+000 1
+011 1
+101 1
+110 1
+.names new_n502_ inpa[47] inpb[47] new_n504_
+-00 1
+1-0 1
+10- 1
+.names new_n506_ new_n508_ inpa[49] inpb[49] outf[49]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n502_ inpa[47] inpb[47] new_n507_ new_n506_
+-110 1
+0-10 1
+01-0 1
+.names inpa[48] inpb[48] new_n507_
+00 1
+.names inpa[48] inpb[48] new_n508_
+11 1
+.names new_n510_ inpa[50] inpb[50] outf[50]
+000 1
+011 1
+101 1
+110 1
+.names inpa[49] inpb[49] new_n506_ new_n508_ new_n510_
+-000 1
+0-00 1
+00-- 1
+.names new_n510_ inpa[50] inpb[50] new_n512_ outf[51]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[51] inpb[51] new_n512_
+01 1
+10 1
+.names new_n514_ new_n515_ inpa[52] inpb[52] outf[52]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n510_ inpa[50] inpb[50] new_n512_ new_n514_
+-111 1
+0-11 1
+01-1 1
+.names inpa[51] inpb[51] new_n515_
+11 1
+.names new_n517_ inpa[53] inpb[53] outf[53]
+000 1
+011 1
+101 1
+110 1
+.names inpa[52] inpb[52] new_n514_ new_n515_ new_n517_
+-000 1
+0-00 1
+00-- 1
+.names new_n519_ inpa[54] inpb[54] outf[54]
+000 1
+011 1
+101 1
+110 1
+.names new_n517_ inpa[53] inpb[53] new_n519_
+-00 1
+1-0 1
+10- 1
+.names new_n521_ new_n523_ inpa[55] inpb[55] outf[55]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n517_ inpa[53] inpb[53] new_n522_ new_n521_
+-110 1
+0-10 1
+01-0 1
+.names inpa[54] inpb[54] new_n522_
+00 1
+.names inpa[54] inpb[54] new_n523_
+11 1
+.names new_n525_ inpa[56] inpb[56] outf[56]
+000 1
+011 1
+101 1
+110 1
+.names inpa[55] inpb[55] new_n521_ new_n523_ new_n525_
+-000 1
+0-00 1
+00-- 1
+.names new_n525_ inpa[56] inpb[56] new_n527_ outf[57]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[57] inpb[57] new_n527_
+01 1
+10 1
+.names new_n529_ new_n530_ inpa[58] inpb[58] outf[58]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n525_ inpa[56] inpb[56] new_n527_ new_n529_
+-111 1
+0-11 1
+01-1 1
+.names inpa[57] inpb[57] new_n530_
+11 1
+.names new_n532_ inpa[59] inpb[59] outf[59]
+000 1
+011 1
+101 1
+110 1
+.names inpa[58] inpb[58] new_n529_ new_n530_ new_n532_
+-000 1
+0-00 1
+00-- 1
+.names new_n534_ inpa[60] inpb[60] outf[60]
+000 1
+011 1
+101 1
+110 1
+.names new_n532_ inpa[59] inpb[59] new_n534_
+-00 1
+1-0 1
+10- 1
+.names new_n536_ new_n538_ inpa[61] inpb[61] outf[61]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n532_ inpa[59] inpb[59] new_n537_ new_n536_
+-110 1
+0-10 1
+01-0 1
+.names inpa[60] inpb[60] new_n537_
+00 1
+.names inpa[60] inpb[60] new_n538_
+11 1
+.names new_n540_ inpa[62] inpb[62] outf[62]
+000 1
+011 1
+101 1
+110 1
+.names inpa[61] inpb[61] new_n536_ new_n538_ new_n540_
+-000 1
+0-00 1
+00-- 1
+.names new_n540_ inpa[62] inpb[62] new_n542_ outf[63]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[63] inpb[63] new_n542_
+01 1
+10 1
+.names new_n544_ new_n545_ inpa[64] inpb[64] outf[64]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n540_ inpa[62] inpb[62] new_n542_ new_n544_
+-111 1
+0-11 1
+01-1 1
+.names inpa[63] inpb[63] new_n545_
+11 1
+.names new_n547_ inpa[65] inpb[65] outf[65]
+000 1
+011 1
+101 1
+110 1
+.names inpa[64] inpb[64] new_n544_ new_n545_ new_n547_
+-000 1
+0-00 1
+00-- 1
+.names new_n549_ inpa[66] inpb[66] outf[66]
+000 1
+011 1
+101 1
+110 1
+.names new_n547_ inpa[65] inpb[65] new_n549_
+-00 1
+1-0 1
+10- 1
+.names new_n551_ new_n553_ inpa[67] inpb[67] outf[67]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n547_ inpa[65] inpb[65] new_n552_ new_n551_
+-110 1
+0-10 1
+01-0 1
+.names inpa[66] inpb[66] new_n552_
+00 1
+.names inpa[66] inpb[66] new_n553_
+11 1
+.names new_n555_ inpa[68] inpb[68] outf[68]
+000 1
+011 1
+101 1
+110 1
+.names inpa[67] inpb[67] new_n551_ new_n553_ new_n555_
+-000 1
+0-00 1
+00-- 1
+.names new_n555_ inpa[68] inpb[68] new_n557_ outf[69]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[69] inpb[69] new_n557_
+01 1
+10 1
+.names new_n559_ new_n560_ inpa[70] inpb[70] outf[70]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n555_ inpa[68] inpb[68] new_n557_ new_n559_
+-111 1
+0-11 1
+01-1 1
+.names inpa[69] inpb[69] new_n560_
+11 1
+.names new_n562_ inpa[71] inpb[71] outf[71]
+000 1
+011 1
+101 1
+110 1
+.names inpa[70] inpb[70] new_n559_ new_n560_ new_n562_
+-000 1
+0-00 1
+00-- 1
+.names new_n564_ inpa[72] inpb[72] outf[72]
+000 1
+011 1
+101 1
+110 1
+.names new_n562_ inpa[71] inpb[71] new_n564_
+-00 1
+1-0 1
+10- 1
+.names new_n566_ new_n568_ inpa[73] inpb[73] outf[73]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n562_ inpa[71] inpb[71] new_n567_ new_n566_
+-110 1
+0-10 1
+01-0 1
+.names inpa[72] inpb[72] new_n567_
+00 1
+.names inpa[72] inpb[72] new_n568_
+11 1
+.names new_n570_ inpa[74] inpb[74] outf[74]
+000 1
+011 1
+101 1
+110 1
+.names inpa[73] inpb[73] new_n566_ new_n568_ new_n570_
+-000 1
+0-00 1
+00-- 1
+.names new_n570_ inpa[74] inpb[74] new_n572_ outf[75]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[75] inpb[75] new_n572_
+01 1
+10 1
+.names new_n574_ new_n575_ inpa[76] inpb[76] outf[76]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n570_ inpa[74] inpb[74] new_n572_ new_n574_
+-111 1
+0-11 1
+01-1 1
+.names inpa[75] inpb[75] new_n575_
+11 1
+.names new_n577_ inpa[77] inpb[77] outf[77]
+000 1
+011 1
+101 1
+110 1
+.names inpa[76] inpb[76] new_n574_ new_n575_ new_n577_
+-000 1
+0-00 1
+00-- 1
+.names new_n579_ inpa[78] inpb[78] outf[78]
+000 1
+011 1
+101 1
+110 1
+.names new_n577_ inpa[77] inpb[77] new_n579_
+-00 1
+1-0 1
+10- 1
+.names new_n581_ new_n583_ inpa[79] inpb[79] outf[79]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n577_ inpa[77] inpb[77] new_n582_ new_n581_
+-110 1
+0-10 1
+01-0 1
+.names inpa[78] inpb[78] new_n582_
+00 1
+.names inpa[78] inpb[78] new_n583_
+11 1
+.names new_n585_ inpa[80] inpb[80] outf[80]
+000 1
+011 1
+101 1
+110 1
+.names inpa[79] inpb[79] new_n581_ new_n583_ new_n585_
+-000 1
+0-00 1
+00-- 1
+.names new_n585_ inpa[80] inpb[80] new_n587_ outf[81]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[81] inpb[81] new_n587_
+01 1
+10 1
+.names new_n589_ new_n590_ inpa[82] inpb[82] outf[82]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n585_ inpa[80] inpb[80] new_n587_ new_n589_
+-111 1
+0-11 1
+01-1 1
+.names inpa[81] inpb[81] new_n590_
+11 1
+.names new_n592_ inpa[83] inpb[83] outf[83]
+000 1
+011 1
+101 1
+110 1
+.names inpa[82] inpb[82] new_n589_ new_n590_ new_n592_
+-000 1
+0-00 1
+00-- 1
+.names new_n594_ inpa[84] inpb[84] outf[84]
+000 1
+011 1
+101 1
+110 1
+.names new_n592_ inpa[83] inpb[83] new_n594_
+-00 1
+1-0 1
+10- 1
+.names new_n596_ new_n598_ inpa[85] inpb[85] outf[85]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n592_ inpa[83] inpb[83] new_n597_ new_n596_
+-110 1
+0-10 1
+01-0 1
+.names inpa[84] inpb[84] new_n597_
+00 1
+.names inpa[84] inpb[84] new_n598_
+11 1
+.names new_n600_ inpa[86] inpb[86] outf[86]
+000 1
+011 1
+101 1
+110 1
+.names inpa[85] inpb[85] new_n596_ new_n598_ new_n600_
+-000 1
+0-00 1
+00-- 1
+.names new_n600_ inpa[86] inpb[86] new_n602_ outf[87]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[87] inpb[87] new_n602_
+01 1
+10 1
+.names new_n604_ new_n605_ inpa[88] inpb[88] outf[88]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n600_ inpa[86] inpb[86] new_n602_ new_n604_
+-111 1
+0-11 1
+01-1 1
+.names inpa[87] inpb[87] new_n605_
+11 1
+.names new_n607_ inpa[89] inpb[89] outf[89]
+000 1
+011 1
+101 1
+110 1
+.names inpa[88] inpb[88] new_n604_ new_n605_ new_n607_
+-000 1
+0-00 1
+00-- 1
+.names new_n609_ inpa[90] inpb[90] outf[90]
+000 1
+011 1
+101 1
+110 1
+.names new_n607_ inpa[89] inpb[89] new_n609_
+-00 1
+1-0 1
+10- 1
+.names new_n611_ new_n613_ inpa[91] inpb[91] outf[91]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n607_ inpa[89] inpb[89] new_n612_ new_n611_
+-110 1
+0-10 1
+01-0 1
+.names inpa[90] inpb[90] new_n612_
+00 1
+.names inpa[90] inpb[90] new_n613_
+11 1
+.names new_n615_ inpa[92] inpb[92] outf[92]
+000 1
+011 1
+101 1
+110 1
+.names inpa[91] inpb[91] new_n611_ new_n613_ new_n615_
+-000 1
+0-00 1
+00-- 1
+.names new_n615_ inpa[92] inpb[92] new_n617_ outf[93]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[93] inpb[93] new_n617_
+01 1
+10 1
+.names new_n619_ new_n620_ inpa[94] inpb[94] outf[94]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n615_ inpa[92] inpb[92] new_n617_ new_n619_
+-111 1
+0-11 1
+01-1 1
+.names inpa[93] inpb[93] new_n620_
+11 1
+.names new_n622_ inpa[95] inpb[95] outf[95]
+000 1
+011 1
+101 1
+110 1
+.names inpa[94] inpb[94] new_n619_ new_n620_ new_n622_
+-000 1
+0-00 1
+00-- 1
+.names new_n624_ inpa[96] inpb[96] outf[96]
+000 1
+011 1
+101 1
+110 1
+.names new_n622_ inpa[95] inpb[95] new_n624_
+-00 1
+1-0 1
+10- 1
+.names new_n626_ new_n628_ inpa[97] inpb[97] outf[97]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n622_ inpa[95] inpb[95] new_n627_ new_n626_
+-110 1
+0-10 1
+01-0 1
+.names inpa[96] inpb[96] new_n627_
+00 1
+.names inpa[96] inpb[96] new_n628_
+11 1
+.names new_n630_ inpa[98] inpb[98] outf[98]
+000 1
+011 1
+101 1
+110 1
+.names inpa[97] inpb[97] new_n626_ new_n628_ new_n630_
+-000 1
+0-00 1
+00-- 1
+.names new_n630_ inpa[98] inpb[98] new_n632_ outf[99]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[99] inpb[99] new_n632_
+01 1
+10 1
+.names new_n634_ new_n635_ inpa[100] inpb[100] outf[100]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n630_ inpa[98] inpb[98] new_n632_ new_n634_
+-111 1
+0-11 1
+01-1 1
+.names inpa[99] inpb[99] new_n635_
+11 1
+.names new_n637_ inpa[101] inpb[101] outf[101]
+000 1
+011 1
+101 1
+110 1
+.names inpa[100] inpb[100] new_n634_ new_n635_ new_n637_
+-000 1
+0-00 1
+00-- 1
+.names new_n639_ inpa[102] inpb[102] outf[102]
+000 1
+011 1
+101 1
+110 1
+.names new_n637_ inpa[101] inpb[101] new_n639_
+-00 1
+1-0 1
+10- 1
+.names new_n641_ new_n643_ inpa[103] inpb[103] outf[103]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n637_ inpa[101] inpb[101] new_n642_ new_n641_
+-110 1
+0-10 1
+01-0 1
+.names inpa[102] inpb[102] new_n642_
+00 1
+.names inpa[102] inpb[102] new_n643_
+11 1
+.names new_n645_ inpa[104] inpb[104] outf[104]
+000 1
+011 1
+101 1
+110 1
+.names inpa[103] inpb[103] new_n641_ new_n643_ new_n645_
+-000 1
+0-00 1
+00-- 1
+.names new_n645_ inpa[104] inpb[104] new_n647_ outf[105]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[105] inpb[105] new_n647_
+01 1
+10 1
+.names new_n649_ new_n650_ inpa[106] inpb[106] outf[106]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n645_ inpa[104] inpb[104] new_n647_ new_n649_
+-111 1
+0-11 1
+01-1 1
+.names inpa[105] inpb[105] new_n650_
+11 1
+.names new_n652_ inpa[107] inpb[107] outf[107]
+000 1
+011 1
+101 1
+110 1
+.names inpa[106] inpb[106] new_n649_ new_n650_ new_n652_
+-000 1
+0-00 1
+00-- 1
+.names new_n654_ inpa[108] inpb[108] outf[108]
+000 1
+011 1
+101 1
+110 1
+.names new_n652_ inpa[107] inpb[107] new_n654_
+-00 1
+1-0 1
+10- 1
+.names new_n656_ new_n658_ inpa[109] inpb[109] outf[109]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n652_ inpa[107] inpb[107] new_n657_ new_n656_
+-110 1
+0-10 1
+01-0 1
+.names inpa[108] inpb[108] new_n657_
+00 1
+.names inpa[108] inpb[108] new_n658_
+11 1
+.names new_n660_ inpa[110] inpb[110] outf[110]
+000 1
+011 1
+101 1
+110 1
+.names inpa[109] inpb[109] new_n656_ new_n658_ new_n660_
+-000 1
+0-00 1
+00-- 1
+.names new_n660_ inpa[110] inpb[110] new_n662_ outf[111]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[111] inpb[111] new_n662_
+01 1
+10 1
+.names new_n664_ new_n665_ inpa[112] inpb[112] outf[112]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n660_ inpa[110] inpb[110] new_n662_ new_n664_
+-111 1
+0-11 1
+01-1 1
+.names inpa[111] inpb[111] new_n665_
+11 1
+.names new_n667_ inpa[113] inpb[113] outf[113]
+000 1
+011 1
+101 1
+110 1
+.names inpa[112] inpb[112] new_n664_ new_n665_ new_n667_
+-000 1
+0-00 1
+00-- 1
+.names new_n669_ inpa[114] inpb[114] outf[114]
+000 1
+011 1
+101 1
+110 1
+.names new_n667_ inpa[113] inpb[113] new_n669_
+-00 1
+1-0 1
+10- 1
+.names new_n671_ new_n673_ inpa[115] inpb[115] outf[115]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n667_ inpa[113] inpb[113] new_n672_ new_n671_
+-110 1
+0-10 1
+01-0 1
+.names inpa[114] inpb[114] new_n672_
+00 1
+.names inpa[114] inpb[114] new_n673_
+11 1
+.names new_n675_ inpa[116] inpb[116] outf[116]
+000 1
+011 1
+101 1
+110 1
+.names inpa[115] inpb[115] new_n671_ new_n673_ new_n675_
+-000 1
+0-00 1
+00-- 1
+.names new_n675_ inpa[116] inpb[116] new_n677_ outf[117]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[117] inpb[117] new_n677_
+01 1
+10 1
+.names new_n679_ new_n680_ inpa[118] inpb[118] outf[118]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n675_ inpa[116] inpb[116] new_n677_ new_n679_
+-111 1
+0-11 1
+01-1 1
+.names inpa[117] inpb[117] new_n680_
+11 1
+.names new_n682_ inpa[119] inpb[119] outf[119]
+000 1
+011 1
+101 1
+110 1
+.names inpa[118] inpb[118] new_n679_ new_n680_ new_n682_
+-000 1
+0-00 1
+00-- 1
+.names new_n684_ inpa[120] inpb[120] outf[120]
+000 1
+011 1
+101 1
+110 1
+.names new_n682_ inpa[119] inpb[119] new_n684_
+-00 1
+1-0 1
+10- 1
+.names new_n686_ new_n688_ inpa[121] inpb[121] outf[121]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n682_ inpa[119] inpb[119] new_n687_ new_n686_
+-110 1
+0-10 1
+01-0 1
+.names inpa[120] inpb[120] new_n687_
+00 1
+.names inpa[120] inpb[120] new_n688_
+11 1
+.names new_n690_ inpa[122] inpb[122] outf[122]
+000 1
+011 1
+101 1
+110 1
+.names inpa[121] inpb[121] new_n686_ new_n688_ new_n690_
+-000 1
+0-00 1
+00-- 1
+.names new_n690_ inpa[122] inpb[122] new_n692_ outf[123]
+-001 1
+-110 1
+0-10 1
+01-0 1
+1-01 1
+10-1 1
+.names inpa[123] inpb[123] new_n692_
+01 1
+10 1
+.names new_n694_ new_n695_ inpa[124] inpb[124] outf[124]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n690_ inpa[122] inpb[122] new_n692_ new_n694_
+-111 1
+0-11 1
+01-1 1
+.names inpa[123] inpb[123] new_n695_
+11 1
+.names new_n697_ inpa[125] inpb[125] outf[125]
+000 1
+011 1
+101 1
+110 1
+.names inpa[124] inpb[124] new_n694_ new_n695_ new_n697_
+-000 1
+0-00 1
+00-- 1
+.names new_n699_ inpa[126] inpb[126] outf[126]
+000 1
+011 1
+101 1
+110 1
+.names new_n697_ inpa[125] inpb[125] new_n699_
+-00 1
+1-0 1
+10- 1
+.names new_n701_ new_n703_ inpa[127] inpb[127] outf[127]
+-100 1
+-111 1
+0001 1
+0010 1
+1-00 1
+1-11 1
+.names new_n697_ inpa[125] inpb[125] new_n702_ new_n701_
+-110 1
+0-10 1
+01-0 1
+.names inpa[126] inpb[126] new_n702_
+00 1
+.names inpa[126] inpb[126] new_n703_
+11 1
+.names inpa[127] inpb[127] new_n701_ new_n703_ cOut
+-000 0
+0-00 0
+00-- 0
+.end

@@ -1,0 +1,508 @@
+# Benchmark "top" written by ABC on Wed May 17 21:58:55 2023
+.model top
+.inputs inpA[0] inpA[1] inpA[2] inpA[3] inpA[4] inpA[5] inpA[6] inpA[7] inpA[8] inpA[9] inpA[10] inpA[11] inpA[12] inpA[13] inpA[14] inpA[15] inpA[16] inpA[17] inpA[18] inpA[19] inpA[20] inpA[21] inpA[22] inpA[23] inpA[24] inpA[25] inpA[26] inpA[27] inpA[28] inpA[29] inpA[30] inpA[31] inpA[32] inpA[33] inpA[34] inpA[35] inpA[36] inpA[37] inpA[38] inpA[39] inpA[40] inpA[41] inpA[42] inpA[43] inpA[44] inpA[45] inpA[46] inpA[47] inpA[48] inpA[49] inpA[50] inpA[51] inpA[52] inpA[53] inpA[54] inpA[55] inpA[56] inpA[57] inpA[58] inpA[59] inpA[60] inpA[61] inpA[62] inpA[63] inpA[64] inpA[65] inpA[66] inpA[67] inpA[68] inpA[69] inpA[70] inpA[71] inpA[72] inpA[73] inpA[74] inpA[75] inpA[76] inpA[77] inpA[78] inpA[79] inpA[80] inpA[81] inpA[82] inpA[83] inpA[84] inpA[85] inpA[86] inpA[87] inpA[88] inpA[89] inpA[90] inpA[91] inpA[92] inpA[93] inpA[94] inpA[95] inpA[96] inpA[97] inpA[98] inpA[99] inpA[100] inpA[101] inpA[102] inpA[103] inpA[104] inpA[105] inpA[106] inpA[107] inpA[108] inpA[109] inpA[110] inpA[111] inpA[112] inpA[113] inpA[114] inpA[115] inpA[116] inpA[117] inpA[118] inpA[119] inpA[120] inpA[121] inpA[122] inpA[123] inpA[124] inpA[125] inpA[126] inpA[127]
+.outputs outP[0] outP[1] outP[2] outP[3] outP[4] outP[5] outP[6] F
+.names new_n164_ inpA[4] inpA[5] new_n163_
+-10 1
+1-0 1
+.names inpA[1] inpA[2] inpA[3] new_n164_
+-10 1
+0-0 1
+.names inpA[8] inpA[9] new_n166_
+00 1
+.names new_n169_ new_n170_ new_n168_
+11 1
+.names inpA[14] inpA[15] new_n169_
+00 1
+.names inpA[12] inpA[13] new_n170_
+00 1
+.names inpA[13] inpA[14] inpA[15] new_n171_
+-10 1
+0-0 1
+.names inpA[17] new_n173_ new_n172_
+01 1
+.names inpA[18] inpA[19] new_n173_
+00 1
+.names inpA[18] inpA[19] inpA[20] new_n174_
+-10 1
+0-0 1
+.names inpA[22] inpA[23] new_n176_
+00 1
+.names inpA[28] inpA[29] new_n179_
+00 1
+.names inpA[32] inpA[33] new_n182_ new_n181_
+001 1
+.names inpA[34] inpA[35] new_n182_
+00 1
+.names inpA[33] inpA[34] inpA[35] new_n183_
+-10 1
+0-0 1
+.names inpA[38] inpA[39] new_n185_
+00 1
+.names inpA[44] inpA[45] new_n188_
+00 1
+.names inpA[42] inpA[43] new_n189_
+00 1
+.names inpA[48] inpA[49] new_n192_
+00 1
+.names new_n195_ new_n196_ new_n194_
+11 1
+.names inpA[54] inpA[55] new_n195_
+00 1
+.names inpA[52] inpA[53] new_n196_
+00 1
+.names inpA[53] inpA[54] inpA[55] new_n197_
+-10 1
+0-0 1
+.names inpA[58] inpA[59] new_n199_
+00 1
+.names inpA[64] inpA[65] new_n202_
+00 1
+.names inpA[62] inpA[63] new_n203_
+00 1
+.names inpA[68] inpA[69] new_n206_
+00 1
+.names inpA[72] inpA[73] new_n209_ new_n208_
+001 1
+.names inpA[74] inpA[75] new_n209_
+00 1
+.names inpA[73] inpA[74] inpA[75] new_n210_
+-10 1
+0-0 1
+.names inpA[78] inpA[79] new_n212_
+00 1
+.names new_n217_ new_n224_ new_n225_ new_n216_
+111 1
+.names new_n218_ new_n221_ new_n217_
+11 1
+.names new_n219_ new_n220_ new_n218_
+11 1
+.names inpA[88] inpA[89] new_n219_
+00 1
+.names inpA[90] inpA[91] new_n220_
+00 1
+.names new_n222_ new_n223_ new_n221_
+11 1
+.names inpA[94] inpA[95] new_n222_
+00 1
+.names inpA[92] inpA[93] new_n223_
+00 1
+.names inpA[84] inpA[85] new_n224_
+00 1
+.names inpA[86] inpA[87] new_n225_
+00 1
+.names new_n227_ inpA[92] inpA[93] new_n226_
+-10 1
+1-0 1
+.names new_n228_ inpA[90] inpA[91] new_n227_
+-10 1
+1-0 1
+.names new_n229_ inpA[88] inpA[89] new_n228_
+-10 1
+1-0 1
+.names inpA[85] inpA[86] inpA[87] new_n229_
+-10 1
+0-0 1
+.names new_n216_ new_n231_ new_n230_
+11 1
+.names inpA[82] inpA[83] new_n231_
+00 1
+.names new_n233_ inpA[126] inpA[127] new_n232_
+-10 1
+1-0 1
+.names new_n234_ inpA[124] inpA[125] new_n233_
+-10 1
+1-0 1
+.names new_n235_ inpA[122] inpA[123] new_n234_
+-10 1
+1-0 1
+.names new_n236_ inpA[120] inpA[121] new_n235_
+-10 1
+1-0 1
+.names new_n406_ inpA[118] inpA[119] new_n236_
+-10 1
+1-0 1
+.names new_n242_ inpA[106] inpA[107] new_n241_
+-10 1
+1-0 1
+.names new_n243_ inpA[104] inpA[105] new_n242_
+-10 1
+1-0 1
+.names new_n244_ inpA[102] inpA[103] new_n243_
+-10 1
+1-0 1
+.names new_n245_ inpA[100] inpA[101] new_n244_
+-10 1
+1-0 1
+.names inpA[97] inpA[98] inpA[99] new_n245_
+-10 1
+0-0 1
+.names inpA[108] inpA[109] new_n247_ new_n246_
+001 1
+.names inpA[110] inpA[111] new_n247_
+00 1
+.names new_n250_ new_n259_ new_n249_
+11 1
+.names new_n251_ new_n254_ new_n256_ new_n250_
+111 1
+.names new_n246_ new_n252_ new_n251_
+11 1
+.names inpA[104] inpA[105] new_n253_ new_n252_
+001 1
+.names inpA[106] inpA[107] new_n253_
+00 1
+.names inpA[96] inpA[97] new_n255_ new_n254_
+001 1
+.names inpA[98] inpA[99] new_n255_
+00 1
+.names new_n257_ new_n258_ new_n256_
+11 1
+.names inpA[102] inpA[103] new_n257_
+00 1
+.names inpA[100] inpA[101] new_n258_
+00 1
+.names new_n260_ new_n265_ new_n268_ new_n259_
+111 1
+.names new_n261_ new_n263_ new_n264_ new_n260_
+111 1
+.names inpA[126] inpA[127] new_n262_ new_n261_
+001 1
+.names inpA[124] inpA[125] new_n262_
+00 1
+.names inpA[122] inpA[123] new_n263_
+00 1
+.names inpA[120] inpA[121] new_n264_
+00 1
+.names new_n266_ new_n267_ new_n265_
+11 1
+.names inpA[118] inpA[119] new_n266_
+00 1
+.names inpA[116] inpA[117] new_n267_
+00 1
+.names new_n269_ new_n270_ new_n268_
+11 1
+.names inpA[112] inpA[113] new_n269_
+00 1
+.names inpA[114] inpA[115] new_n270_
+00 1
+.names new_n410_ inpA[126] inpA[127] outP[1]
+000 0
+.names new_n414_ new_n222_ new_n250_ new_n276_
+-01 1
+1-1 1
+.names new_n291_ new_n303_ new_n179_ new_n290_
+-01 1
+1-1 1
+.names new_n292_ new_n176_ new_n302_ new_n291_
+-01 1
+1-1 1
+.names new_n293_ new_n173_ new_n301_ new_n292_
+-01 1
+1-1 1
+.names new_n294_ inpA[16] inpA[17] new_n293_
+000 1
+.names new_n295_ new_n170_ new_n169_ new_n294_
+-01 1
+1-1 1
+.names new_n296_ new_n166_ new_n300_ new_n295_
+-01 1
+1-1 1
+.names new_n298_ new_n299_ new_n297_ new_n296_
+-11 1
+0-1 1
+.names inpA[6] inpA[7] new_n297_
+00 1
+.names inpA[4] inpA[5] new_n298_
+00 1
+.names inpA[2] inpA[3] new_n299_
+00 1
+.names inpA[10] inpA[11] new_n300_
+00 1
+.names inpA[20] inpA[21] new_n301_
+00 1
+.names inpA[24] inpA[25] new_n302_
+00 1
+.names inpA[26] inpA[27] new_n303_
+00 1
+.names new_n181_ new_n305_ new_n304_
+11 1
+.names inpA[36] inpA[37] new_n185_ new_n305_
+001 1
+.names inpA[30] inpA[31] new_n306_
+00 1
+.names new_n308_ new_n310_ new_n307_
+11 1
+.names new_n188_ new_n309_ new_n308_
+11 1
+.names inpA[46] inpA[47] new_n309_
+00 1
+.names inpA[40] inpA[41] new_n189_ new_n310_
+001 1
+.names inpA[50] inpA[51] new_n313_
+00 1
+.names new_n315_ new_n316_ new_n314_
+11 1
+.names inpA[60] inpA[61] new_n203_ new_n315_
+001 1
+.names inpA[56] inpA[57] new_n199_ new_n316_
+001 1
+.names inpA[66] inpA[67] new_n319_
+00 1
+.names new_n208_ new_n321_ new_n320_
+11 1
+.names inpA[76] inpA[77] new_n212_ new_n321_
+001 1
+.names inpA[70] inpA[71] new_n322_
+00 1
+.names inpA[80] inpA[81] new_n324_
+00 1
+.names new_n255_ new_n258_ new_n257_ new_n328_
+-01 1
+1-1 1
+.names new_n335_ new_n305_ new_n310_ new_n334_
+-01 1
+1-1 1
+.names new_n336_ new_n343_ new_n181_ new_n335_
+-01 1
+1-1 1
+.names new_n337_ new_n342_ new_n341_ new_n336_
+-01 1
+1-1 1
+.names new_n338_ inpA[16] new_n172_ new_n337_
+001 1
+.names new_n339_ new_n340_ new_n168_ new_n338_
+-11 1
+0-1 1
+.names new_n166_ new_n300_ new_n339_
+11 1
+.names new_n297_ new_n298_ new_n340_
+11 1
+.names new_n303_ new_n302_ new_n341_
+11 1
+.names new_n176_ new_n301_ new_n342_
+11 1
+.names new_n179_ new_n306_ new_n343_
+11 1
+.names new_n314_ new_n194_ new_n345_ new_n344_
+111 1
+.names new_n192_ new_n313_ new_n345_
+11 1
+.names new_n202_ new_n319_ new_n347_
+11 1
+.names new_n208_ new_n321_ new_n349_ new_n348_
+-01 1
+1-1 1
+.names new_n230_ new_n324_ new_n349_
+11 1
+.names new_n320_ new_n206_ new_n322_ new_n350_
+111 1
+.names new_n260_ new_n265_ new_n261_ new_n355_
+-11 1
+0-1 1
+.names new_n361_ new_n304_ new_n307_ new_n360_
+-01 1
+1-1 1
+.names new_n362_ new_n364_ new_n363_ new_n361_
+-01 1
+1-1 1
+.names new_n168_ new_n339_ new_n362_
+11 1
+.names new_n343_ new_n341_ new_n363_
+11 1
+.names inpA[16] new_n342_ new_n172_ new_n364_
+011 1
+.names new_n350_ new_n347_ new_n365_
+11 1
+.names new_n259_ new_n251_ new_n260_ new_n366_
+-11 1
+0-1 1
+.names new_n370_ outP[6] new_n369_ outP[4]
+--0 1
+00- 1
+.names new_n349_ new_n249_ new_n365_ outP[6]
+111 0
+.names new_n349_ new_n250_ new_n259_ new_n369_
+-01 1
+1-1 1
+.names new_n371_ new_n372_ new_n344_ new_n370_
+-11 1
+0-1 1
+.names new_n307_ new_n304_ new_n371_
+11 1
+.names new_n363_ new_n364_ new_n372_
+11 1
+.names new_n374_ new_n249_ outP[5]
+01 0
+.names new_n344_ new_n371_ outP[6] new_n374_
+-00 1
+0-0 1
+.names outP[5] new_n376_ F
+01 0
+.names outP[6] new_n372_ new_n377_ new_n376_
+011 1
+.names new_n362_ new_n340_ new_n378_ new_n377_
+111 1
+.names inpA[0] inpA[1] new_n299_ new_n378_
+001 1
+.names inpA[76] new_n386_ inpA[77] inpA[78] new_n379_
+--10 0
+00-0 0
+.names inpA[79] new_n379_ inpA[80] inpA[81] new_n380_
+--10 0
+01-0 0
+.names new_n388_ new_n203_ inpA[63] inpA[64] new_n383_
+--10 0
+01-0 0
+.names inpA[65] new_n383_ inpA[66] inpA[67] new_n384_
+--10 0
+01-0 0
+.names inpA[68] new_n384_ inpA[69] inpA[70] new_n385_
+--10 0
+01-0 0
+.names inpA[71] new_n385_ new_n208_ new_n210_ new_n386_
+--01 1
+01-1 1
+.names inpA[56] new_n392_ inpA[57] inpA[58] new_n387_
+--10 0
+00-0 0
+.names inpA[59] new_n387_ inpA[60] inpA[61] new_n388_
+--10 1
+01-0 1
+.names new_n394_ new_n189_ inpA[43] inpA[44] new_n389_
+--10 0
+01-0 0
+.names inpA[45] new_n389_ inpA[46] inpA[47] new_n390_
+--10 0
+01-0 0
+.names inpA[48] new_n390_ inpA[49] inpA[50] new_n391_
+--10 0
+01-0 0
+.names inpA[51] new_n391_ new_n194_ new_n197_ new_n392_
+--01 1
+01-1 1
+.names inpA[36] new_n398_ inpA[37] inpA[38] new_n393_
+--10 0
+00-0 0
+.names inpA[39] new_n393_ inpA[40] inpA[41] new_n394_
+--10 1
+01-0 1
+.names new_n402_ new_n176_ inpA[23] inpA[24] new_n395_
+--10 0
+01-0 0
+.names inpA[25] new_n395_ inpA[26] inpA[27] new_n396_
+--10 0
+01-0 0
+.names inpA[28] new_n396_ inpA[29] inpA[30] new_n397_
+--10 0
+01-0 0
+.names inpA[31] new_n397_ new_n181_ new_n183_ new_n398_
+--01 1
+01-1 1
+.names inpA[6] new_n163_ inpA[7] inpA[8] new_n399_
+--10 0
+00-0 0
+.names inpA[9] new_n399_ inpA[10] inpA[11] new_n400_
+--10 0
+01-0 0
+.names new_n168_ new_n400_ new_n171_ inpA[16] new_n401_
+--00 0
+11-0 0
+.names new_n172_ new_n401_ new_n174_ inpA[21] new_n402_
+--00 1
+11-0 1
+.names inpA[108] new_n241_ inpA[109] inpA[110] new_n403_
+--10 0
+00-0 0
+.names inpA[111] new_n403_ inpA[112] inpA[113] new_n404_
+--10 0
+01-0 0
+.names inpA[114] new_n404_ inpA[115] inpA[116] new_n405_
+--10 0
+01-0 0
+.names inpA[117] new_n405_ new_n406_
+01 1
+.names new_n328_ new_n251_ new_n253_ new_n246_ new_n407_
+--01 0
+01-- 0
+.names new_n276_ new_n407_ new_n247_ new_n269_ new_n408_
+---0 1
+011- 1
+.names new_n408_ new_n270_ new_n267_ new_n266_ new_n409_
+--01 0
+11-1 0
+.names new_n409_ new_n264_ new_n263_ new_n262_ new_n410_
+--01 1
+11-1 1
+.names new_n417_ new_n322_ new_n208_ new_n209_ new_n411_
+--01 0
+01-1 0
+.names new_n411_ new_n321_ new_n212_ new_n324_ new_n412_
+--01 0
+11-1 0
+.names new_n412_ new_n231_ new_n224_ new_n225_ new_n413_
+--01 0
+11-1 0
+.names new_n219_ new_n413_ new_n220_ new_n223_ new_n414_
+--01 1
+11-1 1
+.names new_n420_ new_n195_ new_n316_ new_n199_ new_n415_
+--01 0
+01-1 0
+.names inpA[61] inpA[60] new_n415_ new_n203_ new_n416_
+---0 1
+001- 1
+.names new_n202_ new_n416_ new_n319_ new_n206_ new_n417_
+--01 1
+11-1 1
+.names new_n435_ new_n188_ new_n309_ new_n192_ new_n419_
+--01 0
+11-1 0
+.names new_n313_ new_n419_ new_n196_ new_n420_
+-01 1
+0-1 1
+.names new_n218_ new_n221_ new_n426_ new_n216_ new_n421_
+--01 0
+01-- 0
+.names new_n254_ new_n421_ new_n256_ new_n251_ new_n422_
+--01 0
+11-1 0
+.names new_n246_ new_n422_ new_n259_ new_n355_ outP[2]
+--01 0
+11-1 0
+.names new_n334_ new_n308_ new_n345_ new_n194_ new_n424_
+--01 0
+01-1 0
+.names new_n424_ new_n316_ new_n315_ new_n347_ new_n425_
+--01 0
+11-1 0
+.names new_n350_ new_n425_ new_n348_ new_n426_
+-01 1
+0-1 1
+.names new_n360_ new_n345_ new_n194_ new_n314_ new_n427_
+---0 1
+011- 1
+.names new_n427_ new_n365_ new_n320_ new_n349_ new_n428_
+--01 0
+11-1 0
+.names new_n217_ new_n428_ new_n249_ new_n366_ outP[3]
+--01 0
+11-1 0
+.names new_n231_ new_n380_ inpA[83] new_n216_ new_n430_
+--11 0
+11-1 0
+.names new_n226_ inpA[94] inpA[95] new_n430_ new_n431_
+-101 0
+1-01 0
+.names new_n431_ new_n249_ new_n232_ outP[0]
+--0 1
+11- 1
+.names new_n290_ new_n306_ new_n181_ new_n182_ new_n433_
+--01 0
+01-1 0
+.names inpA[37] inpA[36] new_n433_ new_n185_ new_n434_
+---0 1
+001- 1
+.names new_n434_ new_n310_ new_n189_ new_n435_
+--0 1
+11- 1
+.end

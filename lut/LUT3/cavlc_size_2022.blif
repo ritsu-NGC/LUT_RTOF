@@ -1,0 +1,845 @@
+# Benchmark "top" written by ABC on Wed May 17 21:58:54 2023
+.model top
+.inputs totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] totalcoeffs[4] ctable[0] ctable[1] ctable[2] trailingones[0] trailingones[1]
+.outputs coeff_token[0] coeff_token[1] coeff_token[2] coeff_token[3] coeff_token[4] coeff_token[5] ctoken_len[0] ctoken_len[1] ctoken_len[2] ctoken_len[3] ctoken_len[4]
+.names totalcoeffs[3] trailingones[0] new_n36_
+01 1
+.names totalcoeffs[2] totalcoeffs[3] new_n38_
+00 1
+.names totalcoeffs[0] totalcoeffs[1] new_n40_
+00 1
+11 1
+.names new_n43_ new_n40_ new_n42_ new_n41_
+011 1
+.names totalcoeffs[2] trailingones[0] new_n42_
+01 1
+10 1
+.names totalcoeffs[2] totalcoeffs[3] new_n43_
+01 1
+10 1
+.names totalcoeffs[1] totalcoeffs[2] new_n48_
+01 1
+.names new_n54_ trailingones[1] new_n53_
+11 1
+.names totalcoeffs[3] trailingones[0] new_n54_
+11 1
+.names totalcoeffs[3] totalcoeffs[0] new_n55_
+01 1
+.names totalcoeffs[3] trailingones[1] new_n59_
+01 1
+10 1
+.names totalcoeffs[0] trailingones[1] new_n65_
+01 1
+10 1
+.names totalcoeffs[0] trailingones[1] new_n67_
+11 1
+.names totalcoeffs[2] trailingones[1] new_n72_
+00 1
+.names totalcoeffs[0] totalcoeffs[3] new_n73_
+01 1
+.names totalcoeffs[2] trailingones[1] new_n74_
+11 1
+.names totalcoeffs[0] totalcoeffs[2] new_n75_
+11 1
+.names totalcoeffs[3] totalcoeffs[1] trailingones[1] new_n76_
+011 1
+.names totalcoeffs[1] trailingones[1] new_n83_
+00 1
+.names totalcoeffs[0] totalcoeffs[2] new_n84_
+00 1
+.names totalcoeffs[2] trailingones[1] new_n91_
+01 1
+10 1
+.names new_n94_ new_n59_ new_n93_ new_n92_
+011 1
+.names new_n48_ trailingones[0] new_n93_
+11 1
+.names totalcoeffs[3] ctable[1] new_n94_
+11 1
+.names totalcoeffs[1] totalcoeffs[3] new_n96_
+00 1
+11 1
+.names new_n692_ new_n693_ ctable[0] new_n101_
+000 1
+.names ctable[2] trailingones[0] new_n111_
+00 1
+.names totalcoeffs[0] trailingones[0] new_n116_
+01 1
+10 1
+.names totalcoeffs[0] totalcoeffs[3] new_n126_
+00 1
+.names ctable[2] ctable[0] trailingones[0] new_n127_
+011 1
+.names new_n65_ new_n43_ totalcoeffs[1] new_n128_
+001 1
+.names totalcoeffs[1] totalcoeffs[2] new_n137_
+01 1
+10 1
+.names trailingones[0] totalcoeffs[3] new_n83_ new_n138_
+011 1
+.names totalcoeffs[0] totalcoeffs[2] new_n139_
+01 1
+.names trailingones[1] totalcoeffs[1] new_n143_
+01 1
+.names totalcoeffs[1] trailingones[1] new_n144_
+01 1
+.names totalcoeffs[3] trailingones[1] new_n147_
+00 1
+.names totalcoeffs[1] trailingones[0] trailingones[1] new_n151_
+001 1
+.names trailingones[0] trailingones[1] new_n154_
+01 1
+10 1
+.names trailingones[1] new_n126_ new_n159_
+01 1
+.names totalcoeffs[1] trailingones[1] new_n162_
+00 1
+11 1
+.names new_n166_ new_n43_ totalcoeffs[1] new_n165_
+111 1
+.names new_n91_ new_n42_ new_n166_
+00 1
+.names ctable[2] new_n170_ new_n169_
+01 1
+.names new_n126_ new_n171_ totalcoeffs[4] new_n170_
+111 1
+.names totalcoeffs[1] totalcoeffs[2] new_n171_
+00 1
+.names totalcoeffs[3] totalcoeffs[2] new_n67_ new_n185_
+-00 0
+111 0
+.names totalcoeffs[3] new_n187_ new_n84_ new_n186_
+011 1
+.names trailingones[0] trailingones[1] new_n187_
+11 1
+.names totalcoeffs[0] totalcoeffs[3] new_n193_
+00 1
+11 1
+.names totalcoeffs[0] ctable[0] new_n197_
+00 1
+.names ctable[0] totalcoeffs[3] new_n200_
+01 1
+.names new_n721_ new_n73_ new_n205_
+00 1
+.names totalcoeffs[3] ctable[0] new_n207_
+01 1
+10 1
+.names trailingones[0] totalcoeffs[2] new_n233_
+01 1
+.names totalcoeffs[2] totalcoeffs[1] ctable[0] new_n237_
+-00 0
+011 0
+.names totalcoeffs[2] ctable[0] trailingones[1] new_n238_
+-10 1
+0-0 1
+.names new_n240_ trailingones[1] trailingones[0] new_n239_
+-01 1
+1-1 1
+.names ctable[0] totalcoeffs[2] totalcoeffs[1] new_n240_
+011 1
+.names ctable[1] totalcoeffs[3] new_n241_
+01 1
+.names new_n802_ totalcoeffs[2] ctable[0] new_n253_
+000 1
+.names totalcoeffs[2] trailingones[0] new_n257_
+01 1
+.names new_n259_ new_n260_ new_n200_ new_n258_
+-00 1
+0-0 1
+.names totalcoeffs[3] new_n42_ new_n259_
+01 1
+.names ctable[0] totalcoeffs[0] new_n260_
+01 1
+.names new_n137_ new_n207_ new_n266_ new_n265_
+001 1
+.names new_n96_ totalcoeffs[0] new_n266_
+11 1
+.names new_n286_ new_n187_ new_n287_ new_n285_
+-10 1
+0-0 1
+.names new_n40_ new_n137_ new_n286_
+11 1
+.names new_n40_ new_n72_ new_n116_ new_n287_
+011 1
+.names totalcoeffs[3] ctable[1] new_n310_
+00 1
+.names ctable[2] new_n260_ new_n315_
+01 1
+.names new_n557_ new_n169_ new_n334_
+11 1
+.names new_n850_ new_n763_ new_n342_ coeff_token[3]
+--1 1
+01- 1
+.names new_n343_ new_n169_ new_n342_
+01 1
+.names new_n619_ ctable[0] ctable[1] new_n343_
+-11 0
+000 0
+.names totalcoeffs[0] totalcoeffs[2] new_n355_
+01 1
+10 1
+.names new_n360_ new_n359_ new_n358_ coeff_token[4]
+011 1
+.names ctable[2] totalcoeffs[4] new_n38_ new_n358_
+000 1
+011 1
+.names ctable[0] ctable[1] new_n359_
+11 1
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] new_n360_
+-10 1
+001 1
+1-0 1
+.names new_n623_ new_n359_ coeff_token[5]
+11 1
+.names new_n395_ new_n91_ trailingones[0] new_n394_
+000 1
+.names new_n84_ new_n43_ new_n395_
+00 1
+.names new_n73_ new_n426_ new_n65_ new_n425_
+011 1
+.names new_n55_ new_n233_ ctable[2] new_n426_
+001 1
+010 1
+.names ctable[2] totalcoeffs[2] trailingones[0] new_n434_
+011 1
+.names totalcoeffs[0] trailingones[0] new_n76_ new_n439_
+001 1
+.names new_n96_ new_n137_ new_n154_ new_n444_
+001 1
+.names ctable[1] ctable[2] new_n445_
+11 1
+.names totalcoeffs[1] totalcoeffs[2] totalcoeffs[3] new_n461_
+011 0
+101 0
+110 0
+.names new_n465_ ctable[1] new_n464_
+00 1
+.names totalcoeffs[2] totalcoeffs[3] new_n169_ new_n465_
+-00 1
+0-0 1
+.names ctoken_len[2] new_n464_ ctoken_len[4]
+01 1
+.names trailingones[0] new_n680_ new_n500_ ctable[2] new_n472_
+--10 0
+01-0 0
+.names new_n472_ new_n504_ totalcoeffs[4] new_n515_ coeff_token[0]
+--10 0
+11-0 0
+.names new_n48_ trailingones[0] totalcoeffs[1] totalcoeffs[0] new_n474_
+--00 1
+0111 1
+.names totalcoeffs[2] totalcoeffs[3] new_n41_ new_n474_ new_n475_
+0001 1
+.names new_n36_ totalcoeffs[2] totalcoeffs[1] new_n476_
+011 1
+.names new_n841_ new_n475_ ctable[0] new_n480_
+-11 1
+1-0 1
+.names new_n74_ new_n72_ totalcoeffs[1] new_n73_ new_n493_
+-101 0
+1-00 0
+.names new_n76_ new_n75_ new_n493_ new_n494_
+-01 1
+0-1 1
+.names ctable[1] totalcoeffs[1] trailingones[0] totalcoeffs[3] new_n495_
+-100 0
+0001 0
+1011 0
+.names trailingones[0] totalcoeffs[1] new_n96_ ctable[1] new_n496_
+-101 0
+0-00 0
+.names trailingones[0] new_n480_ new_n808_ totalcoeffs[1] new_n499_
+--11 1
+11-0 1
+.names new_n499_ new_n101_ new_n500_
+11 1
+.names totalcoeffs[3] totalcoeffs[1] new_n514_ new_n704_ new_n501_
+-000 1
+1-01 1
+.names ctable[0] new_n704_ totalcoeffs[3] new_n514_ new_n502_
+---1 0
+000- 0
+.names new_n502_ new_n501_ new_n111_ new_n503_
+-11 1
+1-0 1
+.names new_n514_ new_n503_ ctable[1] new_n504_
+-10 1
+0-1 1
+.names new_n705_ totalcoeffs[2] new_n127_ new_n513_
+-11 1
+0-1 1
+.names new_n127_ new_n128_ new_n513_ ctable[1] new_n514_
+--11 1
+11-0 1
+.names trailingones[0] new_n519_ ctable[0] new_n169_ new_n515_
+0001 1
+0111 1
+1011 1
+.names new_n94_ ctable[1] new_n710_ ctable[0] new_n519_
+--00 0
+01-1 0
+.names totalcoeffs[1] new_n137_ trailingones[1] totalcoeffs[3] new_n520_
+--00 0
+-011 0
+10-- 0
+.names new_n137_ totalcoeffs[0] trailingones[1] totalcoeffs[3] new_n522_
+0011 1
+0100 1
+.names new_n138_ new_n139_ new_n42_ new_n522_ new_n523_
+--01 0
+11-- 0
+.names totalcoeffs[0] new_n151_ new_n809_ totalcoeffs[3] new_n525_
+--10 0
+11-1 0
+.names new_n73_ new_n162_ totalcoeffs[0] new_n144_ new_n526_
+--00 0
+00-- 0
+.names new_n526_ trailingones[1] totalcoeffs[1] totalcoeffs[2] new_n527_
+-001 0
+-010 0
+1--0 0
+.names new_n138_ new_n75_ new_n93_ new_n165_ new_n528_
+-100 1
+0-00 1
+.names new_n126_ totalcoeffs[1] totalcoeffs[2] trailingones[1] new_n529_
+-011 0
+-101 0
+1000 0
+.names ctable[0] new_n285_ new_n850_ new_n532_
+001 1
+.names new_n170_ totalcoeffs[4] new_n574_ new_n533_
+-00 1
+1-0 1
+.names totalcoeffs[4] new_n532_ new_n533_ ctable[2] coeff_token[1]
+--10 1
+01-1 1
+.names totalcoeffs[3] new_n59_ totalcoeffs[2] totalcoeffs[0] new_n547_
+--01 1
+-0-1 1
+0-10 1
+.names new_n72_ new_n75_ new_n185_ trailingones[0] new_n551_
+--01 0
+00-0 0
+.names new_n159_ new_n551_ ctable[1] new_n186_ new_n552_
+--10 1
+01-0 1
+.names totalcoeffs[1] ctable[0] trailingones[1] new_n233_ new_n553_
+0001 0
+1111 0
+.names new_n237_ new_n238_ new_n239_ new_n553_ new_n554_
+--01 1
+11-1 1
+.names totalcoeffs[1] ctable[0] trailingones[1] new_n233_ new_n555_
+0001 0
+1111 0
+.names new_n239_ new_n238_ new_n801_ new_n555_ new_n556_
+-101 1
+0-01 1
+.names new_n568_ new_n554_ new_n556_ new_n730_ new_n557_
+--10 1
+11-1 1
+.names trailingones[0] new_n74_ trailingones[1] new_n137_ new_n568_
+--11 0
+00-0 0
+.names new_n265_ new_n825_ new_n480_ totalcoeffs[4] new_n570_
+--01 0
+01-- 0
+.names totalcoeffs[4] new_n480_ new_n570_ ctable[1] new_n571_
+--00 0
+01-1 0
+.names new_n738_ new_n577_ totalcoeffs[4] ctable[1] new_n573_
+-001 1
+-111 1
+1--0 1
+.names new_n573_ new_n571_ trailingones[1] new_n574_
+-10 1
+1-1 1
+.names totalcoeffs[0] new_n257_ totalcoeffs[2] ctable[0] new_n575_
+--10 1
+01-1 1
+.names totalcoeffs[1] new_n575_ new_n171_ totalcoeffs[3] new_n576_
+--10 0
+11-0 0
+.names new_n258_ new_n137_ new_n253_ new_n576_ new_n577_
+-001 1
+1-01 1
+.names totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] ctable[0] new_n580_
+0011 1
+1111 1
+.names totalcoeffs[2] totalcoeffs[3] totalcoeffs[1] new_n260_ new_n581_
+0011 1
+.names totalcoeffs[1] ctable[2] totalcoeffs[0] new_n760_ new_n587_
+--11 1
+-0-0 1
+1-00 1
+.names new_n143_ totalcoeffs[3] totalcoeffs[2] new_n144_ new_n591_
+--00 0
+01-- 0
+.names trailingones[1] totalcoeffs[2] new_n162_ new_n43_ new_n595_
+--10 0
+01-0 0
+.names new_n137_ new_n162_ trailingones[1] totalcoeffs[3] new_n596_
+--11 1
+00-0 1
+.names trailingones[0] totalcoeffs[0] totalcoeffs[1] totalcoeffs[2] new_n610_
+-001 1
+-010 1
+0--0 1
+.names trailingones[1] ctable[0] trailingones[0] totalcoeffs[2] new_n617_
+-010 1
+0001 1
+.names new_n166_ new_n355_ new_n617_ new_n65_ new_n618_
+--11 0
+11-- 0
+.names new_n618_ new_n766_ totalcoeffs[1] new_n619_
+-11 1
+1-0 1
+.names new_n260_ new_n193_ totalcoeffs[3] new_n171_ new_n622_
+--10 0
+01-1 0
+.names new_n200_ new_n240_ new_n622_ new_n358_ new_n623_
+---0 0
+001- 0
+.names new_n634_ new_n641_ ctable[0] new_n763_ new_n624_
+---0 1
+001- 1
+.names new_n634_ new_n641_ new_n763_ new_n359_ new_n625_
+--00 1
+00-0 1
+.names new_n170_ new_n625_ new_n624_ ctable[2] ctoken_len[0]
+--11 1
+01-0 1
+.names ctable[1] new_n619_ new_n778_ totalcoeffs[3] new_n634_
+--10 1
+00-1 1
+.names trailingones[1] totalcoeffs[0] new_n257_ new_n166_ new_n636_
+---1 1
+011- 1
+.names totalcoeffs[3] new_n644_ ctable[1] new_n640_
+001 1
+111 1
+.names new_n640_ new_n780_ totalcoeffs[1] new_n641_
+-10 1
+1-1 1
+.names new_n257_ totalcoeffs[3] new_n259_ new_n642_
+-00 1
+1-0 1
+.names new_n84_ new_n36_ new_n642_ new_n65_ new_n643_
+--11 0
+01-0 0
+.names new_n394_ new_n643_ new_n644_
+01 1
+.names totalcoeffs[4] new_n796_ new_n445_ new_n784_ new_n647_
+0001 0
+.names new_n464_ ctoken_len[2] new_n647_ ctoken_len[1]
+-11 1
+0-1 1
+.names ctable[1] totalcoeffs[3] new_n796_ ctable[2] new_n649_
+---0 1
+000- 1
+.names new_n43_ new_n796_ ctable[0] ctable[2] new_n650_
+--11 1
+-11- 1
+1--1 1
+.names ctable[0] new_n649_ new_n650_ new_n673_ new_n651_
+--00 0
+01-1 0
+.names ctable[0] new_n169_ new_n651_ totalcoeffs[4] new_n652_
+--00 0
+01-1 0
+.names ctable[0] new_n169_ new_n652_ new_n519_ ctoken_len[2]
+--01 0
+01-0 0
+.names totalcoeffs[0] totalcoeffs[3] trailingones[1] new_n434_ new_n656_
+0001 0
+.names totalcoeffs[0] totalcoeffs[1] new_n59_ trailingones[0] new_n662_
+-0-1 0
+-00- 0
+0-01 0
+.names totalcoeffs[3] trailingones[1] trailingones[0] totalcoeffs[0] new_n670_
+-000 0
+0011 0
+1111 0
+.names new_n53_ new_n670_ new_n444_ totalcoeffs[1] new_n671_
+-100 1
+0-01 1
+.names new_n147_ trailingones[0] new_n444_ new_n672_
+-10 1
+0-0 1
+.names new_n439_ new_n671_ new_n672_ totalcoeffs[2] new_n673_
+--11 1
+01-0 1
+.names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] new_n674_
+-011 1
+0-1- 1
+01-1 1
+.names new_n623_ new_n38_ new_n673_ new_n43_ new_n676_
+---1 0
+011- 0
+.names new_n808_ new_n480_ new_n692_ new_n693_ new_n679_
+--11 0
+0100 0
+.names new_n679_ new_n692_ new_n693_ totalcoeffs[1] new_n680_
+-001 1
+-111 1
+1--0 1
+.names new_n42_ totalcoeffs[0] new_n59_ new_n53_ new_n684_
+---1 0
+001- 0
+.names totalcoeffs[0] trailingones[1] totalcoeffs[3] totalcoeffs[1] new_n690_
+-000 0
+0-01 0
+0110 0
+10-0 0
+.names trailingones[1] new_n84_ totalcoeffs[1] totalcoeffs[3] new_n691_
+--11 0
+0100 0
+.names new_n690_ new_n494_ new_n691_ ctable[0] new_n692_
+--11 1
+11-0 1
+.names new_n496_ new_n495_ new_n92_ new_n91_ new_n693_
+-101 1
+1-00 1
+.names totalcoeffs[1] trailingones[0] ctable[2] trailingones[1] new_n699_
+-000 1
+-011 1
+01-1 1
+1-00 1
+.names trailingones[0] ctable[2] trailingones[1] new_n700_
+000 0
+.names trailingones[0] totalcoeffs[1] trailingones[1] ctable[2] new_n701_
+-000 1
+-011 1
+-101 1
+1--- 1
+.names trailingones[1] ctable[2] trailingones[0] totalcoeffs[1] new_n702_
+0001 0
+0110 0
+.names new_n701_ new_n702_ totalcoeffs[0] totalcoeffs[2] new_n703_
+--11 1
+-1-1 1
+1-00 1
+.names new_n699_ new_n700_ totalcoeffs[0] new_n703_ new_n704_
+--01 1
+-1-1 1
+1-10 1
+.names totalcoeffs[0] new_n128_ trailingones[1] totalcoeffs[3] new_n705_
+-010 1
+0-10 1
+00-0 1
+.names new_n842_ new_n520_ trailingones[0] new_n523_ new_n707_
+-011 1
+0-01 1
+.names new_n707_ new_n525_ new_n711_ totalcoeffs[2] new_n708_
+--10 1
+11-0 1
+.names new_n525_ totalcoeffs[2] ctable[1] new_n707_ new_n709_
+-101 1
+1-01 1
+.names new_n709_ new_n708_ new_n94_ new_n710_
+-01 1
+1-0 1
+.names new_n529_ new_n527_ trailingones[0] new_n528_ new_n711_
+-111 1
+1-01 1
+.names new_n241_ trailingones[1] new_n730_ new_n557_ new_n712_
+--00 1
+-111 1
+0--1 1
+01-- 1
+.names totalcoeffs[0] new_n721_ totalcoeffs[3] ctable[0] new_n717_
+-011 1
+01-0 1
+1-11 1
+100- 1
+.names totalcoeffs[2] totalcoeffs[0] totalcoeffs[3] new_n552_ new_n719_
+-0-1 1
+-100 1
+0-11 1
+.names new_n547_ totalcoeffs[0] totalcoeffs[3] new_n552_ new_n720_
+-010 1
+-100 1
+1--1 1
+.names new_n720_ new_n719_ totalcoeffs[1] new_n721_
+-11 1
+1-0 1
+.names trailingones[0] ctable[1] totalcoeffs[3] ctable[0] new_n725_
+-001 1
+-100 1
+0-10 1
+1-11 1
+.names trailingones[0] totalcoeffs[3] ctable[1] ctable[0] new_n726_
+--11 0
+01-0 0
+.names ctable[1] totalcoeffs[3] trailingones[0] ctable[0] new_n727_
+--11 1
+-1-0 1
+1-00 1
+.names ctable[0] totalcoeffs[3] trailingones[0] new_n728_
+000 1
+011 1
+.names new_n727_ new_n728_ totalcoeffs[0] totalcoeffs[1] new_n729_
+--11 1
+-1-1 1
+1-00 1
+.names new_n725_ new_n726_ totalcoeffs[0] new_n729_ new_n730_
+--01 1
+-1-1 1
+1-10 1
+.names totalcoeffs[3] totalcoeffs[0] ctable[0] new_n48_ new_n736_
+0001 0
+0111 0
+.names totalcoeffs[3] totalcoeffs[0] new_n580_ new_n737_
+--0 1
+01- 1
+.names new_n581_ new_n736_ new_n737_ trailingones[0] new_n738_
+--10 1
+01-1 1
+.names new_n596_ new_n826_ trailingones[0] new_n315_ new_n741_
+-011 1
+1-01 1
+.names new_n595_ new_n591_ trailingones[0] new_n315_ new_n743_
+-111 1
+1-01 1
+.names new_n741_ new_n743_ ctable[1] new_n587_ new_n746_
+-011 0
+0-01 0
+.names new_n746_ new_n829_ ctable[0] new_n763_ new_n750_
+-111 0
+0-01 0
+.names new_n334_ new_n750_ coeff_token[2]
+01 0
+.names trailingones[0] totalcoeffs[2] trailingones[1] totalcoeffs[3] new_n755_
+-001 1
+-010 1
+0-01 1
+1111 1
+.names totalcoeffs[2] trailingones[1] trailingones[0] totalcoeffs[3] new_n756_
+-000 1
+-110 1
+0011 1
+1-01 1
+11-1 1
+.names trailingones[1] totalcoeffs[2] trailingones[0] totalcoeffs[3] new_n757_
+-0-0 1
+-111 1
+0--1 1
+1-10 1
+.names totalcoeffs[2] trailingones[0] trailingones[1] totalcoeffs[3] new_n758_
+-000 0
+-011 0
+0--1 0
+.names new_n757_ new_n758_ totalcoeffs[1] ctable[1] new_n759_
+--11 1
+-1-1 1
+1-00 1
+.names new_n755_ new_n756_ totalcoeffs[1] new_n759_ new_n760_
+--01 1
+-1-1 1
+1-10 1
+.names totalcoeffs[0] trailingones[0] new_n286_ new_n761_
+001 1
+111 1
+.names new_n610_ new_n761_ trailingones[1] new_n310_ new_n762_
+-111 1
+1-01 1
+.names ctable[0] new_n762_ ctable[2] totalcoeffs[4] new_n763_
+--00 1
+01-0 1
+.names totalcoeffs[2] trailingones[0] ctable[0] totalcoeffs[0] new_n764_
+-1-0 1
+-11- 1
+0-01 1
+.names totalcoeffs[2] trailingones[0] totalcoeffs[0] ctable[0] new_n765_
+-1-1 0
+-10- 0
+1-01 0
+.names trailingones[1] new_n764_ new_n765_ new_n766_
+-00 1
+011 1
+1-0 1
+.names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] trailingones[0] new_n774_
+-000 1
+-011 1
+0-10 1
+1101 1
+.names ctable[1] new_n233_ totalcoeffs[0] totalcoeffs[1] new_n775_
+0011 1
+.names ctable[1] new_n833_ new_n803_ new_n778_
+-10 1
+0-1 1
+.names totalcoeffs[0] totalcoeffs[2] trailingones[1] trailingones[0] new_n779_
+-000 1
+0111 1
+1-00 1
+10-1 1
+.names new_n636_ new_n779_ totalcoeffs[3] ctable[1] new_n780_
+-111 1
+1-01 1
+.names new_n116_ new_n395_ new_n834_ trailingones[1] new_n782_
+--00 1
+01-1 1
+.names new_n674_ new_n461_ new_n154_ ctable[0] new_n783_
+-111 1
+0-01 1
+.names totalcoeffs[1] new_n782_ new_n783_ new_n784_
+--0 1
+11- 1
+.names new_n656_ new_n836_ new_n425_ ctable[2] new_n786_
+--11 1
+-0-1 1
+1-00 1
+.names totalcoeffs[3] totalcoeffs[0] new_n151_ new_n662_ new_n789_
+---0 0
+001- 0
+.names new_n860_ new_n711_ ctable[1] new_n795_
+-11 1
+1-0 1
+.names ctable[1] ctable[2] new_n795_ ctable[0] new_n796_
+--00 0
+00-1 0
+.names new_n623_ new_n676_ ctable[1] ctoken_len[2] ctoken_len[3]
+--10 1
+-0-0 1
+1-01 1
+.names new_n154_ totalcoeffs[2] totalcoeffs[1] trailingones[0] new_n801_
+0001 1
+0110 1
+.names totalcoeffs[1] trailingones[0] new_n96_ totalcoeffs[0] new_n802_
+--00 0
+01-1 0
+.names totalcoeffs[1] totalcoeffs[2] trailingones[1] new_n355_ new_n803_
+-111 1
+0001 1
+.names ctable[1] trailingones[0] trailingones[1] totalcoeffs[3] new_n804_
+-110 0
+0-10 0
+0001 0
+.names ctable[1] trailingones[0] trailingones[1] new_n805_
+000 1
+011 1
+.names new_n804_ new_n805_ totalcoeffs[0] new_n806_
+-11 1
+1-0 1
+.names totalcoeffs[3] totalcoeffs[0] new_n684_ ctable[1] new_n807_
+--00 0
+01-1 0
+.names new_n807_ new_n806_ totalcoeffs[2] new_n808_
+-10 1
+1-1 1
+.names totalcoeffs[1] trailingones[0] totalcoeffs[0] new_n154_ new_n809_
+-101 1
+1011 1
+.names totalcoeffs[2] totalcoeffs[1] totalcoeffs[3] trailingones[0] new_n810_
+-100 0
+1001 0
+1010 0
+1111 0
+.names new_n721_ new_n197_ new_n205_ totalcoeffs[1] new_n814_
+-000 0
+0-00 0
+.names new_n193_ new_n721_ new_n814_ new_n207_ new_n818_
+--01 0
+01-0 0
+.names new_n717_ new_n818_ new_n848_ ctable[1] new_n819_
+--11 1
+01-0 1
+.names trailingones[0] totalcoeffs[3] ctable[0] totalcoeffs[1] new_n821_
+0111 0
+.names totalcoeffs[1] totalcoeffs[3] trailingones[0] ctable[0] new_n822_
+0001 0
+0110 0
+.names totalcoeffs[1] totalcoeffs[3] ctable[0] trailingones[0] new_n823_
+-001 0
+0-00 0
+00-1 0
+.names totalcoeffs[0] new_n823_ totalcoeffs[2] new_n824_
+--1 1
+01- 1
+.names new_n821_ new_n822_ totalcoeffs[0] new_n824_ new_n825_
+--01 1
+-1-1 1
+1-10 1
+.names new_n83_ trailingones[1] totalcoeffs[3] totalcoeffs[2] new_n826_
+-011 0
+-100 0
+1-00 0
+.names totalcoeffs[0] totalcoeffs[3] totalcoeffs[2] totalcoeffs[1] new_n827_
+-000 0
+0-10 0
+11-1 0
+.names totalcoeffs[1] totalcoeffs[0] totalcoeffs[2] totalcoeffs[3] new_n828_
+-111 1
+0-00 1
+11-1 1
+.names new_n808_ new_n827_ new_n828_ new_n829_
+-00 1
+011 1
+1-0 1
+.names totalcoeffs[0] trailingones[0] totalcoeffs[1] totalcoeffs[2] new_n830_
+-110 1
+0-10 1
+0001 1
+1101 1
+.names new_n830_ new_n774_ ctable[1] ctable[0] new_n832_
+-101 1
+1-00 1
+.names ctable[0] new_n775_ new_n832_ trailingones[1] new_n833_
+--10 1
+11-1 1
+.names totalcoeffs[0] totalcoeffs[3] totalcoeffs[2] trailingones[0] new_n834_
+-100 0
+0001 0
+0010 0
+.names totalcoeffs[2] totalcoeffs[3] new_n42_ totalcoeffs[0] new_n835_
+-000 1
+-101 1
+0-11 1
+.names totalcoeffs[0] totalcoeffs[3] new_n835_ trailingones[1] new_n836_
+--10 1
+00-1 1
+.names new_n96_ trailingones[0] new_n162_ new_n789_ new_n839_
+---0 0
+001- 0
+.names new_n476_ new_n810_ new_n41_ totalcoeffs[0] new_n841_
+-101 1
+0-00 1
+.names new_n143_ totalcoeffs[3] new_n144_ totalcoeffs[2] new_n842_
+-010 1
+-100 1
+-111 1
+1001 1
+.names totalcoeffs[0] totalcoeffs[1] totalcoeffs[3] ctable[0] new_n846_
+-101 1
+0011 1
+1-00 1
+.names totalcoeffs[3] totalcoeffs[0] totalcoeffs[1] ctable[0] new_n847_
+-101 1
+1011 1
+.names new_n846_ new_n721_ new_n847_ new_n848_
+-00 1
+0-0 1
+.names ctable[0] totalcoeffs[3] totalcoeffs[0] new_n205_ new_n849_
+--01 0
+01-1 0
+.names new_n819_ new_n849_ new_n712_ new_n850_
+-01 1
+0-1 1
+.names totalcoeffs[0] totalcoeffs[3] trailingones[0] totalcoeffs[1] new_n851_
+-100 1
+0111 1
+1011 1
+.names trailingones[0] totalcoeffs[1] totalcoeffs[0] totalcoeffs[3] new_n856_
+-001 1
+-110 1
+0-00 1
+.names new_n856_ new_n851_ trailingones[1] new_n858_
+-11 1
+1-0 1
+.names new_n858_ new_n839_ totalcoeffs[2] new_n859_
+-11 1
+1-0 1
+.names new_n711_ new_n786_ ctable[2] new_n859_ new_n860_
+--01 0
+00-0 0
+.end
