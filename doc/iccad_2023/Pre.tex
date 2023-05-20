@@ -6,22 +6,35 @@
 %%   \end{center}
 %%   %\vspace*{-1cm}
 %% \end{figure}
-\begin{figure*}[t]
-  \label{fig-maslov-decomp}
-  \begin{center}
-    \input{img/fig-maslov-decomp}
-    \caption{A Toffoli Gate Decomposition from ~\cite{bib-rtof-maslov}}
-  \end{center}
+%% \begin{figure*}[t]
+%% \end{figure*}
+%% \begin{figure}[t]
+%%   \label{fig-bool-or}
+%% \end{figure}
+%% \begin{figure}[t]
+%%   \label{fig-bool-and}
+%% \end{figure}
+
+
+\begin{figure*}[ht]
+  \begin{minipage}{.46\textwidth}
+
+    \begin{center}
+      \input{img/lut_network}
+      \caption{A Boolean Logic Network}
+      \label{fig-lut-network}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{.46\linewidth}
+    \begin{center}
+      \input{img/fig-urtof}
+    \end{center}
+    \caption{U-controlled RTOF gate}
+    \label{fig-urtof}
+  \end{minipage}
+  \vspace*{0.25cm}
 \end{figure*}
-\begin{figure}[t]
-  \label{fig-bool-or}
-\end{figure}
-\begin{figure}[t]
-  \label{fig-bool-and}
-\end{figure}
-
-
-
+\vspace*{0.25cm}
 \section{Preliminary}
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
@@ -30,37 +43,11 @@ In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that i
 
 We denote the primary inputs of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ primary inputs. Each qubit state in a circuit consisting of Toffoli and RTOF gates can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
 
-
-
-
- \subsection{Boolean Constructions}
- \label{Sec:bool-const}
-We will be using a few common constructions to realize certain Boolean operations as quantum circuits. Fig.~\ref{fig-bool-or} depicts how putting the output of two Toffoli or CNOT gates in series on the same output qubit will create a Boolean sum of their controls, while ~\ref{fig-bool-and} depicts how putting their outputs in parallel on the controls of a Toffoli gate will produce their Boolean product on the Toffoli gate's output (assuming a clean ancilla). We will be using these facts in the next section. 
-
-\begin{figure*}[t]
-  \begin{minipage}{.46\textwidth}
-    \label{fig-lut-network}
-    \begin{center}
-      \input{img/lut_network}
-      \caption{A Boolean Logic Network}
-    \end{center}
-  \end{minipage}
-  \begin{minipage}{0.46\textwidth}
-
-    \begin{center}
-      \input{img/fig-lut-network}
-      \caption{The Boolean Quantum Circuit implementing Fig. \ref{fig-lut-network} }
-      \label{fig-lut-qc}
-    \end{center}
-  \end{minipage}
-
-\end{figure*}
-
 \subsection{Relative-Phase Boolean Functions}
 
-A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov} has two control bits and one target bit. It inverts the basis state of the target bit (i.e., $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the both control bits are $\ket{11}$. A Toffoli gate consists of 7 T gates as shown in Fig.~\ref{toffoli} whereas an RTOF consists of 4 T gates as shown in Fig.~\ref{rtof}. One may notice that the version of the RTOF that is used here is similar to the n-controlled-iX gate from ~\cite{bib-selinger-rtof} for $n=2$, with one less CNOT gate. As noted in ~\cite{bib-rtof}, removing this gate only affects the phase, so it only transforms an RTOF gate into another RTOF gate. We will subsume this
+A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov} has two control bits and one target bit. It inverts the basis state of the target bit (i.e., $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the both control bits are $\ket{11}$. A Toffoli gate consists of 7 T gates as shown in Fig.~\ref{fig-toffoli} whereas an RTOF consists of 4 T gates as shown in Fig.~\ref{fig-rtof}. One may notice that the version of the RTOF that is used here is similar to the n-controlled-iX gate from ~\cite{bib-selinger-rtof} for $n=2$, with one less CNOT gate. As noted in ~\cite{bib-rtof}, removing this gate only affects the phase, so it only transforms an RTOF gate into another RTOF gate. We will subsume this
 
-As depicted in Fig.~\ref{rtof}, an RTOF has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Table~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
+As depicted in Fig.~\ref{fig-rtof}, an RTOF has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Table~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
 
 One of the results from ~\cite{bib-rtof} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
 
@@ -70,7 +57,9 @@ A {\it Boolean Logic Network} is a simple dag whose vertices are primary inputs,
 
 A node {\it n} has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes of the network without fanouts. 
 
-A logic function can be decomposed into such a Boolean Logic Network, and its nodes subsequently implemented as LUTs or logic gates.
+A logic function can be decomposed into such a Boolean Logic Network, and its nodes subsequently implemented as LUTs or logic gates. We see an example in ~\ref{fig-lut-network}
+
+\vspace*{0.25cm}
 
 \section{Existing Research and Motivation}
  \label{Sec:Exist}
@@ -79,9 +68,11 @@ A logic function can be decomposed into such a Boolean Logic Network, and its no
 As noted in the introduction, several works have already
 Existing research ~\cite{bib-rtof-maslov} ~\cite{bib-selinger-rtof} finds an advantage to using RTOFs in synthesizing and decomposing logic functions, particularly Multiply-Controlled Toffoli Gates (MCTs).
 
-In particular, Maslov posits the decomposition depicted in ~\ref{fig-maslov-decomp}
+In particular, Maslov posits the decomposition depicted in ~\ref{fig-maslov-decomp}. Here $U$ is a unitary implemented up to a relative phase.
 
-For the sake of brevity, we will only detail their results here that we will use.
+However, 
+
+To summarize:
 \begin{itemize}
 \item Replacing pairs of computing and uncomputing gates with RTOF and its inverse will lead to T gate savings in most cases
 \item Using the above, it is possible to use clean-ancilla to decompose an MCT with fewer T gates than the known methods.

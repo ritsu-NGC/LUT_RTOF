@@ -1,24 +1,7 @@
-\section{Experimental Results}
-\label{Sec:exp}
-\subsection{Methodology}
-
-Boolean functions are taken from the EPFL Combinational Benchmark Suite \cite{bib-abc} which consist of a LUT-network with LUT size of at most 6 variables. We choose 6 because, as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic.
-
-The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
-
-These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the Proposed method for any output node that requires an exact implementation.
-
-The table below uses three sets of Numbers: vsLUTXESOP compares the T-count of the Proposed method for each X-input LUT size with synthesizing each LUT using ESOP based methods. This measures the effectiveness of the Shannon Decomposition Method in replacing exact logic. We also measure vsLUT6ESOP which compares the Proposed method for different LUT-sizes with the ESOP Method for 6 input LUT (LUT6). Comparing to LUT6 gives us a measure of the effect of LUT-size on the overall T-count. Finally, we also measure the execution time ExecTime in seconds of each method. 
-
-\subsection{Analysis}
-
-We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2015. Looking at the LUTXESOP numbers, it is not always clear that at smaller LUT-sizes, the Shannon Decomposition Method produces much fewer T-gates than the equivalent ESOP method, but looking at vsLUT6ESOP, we see using both the Shannon Decomposition Method in conjunction with smaller LUT-sizes yields a clear advantage in most of the cases we see. 
-
-
-
-\begin{table*}[t]
+\begin{table*}[ht]
   \begin{center}
     \caption{Experimental Results}
+    \label{table-results}
     \scalebox{1.0}{ 
       \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
         \hline
@@ -35,7 +18,34 @@ We see that in most cases the proposed method is better than the naive method. H
       \end{tabular}
     }
   \end{center}
+\vspace*{0.75cm}
 \end{table*}
+
+\vspace*{0.5cm}
+\section{Experimental Results}
+\label{Sec:exp}
+\subsection{Methodology}
+
+Boolean functions are taken from the EPFL Combinational Benchmark Suite \cite{bib-epfl} and generated using the abc tool ~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic.
+
+The Shannon Decomposition algorithm uses the Tulip Control BDD library ~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+
+These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Grey-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the Proposed method for any output node that requires an exact implementation.
+
+As in ~\cite{bib-barenco-elementary}, we note that for values of $n<7$, a direct implementation of the Toffoli gate (i.e. using a Grey-code sequence of operations) the number of gates to implement each MCT gate scales with $2^{n-1}$
+
+Our experimental results in Table ~\ref{table-results} use three sets of Numbers: vsLUTXESOP compares the T-count of the Proposed method for each X-input LUT size with synthesizing each LUT using ESOP based methods. This measures the effectiveness of the Shannon Decomposition Method in replacing exact logic. We also measure vsLUT6ESOP which compares the Proposed method for different LUT-sizes with the ESOP Method for 6 input LUT (LUT6). Comparing to LUT6 gives us a measure of the effect of LUT-size on the overall T-count. Finally, we also measure the execution time ExecTime in seconds of each method. 
+
+\subsection{Analysis}
+
+We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2015.
+
+Qualitatively, a common trend among circuits that seem to have diminished gains in their vsLUTXESOP numbers is that they have large numbers of highly complex, maximum width gates. This means more complex BDDs, and because the cost of the Shannon Decomposition scales exponentially with the number of nodes. This will close the gap with the ESOP method. This is the case with bar\_size\_2015, where the vast majority of its gates are at the maximum LUT-size, leading to losing out to ESOP across the board. Others, such as dec\_size\_2018.blif, instead have maximum width but minimum complexity (i.e. single MCT gate) Boolean functions. As the Boolean method performs worse than synthesizing these gates directly using Grey-code, this will lead to a diminished advantage. Finally, a larger share of output nodes to intermediate nodes also contributes, as the method is identical between the two. The balance between all of these elements seems to be the key in maximizing the advantage the Proposed Method has over direct synthesis methods. An interesting future topic of research would be to find how to produce LUT networks that maximize this advantage.
+
+Looking at the LUTXESOP numbers, it is apparent that at smaller LUT-sizes, the Shannon Decomposition Method produces a much clearer advantage over the direct method. Additionally, looking at vsLUT6ESOP, we see using both the Shannon Decomposition Method in conjunction with smaller LUT-sizes yields a clear advantage in almost all of the cases we see. While this yields an advantage in T-count, keep in mind that the required ancilla increases. Even if we use dirty ancilla, trading T-gates for logical qubits, enough dirty ancilla will result in congestion in a real system, leading to increased gate counts that could effectively trade T-gates for CNOTs, and thus T-gates for an increased error-rate. A future topic of research could possibly look into an implementation hardware aware version of this algorithm that considers these resources at the time of synthesis of the LUT-network.
+
+
+
 %% \begin{table*}[t]
 %%   \large
 %%    \begin{center}
