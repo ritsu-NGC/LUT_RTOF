@@ -2,47 +2,102 @@
   \begin{center}
     \caption{Experimental Results}
     \label{table-results}
-    \scalebox{0.9}{ 
-      \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
+%    \scalebox{0.9}{ Rudel
+      \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
         \hline
-        & vsLUTXESOP(\%) &  &  & & vsLUT6ESOP(\%)   &  & & ExecTime(s)   &  & & \\ \hline
-        Circuit & LUT6 & LUT5 & LUT4 & LUT3 & LUT5 & LUT4 & LUT3 & LUT6 & LUT5 & LUT4 & LUT3 \\ \hline
-        priority\_size\_2022 & 73.25 & 8.91 & 38.78 & 38.31 & 48.62 & 80.66 & 84.00 & 14.97 & 8.07 & 5 & 0.79 \\ \hline
-        int2float\_size\_2022 & 5.84 & 18.07 & 18.54 & 6.03 & 6.27 & 60.02 & 64.66 & 13.31 & 4.02 & 6 & 0.87 \\ \hline
-        i2c\_size\_2022 & 5.73 & 2.1 & 22.35 & 15.09 & 31.99 & 69.31 & 76.66 & 115 & 33.35 & 19.73 & 12.36 \\ \hline
-        dec\_size\_2018 & -0.11 & 17.97 & 23.05 & 20.2 & 59.31 & 68.51 & 84.18 & 12 & 7.03 & 18.72 & 21.09 \\ \hline
-        ctrl\_size\_2022 & 0.63 & 3.81 & 38.89 & 40.8 & -12.28 & 48.78 & 59.47 & 10 & 5.57 & 3.21 & 1.11 \\ \hline
-        cavlc\_size\_2022 & 36.53 & 25.68 & 38.61 & 30.84 & 40.28 & 70.22 & 71.37 & 77 & 31.92 & 2.27 & 2.23 \\ \hline
-        bar\_size\_2015 & -615.00 & -49.74 & -581.92 & -533.33 & -40.41 & 78.78 & 78.8 & 410.26 & 215.09 & 29.92 & 35.28 \\ \hline
-        arbiter\_size\_2022 & 65.15 & 6.43 & 35.12 & 39.59 & 36.58 & 73.03 & 83.37 & 54 & 49.48 & 10.00 & 21.09 \\ \hline
+          Circuit & \multicolumn{4}{c}{ESOP-based method}  &  \multicolumn{4}{|c|}{Proposed method} &  \multicolumn{4}{c}{CPU time of the proposed method (sec)}  \\ \cline{2-13}
+        %Circuit & LUT6 (T-count) & LUT5 (ratio) & LUT4 (ratio) & LUT3  (ratio) & LUT6 (ratio) & LUT5 (ratio) & LUT4 (ratio) & LUT3  (ratio) & LUT6 (\%) & LUT5 (\%) & LUT4 (\%) & LUT3 (\%) \\ \hline
+                & LUT6 (T-count) & LUT5 & LUT4 & LUT3 & LUT6 & LUT5 & LUT4 & LUT3    & LUT6 (s) & LUT5 (s) & LUT4 (s) & LUT3 (s) \\ \hline
+    priority\_size\_2022 & 98664 & 0.56 & 0.32 & 0.26 & 0.27 & 0.51 & 0.19 & {\bf 0.16}   & 14.97 & 8.07 & 5.01 & 0.79 \\ \hline
+   int2float\_size\_2022 & 22592 & 1.14 & 0.49 & 0.38 & 0.94 & 0.94 & 0.4  & {\bf 0.35}   & 13.31 & 4.02 & 6.03 & 0.87 \\ \hline
+         i2c\_size\_2022 & 89288 & 0.69 & 0.4  & 0.27 & 0.94 & 0.68 & 0.31 & {\bf 0.23}  & 115.00 & 33.35 & 19.73 & 12.36 \\ \hline
+         dec\_size\_2018 & 57344 & 0.5  & 0.41 & 0.2  & 1    & 0.41 & 0.31 & {\bf 0.16} & 12.23 & 7.03 & 18.72 & 21.09 \\ \hline
+         ctrl\_size\_2022 & 7560 & 1.17 & 0.84 & 0.68 & 0.99 & 1.12 & 0.51 & {\bf 0.41} & 10.17 & 5.57 & 3.21 & 1.11 \\ \hline
+      cavlc\_size\_2022 & 116896 & 0.8  & 0.49 & 0.41 & 0.63 & 0.6  & 0.3  & {\bf 0.29} & 77.91 & 31.92 & 2.27 & 2.23 \\ \hline
+        bar\_size\_2015 & 176400 & 0.94 & {\bf 0.03}  & {\bf 0.03} & 7.15 & 1.4  & 0.21 & 0.21 & 410.26 & 215.09 & 29.92 & 35.28 \\ \hline
+    arbiter\_size\_2022 & 175640 & 0.68 & 0.42 & 0.28 & 0.35 & 0.63 & 0.27 & {\bf 0.17} & 53.63 & 49.48 & 10.00 & 21.09 \\ \hline
+        adder\_size\_2022 & 4992 & 9.75 & 6.38 & 1.94 & {\bf 1}    & 7.16 & 4.06 & 2.54 & 144.37	& 98.02	& 40.37 & 33.56 \\\hline
       \end{tabular}
-    }
+%   }
   \end{center}
-\vspace*{0.25cm}
+%\vspace*{0.25cm}
 \end{table*}
 
-\vspace*{0.5cm}
+%\vspace*{0.5cm}
 \section{Experimental Results}
 \label{Sec:exp}
 \subsection{Methodology}
 
-Boolean functions are taken from the EPFL Combinational Benchmark Suite \cite{bib-epfl} and generated using the ABC tool ~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in ~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit ~\cite{bib-qiskit}, including any uncomputation logic.
+Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and generated using the ABC tool~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
 
-The Shannon Decomposition algorithm uses the Tulip Control BDD library \cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm ~\cite{bib-pkrm}.
+The Shannon Decomposition algorithm uses the Tulip Control BDD library~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm~\cite{bib-rudell}).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
 
-These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
+These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
 
-As in ~\cite{bib-barenco-elementary}, we note that for values of $n<7$, a direct implementation of the Toffoli gate (i.e. using a Gray-code sequence of operations) the number of gates to implement each MCT gate scales with $2^{n-1}$.
+As in~\cite{bib-barenco-elementary}, we note that for values of $n<7$, a direct implementation of the Toffoli gate (i.e. using a Gray-code sequence of operations) the number of gates to implement each MCT gate scales with $2^{n-1}$.
 
-Our experimental results in Table ~\ref{table-results} use three sets of Numbers: vsLUTXESOP is the ratio of the difference between the T-count of synthesizing using the proposed method and the ESOP method for each maximum LUT-size (LUTX), and the T-count of the ESOP method for that LUT-size. It compares the T-count of the proposed method for each X-input LUT size with synthesizing each LUT using ESOP based methods. This measures the effectiveness of the Shannon Decomposition Method in replacing exact logic. We also measure vsLUT6ESOP whichis a similar number, which takes of the T-count of the proposed method for each size and measures the ratio of its difference with the T-count of the ESOP method for the 6-input maximum LUT case (LUT6) vs the T-count of that ESOP method. Comparing to LUT6 gives us a measure of the effect of LUT-size on the overall T-count. Finally, we also measure the execution time ExecTime in seconds of each method. 
+Our experimental results are displayed in
+Table~\ref{table-results}. We compare the ratio of the T-count for
+each mapped LUT-size generated by either the ESOP-based method or the proposed 
+method to that of the LUT6 in the second column generated by the
+ESOP-based method as a baseline.  
+%In addition to comparing the numbers for each LUT map size
+%with the proposed method to this baseline, we also include the numbers
+%for their counterparts generated by the ESOP method, to measure the
+%overall effect of decreasing the LUT-size on the T-count.
+Recall that in the previous paragraph, we noted that the cost of each relative
+phase LUT scales with $2^n$. This measures the contribution of
+decreasing the LUT-size at the cost of increasing the number of gates 
+and ancilla used. Finally, we also measure the execution time in
+seconds of our proposed method of for each LUT-size. 
+
+%Our experimental results in Table~\ref{table-results} use three sets of Numbers: vsLUTXESOP is the ratio of the difference between the T-count from using the proposed method and the ESOP method for each maximum LUT-size (LUTX), and that from using the ESOP method for that LUT-size i.e. $Tcount(LUTX_{ESOP}) - Tcount(LUTX_{prop}) / Tcount(LUTX_{ESOP})$ (displayed as \%). It compares the T-count of the proposed method for each X-input LUT size with synthesizing each LUT using ESOP based methods. This measures the effectiveness of the Shannon Decomposition Method in replacing exact logic. We also display a similar measure vsLUT6ESOP, which takes of the T-count of the proposed method for each size and measures the ratio of its difference with the T-count of the ESOP method for the 6-input maximum LUT case (LUT6) vs the T-count of that ESOP method i.e. $Tcount(LUT6_{ESOP}) - Tcount(LUTX_{prop}) / Tcount(LUT6_{ESOP})$ (displayed as \%). Because the Shannon decomposition method scales with $2^n$, comparing to the LUT6 ESOP numbers gives us a measure of the overall effectiveness of the algorithm at different LUT-sizes, integrating effects that the LUT-size might have on the overall cost of the circuit. Finally, we also measure the execution time ExecTime in seconds of each method. 
 
 \subsection{Analysis}
+In Table~\ref{table-results}, the best result for each circuit is written in bold; we see that in most cases the proposed method with LUT-size is three is the best. However, there remain cases where the proposed method underperforms the ESOP implementation, such as bar\_size\_2015. 
+Qualitatively, a common trend among circuits that seem to have similar 
+numbers between the proposed and ESOP-based methods is that they have large
+numbers of highly complex, maximum width gates. This means more
+complex BDDs, and because the cost of the Shannon decomposition scales 
+exponentially with the number of nodes, this will close the gap with 
+the ESOP-based method. This is the case with bar\_size\_2015, where
+the vast majority of its gates are at the maximum LUT-size, leading to
+losing out to ESOP across the board. Others, such as dec\_size\_2018,
+instead have maximum width but minimum complexity (i.e., a single MCT gate)
+Boolean functions. As our proposed method may perform worse than
+synthesizing these gates directly using Gray-code, this will lead to a
+diminished advantage. Finally, a larger share of output nodes to 
+intermediate nodes also contributes, as the method is identical 
+between the two. A particularly interesting case is 
+adder\_size\_2022. At LUT6, this circuit's Boolean logic network can
+fit all of the logic for each bit into a single node, so there is no 
+need to generate any intermediate nodes; therefore, every single LUT 
+is generated identically to the ESOP-based method i.e., a ratio of
+1. However, moving onto LUT5, we see an immediate jump in the numbers, 
+ostensibly because of the $2^n$ proportionality. We thereafter see a 
+drop in the ratio, though it still underperforms the ESOP-based method
+even when LUT-size is 3. 
 
-We see that in most cases the proposed method is better than the naive method. However, there remain cases where the proposed method underperforms a naive implementation, such as bar\_size\_2015.
 
-Qualitatively, a common trend among circuits that seem to have diminished gains in their vsLUTXESOP numbers is that they have large numbers of highly complex, maximum width gates. This means more complex BDDs, and because the cost of the Shannon Decomposition scales exponentially with the number of nodes. This will close the gap with the ESOP method. This is the case with bar\_size\_2015, where the vast majority of its gates are at the maximum LUT-size, leading to losing out to ESOP across the board. Others, such as dec\_size\_2018.blif, instead have maximum width but minimum complexity (i.e. single MCT gate) Boolean functions. As the Boolean method performs worse than synthesizing these gates directly using Grey-code, this will lead to a diminished advantage. Finally, a larger share of output nodes to intermediate nodes also contributes, as the method is identical between the two. The balance between all of these elements seems to be the key in maximizing the advantage the proposed Method has over direct synthesis methods. An interesting future topic of research would be to find how to produce LUT networks that maximize this advantage.
+The balance between all of these elements seems to be the key in
+maximizing the advantage the proposed method has over direct synthesis 
+methods. An interesting future topic of research would be to find how
+to produce LUT networks that maximize this advantage.  
+Looking further, it is apparent that at smaller LUT-sizes, the Shannon 
+decomposition method produces a much clearer advantage over the direct
+method. Additionally, we see using both the Shannon decomposition 
+method in conjunction with smaller LUT-sizes yields a clear advantage 
+in almost all of the cases we see. While this yields an advantage in 
+T-count, keep in mind that the required ancilla increases. Even if we 
+use dirty ancilla, trading T-gates for logical qubits, enough dirty 
+ancilla will result in congestion in a real system, leading to 
+increased gate counts that could effectively trade T-gates for CNOTs, 
+and thus T-gates for an increased error-rate. A future topic of 
+research could possibly look into an implementation hardware aware
+version of this algorithm that considers these resources at the time
+of synthesis of the LUT-network.
 
-Looking at the LUTXESOP numbers, it is apparent that at smaller LUT-sizes, the Shannon Decomposition Method produces a much clearer advantage over the direct method. Additionally, looking at vsLUT6ESOP, we see using both the Shannon Decomposition Method in conjunction with smaller LUT-sizes yields a clear advantage in almost all of the cases we see. While this yields an advantage in T-count, keep in mind that the required ancilla increases. Even if we use dirty ancilla, trading T-gates for logical qubits, enough dirty ancilla will result in congestion in a real system, leading to increased gate counts that could effectively trade T-gates for CNOTs, and thus T-gates for an increased error-rate. A future topic of research could possibly look into an implementation hardware aware version of this algorithm that considers these resources at the time of synthesis of the LUT-network.
+
 
 
 
