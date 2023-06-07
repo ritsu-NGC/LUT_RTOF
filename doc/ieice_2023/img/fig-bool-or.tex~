@@ -1,0 +1,8 @@
+\Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }    & & \qw              & \qw               & \qw                     & \qw     & \qw                      & \multigate{3}{f} & \qw               & \qw      & \qw                       & \qw                & \qw \\
+          \push{{x}_{1} }    & & \qw              & \qw               & \qw                     & \qw     & \qw                      & \ghost{f}        & \qw               & \qw      & \qw                       & \qw                & \qw \\
+          \push{\vdots}     & &                  &                   & \push{\vdots}           &          &  \push{\vdots}          &                  & \push{\vdots}     &          &                            & \push{\vdots}     &    \\
+          \push{{x}_{n} }    & & \qw              & \qw               & \qw                     & \ctrl{1} & \qw                     & \ghost{f}        & \qw               & \ctrl{1} & \qw                        & \qw               & \qw \\
+          \push{{\ket{0}}}  & & \qw              & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \targ   & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} & \qw \\
+}
+

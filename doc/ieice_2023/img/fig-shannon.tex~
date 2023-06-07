@@ -1,0 +1,10 @@
+\Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{3}{F} & \qw  & \qw & &         & & \qw               & \qw                     & \multigate{3}{g} & \qw                     & \multigate{3}{f} & \qw               & \qw                       & \qw \\
+          \push{{x}_{1} }     & & \ghost{F}        & \qw  & \qw & &         & & \qw               & \qw                     & \ghost{g}\qw     & \qw                     & \ghost{f}        & \qw                & \qw                       & \qw \\
+          \push{\vdots}      & &                  &      & \qw & &\push{=} & &                    & \push{\vdots}           &                  &  \push{\vdots}          &                  & \push{\vdots}     &                          & \push{\vdots} \\
+          \push{{x}_{k} }     & & \ghost{F}        & \qw  & \qw & &         & & \qw               & \qw                     & \ghost{g}\qw     & \qw                     & \ghost{f}        & \qw                & \qw                       & \qw \\
+          \push{\vdots}      & &                  &      & \qw & &\push{=} & &                    & \push{\vdots}           &                  &  \push{\vdots}          &                  & \push{\vdots}     &                          & \push{\vdots} \\
+          \push{{x}_{n} }     & & \ghost{F}        & \qw  & \qw & &         & & \qw               & \qw                     & \ghost{g}\qw     & \qw                     & \ghost{f}        & \qw                & \qw                       & \qw \\  
+          \push{{\ket{0}}   }& & \targ\qwx[-1]    & \qw  & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} \\
+}
+
