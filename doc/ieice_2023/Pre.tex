@@ -79,7 +79,7 @@ Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advan
 
 In particular, Maslov proposes the decomposition depicted in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $U$ is a unitary operation implemented up to a relative phase.
 
-Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase, which, combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
+Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
 \begin{figure*}[t]
   \begin{minipage}{0.46\linewidth}
     \begin{center}
@@ -116,13 +116,13 @@ Maslov further posits a way to construct $n$-input RTOF gates by replacing the m
 To summarize:
 \begin{itemize}
 \item Replacing pairs of computing and uncomputing gates with RTOF gate and its inverse will lead to T gate savings in most cases.
-\item Using the above, it is possible to use clean-ancilla to decompose an MCT with fewer T gates than the known methods.
+\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
 \item A recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
 \label{Sec:lhrs}
-Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate, and then cascades them together to create the output. Because the U-controlled NOT gates act on ancillas, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate, and then cascades them together to create the output. Because the U-controlled NOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
 
 
 %%% Local Variables:

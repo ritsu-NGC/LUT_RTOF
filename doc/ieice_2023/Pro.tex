@@ -41,11 +41,11 @@ Recall the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cd
 
 As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$. This means that we can implement this function as a series of Toffoli gates. Generalizing to UCNOT gates, we get the construction shown in Fig.~\ref{fig-bool-or}.
 
-First, from the Shannon decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As with any Shannon decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and we get the construction as shown in Fig.~\ref{fig-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each UCNOT in it with one half of the Shannon decomposition that we just made. As noted in Section~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we are left with a simple CNOT as our U-controlled NOT expression.
+First, from the Shannon decomposition ~$f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As with any Shannon decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and we get the construction as shown in Fig.~\ref{fig-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each UCNOT in it with one half of the Shannon decomposition that we just made. As noted in Section~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of the Shannon decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we are left with a simple CNOT as our U-controlled NOT expression.
 
 If it is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of the Shannon decomposition evaluations to either ``True'' or ``False'', we can merely replace it with a NOT gate or an identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the function. As we will see in the next example, we can express the relative-phase Toffoli gate construction in~\cite{bib-amy-phase-state} as a special case of this construction
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. Because the Shannon decomposition will now evaluate to either $x_k \cdot F_{x=1} + \bar{x}$ or $x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled CNOT gate. 
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. Because the Shannon decomposition will now evaluate to either $x_k \cdot F_{x=1} + \bar{x}$ or $x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
 %The reader may note at this point that this gate order is NOT symmetric i.e. the CNOT and the RTOF do not commute with each other. However, because the difference is entirely in phase space, and since this will just be reversed in the uncomputation logic, we treat them as interchangeable.
 %% \begin{example}
 %%   \label{ex-rtof}
@@ -102,11 +102,11 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
 
 \subsection{Shannon Decomposition Cost and BDD representation}
 
-As is already apparent from the diagram, each variable that the function is dependent on roughly doubles the T-count, such that the total cost $C \propto 2^n$. This is in line with Barenco et. al.~\cite{bib-barenco-elementary}, who posit that the T-count of a gate is exponential with respect to the number of inputs in the absence of ancilla. As can also be seen from the diagram, each level has a linear dependence on the number of nodes at each level, so the relative complexity of the function also factors into the cost. In an environment where dirty ancilla are assumed to be plentiful, it is therefore desireable to limit these implementations to smaller numbers of input qubits i.e., smaller LUT-sizes.
+As is already apparent from the diagram, each variable that the function is dependent on roughly doubles the T-count, such that the total cost $C \propto 2^n$. This is in line with Barenco et. al.~\cite{bib-barenco-elementary}, who posit that the T-count of a gate is exponential with respect to the number of inputs in the absence of ancilla. As can also be seen from the diagram, the cost at each level is linearly proportional on the number of nodes at each level, so the relative complexity of the function also factors into the cost. In an environment where dirty ancilla are assumed to be plentiful, it is therefore desireable to limit these implementations to smaller numbers of input qubits i.e., smaller LUT-sizes.
 
 As can already be seen, the Shannon decomposition method lends itself naturally to representation by Binary Decision Diagrams (BDDs). Representing our Boolean functions as BDDs gives us an easy way to traverse down the Shannon decomposition tree merely by traversing the BDD in the same direction and feeding the next node in the traversal as your input function to the next iteration of the recursive loop.
 
-One other thing that this means is that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is easy to estimate the T-gate cost of the function by multiplying the number of nodes at each level $n$ by 2. 
+This also means that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is easy to estimate the T-gate cost of the function by multiplying the number of nodes at each level $n$ by 2. 
 
 %% \begin{example}
 %%   \label{ex-cost}
@@ -129,6 +129,7 @@ One other thing that this means is that there is now a direct way of calculating
 
 This now gives us a way of optimizing our circuit. Recall that we discuss variable orders earlier. Because the cost of the decomposed circuit scales directly with the BDD, it is enough to find a variable order that minimizes the number of nodes in the BDD and to simply use that. Further, since the Shannon decomposed branches are now independent of each other, we can choose a different variable order for every succeeding level, and minimize the corresponding circuit as we go along.
 %\vspace{-1cm}
+\setlength{\textfloatsep}{0pt}
 \begin{algorithm}[tbp]
   \caption{shannon\_decomp(BF: a Boolean function)}
   \label{algo-shannon}
@@ -170,6 +171,7 @@ This now gives us a way of optimizing our circuit. Recall that we discuss variab
     \EndIf
     \EndFor
   \end{algorithmic}
+%\vspace*{-0.25cm}
 \end{algorithm}
 
 \begin{figure*}[h]
@@ -194,7 +196,7 @@ This now gives us a way of optimizing our circuit. Recall that we discuss variab
 \end{figure*}
 %\vspace*{-0.25cm}
 
-Knowing this, we are now ready to propose our algorithm to generate an arbitrary Boolean function up to a relative phase in Algorithm~\ref{algo-shannon}. First we convert the target Boolean function to a BDD. We then find a suitable variable order that minimizes the number of nodes in the BDD (We leave the calculation up to the implementation depending on the scale of the problem. We present a solution in Section~\ref{Sec:exp} that works for the problems we used in our experiments, but this is not meant to be a part of the main algorithm). We then proceed with our Shannon decomposition recursively in the variable order. However, we reevaluate the optimality of the BDD order at every level and rearrange the variables depending on which minimizes the function. The algorithm terminates when all branches reach either leaves or True/False.
+Knowing this, we are now ready to propose our algorithm to generate an arbitrary Boolean function up to a relative phase in Algorithm~\ref{algo-shannon}. First we convert the target Boolean function to a BDD. We then find a suitable variable order that minimizes the number of nodes in the BDD (We leave the calculation up to the implementation depending on the scale of the problem. We present a solution in Section~\ref{Sec:exp} that works for the problems we used in our experiments, but this is not meant to be a part of the main algorithm). We then proceed with our Shannon decomposition recursively in the variable order. However, we reevaluate the optimality of the BDD order at every level and rearrange the variables depending on which minimizes the subfunction. The algorithm terminates when all branches reach either leaves or True/False.
 
 
 
