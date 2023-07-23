@@ -22,7 +22,7 @@
       \label{fig-rtof}
     \end{center}
   \end{minipage}
-  \vspace*{0.25cm}
+  %\vspace*{0.25cm}
 \end{figure*}
 
     % ToffoliゲートとRTOFゲートの違いは，
@@ -33,7 +33,7 @@
       % $+\frac{\pi}{2}, +\pi, -\frac{\pi}{2}$だけ変化する．
 \begin{figure*}[ht]
   \def\@captype{table}
-  \begin{minipage}[ht]{.32\textwidth}
+  \begin{minipage}[ht]{.31\textwidth}
     \begin{center}
        %\scalebox{0.7}[1]{
         \begin{tabular}{c|c}      \hline
@@ -51,24 +51,29 @@
         \captionof{table}{Added phases by an RTOF.}
         \label{table-rtof}
   \end{minipage}
-  \begin{minipage}[ht]{.32\textwidth}
+  \hspace{0.1cm}
+  \begin{minipage}[ht]{.31\textwidth}
     \begin{center}
       \includegraphics[width=5cm]{img/toffoli-f.eps}
       \caption{Functional representations for the output of a Toffoli gate.}
       \label{toffoli-f}
     \end{center}
   \end{minipage}
-  \begin{minipage}{0.32\textwidth}
+  \hspace{0.1cm}
+  \begin{minipage}{0.31\textwidth}
     \begin{center}
 
       \begin{center}
-        \input{img/fig-maslov-decomp}
+        \scalebox{0.9} {
+            \input{img/fig-maslov-decomp}
+        }
         \caption{A Toffoli Gate Decomposition from~\cite{bib-rtof-maslov}}
         \label{fig-maslov-decomp}
       \end{center}
     \end{center}
   \end{minipage}
-  \vspace*{0.25cm}  
+  %\vspace*{0.25cm}  
+  \vspace*{-0.25cm}
  \end{figure*}
 
 \section{Introduction}
@@ -90,7 +95,7 @@ Our research seeks to leverage recent results in relative phase implementations 
 \noindent {\bf Our Contribution.} 
 We propose a method that reduces the number of T-gates in a quantum Boolean circuit by exploiting relative phase Boolean functions. Among our contributions:
 \begin{itemize}
-\item A novel method to synthesize a Boolean function up to a relative phase by utilizing relative phase constructions and Shannon decomposition.
+\item A novel method to synthesize a Boolean function up to a relative phase by utilizing relative phase constructions and Shannon's decomposition.
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the above method to reduce T-count.
 
 \end{itemize}
