@@ -79,7 +79,7 @@ Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advan
 
 In particular, Maslov proposes the decomposition depicted in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $U$ is a unitary operation implemented up to a relative phase.
 
-Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase, which, combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
+Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
 \begin{figure*}[t]
   \begin{minipage}{0.46\linewidth}
     \begin{center}
@@ -87,7 +87,7 @@ Maslov further posits a way to construct $n$-input RTOF gates by replacing the m
         \input{img/fig-f-dot-g-in}
       }
     \end{center}
-    \caption{Generalization of Fig.~ref{fig-urtof}, which also implements the Boolean product of two functions}
+    \caption{Generalization of Fig.~\ref{fig-urtof}, which also implements the Boolean product of two functions}
     \label{fig-f-dot-g}
   \end{minipage}
   \begin{minipage}{0.46\linewidth}
@@ -116,13 +116,29 @@ Maslov further posits a way to construct $n$-input RTOF gates by replacing the m
 To summarize:
 \begin{itemize}
 \item Replacing pairs of computing and uncomputing gates with RTOF gate and its inverse will lead to T gate savings in most cases.
-\item Using the above, it is possible to use clean-ancilla to decompose an MCT with fewer T gates than the known methods.
+\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
 \item A recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
 \label{Sec:lhrs}
-Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate, and then cascades them together to create the output. Because the U-controlled NOT gates act on ancillas, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+
+Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate, and then cascades them together to create the output. 
+
+The result of the method is shown in Fig~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig~\ref{fig-lut-qc} first, we take as input a LUT network synthesized from a Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by the algorithm to create a quantum circuit of UCNOT gates. Any intermediate node is decomposed as two UCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one UCNOT.
+
+Because the U-controlled NOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+
+\begin{example}
+  \label{ex-lut}
+  We start at node 1. Since this is an intermediate node, we place a
+  UCNOT on an ancilla, and place its inverse on the same ancilla to
+  uncompute. We do the same for 2. For node 4, we cascade the ancilla
+  from nodes 1 and 2 into it as input, and place its LUT, as well as
+  its uncompute logic, on another ancilla. Finally, nodes 3 and 5 are
+  output nodes, so we only generate their compute logic. 
+
+\end{example}
 
 
 %%% Local Variables:
