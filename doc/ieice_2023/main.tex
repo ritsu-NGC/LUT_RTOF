@@ -53,7 +53,7 @@
 \setcounter{page}{1}
 
 \field{A}
-\title{A Relative Phase Quantum Boolean Circuit Generation Algorithm and Application to LUT-Based Synthesis}
+\title{Leveraging Different Boolean Function Decompositions to Optimize LUT-based Quantum Circuit Synthesis}
 \authorlist{%
  \authorentry[dizzy@ngc.is.ritsumei.ac.jp]{David Clarino}{n}{rits}\MembershipNumber{}
  \authorentry[accel@ngc.is.ritsumei.ac.jp]{Naoya Asada}{n}{rits}\MembershipNumber{}
@@ -69,19 +69,16 @@
 \begin{summary}
   LUT-based synthesis methods have recently been proposed as a way to
   synthesize quantum Boolean circuits in a qubit constrained
-  environment. Other results have also shown that allowing a relative
-  phase when implementing quantum Boolean circuits yields an advantage
-  in T-count without additional ancilla qubits, which is advantageous
-  in the fault-tolerant quantum computing paradigm. We propose a
-  method that utilizes both LUT-based synthesis and relative phase
-  quantum Boolean circuits which minimize the T-count while minimizing
-  the ancilla required to implement them. We leverage recent results
-  regarding relative phase versions of Boolean functions and Shannon's decomposition to propose a novel method to synthesize
-  arbitrary Boolean functions up to a relative phase. We then utilize 
-  this method to synthesize Boolean logic inside each LUT as a 
-  relative phase quantum Boolean circuit and show that the resulting
-  quantum circuit has a clear advantage in T-count over 
-  more naive methods.  
+  environment. Other recent research has demonstrated the possibility of using
+  Relative Phase quantum circuits in tandem has an advantage in minimizing
+  T-count in the fault-tolerant quantum computing paradigm. Previously a Shannon's
+  Decomposition based algorithm for generating Relative Phase quantum circuits,
+  used in conjunction with LUT-based synthesis, yields a small but clear advantage
+  in T-counts. In order to further this advantage, several other techniques
+  are integrated, such as using Davio expansions, as well as alternating
+  balanced and unbalanced Relative Phase Circuits. This yields a much more clear
+  advantage even at bigger LUT-sizes. 
+  
 \end{summary}
 \begin{keywords}
 relative-phase Toffoli gates (RTOF), circuit optimization, LUT, synthesis
