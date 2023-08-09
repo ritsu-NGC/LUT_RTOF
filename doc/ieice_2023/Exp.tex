@@ -2,37 +2,58 @@
   \begin{center}
     \caption{Experimental Results}
     \label{table-results}
-    \scalebox{0.85}{
+    \scalebox{0.90}{
       \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
         \hline
-          Circuit & \multicolumn{4}{c}{ESOP-based method}  &  \multicolumn{4}{|c|}{Proposed method} &  \multicolumn{4}{c}{CPU time of the proposed method (sec)}  \\ \cline{2-13}
-        %Circuit & LUT6 (T-count) & LUT5 (ratio) & LUT4 (ratio) & LUT3  (ratio) & LUT6 (ratio) & LUT5 (ratio) & LUT4 (ratio) & LUT3  (ratio) & LUT6 (\%) & LUT5 (\%) & LUT4 (\%) & LUT3 (\%) \\ \hline
-                & LUT6 (T-count) & LUT5 & LUT4 & LUT3 & LUT6 & LUT5 & LUT4 & LUT3    & LUT6 (s) & LUT5 (s) & LUT4 (s) & LUT3 (s) \\ \hline
-    priority\_size\_2022 & 98664 & 0.56 & 0.32 & 0.26 & 0.27 & 0.51 & 0.19 & {\bf 0.16}   & 14.97 & 8.07 & 5.01 & 0.79 \\ \hline
-   int2float\_size\_2022 & 22592 & 1.14 & 0.49 & 0.38 & 0.94 & 0.94 & 0.4  & {\bf 0.35}   & 13.31 & 4.02 & 6.03 & 0.87 \\ \hline
-         i2c\_size\_2022 & 89288 & 0.69 & 0.4  & 0.27 & 0.94 & 0.68 & 0.31 & {\bf 0.23}  & 115.00 & 33.35 & 19.73 & 12.36 \\ \hline
-         dec\_size\_2018 & 57344 & 0.5  & 0.41 & 0.2  & 1    & 0.41 & 0.31 & {\bf 0.16} & 12.23 & 7.03 & 18.72 & 21.09 \\ \hline
-         ctrl\_size\_2022 & 7560 & 1.17 & 0.84 & 0.68 & 0.99 & 1.12 & 0.51 & {\bf 0.41} & 10.17 & 5.57 & 3.21 & 1.11 \\ \hline
-      cavlc\_size\_2022 & 116896 & 0.8  & 0.49 & 0.41 & 0.63 & 0.6  & 0.3  & {\bf 0.29} & 77.91 & 31.92 & 2.27 & 2.23 \\ \hline
-        bar\_size\_2015 & 176400 & 0.94 & {\bf 0.03}  & {\bf 0.03} & 7.15 & 1.4  & 0.21 & 0.21 & 410.26 & 215.09 & 29.92 & 35.28 \\ \hline
-    arbiter\_size\_2022 & 175640 & 0.68 & 0.42 & 0.28 & 0.35 & 0.63 & 0.27 & {\bf 0.17} & 53.63 & 49.48 & 10.00 & 21.09 \\ \hline
-        adder\_size\_2022 & 4992 & 9.75 & 6.38 & 1.94 & {\bf 1}    & 7.16 & 4.06 & 2.54 & 144.37	& 98.02	& 40.37 & 33.56 \\\hline
+          Circuit             & \multicolumn{4}{c}{ESOP-based method}  &  \multicolumn{4}{|c|}{Proposed method} &  \multicolumn{4}{|c}{Previous method} \\ \cline{2-13}
+                              & LUT6 (T-count) & LUT5 & LUT4 & LUT3    & LUT6 & LUT5 & LUT4 & LUT3              & LUT6 & LUT5  & LUT4 & LUT3 \\ \hline                              
+        priority\_size\_2022  & 98664          & 0.56 & 0.32 & 0.26    & 0.14 & 0.08 & 0.06 & 0.05              & 0.27 & 0.51 & 0.19 & 0.16  \\ \hline            
+        int2float\_size\_2022 & 22592          & 1.14 & 0.49 & 0.38    & 0.27 & 0.17 & 0.1  & 0.06              & 0.94 & 0.94 & 0.4 & 0.35  \\ \hline             
+        i2c\_size\_2022       & 89288          & 0.69 & 0.4 & 0.27     & 0.61 & 0.27 & 0.18 & 0.13              & 0.94 & 0.68 & 0.31 & 0.23 \\ \hline             
+        dec\_size\_2018       & 57344          & 0.5 & 0.41 & 0.2      & 1 & 0.39 & 0.3 & 0.15                  & 1 & 0.41 & 0.31 & 0.16 \\ \hline                
+        ctrl\_size\_2022      & 7560           & 1.17 & 0.84 & 0.68    & 0.99 & 0.88 & 0.35 & 0.24              & 0.99 & 1.12 & 0.51 & 0.41\\ \hline              
+        cavlc\_size\_2022     & 116896         & 0.8 & 0.49 & 0.41     & 0.13 & 0.1 & 0.07 & 0.06               & 0.63 & 0.6 & 0.3 & 0.29 \\ \hline               
+        bar\_size\_2015       & 176400         & 0.94 & 0.03 & 0.03    & 0.15 & 0.21 & 0.07 & 0.07              & 7.15 & 1.4 & 0.21 & 0.21\\ \hline               
+        arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28    & 0.21 & 0.13 & 0.11 & 0.05              & 0.35 & 0.63 & 0.27 & 0.17 \\ \hline             
+        adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94    & 1 & 1.91 & 1.95 & 1.66                 & 1 & 7.16 & 4.06 & 2.54  \\ \hline               
+                              &  \multicolumn{4}{c|}{CPU time of the proposed method (sec)}  \\ \cline{1-5}
+                              & LUT6 & LUT5  & LUT4 & LUT3 \\ \cline{1-5}
+        priority\_size\_2022  & 14.97 & 8.07 & 5.01 & 0.79 \\ \cline{1-5}
+        int2float\_size\_2022 & 13.31 & 4.02 & 6.03 & 0.87 \\ \cline{1-5}
+        i2c\_size\_2022       & 115.00 & 33.35 & 19.73 & 12.36 \\ \cline{1-5}
+        dec\_size\_2018       & 12.23 & 7.03 & 18.72 & 21.09 \\ \cline{1-5}
+        ctrl\_size\_2022      & 10.17 & 5.57 & 3.21 & 1.11 \\ \cline{1-5}
+        cavlc\_size\_2022     & 77.91 & 31.92 & 2.27 & 2.23 \\ \cline{1-5}
+        bar\_size\_2015       & 410.26 & 215.09 & 29.92 & 35.28 \\ \cline{1-5}
+        arbiter\_size\_2022   & 53.63 & 49.48 & 10.00 & 21.09 \\ \cline{1-5}
+        adder\_size\_2022     & 144.37 & 98.02 & 40.37 & 33.56 \\\cline{1-5}
       \end{tabular}
    }
   \end{center}
 %\vspace*{0.25cm}
 \end{table*}
 
+
+
+
+
+
+
+
+
+
+
 %\vspace*{0.5cm}
 \section{Experimental Results}
 \label{Sec:exp}
 \subsection{Methodology}
 
-Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and generated using the ABC tool~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
+Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and generated using the ABC tool~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic. 
 
-The Shannon Decomposition algorithm uses the Tulip Control BDD library~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm~\cite{bib-rudell}).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
+%The Shannon Decomposition algorithm uses the Tulip Control BDD library~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm~\cite{bib-rudell}).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
+The Decomposition algorithm is implemented in Python. In addition to the algorithm described in Algorithm~\ref{algo-imp}, we also compare several modified versions. A version that only utilizes the balanced and unbalanced constructions(noDavio) and one that only utilizes the Davio expansion (noBalance) are compared to the original to measure the contribution of each of these respective elements. Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
 
-These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
+These results are then compared to a naive implementation of the LUT-based synthesis method, wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions, as well as the original Shannon's Decomposition based algorithm. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
 
 As in~\cite{bib-barenco-elementary}, we note that for values of $n<7$, a direct implementation of the Toffoli gate (i.e. using a Gray-code sequence of operations) the number of gates to implement each MCT gate scales with $2^{n-1}$.
 
