@@ -33,7 +33,7 @@
       % $+\frac{\pi}{2}, +\pi, -\frac{\pi}{2}$だけ変化する．
 \begin{figure*}[ht]
   \def\@captype{table}
-  \begin{minipage}[ht]{.32\textwidth}
+  \begin{minipage}[ht]{.31\textwidth}
     \begin{center}
        %\scalebox{0.7}[1]{
         \begin{tabular}{c|c}      \hline
@@ -48,27 +48,32 @@
           111   & $-\pi/2$ \\ \hline
         \end{tabular}        
     \end{center}
-        \captionof{table}{Added phases by an RTOF.}
+        \captionof{table}{Added phases by the circuit in Fig.~\ref{fig-rtof}}
         \label{table-rtof}
   \end{minipage}
-  \begin{minipage}[ht]{.32\textwidth}
+  \hspace{0.1cm}
+  \begin{minipage}[ht]{.31\textwidth}
     \begin{center}
       \includegraphics[width=5cm]{img/toffoli-f.eps}
       \caption{Functional representations for the output of a Toffoli gate.}
       \label{toffoli-f}
     \end{center}
   \end{minipage}
-  \begin{minipage}{0.32\textwidth}
+  \hspace{0.1cm}
+  \begin{minipage}{0.31\textwidth}
     \begin{center}
 
       \begin{center}
-        \input{img/fig-maslov-decomp}
+        \scalebox{0.9} {
+            \input{img/fig-maslov-decomp}
+        }
         \caption{A Toffoli Gate Decomposition from~\cite{bib-rtof-maslov}}
         \label{fig-maslov-decomp}
       \end{center}
     \end{center}
   \end{minipage}
-  \vspace*{0.25cm}  
+  %\vspace*{0.25cm}  
+  %\vspace*{-0.25cm}
  \end{figure*}
 
 \section{Introduction}
@@ -77,24 +82,24 @@ Boolean functions are  essential components in quantum algorithms, being used in
 
 As qubits are famously prone to error and perturbation, it is often useful to consider a {\it fault-tolerant} implementation of quantum computation, one which could detect and correct errors~\cite{bib-mike-and-ike}. Unfortunately, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gate types. Many of the most prominent implementations employ state purification and gate teleportation, among others, all of which add resources in real systems. Because of its relatively outsized cost compared to Clifford gates, it has the possibility of overwhelming the base cost of a particular circuit implementation. As T gates are key to quantum advantage, due to the Gottesman-Knill Theorem, decreasing the number of T-gates (T-count) has been identified as of paramount importance in bridging the gap between theoretical models of quantum computation and their physically realizable counterparts, and many propositions have been made to decrease their number in a given circuit.
 
-One of the methods that has been proposed to reduce this T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}. By ignoring any phase logic that is not dependent on the target, the method can reduce the T-count of implementing a Boolean map in quantum computing, but at the cost of a relative phase. While this is fine if the end result were to be measured immediately, the most common application of quantum Boolean circuits are in elements such as oracles, where the output is subject to further quantum processing. As a relative phase corresponds to a rotation of the output state, this will skew any further calculations.
+One of the methods that has been proposed to reduce this T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}. By ignoring any phase logic that is not dependent on the target, the method can reduce the T-count of implementing a Boolean map in quantum computing, but at the cost of a relative phase. While this is fine if the end result were to be measured immediately (in the computation basis), the most common application of quantum Boolean circuits are in elements such as oracles, where the output is subject to further quantum processing. As a relative phase corresponds to a rotation of the output state, this will skew any further calculations.
 
 Some recent work~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof}~\cite{bib-amy-phase-state} has proposed relative phase versions of common Boolean functions, particularly the Relative Phase Toffoli Gate (RTOF). The work in~\cite{bib-rtof-maslov} showed that constructing circuits in the manner shown in Fig.~\ref{fig-maslov-decomp} has advantages in T-count. Both~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed methods to generalize the construction of relative phase versions of quantum circuits that were introduced in~\cite{bib-selinger-rtof}.
 
 Other recent work has attempted to use these constructions to reduce the number of T gates in circuits that are already synthesized~\cite{bib-sousai-rtof}~\cite{bib-dizzy-rtof}. However, it turns out that the majority of the advantage such a method confers comes from replacing matching gates in the compute/uncompute logic with symmetric pairs of their relative phase equivalent. It is therefore useful to consider a synthesis method that maximizes the amount of logic that can be treated in such a manner. Cascading logic, such as those produced by LUT-based synthesis methods, thus present an interesting candidate to integrate with relative phase methods.
 
-Recent attempts to use~\cite{bib-lhrs-soeken} to synthesize quantum circuits using LUT-based methods have shown some promising results. As intermediate nodes ``cascade'' their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancillae means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for.
+Recent attempts to use~\cite{bib-lhrs-soeken} to synthesize quantum circuits using LUT-based methods have shown some promising results. As intermediate nodes ``cascade'' their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for.
 
-Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce T-count in a a qubit constrained environment.
+Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce T-count in a quantum circuit.
 
 \noindent {\bf Our Contribution.} 
 We propose a method that reduces the number of T-gates in a quantum Boolean circuit by exploiting relative phase Boolean functions. Among our contributions:
 \begin{itemize}
-\item A novel method to synthesize a Boolean function up to a relative phase by utilizing relative phase constructions and Shannon decomposition.
+\item A novel method to synthesize a Boolean function up to a relative phase by utilizing relative phase constructions and Shannon's decomposition.
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the above method to reduce T-count.
 
 \end{itemize}
 Our methods are compared to a naive synthesis of each LUT node that utilizes an ESOP-based method to synthesize each Boolean function exactly as a quantum Boolean circuit. While there remain a few exceptions to its advantage, its advantage in the majority of cases we have tested suggests that further research into this area might turn fruitful.
 
-The paper is structured as follows. Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Then Section~\ref{Sec:Exist} lays out some motivations for the research we are going to conduct. Section~\ref{Sec:proposed} follows with our proposed method, including our novel method to realize functions up to a relative phase without any additional ancillae, and then its use with the LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} can confirm that our method can indeed reduce the T-count of quantum Boolean circuits. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
+The paper is structured as follows: Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Then Section~\ref{Sec:Exist} lays out some motivations for the research we are going to conduct. Section~\ref{Sec:proposed} follows with our proposed method, including our novel method to realize functions up to a relative phase without any additional ancilla, and then its use with the LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} can confirm that our method can indeed reduce the T-count of quantum Boolean circuits. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
 

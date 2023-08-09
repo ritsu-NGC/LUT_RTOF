@@ -32,9 +32,9 @@
     \caption{U-controlled RTOF gate}
     \label{fig-urtof}
   \end{minipage}
-  \vspace*{0.25cm}
+  %\vspace*{0.25cm}
 \end{figure*}
-\vspace*{0.25cm}
+%\vspace*{0.25cm}
 \section{Preliminary}
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
@@ -61,7 +61,7 @@ this paper.
 
 As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Table~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
 
-One of the results from~\cite{bib-rtof-maslov} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
+One of the results from~\cite{bib-rtof-maslov} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will go into one such construction later.
 \vspace{-0.25cm}
 \subsection{Boolean Logic Network}
 
@@ -80,38 +80,27 @@ Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advan
 In particular, Maslov proposes the decomposition depicted in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $U$ is a unitary operation implemented up to a relative phase.
 
 Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
-\begin{figure*}[t]
-  \begin{minipage}{0.46\linewidth}
+\begin{figure*}[tbp]
+  \begin{minipage}{0.50\linewidth}
     \begin{center}
-      \scalebox{0.7} {
-        \input{img/fig-f-dot-g-in}
+      \scalebox{1.0} {
+        \input{img/fig-lut-network}
       }
-    \end{center}
-    \caption{Generalization of Fig.~\ref{fig-urtof}, which also implements the Boolean product of two functions}
-    \label{fig-f-dot-g}
-  \end{minipage}
-  \begin{minipage}{0.46\linewidth}
-    \begin{center}
-      \scalebox{0.9} {
-        \input{img/fig-bool-or}
-      }
-      \caption{A generalized way of conducting the OR for the Shannon decomposition}
-      \label{fig-bool-or}
+      \caption{The Quantum Circuit implementing Fig.~\ref{fig-lut-network} }
+      \label{fig-lut-qc}
     \end{center}
   \end{minipage}
+  \hspace{0.08\linewidth}
+  \begin{minipage}{0.40\linewidth}
+    \begin{center}
+      \input{img/fig-ex-bdd}
+      \caption{The BDD for $x_3 \cdot x_2 \cdot x_1 + \bar{x_3} \cdot (x_2 + x_1)$}
+      \label{fig-func-bdd}
+    \end{center}
+  \end{minipage}
+%\vspace*{0.5cm}
 \end{figure*}
-\begin{figure*}[t]
-  \begin{minipage}{\linewidth}
-    \begin{center}
-      \scalebox{0.8} {
-        \input{img/fig-shannon-amy}
-      }
-    \end{center}
-    \caption{The circuit for Shannon Decomposition}
-    \label{fig-shannon}
-  \end{minipage}
-\vspace*{0.5cm}
-\end{figure*}
+%\vspace*{-0.25cm}
 
 To summarize:
 \begin{itemize}
