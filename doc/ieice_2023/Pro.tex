@@ -30,59 +30,18 @@ We can further generalize this. Recall from Section~\ref{Sec:Exist} that a Toffo
         \input{img/fig-shannon-amy}
       }
     \end{center}
-    \caption{The circuit for implementing the balanced Shannon's Decomposition}
+    \caption{Balanced Shannon's Decomposition}
     \label{fig-shannon}
   \end{minipage}
-  \begin{minipage}{0.45\linewidth}
-    \begin{center}
-      \scalebox{0.5} {
-        \input{img/fig-shannon-amy-unb}
-      }
-    \end{center}
-    \caption{The circuit for implementing the unbalanced Shannon's Decomposition}
-    \label{fig-shannon-unb}
-  \end{minipage}
-%\vspace*{0.5cm}
-\end{figure*}
-\begin{figure*}[t]
-  \begin{minipage}{0.45\linewidth}
-    \begin{center}
-      \scalebox{0.5} {
-        \input{img/fig-davio-pos}
-      }
-    \end{center}
-    \caption{The circuit for implementing the balance Davio Expansion}
-    \label{fig-davio-pos}
-  \end{minipage}
+  \hspace{0.5cm}
   \begin{minipage}{0.45\linewidth}
     \begin{center}
       \scalebox{0.5} {
         \input{img/fig-davio-pos-unb}
       }
     \end{center}
-    \caption{The circuit for implementing the unbalanced positive Davio's Expansion}
+    \caption{Unbalanced Positive Davio Decomposition}
     \label{fig-davio-pos-unb}
-  \end{minipage}
-%\vspace*{0.5cm}
-\end{figure*}
-\begin{figure*}[t]
-  \begin{minipage}{0.45\linewidth}
-    \begin{center}
-      \scalebox{0.5} {
-        \input{img/fig-davio-amy}
-      }
-    \end{center}
-    \caption{The circuit for implementing the balanced negative Davio Expansion}
-    \label{fig-davio-neg}
-  \end{minipage}
-  \begin{minipage}{0.45\linewidth}
-    \begin{center}
-      \scalebox{0.5} {
-        \input{img/fig-davio-pos-unb}
-      }
-    \end{center}
-    \caption{The circuit for implementing the unbalanced negative Davio's Expansion}
-    \label{fig-davio-neg-unb}
   \end{minipage}
 %\vspace*{0.5cm}
 \end{figure*}
@@ -126,24 +85,12 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
   decomposition in~\cite{bib-rtof-maslov}. We can see that if we
   continue Shannon's decomposition, one or the other side of the
   equation will always evaluate to 0. Therefore it is easy to see that it simplifies to the
-  decomposition in~\cite{bib-amy-phase-state}. (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input case without any additional information). The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
+  decomposition in~\cite{bib-amy-phase-state}. (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input case without any additional information). %The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
   
-  For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term. We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method. We treat optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$ and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$. This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$ as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose the two functions. The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
+  For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term. We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method. We treat optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$ and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$. This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$ as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
   
-  Finally we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 1,x_2,x_1)$ as in Fig~\ref{fig-bool-or} again, and obtain the circuit depicted in ~\ref{fig-func-decomp}.
+  Finally we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 1,x_2,x_1)$ as in Fig~\ref{fig-bool-or} again.%, and obtain the circuit depicted in ~\ref{fig-func-decomp}.
 \end{example}
-
-\begin{figure*}[t]
-  \begin{minipage}{\linewidth}
-      \begin{center}
-        \input{img/fig-func-decomp}
-      \end{center}
-      \caption{Decomposition of the function in Example ~\ref{ex-bool}}
-      \label{fig-func-decomp}
-  \end{minipage}
-  %\vspace*{0.25cm}
-  \vspace*{-0.25cm}
-\end{figure*}
 
 \subsection{Synthesizing A Boolean Function Using LUT-networks and Shannon Decomposition RTOF}
 
@@ -206,21 +153,23 @@ This QC is then parsed by our algorithm, synthesizing each UCNOT into relative p
 
 \section{Proposed Method}
 \label{Sec:new}
-In this section we aim to improve the existing method by improving the relative phase construction function. As is evident from Fig~\ref{fig-shannon-amy}, at every level there is a doubling of the cost of the level below it. That means that the \emph{best case} for this method is $2^n$. Below we detail several attempts to reduce this. 
+In this section we aim to improve the existing method by improving the relative phase construction function. As is evident from Fig~\ref{fig-shannon}, at every level there is a doubling of the cost of the level below it. That means that the \emph{best case} for this method is $2^n$. Below we detail several attempts to reduce this. 
 
 \subsection{Using Balanced and Unbalanced Relative Phase Functions}
 \label{Subsec:balanced}
 As Amy et al. ~\cite{bib-amy-phase-state} pointed out, because any multiplication is first ``constructed'' in phase space and then rotated back into state space with a Hadamard gate, adding a relative phase circuit inside that logic with a \emph{target dependent} phase (meaning one whose value depends on the target bit of the function) in an \emph{unbalanced} construction, such as in Fig~\ref{fig-urtof}, , will see its relative phase added on to the main Boolean function as a residue i.e. it will take the form of $F=x \cdot F_k + F_{k-1}$. To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used, with pairs of relative phase circuits and their inverses to cancel out the target dependence that the Hadamard gate on the bit will act on. In the process, such a construction creates a function with a \emph{target independent}relative phase. This means that it can be used inside an unbalanced construction without incurring residue since the Hadamard gate now does not have any dependence to act on.
 
-Amy et al. propose a method where balanced and unbalanced constructions are alternated at different levels of the construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. We can easily extend this to our method of constructing arbitrary Boolean functions above. In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite a significant reduction in the regime we are working with. For example for $n=6$, the circuit is at MOST 1/8th of the original cost! Merely introducing this methodology results in significant savings for larger LUT-sizes, though its effect could be diminished for smaller ones.
+Amy et al. propose a method where balanced and unbalanced constructions are alternated at different levels of the construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. We can easily extend this to our method of constructing arbitrary Boolean functions above. We start at the root node with an unbalanced construction, and any children that are constructed recursively will have to be constructed in a balanced manner. The children of those in turn can be unbalanced, and so on. 
+
+In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite a significant reduction in the regime we are working with. For example for $n=6$, the circuit is at MOST 1/8th of the original cost! Merely introducing this methodology results in significant savings for larger LUT-sizes, though its effect could be diminished for smaller ones.
 
 \subsection{Integrating Davio Expansions}
 \label{Subsec:davio}
-As can be seen in the previous section, a significant portion of the cost comes from multiplication. Therefore it is useful to consider a method that takes advantage of ESOP expressions. Recall the positive Davio Expansion $F=F_1\oplus x_n \cdot F_2$ and the corresponding negative Davio expansion $F=F_0 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$, and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that at every level, only one multiplication takes place, which already reduces the maximum possible T-gate use at any node from 8 to 4. Additionally, since there is only one multiplication performed, the non-multiplied term ($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can be implemented as an \emph{unbalanced} relative phase circuit. This means there is no need to double the logic inside to cancel the residue, and so the exponential is further reduced. Used in conjunction with an alternating series of balanced and unbalanced logic to implement the multiplication, this can reduce the exponential relation even further.
+As can be seen in the previous section, a significant portion of the cost comes from multiplication. Therefore it is useful to consider a method that takes advantage of ESOP expressions. Recall the positive Davio Expansion $F=F_1\oplus x_n \cdot F_2$ and the corresponding negative Davio expansion $F=F_0 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$, and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that at every level, only one multiplication takes place, which already reduces the maximum possible T-gate use at any node from 8 to 4. Additionally, since there is only one multiplication performed, the non-multiplied term ($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can be implemented as an \emph{unbalanced} relative phase circuit, provided the parent construction can also be unbalanced. This means there is no need to double the logic inside to cancel the residue, and so the exponential is further reduced. Used in conjunction with an alternating series of balanced and unbalanced logic to implement the multiplication, this can reduce the exponential relation even further.
 
 \subsection{Improved Method}
 
-We now try to integrate the Sec~\ref{Subsec:shannon}, Sec~\ref{Subsec:balanced}, and ~\ref{Subsec:davio}. First, because we are dealing with at most 6 qubits, we attempt to perform an exhaustive search of all possible paths. First the function is expanded using the Shannon, Positive Davio, or Negative Davio expansions, independently. The constituent subfunctions of each expansion are then processed in the same way by recursing the function. When the logic can be implemented as an unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is relayed to the next level of the recursion via an input. The recursion terminates as in Alg.~\ref{algo-shannon}. As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is compared with each other, and the minimum is chosen and passed on to the recursion level above it.
+We now try to integrate the Sec~\ref{Subsec:shannon}, Sec~\ref{Subsec:balanced}, and ~\ref{Subsec:davio}. First the function is expanded using the Shannon, Positive Davio, or Negative Davio expansions, independently. The constituent subfunctions of each expansion are then processed in the same way by recursing the function. When the logic can be implemented as an unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is relayed to the next level of the recursion via an input. The recursion terminates as in Alg.~\ref{algo-shannon}. As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
 
 The process is then repeated with all of the variable orders and the minimum is picked from the results. The resulting algorithm is described in Alg.~\ref{algo-new}
 
@@ -250,9 +199,9 @@ The process is then repeated with all of the variable orders and the minimum is 
     \State    $F_2$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
     \State                       !balanced)
     \State
-    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ as in Fig.~\ref{fig-shannon} if balanced or Fig.~\ref{fig-shannon-unb} if not
-    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ as in Fig.~\ref{fig-davio-pos} if balanced or ~\ref{fig-davio-pos-unb} if not.
-    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ as in Fig.~\ref{fig-davio-neg} if balanced or ~\ref{fig-davio-neg-unb} if not.
+    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ in a balanced manner if balanced or unbalanced if not.
+    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ in a balanced manner if balanced is true or unbalanced if not.
+    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ in a balanced manner if balanced is true or unbalanced if not.
     \State    return one of $[shannon, davio_{pos},davio_{neg}]$ with the min T-count
     \EndIf
     \State Repeat for every variable order and pick the minimum
@@ -262,7 +211,8 @@ The process is then repeated with all of the variable orders and the minimum is 
 
 \begin{figure*}[t]
   \begin{minipage}{\linewidth}
-      \begin{center}
+    \begin{center}
+      \hspace{0.5\textwidth}
         \input{img/fig-func-decomp-davio}
       \end{center}
       \caption{Decomposition of the function in Example ~\ref{ex-davio}}
@@ -283,12 +233,13 @@ The process is then repeated with all of the variable orders and the minimum is 
   We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
   controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \bar{x_1}$
   Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
-  these as in Fig.~\ref{fig-pos-davio} and terminate the recursion. We can see at this point that there are 4 T-gates.
+  these similarly to Fig.~\ref{fig-davio-pos-unb} but with a balanced constructionand terminate the recursion. We can see at this point that
+  there are 4 T-gates.
 
   We now go to the $F_2$ branch. Here, since $x_1 \oplus x_2$ can be implemented using an $x_1$ controlled CNOT and $x_2$ controlled CNOT
   in series, we synthesize that and terminate the recursion.
 
-  Back at the top level, we compose the subcircuits for $F_0$ and $F_2$ as in Fig~\ref{fig-davio-neg-unb}, adding an additional 4
+  Back at the top level, we compose the subcircuits for $F_0$ and $F_2$ as a negative unbalanced Davio construction, adding an additional 4
   T-gates. This brings us to a total of 8 T-gates. Compare this to the 24 T-gates of our original methodology, 1/3 the size. We omit
   the computation of the other branches and variable orders in the interest of space, but the reader can perform them  quickly to
   see that the branch we followed is the optimal branch (or one of them. In this function there are multiple because $x_1$  and
