@@ -111,17 +111,18 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
 
 \begin{example}
   \label{ex-bool}
-  We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.
-
-  For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks just like the
+  We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.  
+     
+     For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks just like the
   decomposition in~\cite{bib-rtof-maslov}. We can see that if we
   continue Shannon's decomposition, one or the other side of the
   equation will always evaluate to 0. Therefore it is easy to see that it simplifies to the
   decomposition in~\cite{bib-amy-phase-state}. (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input case without any additional information). The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
   
-  For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term. We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method. We treat optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$ and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$. This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$ as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose the two functions. The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
-  
-  Finally we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 1,x_2,x_1)$ as in Fig~\ref{fig-bool-or} again, and obtain the circuit depicted in Fig~\ref{fig-func-decomp}.
+     \vspace{-0.1cm}
+     For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term. We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method. We treat optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$ and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$. This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$ as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose the two functions. The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
+     
+     Finally we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 1,x_2,x_1)$ as in Fig~\ref{fig-bool-or} again, and obtain the circuit depicted in Fig~\ref{fig-func-decomp}.
 \end{example}
 
 %% \begin{algorithm}[tbp]
@@ -195,7 +196,7 @@ Knowing this, we are now ready to propose our algorithm to generate an arbitrary
     \ElsIf{$BF$ is a leaf node}
     \State return CNOT
     \Else
-    \State $F_0$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 0)}$)
+    \State $F_0$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 0}$)
     \State $F_1$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 1}$)
     \State return a UCNOT implemented by composing $F_0$ + $F_1$ in the manner shown in Fig.~\ref{fig-shannon}
     \EndIf
@@ -220,7 +221,7 @@ Knowing this, we are now ready to propose our algorithm to generate an arbitrary
     \EndIf
     \EndFor
   \end{algorithmic}
-\vspace*{-0.25cm}
+%\vspace*{-0.25cm}
 \end{algorithm}
 
 \subsection{Synthesizing A Boolean Function Using LUT-networks and Shannon Decomposition RTOF}
