@@ -16,17 +16,30 @@
         bar\_size\_2015       & 176400         & 0.94 & 0.03 & {\bf 0.03}    & 0.15 & 0.21 & 0.07 & 0.07              & 7.15 & 1.4 & 0.21 & 0.21\\ \hline               
         arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28    & 0.21 & 0.13 & 0.11 & {\bf 0.05}              & 0.35 & 0.63 & 0.27 & 0.17 \\ \hline             
         adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94    & 1 & 1.91 & 1.95 & 1.66                 & 1 & 7.16 & 4.06 & 2.54  \\ \hline               
-                              &  \multicolumn{4}{c|}{CPU time of the proposed method (sec)}  \\ \cline{1-5}
+      \end{tabular}
+   }
+  \end{center}
+%\vspace*{0.25cm}
+\end{table*}
+
+\begin{table*}[ht]
+  \begin{center}
+    \caption{Runtime of Proposed Method}
+    \label{table-runtime}
+    \scalebox{0.90}{
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+          Circuit             &  \multicolumn{4}{c|}{CPU time of the proposed method (sec)}  \\ \cline{1-5}
                               & LUT6 & LUT5  & LUT4 & LUT3 \\ \cline{1-5}
-        priority\_size\_2022  & 14.97 & 8.07 & 5.01 & 0.79 \\ \cline{1-5}
-        int2float\_size\_2022 & 13.31 & 4.02 & 6.03 & 0.87 \\ \cline{1-5}
-        i2c\_size\_2022       & 115.00 & 33.35 & 19.73 & 12.36 \\ \cline{1-5}
-        dec\_size\_2018       & 12.23 & 7.03 & 18.72 & 21.09 \\ \cline{1-5}
-        ctrl\_size\_2022      & 10.17 & 5.57 & 3.21 & 1.11 \\ \cline{1-5}
-        cavlc\_size\_2022     & 77.91 & 31.92 & 2.27 & 2.23 \\ \cline{1-5}
-        bar\_size\_2015       & 410.26 & 215.09 & 29.92 & 35.28 \\ \cline{1-5}
-        arbiter\_size\_2022   & 53.63 & 49.48 & 10.00 & 21.09 \\ \cline{1-5}
-        adder\_size\_2022     & 144.37 & 98.02 & 40.37 & 33.56 \\\cline{1-5}
+        priority\_size\_2022  & 14.01 & 4.61 & 0.33 & 1.03 \\ \cline{1-5}
+        int2float\_size\_2022 & 10.57 & 2.03 & 0.94 & 0.6 \\ \cline{1-5}
+        i2c\_size\_2022       & 89.33 & 18.57 & 2.17 & 0.71 \\ \cline{1-5}
+        dec\_size\_2018       & 5.14 & 0.33 & 1.17 & 1.21 \\ \cline{1-5}
+        ctrl\_size\_2022      & 9.87 & 4.52 & 0.45 &0.37 \\ \cline{1-5}
+        cavlc\_size\_2022     & 16.46 & 3.24 & 2.72 & 0.22 \\ \cline{1-5}
+        bar\_size\_2015       & 340.25 & 119.99 & 1.46 & 0.99 \\ \cline{1-5}
+        arbiter\_size\_2022   & 33.74 & 1.78 & 4.01 & 0.02 \\ \cline{1-5}
+        adder\_size\_2022     & 129.88 & 63.09 & 2.37 & 1.07 \\\cline{1-5}
       \end{tabular}
    }
   \end{center}
@@ -67,7 +80,7 @@ Recall that in the previous paragraph, we noted that the cost of each relative
 phase LUT scales with $2^n$. This measures the contribution of
 decreasing the LUT-size at the cost of increasing the number of gates 
 and ancilla used. Finally, we also measure the execution time in
-seconds of our proposed method for each LUT-size. 
+seconds of our proposed method for each LUT-size. Additionally, we display the average runtimes for each circuit for each iteration of the proposed method in Table ~\ref{table-runtime}
 
 \subsection{Analysis}
 In Table~\ref{table-results}, the best result for each circuit is written in bold. Just as before, the
