@@ -1,8 +1,8 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-  \push{\phantom{{x}_{0} }} & & \multigate{2}{U} & \qw & \qw         & \qw & \multigate{2}{U^{\dagger}} \\
-  \push{\phantom{{x}_{0} }} & & \ghost{U}        & \qw & \qw         & \qw & \ghost{U^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \ghost{U}        & \qw & \ctrl{2}    & \qw & \ghost{U^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \targ\qwx[-1]    & \qw & \control\qw & \qw & \targ\qwx[-1]\qw         \\
-  \push{\phantom{{x}_{0} }} & & \qw              & \qw & \targ       & \qw & \qw                      \\
+  \push{{x}_{0} }     & \multigate{3}{F} & &          & & \multigate{2}{U}            & \qw & \qw         & \qw & \multigate{2}{U^{\dagger}} \\
+  \push{{x}_{1} }     & \ghost{F}        & &          & & \ghost{U}                   & \qw & \qw         & \qw & \ghost{U^{\dagger}}        \\
+  \push{\vdots}       &                  & & \push{=} & & \ghost{U}                   & \qw & \ctrl{2}    & \qw & \ghost{U^{\dagger}}        \\
+  \push{{x}_{n} }     & \ghost{F}        & &          & & \push{\rtoftarg}\qwx[-1]\qw & \qw & \control\qw & \qw & \push{\rtoftarg}\qwx[-1]\qw   \\
+  \push{{\ket{0}}   } & \targ\qwx[-1]\qw & &          & & \qw                         & \qw & \targ       & \qw & \qw                        \\
 }
 

@@ -1,8 +1,8 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }    & & \qw              & \qw               & \qw                     & \qw     & \qw                      & \multigate{3}{U} & \qw               & \qw      & \qw                       & \qw                & \qw \\
-          \push{{x}_{1} }    & & \qw              & \qw               & \qw                     & \qw     & \qw                      & \ghost{U}        & \qw               & \qw      & \qw                       & \qw                & \qw \\
-          \push{\vdots}     & &                  &                   & \push{\vdots}           &          &  \push{\vdots}          &                  & \push{\vdots}     &          &                            & \push{\vdots}     &    \\
-          \push{{x}_{n} }    & & \qw              & \qw               & \qw                     & \ctrl{1} & \qw                     & \ghost{U}        & \qw               & \ctrl{1} & \qw                        & \qw               & \qw \\
-          \push{{\ket{0}}}  & & \qw              & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \targ   & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} & \qw \\
+          \push{{x}_{0} }   & & \multigate{3}{x_k \cdot U}  & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw      & \qw                       & \multigate{3}{U}              & \qw               & \qw      & \qw                         & \qw               & \qw & \\
+          \push{{x}_{1} }   & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw      & \qw                       & \ghost{U}                      & \qw               & \qw      & \qw                         & \qw               & \qw & \\
+          \push{\vdots}     & &                             &       &     & &\push{=} & &     &                   & \push{\vdots}             &          &  \push{\vdots}            &                                & \push{\vdots}     &          &                             & \push{\vdots}     &     & \\
+          \push{{x}_{n-1} } & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \ctrl{1} & \qw                       & \ghost{U}                      & \qw               & \ctrl{1} & \qw                         & \qw               & \qw & \\
+          \push{{x}_{n} }   & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \qw & \gate{\mathrm{H}} & \gate{\mathrm{T}}         & \targ    & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} & \qw & \rstick{e^{i\phi(x_0,\ldots,x_n)} \ket{x_n \cdot U(x_0, \ldots,x_{n-1}) + \phi_{U*}} } \\
 }
-
+                            
