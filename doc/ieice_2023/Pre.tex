@@ -1,12 +1,5 @@
 \begin{figure*}[ht]
-  \begin{minipage}{.46\textwidth}
-
-    \begin{center}
-      \input{img/lut_network}
-      \caption{A Boolean logic network}
-      \label{fig-lut-network}
-    \end{center}
-  \end{minipage}
+  
   \begin{minipage}{.46\linewidth}
     \begin{center}
       \input{img/fig-urtof}
@@ -16,7 +9,7 @@
   \end{minipage}
   %\vspace*{0.25cm}
 \end{figure*}
-%\vspace*{0.1cm}
+\vspace*{0.1cm}
 \section{Preliminary}
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
@@ -47,9 +40,9 @@ One of the results from~\cite{bib-rtof-maslov} is that when larger functions are
 %\vspace{-0.25cm}
 \subsection{Boolean Logic Network}
 
-A {\it Boolean logic network} is a simple dag whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
+A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG) whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
 
-A node {\it n} has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes of the network without fanouts. 
+A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes of the network without fanouts. 
 
 A logic function can be decomposed into such a Boolean logic network, and its nodes subsequently implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}.
 
@@ -88,7 +81,7 @@ To summarize:
 \begin{itemize}
 \item Replacing pairs of computing and uncomputing gates with RTOF gate and its inverse will lead to T gate savings in most cases.
 \item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
-\item A recursive procedure to generate MCT gates up to a relative phase.
+\item By utilizing a relative UCNOT implementation, we get a recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
 \begin{figure*}[ht]
@@ -101,14 +94,15 @@ To summarize:
       \label{fig-lut-qc}
     \end{center}
   \end{minipage}
-  \hspace{0.1cm}
-  \begin{minipage}{0.40\linewidth}
+  \begin{minipage}{.46\textwidth}
     \begin{center}
-      \input{img/fig-ex-bdd}
-      \caption{The BDD for $x_3 \cdot x_2 \cdot x_1 + \bar{x_3} \cdot (x_2 + x_1)$}
-      \label{fig-func-bdd}
+      \input{img/lut_network}
+      \caption{A Boolean logic network}
+      \label{fig-lut-network}
     \end{center}
   \end{minipage}
+  \hspace{0.1cm}
+  
 %\vspace*{0.5cm}
 \vspace*{-0.25cm}
 \end{figure*}
@@ -117,7 +111,7 @@ To summarize:
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
 \label{Sec:lhrs}
 
-Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate, and then cascades them together to create the output. 
+Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate (UCNOT), a NOT gate controlled not just by the value of a variable but that of a Boolean function, and then cascades them together to create the output. 
 
 The result of the method is shown in Fig~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig~\ref{fig-lut-qc} first, we take as input a LUT network synthesized from a Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by the algorithm to create a quantum circuit of UCNOT gates. Any intermediate node is decomposed as two UCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one UCNOT.
 
