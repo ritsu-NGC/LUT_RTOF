@@ -115,7 +115,7 @@ Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-base
 
 The result of the method is shown in Fig~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig~\ref{fig-lut-qc} first, we take as input a LUT network synthesized from a Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by the algorithm to create a quantum circuit of UCNOT gates. Any intermediate node is decomposed as two UCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one UCNOT.
 
-Because the U-controlled NOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+Because the UCNOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
 
 \begin{example}
   \label{ex-lut}
