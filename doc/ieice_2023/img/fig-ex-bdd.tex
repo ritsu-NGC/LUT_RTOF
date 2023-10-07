@@ -25,18 +25,31 @@
 %%     \path (z) edge (x);
 %%     \path (z) edge (y);
 %% }
+  %% every node/.append style = {
+  %%   draw      = black,
+  %%   shape     = circle,
+  %%   inner sep = 1
+  %% },
+
 \tikzset{
   > = stealth,
-  every node/.append style = {
+  c/.style = {
     draw      = black,
     shape     = circle,
     inner sep = 1
+  },
+  r/.style = {
+    draw      = black,
+    shape     = rectangle,
+    inner sep = 1,
+    minimum width=1em,
+    minimum height=1em      
   },
   every path/.append style = {
         arrows = ->,
         draw = black,
         fill = offwhite
-  },  
+  },
   input/.style = {
     draw = none
   }
@@ -44,13 +57,13 @@
 
 \tikz{
 
-  \node (root)   at (7,3) {$x3$};      
-  \node (x3)     at (6,2) {$x2$};        
-  \node (nx3)    at (8,2) {$x2$};
-  \node (x3x2)   at (5,1) {$x1$};
-  \node (nx3nx2) at (9,1) {$x1$};
-  \node (out0)   at (6,0) {$0$};
-  \node (out1)   at (8,0) {$1$};
+  \node[c] (root)   at (7,3) {$x3$};      
+  \node[c] (x3)     at (6,2) {$x2$};        
+  \node[c] (nx3)    at (8,2) {$x2$};
+  \node[c] (x3x2)   at (5,1) {$x1$};
+  \node[c] (nx3nx2) at (9,1) {$x1$};
+  \node[r] (out0)   at (6,0) {$0$};
+  \node[r] (out1)   at (8,0) {$1$};
 
   \path (root) edge (x3); 
   \path[dashed] (root) edge (nx3);
