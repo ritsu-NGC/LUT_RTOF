@@ -1,15 +1,15 @@
-\begin{figure*}[ht]
+% \begin{figure*}[ht]
   
-  \begin{minipage}{.46\linewidth}
-    \begin{center}
-      \input{img/fig-urtof}
-    \end{center}
-    \caption{U-controlled RTOF gate}
-    \label{fig-urtof}
-  \end{minipage}
-  %\vspace*{0.25cm}
-\end{figure*}
-\vspace*{0.1cm}
+%   \begin{minipage}{.46\linewidth}
+%     \begin{center}
+%       \input{img/fig-urtof}
+%     \end{center}
+%     \caption{U-controlled RTOF gate}
+%     \label{fig-urtof}
+%   \end{minipage}
+%   %\vspace*{0.25cm}
+% \end{figure*}
+% \vspace*{0.1cm}
 \section{Preliminary}
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
@@ -34,7 +34,7 @@ phase, so it only transforms an RTOF gate into another RTOF gate with
 the same T-count. Thus we do not consider other types of RTOF gates in 
 this paper. 
 
-As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Table~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
+As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
 
 One of the results from~\cite{bib-rtof-maslov} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
 %\vspace{-0.25cm}
@@ -46,6 +46,14 @@ A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it f
 
 A logic function can be decomposed into such a Boolean logic network, and its nodes subsequently implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}.
 
+\begin{figure}[tbp]
+    \centering
+    \input{img/lut_network}
+    \caption{A Boolean logic network}
+    \label{fig-lut-network}
+\end{figure}
+
+
 \section{Existing Research and Motivation}
  \label{Sec:Exist}
 
@@ -55,27 +63,66 @@ Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advan
 In particular, Maslov proposes the decomposition depicted in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $U$ is a unitary operation implemented up to a relative phase.
 
 Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
-\begin{figure*}[t]
-  \begin{minipage}{0.46\linewidth}
-    \begin{center}
-      \scalebox{0.7} {
-        \input{img/fig-f-dot-g-in}
-      }
-    \end{center}
-    \caption{Generalization of Fig.~\ref{fig-urtof}, which also implements the Boolean product of two functions}
-    \label{fig-f-dot-g}
-  \end{minipage}
-  \begin{minipage}{0.46\linewidth}
-    \begin{center}
-      \scalebox{0.9} {
-        \input{img/fig-bool-or}
-      }
-      \caption{A generalized way of conducting the OR for the Shannon decomposition}
-      \label{fig-bool-or}
-    \end{center}
-  \end{minipage}
-  \vspace*{-0.25cm}
-\end{figure*}
+
+
+\begin{figure}[tbp]
+    \centering
+    \scalebox{1}{\input{img/fig-maslov-decomp}}
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
+    \label{fig-maslov-decomp}
+\end{figure}
+
+
+\begin{figure}[tbp]
+    \centering
+    \scalebox{1}{\input{img/fig-lut-network}}
+    \caption{The quantum circuit implementing the Boolean logic network in Fig.~\ref{fig-lut-network} using the LHRS. }
+    \label{fig-lut-qc}
+\end{figure}
+
+% \begin{figure*}[ht]
+  
+%   \begin{minipage}{.46\linewidth}
+%     \begin{center}
+%       \input{img/fig-urtof}
+%     \end{center}
+%     \caption{U-controlled RTOF gate}
+%     \label{fig-urtof}
+%   \end{minipage}
+%   %\vspace*{0.25cm}
+% \end{figure*}
+
+% \begin{figure*}[t]
+%     \centering
+%     \begin{minipage}{0.6\textwidth}
+%         \begin{subfigure}[b][15mm]{0.9\textwidth}
+%             \centering
+%              \input{img/toffoli}
+%             \caption{A Toffoli gate in Clifford+T basis}
+%             \label{fig-toffoli}
+%         \end{subfigure}
+
+% \begin{figure*}[t]
+%   \begin{minipage}{0.46\linewidth}
+%     \begin{center}
+%       \scalebox{0.7} {
+%         \input{img/fig-f-dot-g-in}
+%       }
+%     \end{center}
+%     \caption{Generalization of Fig.~\ref{fig-urtof}, which also implements the Boolean product of two functions}
+%     \label{fig-f-dot-g}
+%   \end{minipage}
+%   \begin{minipage}{0.46\linewidth}
+%     \begin{center}
+%       \scalebox{0.9} {
+%         \input{img/fig-bool-or}
+%       }
+%       \caption{A generalized way of conducting the OR for the Shannon decomposition}
+%       \label{fig-bool-or}
+%     \end{center}
+%   \end{minipage}
+%   \vspace*{-0.25cm}
+% \end{figure*}
 
 To summarize:
 \begin{itemize}
@@ -84,28 +131,28 @@ To summarize:
 \item By utilizing a relative UCNOT implementation, we get a recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
-\begin{figure*}[ht]
-  \begin{minipage}{0.50\linewidth}
-    \begin{center}
-      \scalebox{1.0} {
-        \input{img/fig-lut-network}
-      }
-      \caption{The Quantum Circuit implementing Fig.~\ref{fig-lut-network} }
-      \label{fig-lut-qc}
-    \end{center}
-  \end{minipage}
-  \begin{minipage}{.46\textwidth}
-    \begin{center}
-      \input{img/lut_network}
-      \caption{A Boolean logic network}
-      \label{fig-lut-network}
-    \end{center}
-  \end{minipage}
-  \hspace{0.1cm}
+% \begin{figure*}[ht]
+%   \begin{minipage}{0.50\linewidth}
+%     \begin{center}
+%       \scalebox{1.0} {
+%         \input{img/fig-lut-network}
+%       }
+%       \caption{The Quantum Circuit implementing Fig.~\ref{fig-lut-network} }
+%       \label{fig-lut-qc}
+%     \end{center}
+%   \end{minipage}
+%   % \begin{minipage}{.46\textwidth}
+%   %   \begin{center}
+%   %     \input{img/lut_network}
+%   %     \caption{A Boolean logic network}
+%   %     \label{fig-lut-network}
+%   %   \end{center}
+%   % \end{minipage}
+%   % \hspace{0.1cm}
   
-%\vspace*{0.5cm}
-\vspace*{-0.25cm}
-\end{figure*}
+% %\vspace*{0.5cm}
+% \vspace*{-0.25cm}
+% \end{figure*}
 
 
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
@@ -114,6 +161,7 @@ To summarize:
 Previous research~\cite{bib-lhrs-soeken} has detailed a way to leverage LUT-based synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits. The overall flow maps each node in the Boolean network to a function-controlled NOT gate (UCNOT), a NOT gate controlled not just by the value of a variable but that of a Boolean function, and then cascades them together to create the output. 
 
 The result of the method is shown in Fig~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig~\ref{fig-lut-qc} first, we take as input a LUT network synthesized from a Boolean expression using existing LUT-Network decomposition methods. Then this LUT network is parsed by the algorithm to create a quantum circuit of UCNOT gates. Any intermediate node is decomposed as two UCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one UCNOT.
+
 
 Because the UCNOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
 
