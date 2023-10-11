@@ -16,25 +16,37 @@
 
 In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. We will be implementing them using the fault-tolerant set of Clifford gates, T gates, and S gates. 
 
-We denote the primary inputs of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ primary inputs. Each qubit state in a circuit consisting only of Toffoli and RTOF gates can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
+We denote the primary inputs of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ primary inputs. Each qubit state in a circuit can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
+
+An example of such a quantum Boolean operation is the Toffoli gate depicted in
+Fig ~\ref{fig-toffoli}. It inverts the basis state of the target bit (i.e.,
+$\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the both
+control bits are $\ket{11}$. This provides us a a way to realize the AND
+operation in a quantum circuit.
 
 \subsection{Relative-Phase Boolean Functions}
 
-A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov} has two
-control bits and one target bit. It inverts the basis state of the
-target bit (i.e., $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$)
-when the states of the both control bits are $\ket{11}$. A Toffoli
-gate consists of seven T gates as shown in Fig.~\ref{fig-toffoli}
-whereas an RTOF gate consists of four T gates as shown in
-Fig.~\ref{fig-rtof}. One may notice that the version of the RTOF gate
+A typical decomposition of the Toffoli gate into the Clifford + T basis
+consists of seven T gates as shown in Fig.~\ref{fig-toffoli}.
+A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov}, in contrast,
+implements the same function using only four T gates as shown in
+Fig.~\ref{fig-rtof}. However, it does this at the cost of a {\it relative phase},
+which is an input dependent phase on the output.
+Note the double circle on the target of Fig.~\ref{fig-rtof}: we will be
+using this notation to denote a relative phase version of a logic
+gate in this paper. One may notice that the version of the RTOF gate
 that is used here is similar to the $n$-controlled-iX gate
 from~\cite{bib-selinger-rtof} for $n=2$, with one less CNOT gate. As
 noted in~\cite{bib-rtof-maslov}, removing this gate only affects the
 phase, so it only transforms an RTOF gate into another RTOF gate with
-the same T-count. Thus we do not consider other types of RTOF gates in 
-this paper. 
+the same T-count. We will be considering analogs of both types of
+relative phase gatesin Section ~\ref{Sec:proposed}
 
-As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$ to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps  $\ket{110}$ and $\ket{111}$. In addition to this logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is added.
+As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
+to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps  $\ket{110}$ and $\ket{111}$. In addition to this
+logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added
+phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is
+added.
 
 One of the results from~\cite{bib-rtof-maslov} is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
 %\vspace{-0.25cm}
@@ -62,7 +74,7 @@ Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advan
 
 In particular, Maslov proposes the decomposition depicted in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $U$ is a unitary operation implemented up to a relative phase.
 
-Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then doing that recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
+Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then repeating recursively. However, as Amy et. al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$.
 
 
 \begin{figure}[tbp]
@@ -80,50 +92,6 @@ Maslov further posits a way to construct $n$-input RTOF gates by replacing the m
     \label{fig-lut-qc}
 \end{figure}
 
-% \begin{figure*}[ht]
-  
-%   \begin{minipage}{.46\linewidth}
-%     \begin{center}
-%       \input{img/fig-urtof}
-%     \end{center}
-%     \caption{U-controlled RTOF gate}
-%     \label{fig-urtof}
-%   \end{minipage}
-%   %\vspace*{0.25cm}
-% \end{figure*}
-
-% \begin{figure*}[t]
-%     \centering
-%     \begin{minipage}{0.6\textwidth}
-%         \begin{subfigure}[b][15mm]{0.9\textwidth}
-%             \centering
-%              \input{img/toffoli}
-%             \caption{A Toffoli gate in Clifford+T basis}
-%             \label{fig-toffoli}
-%         \end{subfigure}
-
-% \begin{figure*}[t]
-%   \begin{minipage}{0.46\linewidth}
-%     \begin{center}
-%       \scalebox{0.7} {
-%         \input{img/fig-f-dot-g-in}
-%       }
-%     \end{center}
-%     \caption{Generalization of Fig.~\ref{fig-urtof}, which also implements the Boolean product of two functions}
-%     \label{fig-f-dot-g}
-%   \end{minipage}
-%   \begin{minipage}{0.46\linewidth}
-%     \begin{center}
-%       \scalebox{0.9} {
-%         \input{img/fig-bool-or}
-%       }
-%       \caption{A generalized way of conducting the OR for the Shannon decomposition}
-%       \label{fig-bool-or}
-%     \end{center}
-%   \end{minipage}
-%   \vspace*{-0.25cm}
-% \end{figure*}
-
 To summarize:
 \begin{itemize}
 \item Replacing pairs of computing and uncomputing gates with RTOF gate and its inverse will lead to T gate savings in most cases.
@@ -131,28 +99,6 @@ To summarize:
 \item By utilizing a relative UCNOT implementation, we get a recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
-% \begin{figure*}[ht]
-%   \begin{minipage}{0.50\linewidth}
-%     \begin{center}
-%       \scalebox{1.0} {
-%         \input{img/fig-lut-network}
-%       }
-%       \caption{The Quantum Circuit implementing Fig.~\ref{fig-lut-network} }
-%       \label{fig-lut-qc}
-%     \end{center}
-%   \end{minipage}
-%   % \begin{minipage}{.46\textwidth}
-%   %   \begin{center}
-%   %     \input{img/lut_network}
-%   %     \caption{A Boolean logic network}
-%   %     \label{fig-lut-network}
-%   %   \end{center}
-%   % \end{minipage}
-%   % \hspace{0.1cm}
-  
-% %\vspace*{0.5cm}
-% \vspace*{-0.25cm}
-% \end{figure*}
 
 
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}

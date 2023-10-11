@@ -5,17 +5,18 @@
     \scalebox{0.90}{
       \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
         \hline
-          Circuit             & \multicolumn{4}{c}{ESOP-based method}  &  \multicolumn{4}{|c|}{Proposed method} &  \multicolumn{4}{|c}{Previous method} \\ \cline{2-13}
-                              & LUT6 (T-count) & LUT5 & LUT4 & LUT3    & LUT6 & LUT5 & LUT4 & LUT3              & LUT6 & LUT5  & LUT4 & LUT3 \\ \hline                              
-        priority\_size\_2022  & 98664          & 0.56 & 0.32 & 0.26    & 0.14 & 0.08 & 0.06 & {\bf 0.05}              & 0.27 & 0.51 & 0.19 & 0.16  \\ \hline            
-        int2float\_size\_2022 & 22592          & 1.14 & 0.49 & 0.38    & 0.27 & 0.17 & 0.1  & {\bf 0.06}              & 0.94 & 0.94 & 0.4 & 0.35  \\ \hline             
-        i2c\_size\_2022       & 89288          & 0.69 & 0.4 & 0.27     & 0.61 & 0.27 & 0.18 & {\bf 0.13}              & 0.94 & 0.68 & 0.31 & 0.23 \\ \hline             
-        dec\_size\_2018       & 57344          & 0.5 & 0.41 & 0.2      & 1 & 0.39 & 0.3 & {\bf 0.15}                  & 1 & 0.41 & 0.31 & 0.16 \\ \hline                
-        ctrl\_size\_2022      & 7560           & 1.17 & 0.84 & 0.68    & 0.99 & 0.88 & 0.35 & {\bf 0.24}              & 0.99 & 1.12 & 0.51 & 0.41\\ \hline              
-        cavlc\_size\_2022     & 116896         & 0.8 & 0.49 & 0.41     & 0.13 & 0.1 & 0.07 & {\bf 0.06}               & 0.63 & 0.6 & 0.3 & 0.29 \\ \hline               
-        bar\_size\_2015       & 176400         & 0.94 & 0.03 & {\bf 0.03}    & 0.15 & 0.21 & 0.07 & 0.07              & 7.15 & 1.4 & 0.21 & 0.21\\ \hline               
-        arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28    & 0.21 & 0.13 & 0.11 & {\bf 0.05}              & 0.35 & 0.63 & 0.27 & 0.17 \\ \hline             
-        adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94    & 1 & 1.91 & 1.95 & 1.66                 & 1 & 7.16 & 4.06 & 2.54  \\ \hline               
+          Circuit             & \multicolumn{4}{c}{ESOP-based method}      &  \multicolumn{4}{|c}{Shannon-Only}    &  \multicolumn{4}{|c|}{Proposed method} \\ \cline{2-13}
+                              & LUT6 (T-count) & LUT5 & LUT4 & LUT3        & LUT6 & LUT5  & LUT4 & LUT3            & LUT6 & LUT5 & LUT4 & LUT3              \\ \hline                              
+        priority\_size\_2022  & 98664          & 0.56 & 0.32 & 0.26        & 0.27 & 0.51 & 0.19 & 0.16             & 0.14 & 0.08 & 0.06 & {\bf 0.05}        \\ \hline            
+        int2float\_size\_2022 & 22592          & 1.14 & 0.49 & 0.38        & 0.94 & 0.94 & 0.4 & 0.35              & 0.27 & 0.17 & 0.1  & {\bf 0.06}        \\ \hline             
+        i2c\_size\_2022       & 89288          & 0.69 & 0.4 & 0.27         & 0.94 & 0.68 & 0.31 & 0.23             & 0.61 & 0.27 & 0.18 & {\bf 0.13}        \\ \hline             
+        dec\_size\_2018       & 57344          & 0.5 & 0.41 & 0.2          & 1 & 0.41 & 0.31 & 0.16                & 1 & 0.39 & 0.3 & {\bf 0.15}            \\ \hline                
+        ctrl\_size\_2022      & 7560           & 1.17 & 0.84 & 0.68        & 0.99 & 1.12 & 0.51 & 0.41             & 0.99 & 0.88 & 0.35 & {\bf 0.24}        \\ \hline              
+        cavlc\_size\_2022     & 116896         & 0.8 & 0.49 & 0.41         & 0.63 & 0.6 & 0.3 & 0.29               & 0.13 & 0.1 & 0.07 & {\bf 0.06}         \\ \hline               
+        bar\_size\_2015       & 176400         & 0.94 & 0.03 & {\bf 0.03}  & 7.15 & 1.4 & 0.21 & 0.21              & 0.15 & 0.21 & 0.07 & 0.07              \\ \hline               
+        arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28        & 0.35 & 0.63 & 0.27 & 0.17             & 0.21 & 0.13 & 0.11 & {\bf 0.05}        \\ \hline             
+        adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94        & 1 & 7.16 & 4.06 & 2.54                & 1 & 1.91 & 1.95 & 1.66                 \\ \hline
+        Average               & \multicolumn{4}{c}{1.13}                   & \multicolumn{4}{|c}{0.72}             & \multicolumn{4}{|c}{0.24}              \\ \hline
       \end{tabular}
    }
   \end{center}
@@ -67,7 +68,7 @@ Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bi
 The algorithm is implemented in Python. Any exact (non-relative phase) synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
 %In addition to the algorithm described in Algorithm~\ref{algo-imp}, we also compare several modified versions. A version that only utilizes the balanced and unbalanced constructions(noDavio) and one that only utilizes the Davio expansion (noBalance) are compared to the original to measure the contribution of each of these respective elements. 
 
-These results (Proposed method) are then compared to a naive implementation of the LUT-based synthesis method (ESOP-based method), wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions, as well as the original Shannon's Decomposition based algorithm (Previous method). Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
+These results (Proposed method) are then compared to a naive implementation of the LUT-based synthesis method (ESOP-based method), wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. We also run a version of the algorithm described in Sec ~\ref{Subsec:shannon} using only Shannon's Decomposition (Shannon Only), to test the efficacy of introducing the Davio's Expansions. Because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time, so any MPMCT (Multi-Polar Multiply-Controlled Toffoli) gates are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
 
 As in~\cite{bib-barenco-elementary}, we note that for values of $n<7$, the number of gates in a direct implementation of the Toffoli gate (i.e. using a Gray-code sequence of operations) scales with $2^{n-1}$.
 
@@ -85,11 +86,11 @@ seconds of our proposed method for each LUT-size. Additionally, we display the a
 \subsection{Analysis}
 In Table~\ref{table-results}, the best result for each circuit is written in bold. Just as before, the
 Proposed method sees the largest gain over the baseline LUT6 ESOP-based numbers in LUT3. However, whereas
-the Previous method saw only modest gains here over the ESOP-based LUT3 numbers (i.e., merely reducing the
+the Shannon Only method saw only modest gains here over the ESOP-based LUT3 numbers (i.e., merely reducing the
 maximum LUT-size with the naive method), we see a much more significant advantage for the Proposed method.
-Of note, Proposed method shows an absolute advantage over the Previous method over all the cases tested.
+Of note, Proposed method shows an absolute advantage over the Shannon Only method over all the cases tested.
 
-Of particular note is bar\_size\_2015, which contains many highly complex, maximum size nodes. The Previous
+Of particular note is bar\_size\_2015, which contains many highly complex, maximum size nodes. The Shannon Only
 method suffered from its $2^n$ proportionality here and severely underperformed the ESOP-based method.
 However, the Proposed method shows a better ability to break down the complex functions into something
 with tractable T-cost. This seems to be due to the introduction of the Davio expansion and its ability
@@ -98,37 +99,10 @@ and thus fewer T-gates used.
 
 However, adder\_size\_2022 remains an exception because it is a particularly interesting case. At LUT6 size,
 all of the logic for every output bit fits into a single node, and thus, as is evident from the table,
-both the Proposed method and Previous method at LUT6 are identical to the naive case. What is more telling is
+both the Proposed method and Shannon Only method at LUT6 are identical to the naive case. What is more telling is
 that reducing the LUT-size does NOT help in this case. While the Proposed method outperforms both the ESOP-based
-method and Previous method at smaller LUT-sizes, it still remains inferior to the LUT6 case. Speaking in terms
+method and Shannon Only method at smaller LUT-sizes, it still remains inferior to the LUT6 case. Speaking in terms
 of the LUT network, the LUT6 case is simply a chain of nodes. An interesting further topic of research would be
 to synthesize LUT-networks that explicitly aim for this type of construction and again do the same experiments. 
 
 
-%% . However, there remain cases where the proposed method underperforms the ESOP implementation, such as bar\_size\_2015. 
-%% Qualitatively, a common trend among circuits that seem to have similar 
-%% numbers between the proposed and ESOP-based methods is that they have large
-%% numbers of highly complex, maximum width gates. This means more
-%% complex BDDs, and because the cost of the Shannon decomposition scales 
-%% exponentially with the number of nodes, this will close the gap with 
-%% the ESOP-based method. This is the case with bar\_size\_2015, where
-%% the vast majority of its gates are at the maximum LUT-size, leading to
-%% losing out to ESOP across the board. Others, such as dec\_size\_2018,
-%% instead have maximum width but minimum complexity (i.e., a single MCT gate)
-%% Boolean functions. As our proposed method may perform worse than
-%% synthesizing these gates directly using Gray-code, this will lead to a
-%% diminished advantage. Finally, a larger share of output nodes to 
-%% intermediate nodes also contributes, as the method is identical 
-%% between the two. A particularly interesting case is 
-%% adder\_size\_2022. At LUT6, this circuit's Boolean logic network can
-%% fit all of the logic for each bit into a single node, so there is no 
-%% need to generate any intermediate nodes; therefore, every single LUT 
-%% is generated identically to the ESOP-based method i.e., a ratio of
-%% 1. However, moving onto LUT5, we see an immediate jump in the numbers, 
-%% ostensibly because of the $2^n$ proportionality. We thereafter see a 
-%% drop in the ratio, though it still underperforms the ESOP-based method
-%% even when LUT-size is 3. 
-
-
-%% The balance between all of these elements seems to be the key in maximizing the advantage the proposed method has over direct synthesis methods. An interesting future topic of research would be to find how
-%% to produce LUT networks that maximize this advantage. Looking further, it is apparent that at smaller LUT-sizes, the Shannon decomposition method produces a much clearer advantage over the direct method. Additionally, we see using both the Shannon decomposition method in conjunction with smaller LUT-sizes yields a clear advantage in almost all of the cases we see. While this yields an advantage in T-count, keep in mind that the required ancilla increases. Even if we use dirty ancilla, trading T-gates for logical qubits, enough dirty ancilla will result in congestion in a real system, leading to increased gate counts that could effectively trade T-gates for CNOTs, and thus T-gates for an increased error-rate. A future topic of research could possibly look into an implementation hardware aware version of this algorithm that considers these resources at the time of synthesis of the LUT-network.

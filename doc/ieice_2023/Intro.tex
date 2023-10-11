@@ -1,81 +1,3 @@
-% \begin{figure*}[hbt]
-%   \begin{minipage}{0.46\linewidth}
-%     \begin{center}
-%       % \includegraphics[width=6cm]{img/toffoli.eps}
-%       % \includegraphics[width=\linewidth]{img/toffoli.eps}
-%       \scalebox{0.9} {
-%         \input{img/toffoli}
-%       }
-%       \caption{A Toffoli gate in Clifford+T basis}
-%       \label{fig-toffoli}
-%     \end{center}
-%   \end{minipage}
-%   \hspace*{10mm}
-%   \begin{minipage}{0.46\linewidth}
-%     \begin{center}
-%       % \includegraphics[width=6cm]{img/rtof.eps}
-%       %\includegraphics[width=\linewidth]{img/rtof.eps}
-%       \scalebox{0.9} {
-%         \input{img/rtof}
-%       }
-%       \caption{An RTOF gate in Clifford+T basis}
-%       \label{fig-rtof}
-%     \end{center}
-%   \end{minipage}
-%   %\vspace*{0.25cm}
-% \end{figure*}
-
-%     % ToffoliゲートとRTOFゲートの違いは，
-%     % RTOFゲートは入力によって回路の位相を変化させる場合があることにある．
-%     % 図\ref{rtof}に示すRTOFの全ての入力に対する位相は，表\ref{table-rtof}に示す通りである．
-%     % RTOFゲートの入力（$x_1, x_2, x_3$）が
-%     % $(1, 1, 0),(1, 0, 1), (1, 1, 1)$のとき，位相はそれぞれ，
-%       % $+\frac{\pi}{2}, +\pi, -\frac{\pi}{2}$だけ変化する．
-% \begin{figure*}[ht]
-%   \def\@captype{table}
-%   \begin{minipage}[ht]{.31\textwidth}
-%     \begin{center}
-%        %\scalebox{0.7}[1]{
-%         \begin{tabular}{c|c}      \hline
-%           input & $\Delta\theta$  \\\hline
-%           000   & 0      \\
-%           001   & 0      \\
-%           010   & 0      \\
-%           011   & 0      \\
-%           100   & 0      \\
-%           101   & $+\pi$          \\
-%           110   & $+\pi/2$   \\
-%           111   & $-\pi/2$ \\ \hline
-%         \end{tabular}        
-%     \end{center}
-%         \captionof{table}{Added phases by an RTOF.}
-%         \label{table-rtof}
-%   \end{minipage}
-%   \hspace{0.1cm}
-%   \begin{minipage}[ht]{.31\textwidth}
-%     \begin{center}
-%       \includegraphics[width=5cm]{img/toffoli-f.eps}
-%       \caption{Functional representations for the output of a Toffoli gate.}
-%       \label{toffoli-f}
-%     \end{center}
-%   \end{minipage}
-%   \hspace{0.1cm}
-%   \begin{minipage}{0.31\textwidth}
-%     \begin{center}
-
-%       \begin{center}
-%         \scalebox{0.9} {
-%             \input{img/fig-maslov-decomp}
-%         }
-%         \caption{A Toffoli Gate Decomposition from~\cite{bib-rtof-maslov}}
-%         \label{fig-maslov-decomp}
-%       \end{center}
-%     \end{center}
-%   \end{minipage}
-%   %\vspace*{0.25cm}  
-%   \vspace*{-0.25cm}
-%  \end{figure*}
-
 \begin{figure*}[t]
     \centering
     \begin{minipage}{0.6\textwidth}
@@ -121,75 +43,13 @@
     \label{fig-tof-rtof}
 \end{figure*}
 
-
-% \begin{figure}[hbt]
-%     \centering
-%     \begin{subfigure}[t]{0.46\linewidth}
-%         \centering
-%         \scalebox{0.9}{\input{img/toffoli}}
-%         \caption{Toffoli gate in Clifford+T basis}
-%         \label{fig-toffoli}
-%     \end{subfigure}
-%     \begin{subfigure}[t]{0.46\linewidth}
-%         \centering
-%         \scalebox{0.9}{\input{img/rtof}}
-%         \caption{RTOF gate in Clifford+T basis}
-%         \label{fig-rtof}
-%     \end{subfigure}
-% \end{figure}
-
-% \begin{figure}[ht]
-%     \centering
-%     \begin{subfigure}[t]{.31\textwidth}
-%         \centering
-%         \begin{tabular}{c|c}      
-%             \hline
-%             input & $\Delta\theta$  \\
-%             \hline
-%             000   & 0      \\
-%             001   & 0      \\
-%             010   & 0      \\
-%             011   & 0      \\
-%             100   & 0      \\
-%             101   & $+\pi$          \\
-%             110   & $+\pi/2$   \\
-%             111   & $-\pi/2$ \\
-%             \hline
-%         \end{tabular}
-%         \caption{Phases added by an RTOF gate}
-%         \label{table-rtof}
-%     \end{subfigure}
-%     \hspace{0.1cm}
-%     \begin{subfigure}[t]{.31\textwidth}
-%         \centering
-%         \includegraphics[width=5cm]{img/toffoli-f.eps}
-%         \caption{Functional representation of Toffoli gate's output}
-%         \label{toffoli-f}
-%     \end{subfigure}
-%     \hspace{0.1cm}
-%     \begin{subfigure}[t]{0.31\textwidth}
-%         \centering
-%         \scalebox{0.9}{\input{img/fig-maslov-decomp}}
-%         \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
-%         \label{fig-maslov-decomp}
-%     \end{subfigure}
-% \end{figure}
-
-% \begin{figure}[tbp]
-%     \centering
-%     \input{img/fig-maslov-decomp}
-%     \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
-%     \label{fig-maslov-decomp}
-% \end{figure}
-
-
 \section{Introduction}
 
-{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such as oracles in Grover's Algorithm and cost functions in VQE. To realize such quantum Boolean circuits, a Toffoli gate is an essential logic primitive in a universal gate set. However, these Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT, CNOT, and T. (e.g., the Clifford+T~\cite{bib-barenco-elementary} basis gate set), as depicted in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gate types. It is therefore useful to consider ways to reduce this {\it T-count}.
+{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such as oracles in Grover's Algorithm and cost functions in VQE. To realize such quantum Boolean circuits, a Toffoli gate is an essential logic primitive in a universal gate set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT, CNOT, and T. (e.g., the Clifford+T~\cite{bib-barenco-elementary} basis gate set), as depicted in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gate types. It is therefore useful to consider ways to reduce this {\it T-count}.
 
 One of the methods that has been proposed to reduce this T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}. Some recent work~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof}~\cite{bib-amy-phase-state} has proposed relative phase versions of common Boolean functions, particularly the Relative Phase Toffoli Gate (RTOF). 
 The work in~\cite{bib-rtof-maslov} showed that the method of constructing circuits offers advantages in T-count.
-% The work in~\cite{bib-rtof-maslov} showed that constructing circuits in the manner shown in Fig.~\ref{fig-maslov-decomp} has advantages in T-count. 
+
 Both~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed methods to generalize the construction of relative phase versions of quantum circuits that were introduced in~\cite{bib-selinger-rtof}. Because of these findings, cascading logic, such as those produced by LUT-based synthesis methods, thus present an interesting candidate to integrate with relative phase methods.
 
 Recent attempts to use~\cite{bib-lhrs-soeken} to synthesize quantum circuits using LUT-based methods have shown some promising results. As intermediate nodes ``cascade'' their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for. 
@@ -199,11 +59,11 @@ Our research seeks to leverage recent results in relative phase implementations 
 \noindent {\bf Our Contribution.} 
 We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit by improving upon our existing method \footnote{The preliminary version of this research will appear in ICCAD} to generate relative phase quantum circuits. Among our contributions:
 \begin{itemize}
-\item An improvement over the Shannon's decomposition based method by incorporating unbalanced relative phase constructions and Davio expansions.
+\item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio Expansions, as well as balanced and unbalanced constructions of relative phase gates.
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the above method to reduce T-count.
 \end{itemize}
 
-The paper is structured as follows: Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Then Section~\ref{Sec:Exist} lays out some motivations for the research we are going to conduct. Section~\ref{Sec:proposed} follows with the existing method, including both the method to realize functions up to a relative phase without any additional ancilla, as well as its use with the LUT-based synthesis. Then Section~\ref{Sec:new} covers our improvements to the method's relative phase generation algorithm. Then, our experimental results in Section~\ref{Sec:exp} compares the proposed method to the existing method and the naive method and finds a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
+The paper is structured as follows: Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method to realize functions up to a relative phase without any additional ancilla, as well as its use with the LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} compares the proposed method to the existing method and the naive method and finds a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
 
 
 

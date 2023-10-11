@@ -1,9 +1,9 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }     & \multigate{5}{x \cdot U} & \qw      & \multigate{5}{\bar{x} \cdot U'}\\
-          \push{{x}_{1} }     & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       \\
-          \push{\vdots}      &                          &          &                          \\
-          \push{{x}_{k} }     & \ghost{x \cdot U}        & \gate{X} & \ghost{\bar{x} \cdot U'}       \\
-          \push{\vdots}      &                          &          &              \\
-          \push{{x}_{n} }     & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       \\
-          \push{{\ket{0}}}    & \targ\qwx[-1]       & \qw      & \targ\qwx[-1]       \\
+          \push{{x}_{0} }  & \multigate{5}{x \cdot U} & \qw      & \multigate{5}{\bar{x} \cdot U'}&\qw\\
+          \push{{x}_{1} }  & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{\vdots}    &                          &          &                                &   \\
+          \push{{x}_{k} }  & \ghost{x \cdot U}        & \gate{X} & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{\vdots}    &                          &          &                                &   \\
+          \push{{x}_{n} }  & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{{\ket{0}}} & \targ\qwx[-1]            & \qw      & \targ\qwx[-1]                  &\qw\\
 }

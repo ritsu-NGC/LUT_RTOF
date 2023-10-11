@@ -16,7 +16,7 @@
 %% \end{figure*}
 %\vspace*{0.25cm}
 
-\section{Existing Method}
+\section{Proposed Method}
 \label{Sec:proposed}
 \subsection{Realizing Arbitrarily Controlled NOT Functions Up To A Relative Phase}
 \label{Subsec:UNOT}
@@ -28,9 +28,9 @@
     \label{fig-urtof}
 \end{figure}
 
-To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a $n$-input Toffoli gate or U-controlled NOT (UCNOT) as depicted in Fig.~\ref{fig-urtof} which was observed by Maslov~\cite{bib-rtof-maslov}. However, as noted in~\cite{bib-amy-phase-state}, the introduction of a relative phase here has an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the $C-X^*$ construction that is depicted in~\cite{bib-amy-phase-state}. We can generalize this $n$-input Toffoli gate to an arbitrarily controlled NOT gate as depicted in Fig.~\ref{fig-urtof}. It is easy to see this without further proof: we can imagine implementing the Boolean function separately and then routing its input to a CNOT control bit via a clean ancilla.
+To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a $n$-input Toffoli gate or U-controlled NOT (UCNOT) as depicted in Fig.~\ref{fig-urtof} which was observed by Maslov~\cite{bib-rtof-maslov}. However, as noted in~\cite{bib-amy-phase-state}, the introduction of a relative phase here has an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the $C-X^*$ construction that is depicted in~\cite{bib-amy-phase-state}. We can generalize this $n$-input Toffoli gate to an arbitrarily controlled NOT gate as depicted in Fig.~\ref{fig-urtof}. 
 
-\begin{figure}
+\begin{figure}[tb]
     \centering
     \scalebox{0.8} {
     \input{img/fig-f-dot-g-in}
@@ -75,35 +75,37 @@ We can further generalize this. Recall from Section~\ref{Sec:Exist} that a Toffo
     \label{fig-bool-or}
 \end{figure}
 
-Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$. Using the constructions mentioned in Section~\ref{Subsec:UNOT}, we thus have a way to recursively construct arbitrary Boolean functions up to a relative phase as a single target controlled NOT gate.
+Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
+Using the constructions mentioned in Section~\ref{Subsec:UNOT}, we thus have a way to recursively construct
+arbitrary Boolean functions up to a relative phase as a single target controlled NOT gate.
 
-As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$. This means that we can implement this function as a series of Toffoli gates. Generalizing to UCNOT gates, we get the construction shown in Fig.~\ref{fig-bool-or}.
+As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
+This means that we can implement this function as a series of Toffoli gates. Generalizing to UCNOT gates, we get
+the construction shown in Fig.~\ref{fig-bool-or}, that we will be using to construct our implementations in the
+next two sections.
 
 
-First, from the Shannon's decomposition formula~$f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$ where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As always with Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each UCNOT in it with one of the terms in the Shannon's decomposition that we just made. As noted in Section~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we are left with a simple CNOT as our U-controlled NOT expression.
+First, from the Shannon's decomposition
+formula~$f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$
+where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As always with
+Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
+determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
+we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each
+UCNOT in it with one of the terms in the Shannon's decomposition that we just made. As noted in
+Section~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
+of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we
+are left with a simple CNOT as our U-controlled NOT expression.
 
-If it is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of the Shannon decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the function. As we will see in the next example, we can express the relative-phase Toffoli gate construction in~\cite{bib-amy-phase-state} as a special case of this construction
+If it is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
+the Shannon decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
+identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the
+function. As we will see in the next example, we can express the relative-phase Toffoli gate construction
+in~\cite{bib-amy-phase-state} as a special case of this construction
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. Because the Shannon decomposition now evaluates to either $x_k \cdot F_{x=1} + \bar{x}$ or $x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
-%The reader may note at this point that this gate order is NOT symmetric i.e. the CNOT and the RTOF do not commute with each other. However, because the difference is entirely in phase space, and since this will just be reversed in the uncomputation logic, we treat them as interchangeable.
-%% \begin{example}
-%%   \label{ex-rtof}
-%%   Starting with $F(x_0,x_1,\cdots,x_n) = x_0 \cdot x_1 \cdot \cdots
-%%   \cdot x_n$ we can decompose this into $F(x_0,x_1,\cdots,x_n) =
-%%    x_0 \cdot F(x_0=1,x_1,\cdots,x_n) + \bar{x_o} \cdot   F(x_0=0,x_1,\cdots,x_n)$ which is reduced to
-%%    $x_0 \cdot F(x_0=1,x_1,\cdots,x_n)$ for this function. 
-
-%%  The first stage of this decomposition thus just looks like the
-%%  decomposition in~\cite{bib-rtof-maslov}. We can see that if we
-%%  proceed down the Shannon decomposition, one or the other side of the
-%%  equation will always evaluate to 0. Therefore it simplifies to the
-%%  decomposition in~\cite{bib-amy-phase-state}. In fact, it generalizes
-%%  it slightly because it also automatically handles the case where
-%%  $F(\cdots , x_k=0 , \cdots) \neq 0$, meaning this method can
-%%  decompose Mixed-Polarity Multiple-Control Toffoli (MPMCT) gates as
-%%  well. 
-%%   This produces $2^n * 4$ T-gates and represents a best-case scenario for an $n$-input Boolean function (i.e., one ESOP term)
-%% \end{example}
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
+meaning, a NOT function. Because the Shannon decomposition now evaluates to either $x_k \cdot F_{x=1} + \bar{x}$ or
+$x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
+$\bar{x_k}$ controlled~CNOT gate. 
 
 \begin{example}
   \label{ex-bool}
@@ -117,95 +119,94 @@ Note that with this decomposition, when the function evaluates as ``True'', we e
   (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input
   case without any additional information). %The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
   
-  For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term. We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method. We treat optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$ and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$. This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$ as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
+  For the $F(x_3 = 1,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term.
+  We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is
+  chosen to best illustrate the working of the method. We treat optimal variable order later). We see that
+  $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$
+  and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$.
+  This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$
+  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose
+  the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
   
   Finally we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 1,x_2,x_1)$ as in Fig~\ref{fig-bool-or} again. The result is depicted in Fig.~\ref{app-func-decomp} in ~\ref{App:FuncDecomp}.
 \end{example}
 
-\subsection{Synthesizing A Boolean Function Using LUT-networks and Shannon Decomposition RTOF}
-
-Using Algorithm~\ref{algo-shannon} defined in the previous subsection, we are now ready to propose our LUT-based synthesis method 
-
-First we compose the circuit as in Sec.~\ref{Sec:lhrs}. However, this time, we replace the alternating pairs of compute/uncompute gates with the respective relative phase version using Algorithm~\ref{algo-shannon} as well as its associated inverse. If there is no matching uncompute logic i.e., a node acting on an output qubit, we generate the logic exactly. The method is enumerated explicitly in Algorithm~\ref{algo-lut}.
-
-This QC is then parsed by our algorithm, synthesizing each UCNOT into relative phase versions of the partial Boolean functions in each intermediate node (as well as their inverse), and exact versions in each output node. These are then recombined into a quantum circuit. 
-
-\begin{example}
-\label{ex-lut-rp}
-  We follow the steps in Ex.~\ref{ex-lut}. We then parse through LUTs
-  $1$,$2$,$1^{\dagger}$,$2^{\dagger}$,$4$,and $4^{\dagger}$ and
-  generate their relative phase versions. For nodes 3 and 5, we use an
-  ESOP-based exact synthesis. 
-  The result is depicted in Fig.~\ref{fig-lut-qc}.
-\end{example}
-
-\begin{algorithm}[tbp]
-  \caption{shannon\_decomp(BF: a Boolean function)}
-  \label{algo-shannon}
-  \begin{algorithmic}
-%    \State BF $\leftarrow$ A Boolean Function
-    \State QC $\leftarrow$ an empty quantum circuit with registers
-    \State Output $\leftarrow$ the output bit of the Boolean Function
-    \State order $\leftarrow$ BF.find\_optimal\_order()
-    \If{$BF == True$}
-    \State return CNOT
-    \ElsIf{$BF == False$}
-    \State return QC $\leftarrow$ Identity(Output)
-    \ElsIf{$BF$ is a leaf node}
-    \State return CNOT
-    \Else
-    \State $F_0$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 0)}$)
-    \State $F_1$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 1}$)
-    \State return a UCNOT implemented by composing $F_0$ + $F_1$ in the manner shown in Fig.~\ref{app-shannon}
-    \EndIf
-  \end{algorithmic}
-  
-\end{algorithm}
-
-\begin{algorithm}[tbp]
-  \caption{lut\_synthesis}
-  \label{algo-lut}
-  \begin{algorithmic}
-    \State lut\_net $\leftarrow$ a LUT network
-    \State esop (Boolean Function) $\leftarrow$ a method to generate
-    an exact QC to calculate a Boolean function implemented as a UCNOT gate 
-    \For{every node in lut\_net}
-    \If{node is intermediate node}
-    \State QC $\leftarrow$ add shannon\_decomp (node's Boolean function) on a dirty ancilla
-    \State QC $\leftarrow$ add inverse of shannon\_decomp (node's 
-    Boolean function) where we restore the state of the same dirty ancilla
-    \ElsIf{node is output node}
-    \State QC $\leftarrow$ add esop (node's Boolean function) acting on a dirty ancilla
-    \EndIf
-    \EndFor
-  \end{algorithmic}
-%\vspace*{-0.25cm}
-\end{algorithm}
-
-\section{Proposed Method}
-\label{Sec:new}
-In this section we aim to improve the existing method by improving the relative phase construction function. As is evident from Fig~\ref{app-shannon}, at every level there is a doubling of the cost of the level below it. That means that the \emph{best case} for this method is $2^n$. Below we detail several attempts to reduce this. 
-
-\subsection{Using Balanced and Unbalanced Relative Phase Functions}
-\label{Subsec:balanced}
-As Amy et al. ~\cite{bib-amy-phase-state} pointed out, because any multiplication is first ``constructed'' in phase space and then rotated back into state space with a Hadamard gate, adding a relative phase circuit inside that logic with a \emph{target dependent} phase (meaning one whose value depends on the target bit of the function) in an \emph{unbalanced} construction, such as in Fig~\ref{fig-urtof}, will see its relative phase added on to the main Boolean function as a residue i.e. it will take the form of $F=x \cdot F_k + F_{k-1}$. To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used, with pairs of relative phase circuits and their inverses to cancel out the target dependence that the Hadamard gate on the bit will act on. In the process, such a construction creates a function with a \emph{target independent}relative phase. This means that it can be used inside an unbalanced construction without incurring residue since the Hadamard gate now does not have any dependence to act on.
-
-Amy et al. propose a method where balanced and unbalanced constructions are alternated at different levels of the construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. We can easily extend this to our method of constructing arbitrary Boolean functions above. We start at the root node with an unbalanced construction, and any children that are constructed recursively will have to be constructed in a balanced manner. The children of those in turn can be unbalanced, and so on. 
-
-In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite a significant reduction in the regime we are working with. For example for $n=6$, the circuit is at MOST 1/8th of the original cost! Merely introducing this methodology results in significant savings for larger LUT-sizes, though its effect could be diminished for smaller ones.
+However, as we will see later in Section \ref{Sec:Exp}, some expressions are not amenable to a purely Shannon
+Decomposition. Several of them have highly complex (many BDD nodes) representation in the Shannon Decomposition.
+We must then introduce a different representation to take them into account.
 
 \subsection{Integrating Davio Expansions}
 \label{Subsec:davio}
-As can be seen in the previous section, a significant portion of the cost comes from multiplication. Therefore it is useful to consider a method that takes advantage of ESOP expressions. Recall the positive Davio Expansion $F=F_1\oplus x_n \cdot F_2$ and the corresponding negative Davio expansion $F=F_0 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$, and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that at every level, only one multiplication takes place, which already reduces the maximum possible T-gate use at any node from 8 to 4. Additionally, since there is only one multiplication performed, the non-multiplied term ($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can be implemented as an \emph{unbalanced} relative phase circuit, provided the parent construction can also be unbalanced. This means there is no need to double the logic inside to cancel the residue, and so the exponential is further reduced. Used in conjunction with an alternating series of balanced and unbalanced logic to implement the multiplication, this can reduce the exponential relation even further.
+As can be seen in the previous section, a significant portion of the cost comes from multiplication.
+Therefore it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
+expressions. Recall the positive Davio Expansion $F=F_1\oplus x_n \cdot F_2$ and the corresponding
+negative Davio expansion $F=F_0 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$,
+and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that at every level, only one
+multiplication takes place, which already reduces the maximum possible T-gate use at any node from
+8 to 4. 
 
-\subsection{Improved Method}
+\subsection{Using Balanced and Unbalanced Relative Phase Functions}
+\label{Subsec:balanced}
+As Amy et al. ~\cite{bib-amy-phase-state} pointed out, because any multiplication is first ``constructed''
+in phase space and then rotated back into state space with a Hadamard gate, adding a relative phase circuit
+inside that logic with a \emph{target dependent} phase (meaning one whose value depends on the target bit
+of the function) in an \emph{unbalanced} construction, such as in Fig~\ref{fig-urtof}, will see its relative
+phase added on to the main Boolean function as a residue i.e. it will take the form of $F=x \cdot F_k + F_{k-1}$.
+To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used, with pairs
+of relative phase circuits and their inverses to cancel out the target dependence that the Hadamard gate on the
+bit will act on. In the process, such a construction creates a function with a \emph{target independent}relative
+phase. This means that it can be used inside an unbalanced construction without incurring residue since the
+Hadamard gate now does not have any dependence to act on.
+
+Amy et al. propose a method where balanced and unbalanced constructions are alternated at different levels of the
+construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. We can
+easily extend this to our method of constructing arbitrary Boolean functions above. We start at the root node
+with an unbalanced construction, and any children that are constructed recursively will have to be constructed
+in a balanced manner. The children of those in turn can be unbalanced, and so on. 
+
+In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite
+a significant reduction in the regime we are working with. For example for $n=6$, the circuit is at MOST 1/8th of
+the original cost! Merely introducing this methodology results in significant savings for larger LUT-sizes, though
+its effect could be diminished for smaller ones.
+
+This has additional ramifications when combined with the Davio Expansions. Since there is only one multiplication
+performed, the non-multiplied term ($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can
+be implemented as an \emph{unbalanced} relative phase circuit, provided the parent construction can also be
+unbalanced. This means there is no need to double the logic inside to cancel the residue, and so the exponential
+is further reduced. This can reduce the exponential relation even further.
+
+\subsection{Relative Phase Synthesis Algorithm}
 \label{Subsec:Pro:Improved}
-We now try to integrate the Sec~\ref{Subsec:shannon}, Sec~\ref{Subsec:balanced}, and ~\ref{Subsec:davio}. First the function is expanded using the Shannon, Positive Davio, or Negative Davio expansions, independently. We go over constructions for them in Appendix ~\ref{App:ManyDecomp}. The constituent subfunctions of each expansion are then processed in the same way by recursing the function. When the logic can be implemented as an unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is relayed to the next level of the recursion via an input. The recursion terminates as in Alg.~\ref{algo-shannon}. As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
+We now try to integrate the Sec~\ref{Subsec:shannon}, Sec~\ref{Subsec:balanced}, and ~\ref{Subsec:davio}.
 
-The process is then repeated with all of the variable orders and the minimum is picked from the results. The resulting algorithm is described in Alg.~\ref{algo-new}
+As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
+This means that we can implement this function as a series of Toffoli gates. Generalizing to UCNOT gates, we get
+the construction shown in Fig.~\ref{fig-bool-or}.
+
+First, we determine the variable order to decompose the function in. As the details of the variable order
+computation are not important to the algorithm itself, we will defer discussion of how we determine
+this variable order to our discussion of the implementation in Section~\ref{Sec:exp}.
+
+If the function is neither ``True'' nor ``False'', the function is expanded using the Shannon, Positive
+Davio, or Negative Davio expansions, independently. We go over constructions for them in Appendix
+~\ref{App:ManyDecomp}. The constituent subfunctions of each expansion are then processed in the same way by
+recursing the function with the decomposed Boolean function as input.. When the logic can be implemented as an
+unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is
+relayed to the next level of the recursion via an input.
+
+If it is ``False'', we have a False-controlled-NOT, meaning an identity function. In this case we remove the term
+with this function entirely.
+
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{x=1}$ in Shannon's Decomposition or $\bar{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio Expansion, we simply get $x_k$ or $\bar{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
+
+As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
+compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
+The process is then repeated with all of the variable orders and the minimum is picked from the results. The
+resulting algorithm is described in Alg.~\ref{algo-new}
+
 
 \begin{algorithm}[tb]
-  \caption{new\_decomp(BF: a Boolean function, balanced: Boolean indicating whether this function is balanced)}
+  \caption{relative\_phase(BF: a Boolean function, balanced: Boolean indicating whether this function is balanced)}
   \label{algo-new}
   \begin{algorithmic}
 %    \State BF $\leftarrow$ A Boolean Function
@@ -220,14 +221,14 @@ The process is then repeated with all of the variable orders and the minimum is 
     \State return CNOT
     \Else
     \State    //The Shannon $F_0$ and $F_1$ alternate balanced and unbalanced
-    \State    $F_0$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 0)}$,!balanced) 
-    \State    $F_1$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 1}$,!balanced) 
+    \State    $F_0$ $\leftarrow$ relative\_phase($BF_{x_{order[first]}\leftarrow 0)}$,!balanced) 
+    \State    $F_1$ $\leftarrow$ relative\_phase($BF_{x_{order[first]}\leftarrow 1}$,!balanced) 
     \State
     \State    //The Davio $F_0$ and $F_1$ inherit the parent's balanced attribute
-    \State    $(F_0)_{dav}$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 0)}$,balanced) 
-    \State    $(F_1)_{dav}$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 1}$,balanced) 
+    \State    $(F_0)_{dav}$ $\leftarrow$ relative\_phase($BF_{x_{order[first]}\leftarrow 0)}$,balanced) 
+    \State    $(F_1)_{dav}$ $\leftarrow$ relative\_phase($BF_{x_{order[first]}\leftarrow 1}$,balanced) 
     \State
-    \State    $F_2$ $\leftarrow$ new\_decomp($BF_{x_{order[first]}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
+    \State    $F_2$ $\leftarrow$ relative\_phase($BF_{x_{order[first]}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
     \State                       !balanced)
     \State
     \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ in a balanced manner if balanced or unbalanced if not.
@@ -267,34 +268,65 @@ The process is then repeated with all of the variable orders and the minimum is 
 
 \end{example}
 
-%% \subsection{Shannon's Decomposition Cost and BDD representation}
+\begin{example}
 
-%% As is already apparent from the diagram, each variable that the function is dependent on roughly doubles the T-count, such that the total cost $C \propto 2^n$. This is in line with Barenco et. al.~\cite{bib-barenco-elementary}, who posit that the T-count of a gate is exponential with respect to the number of inputs in the absence of ancilla. As can also be seen from the diagram, the cost at each level is linearly proportional on the number of nodes at each level, so the relative complexity of the function also factors into the cost. In an environment where dirty ancilla are assumed to be plentiful, it is therefore desireable to limit these implementations to smaller numbers of input qubits i.e., smaller LUT-sizes.
+%% \begin{algorithm}[tbp]
+%%   \caption{shannon\_decomp(BF: a Boolean function)}
+%%   \label{algo-shannon}
+%%   \begin{algorithmic}
+%% %    \State BF $\leftarrow$ A Boolean Function
+%%     \State QC $\leftarrow$ an empty quantum circuit with registers
+%%     \State Output $\leftarrow$ the output bit of the Boolean Function
+%%     \State order $\leftarrow$ BF.find\_optimal\_order()
+%%     \If{$BF == True$}
+%%     \State return CNOT
+%%     \ElsIf{$BF == False$}
+%%     \State return QC $\leftarrow$ Identity(Output)
+%%     \ElsIf{$BF$ is a leaf node}
+%%     \State return CNOT
+%%     \Else
+%%     \State $F_0$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 0)}$)
+%%     \State $F_1$ $\leftarrow$ shannon\_decomp($BF_{x_{order[first]}\leftarrow 1}$)
+%%     \State return a UCNOT implemented by composing $F_0$ + $F_1$ in the manner shown in Fig.~\ref{app-shannon}
+%%     \EndIf
+%%   \end{algorithmic}
+  
+%% \end{algorithm}
 
-%% As can already be seen, the Shannon's decomposition method lends itself naturally to representation by Binary Decision Diagrams (BDDs). Thus, representing our Boolean functions as BDDs gives us an easy way to traverse down the Shannon's decomposition tree merely by traversing the BDD in the same direction and feeding the next node in the traversal as your input function to the next iteration of the recursive loop.
+\begin{algorithm}[tb]
+  \caption{lut\_synthesis}
+  \label{algo-lut}
+  \begin{algorithmic}
+    \State lut\_net $\leftarrow$ a LUT network
+    \State esop (Boolean Function) $\leftarrow$ a method to generate
+    an exact QC to calculate a Boolean function implemented as a UCNOT gate 
+    \For{every node in lut\_net}
+    \If{node is intermediate node}
+    \State QC $\leftarrow$ add relative\_phase(node's Boolean function) on a dirty ancilla
+    \State QC $\leftarrow$ add inverse of relative\_phase(node's 
+    Boolean function) where we restore the state of the same dirty ancilla
+    \ElsIf{node is output node}
+    \State QC $\leftarrow$ add esop (node's Boolean function) acting on a dirty ancilla
+    \EndIf
+    \EndFor
+  \end{algorithmic}
+%\vspace*{-0.25cm}
+\end{algorithm}
 
-%% This also means that there is now a direct way of calculating the T-gate cost of the function. As we can see in the method above, a node in the BDD corresponds to 4 T-gates. If the resulting outgoing edges terminate in ``True'' or ``False'', there is no additional cost. Therefore it is easy to estimate the T-gate cost of the function by multiplying the number of nodes at each level $n$ by 2. 
+\subsection{Synthesizing A Boolean Function Using LUT-networks and Shannon Decomposition RTOF}
 
-%% %% \begin{example}
-%% %%   \label{ex-cost}
-%% %%   We take the BDD of the Boolean function in Example~\ref{ex-bool}
-%% %%   depicted in Fig.~\ref{fig-func-bdd}. Starting at the leaf nodes, we
-%% %%   note that these can be implemented using only CNOT gates so we set
-%% %%   the cost to 0. Moving up to the next level, we see two non-leaf
-%% %%   nodes, and each of them has one non-constant child node and one leaf
-%% %%   child. so we add 4 to the cost for each of the nodes at this
-%% %%   level. Finally, we arrive at the root node. Because it has two
-%% %%   non-constant child nodes, the costs of these child nodes are
-%% %%   multiplied by 2, and 4 gates are added to process each node. This
-%% %%   gives us a total of 24 T-gates, which is what we get in
-%% %%   Example~\ref{ex-bool}. 
-%% %% \end{example}
+Using Algorithm~\ref{algo-new} we are now ready to propose our LUT-based synthesis method 
 
+First we compose the circuit as in Sec.~\ref{Sec:lhrs}. However, this time, we replace the alternating pairs of compute/uncompute gates with the respective relative phase version using Algorithm~\ref{algo-shannon} as well as its associated inverse. If there is no matching uncompute logic i.e., a node acting on an output qubit, we generate the logic exactly. The method is enumerated explicitly in Algorithm~\ref{algo-lut}.
 
-%% \subsection{Optimizing the RTOF by BDD}
-%% \label{Subsec:rtof-opt}
+This QC is then parsed by our algorithm, synthesizing each UCNOT into relative phase versions of the partial Boolean functions in each intermediate node (as well as their inverse), and exact versions in each output node. These are then recombined into a quantum circuit. 
 
-%% This now gives us a way of optimizing our circuit. Recall that we discuss variable orders earlier. Because the cost of the decomposed circuit scales directly with the BDD, it is enough to find a variable order that minimizes the number of nodes in the BDD and to simply use that. Further, since the Shannon decomposed branches are now independent of each other, we can choose a different variable order for every succeeding level, and minimize the corresponding circuit as we go along.
+\label{ex-lut-rp}
+  We follow the steps in Ex.~\ref{ex-lut}. We then parse through LUTs
+  $1$,$2$,$1^{\dagger}$,$2^{\dagger}$,$4$,and $4^{\dagger}$ and
+  generate their relative phase versions. For nodes 3 and 5, we use an
+  ESOP-based exact synthesis. 
+  The result is depicted in Fig.~\ref{fig-lut-qc}.
+\end{example}
 
-%% Knowing this, we are now ready to propose our algorithm to generate an arbitrary Boolean function up to a relative phase in Algorithm~\ref{algo-shannon}. First we convert the target Boolean function to a BDD. We then find a suitable variable order that minimizes the number of nodes in the BDD (We leave the calculation up to the implementation depending on the scale of the problem. We present a solution in Section~\ref{Sec:exp} that works for the problems we used in our experiments, but this is not meant to be a part of the main algorithm). We then proceed with our Shannon decomposition recursively in the variable order. However, we reevaluate the optimality of the BDD order at every level and rearrange the variables depending on which minimizes the subfunction. The algorithm terminates when all branches reach either leaves or True/False.
 
