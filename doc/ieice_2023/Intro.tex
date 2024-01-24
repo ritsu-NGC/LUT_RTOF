@@ -5,7 +5,7 @@
             \centering
              \input{img/toffoli}
             \caption{A Toffoli gate in Clifford+T basis}
-            \label{fig-toffoli}
+            \sublabel{fig-toffoli}
         \end{subfigure}
         
         \vspace{10mm}
@@ -13,7 +13,7 @@
             \centering
              \input{img/rtof}
             \caption{An RTOF gate in Clifford+T basis}
-            \label{fig-rtof}
+            \sublabel{fig-rtof}
         \end{subfigure}
     \end{minipage}
     \hspace{10mm}
@@ -23,7 +23,7 @@
         \centering
         \begin{tabular}{c|c}      
             \hline
-            {x1,x2,x3} & $\Delta\theta$  \\
+            {x1,x2,x3} & $\Delta\theta$  \\  
             \hline
             000   & 0      \\
             001   & 0      \\
@@ -36,7 +36,7 @@
             \hline
         \end{tabular}
         \caption{Phases added by an RTOF gate}
-        \label{table-rtof}
+        \sublabel{table-rtof}
         \end{subfigure}
     \end{minipage}
     \caption{A Toffoli gate and an RTOF gate}
@@ -45,25 +45,31 @@
 
 \section{Introduction}
 
-{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such as oracles in Grover's Algorithm and cost functions in VQE. To realize such quantum Boolean circuits, a Toffoli gate is an essential logic primitive in a universal gate set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT, CNOT, and T. (e.g., the Clifford+T~\cite{bib-barenco-elementary} basis gate set), as depicted in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gate types. It is therefore useful to consider ways to reduce this {\it T-count}.
+{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such as oracles in Grover's algorithm and cost functions in VQE. To realize such quantum Boolean circuits, a Toffoli gate is an essential logic primitive in a universal gate set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT, CNOT, and T gates (e.g., the Clifford + T~\cite{bib-barenco-elementary} basis gate set), as depicted in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gates. It is therefore useful to consider ways to reduce this {\it T-count}, which is the number of both the T-gates and their inverse in the circuit.
 
-One of the methods that has been proposed to reduce this T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}. Some recent work~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof}~\cite{bib-amy-phase-state} has proposed relative phase versions of common Boolean functions, particularly the Relative Phase Toffoli Gate (RTOF). 
-The work in~\cite{bib-rtof-maslov} showed that the method of constructing circuits offers advantages in T-count.
+One of the methods that has been proposed to reduce the T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}, which is an input dependent phase on the output. Some recent work~\cite{bib-rtof-maslov,bib-selinger-rtof,bib-amy-phase-state} has proposed relative phase versions of common Boolean functions, particularly the Relative Phase Toffoli Gate (RTOF). 
+The work in~\cite{bib-rtof-maslov} showed that the method of constructing circuits in this relative phase manner offers advantages in T-count.
 
-Both~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed methods to generalize the construction of relative phase versions of quantum circuits that were introduced in~\cite{bib-selinger-rtof}. Because of these findings, cascading logic, such as those produced by LUT-based synthesis methods, thus present an interesting candidate to integrate with relative phase methods.
+Both~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed methods to generalize the 
+construction of relative phase versions of quantum circuits that were introduced in~\cite{bib-selinger-rtof}. 
+These identify matching pairs of compute/uncompute logic as a possible application of relative phase 
+circuits, because any relative phase introduced can be canceled out by simply using the inverse of the
+gate in the uncompute logic. Because of these findings, cascading logic, such as those 
+produced by Lookup Table (LUT) based synthesis methods, thus present an interesting candidate to integrate 
+with relative phase methods.
 
-Recent attempts to use~\cite{bib-lhrs-soeken} to synthesize quantum circuits using LUT-based methods have shown some promising results. As intermediate nodes ``cascade'' their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for. 
+Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results ~\cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for. 
 
-Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce T-count in a quantum circuit.
+Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit.
 
 \noindent {\bf Our Contribution.} 
-We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit by improving upon our existing method \footnote{The preliminary version of this research will appear in ICCAD} to generate relative phase quantum circuits. Among our contributions:
+We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit by generating relative phase quantum circuits. Among our contributions:
 \begin{itemize}
 \item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio Expansions, as well as balanced and unbalanced constructions of relative phase gates.
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the above method to reduce T-count.
 \end{itemize}
 
-The paper is structured as follows: Section~\ref{Sec:prelim} outlines preliminary information for understanding this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method to realize functions up to a relative phase without any additional ancilla, as well as its use with the LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} compares the proposed method to the existing method and the naive method and finds a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
+The paper is structured as follows. Section~\ref{Sec:prelim} gives preliminary information to understand this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method for performing functions up to a relative phase without any additional ancilla and its use with LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} compare the proposed method to a simplistic relative phase method, as well as the naive method, and find a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
 
 
 

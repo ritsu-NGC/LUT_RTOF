@@ -3,6 +3,10 @@
 \onecolumn
 
 \appendix
+%\counterwithin{figure}{section}
+%\newcommand*{\currentname}{\@currentlabelname}
+\newcommand{\thenewsection}{\Alph{section}}
+\renewcommand\thefigure{\thenewsection\arabic{figure}}
 
 \section{Function Decomposition}
 \label{App:FuncDecomp}
@@ -51,7 +55,7 @@
         \input{img/fig-davio-pos}
       }
     \end{center}
-    \caption{Balanced Davio Expansion}
+    \caption{Balanced positive Davio Expansion}
     \label{app-davio-pos}
   \end{minipage}
   \hspace{0.5cm}
@@ -80,7 +84,7 @@
   \begin{minipage}{0.45\linewidth}
     \begin{center}
       \scalebox{0.5} {
-        \input{img/fig-davio-pos-unb}
+        \input{img/fig-davio-neg-unb}
       }
     \end{center}
     \caption{Unbalanced negative Davio Expansion}

@@ -14,11 +14,18 @@
 \usepackage{algorithm, algpseudocode} % texlive-science
 \usepackage[braket, qm]{qcircuit}
 
+\usepackage{nameref}
 \usepackage[braket, qm]{qcircuit}
 \usepackage{tikz}
 %
 \input{img/defs}
 
+%\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}}
+
+\makeatletter
+\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}}
+\makeatother
+\captionsetup{subrefformat=parens}
 \algrenewcommand\algorithmicindent{0.5em}%
 \newtheorem{definition}{Definition}
 \newtheorem{example}{Example}
@@ -53,7 +60,7 @@
 \setcounter{page}{1}
 
 \field{A}
-\title{Leveraging Different Boolean Function Decompositions to Optimize LUT-based Quantum Circuit Synthesis}
+\title{Leveraging Different Boolean Function Decompositions to Reduce T-Count in LUT-based Quantum Circuit Synthesis}
 \authorlist{%
  \authorentry[dizzy@ngc.is.ritsumei.ac.jp]{David Clarino}{n}{rits}\MembershipNumber{}
  \authorentry[accel@ngc.is.ritsumei.ac.jp]{Naoya Asada}{n}{rits}\MembershipNumber{}
@@ -62,7 +69,8 @@
 }
 \affiliate[rits]{The author is with the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, 525-8577 Japan.
 }
-\affiliate[ibm]{The author is with IBM Quantum, IBM Research - Tokyo, Tokyo, 103-8510 Japan
+\affiliate[ibm]{The author is with IBM Quantum, IBM Research - Tokyo, Tokyo, 103-8510 Japan. \\
+\hspace*{0.5cm}A preliminary version of this paper is presented in ICCAD 2023. 
 }
 
 
@@ -71,21 +79,17 @@
 \maketitle
 
 \begin{summary}
-  LUT-based synthesis methods have recently been proposed as a way to
-  synthesize quantum Boolean circuits in a qubit constrained
-  environment. Other recent research has demonstrated the possibility of using
-  Relative Phase quantum circuits in tandem has an advantage in minimizing
-  T-count in the fault-tolerant quantum computing paradigm. Previously a Shannon's
-  Decomposition based algorithm for generating Relative Phase quantum circuits,
-  used in conjunction with LUT-based synthesis, yields a small but clear advantage
-  in T-counts. In order to further this advantage, several other techniques
-  are integrated, such as using Davio expansions, as well as alternating
-  balanced and unbalanced Relative Phase Circuits. This yields a much more clear
-  advantage even at bigger LUT-sizes. 
+  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits in a qubit-constrained environment. Other recent 
+  research has demonstrated the possibility of using {\it relative phase} quantum 
+  circuits in tandem has an advantage in minimizing T-count in the fault-tolerant quantum 
+  computing paradigm. To generate such arbitrary Boolean functions, we utilize Shannon's 
+  Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative
+  phase circuits. Experimental results demonstrate that our method can reduce the T-count
+  to an average of 24\% of the conventional method. 
   
 \end{summary}
 \begin{keywords}
-relative-phase Toffoli gates (RTOF), circuit optimization, LUT, synthesis
+relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit synthesis
 \end{keywords}
 \setlength\textfloatsep{4pt}
 \setlength\floatsep{0pt}
@@ -97,16 +101,19 @@ relative-phase Toffoli gates (RTOF), circuit optimization, LUT, synthesis
 \input{Mot.tex}
 \input{Pro.tex}
 \input{Exp.tex}
+%\vspace{5mm}
 \input{Concl.tex}
+
+%\vspace{10mm}
 
 \bibliographystyle{ieicetr}%
 \bibliography{ref}%
 
-\vspace{-22mm}
+\vspace{-10mm}
 
 \profile[img/clarino.pdf]{David Clarino}{received his BS EECS and BA Physics from UC Berkeley and MS from Santa Clara University. He is currently a student at the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, Japan. His research interests include quantum circuit design and quantum circuit verification and he has previously worked on SoC design verification}
 
-\vspace{-5mm}
+%\vspace{-5mm}
 
 \profile[accel.jpg]{Naoya Asada}{received his bachelor's degree from
 College of Information Science and Engineering, Ritsumeikan
@@ -115,11 +122,11 @@ Graduate School of Information Science and Engineering, Ritsumeikan
 University in 2023. He is currently with Mitsubishi Electric Corp. 
 }
 
-\vspace{-5mm}
+%\vspace{-5mm}
 
 \profile[img/matsuo.pdf]{Atsushi Matsuo}{received his B.E., M.E. and Ph.D. degrees in Information Science and Engineering from Ritsumeikan University, Shiga, Japan in 2011, 2013, and 2023, respectively. His research interests include quantum circuit design, compilers for quantum circuits, and variational quantum algorithms.}
 
-\vspace{-5mm}
+%\vspace{-5mm}
 
 \profile[img/Yamashita.pdf]{Shigeru Yamashita}{is a professor at the
 Department of Computer Science, College
@@ -135,7 +142,7 @@ on Computer-Aided Design of Integrated Circuits and Systems
 Best Paper Award, SASIMI 2010 Best Paper Award, 2010 IPSJ
 Yamashita SIG Research Award, and 2010 Marubun Academic
 Achievement Award of the Marubun Research Promotion Foundation.
-He is a senior member of IEEE, and a member of IPSJ.}
+He is a senior member of IEEE and a senior member of IPSJ.}
 
 
 

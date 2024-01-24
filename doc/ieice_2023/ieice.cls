@@ -1,3 +1,5 @@
+
+
 %% LaTeX2e Class File for IEICE Transactions by ULS and Company (1999-2016).
 %%  E-mail: ieice-div@uls.co.jp or teppei@uls.co.jp, http://www.uls.co.jp/
 \NeedsTeXFormat{LaTeX2e}
@@ -20,6 +22,7 @@
 \newif\if@Proof \@Prooffalse
 \DeclareOption{Proof}{\@Prooftrue}
 \newif\if@cameraready \@camerareadyfalse
+
 \DeclareOption{cameraready}{\@camerareadytrue}
 \def\ieice@warning{\ClassWarningNoLine{ieice}}
 \newif\if@referee \@refereefalse
