@@ -19,24 +19,24 @@
 \section{Proposed Method}
 \label{Sec:proposed}
 \subsection{Realizing Arbitrary Boolean Functions Up To A Relative Phase}
-\label{Subsec:UNOT}
+\label{Subsec:FNOT}
 
 \begin{figure}[tbp]
     \centering
     \scalebox{0.8}{\input{img/fig-urtof}}
-    \caption{A U-controlled RTOF gate}
+    \caption{A F-controlled RTOF gate}
     \label{fig-urtof}
 \end{figure}
 
 %To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with an MCT gate or a FCNOT as depicted in Fig.~\ref{fig-urtof}, which was observed by Maslov~\cite{bib-rtof-maslov}. However, as noted in~\cite{bib-amy-phase-state}, the introduction of a {\it target bit dependent} relative phase here has an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the Controlled-$iX$ construction that is depicted in Fig.~\ref{fig-f-dot-g}. This is a form of the RTOF which realizes the same Boolean function, but with a relative phase that is only present when $x_k$ and $U$ are true. This means that it is {\it independent} of the initial state of the target bit.
-To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF can roughly be generalized to the Controlled-$iX$ construction that is depicted in Fig.~\ref{fig-f-dot-g}. We will go into why this is in Sec ~\ref{Subsec:balanced}, but for this section we will take this construction as is. This is a form of the RTOF which realizes the same Boolean function, but with a relative phase that is only present when $x_k$ and $F$ are true. This means that it is {\it independent} of the initial state of the target bit. 
+To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF can roughly be generalized to the construction that is depicted in Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary variable and $F'$ is an arbitrary Boolean function, up to a relative phase. We will go into why this is in Sec ~\ref{Subsec:balanced}, but for this section we will take this construction as is. 
 
 \begin{figure}[tb]
     \centering
     \scalebox{0.8} {
     \input{img/fig-f-dot-g-in}
     }
-    \caption{The Controlled-$iX$ construction, which realizes $x_k \cdot U$ up to a relative phase.}
+    \caption{The Controlled-$iX$ construction, which realizes $x_k \cdot F$ up to a relative phase.}
     \label{fig-f-dot-g}
 \end{figure}
 
@@ -77,7 +77,7 @@ We can further generalize this. Recall from Section~\ref{Sec:prelim} that a Toff
 \end{figure}
 
 Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
-Using the constructions mentioned in Section~\ref{Subsec:UNOT}, we thus have a way to recursively construct
+Using the constructions mentioned in Section~\ref{Subsec:FNOT}, we thus have a way to recursively construct
 arbitrary Boolean functions up to a relative phase as a FCNOT gate.
 
 As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
@@ -93,9 +93,9 @@ Shannon's decomposition, we can decompose using an arbitrary variable order. (We
 determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
 we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each
 FCNOT in it with one of the terms in the Shannon's decomposition that we just made. As noted in
-Section~\ref{Subsec:UNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
+Section~\ref{Subsec:FNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
 of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we
-are left with a simple CNOT as our U-controlled NOT expression.
+are left with a simple CNOT as our F-controlled NOT expression.
 
 If the function is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
 the Shannon decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
@@ -144,23 +144,41 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 \subsection{Using Balanced and Unbalanced Relative Phase Functions}
 \label{Subsec:balanced}
 
-We observe that in Fig.~\ref{fig-f-dot-g}, every action on $x_3$, besides the T-gates, is uncomputed. For example,
-$g_2$ is uncomputed by $g_8$ and $g_6$ is uncomputed by $g_{10}$. The idea is that the computational basis states
-after $g_0$ are restored before the final Hadamard transformation in $g_11$. This type fo construction, where the
-target bit is first rotated using a Hadamard gate, is operated on, and then the computational basis states is
-restored to the first post Hadamard state before finally rotating it back using another Hadamard gate, will
-be called a {\it balanced} construction. As noted in ~\cite{bib-amy-phase-state}, this construction gives us a
-{\it target independet} phase, where the phase does not depend on the target's computational basis state.
+Now, we move on to explain Fig.~\ref{fig-f-dot-g} and how we can further get T-count savings from modifying this
+construction. As a prelude to our discussion, let's first take a look at what an RTOF would look like if we replace
+the middle CNOT with an FCNOT. We get Fig.~\ref{fig-urtof}. Just like Fig.~\ref{fig-f-dot-g}, this gate also
+implements $F=x_k \cdot F'$, up to a relative phase. However, in Fig.~\ref{fig-urtof} the FCNOT in this
+construction, $g_4$, is not balanced by a similar gate to uncompute its output just like its CNOTs $g_2$ and $g_6$
+are. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and then rotated
+back with a Hadamard without returning the target qubit to the same computational basis states it had just after
+the first Hadamard, an \emph{unbalanced} construction.This means that its resulting state just before the final
+Hadamard gate at $g_8$ will have some dependence on $F'$. When the Hadamard gate acts on this state, its phase now
+has a dependence on the target bit. We call this a \emph{target dependent} phase. 
 
-Let us look at why this is important.
+To see why a target dependent phase complicates ~Fig.~\ref{fig-urtof}'s use in our algorithms, let's imagine its
+recursive use within itself. That is, imagine ~Fig.~\ref{fig-urtof} is also used to implement the FCNOT inside it
+up to a relative phase. This means that the relative phase from $g_4$ now has a dependence on the output of $g_2$.
+This dependence, after the second Hadamard gate, now turns into a skew in the final function of the form
+$F=F+\Delta F$, where $\Delta F$ is the skew.
+
+To get around this, we observe that in Fig.~\ref{fig-f-dot-g}, every action on $x_3$, besides the T-gates, is
+uncomputed. For example, $g_2$ is uncomputed by $g_8$ and $g_6$ is uncomputed by $g_{10}$. The idea is that the
+computational basis states after $g_0$ are restored before the final Hadamard transformation in $g_11$. This type
+of construction, where the target bit is first rotated using a Hadamard gate, is operated on, and then the
+computational basis state is restored to the its state just after the first Hadamard before finally rotating it
+back using another Hadamard gate, we will call a {\it balanced} construction. As noted in
+~\cite{bib-amy-phase-state}, this construction gives us a {\it target independetn} phase, where the phase does not
+depend on the target's computational basis state. With a target independent phase, we no longer add any
+dependencies on the target qubit with the internal relative phase, avoiding the skew problem we described earlier.
+
 %% As already pointed out, the presence of a target-dependent phase on any internal logic will 
 %% create a skew in the final Boolean function of the form $F=x \cdot F_k + F_{k-1}$. Such 
 %% target-dependent phases are created using \emph{unbalanced} construction, such as in 
 %% Fig.~\ref{fig-urtof}. In this construction, the state just before the second Hadamard gate is different from the one just after the first one. In this construction, the two $x_{n-1}$ CNOT gates cancel their effect on each other, but the middle FCNOT gate's effect remains. The final Hadamard gate will turn this state into a target dependent phase.
 
-To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
-phase. This means that it can be used inside an unbalanced construction without incurring residue since the
-Hadamard gate now does not have any dependence to act on.
+%% To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
+%% phase. This means that it can be used inside an unbalanced construction without incurring residue since the
+%% Hadamard gate now does not have any dependence to act on.
 
 Amy et al. ~\cite{bib-amy-phase-state} propose a method where balanced and unbalanced constructions are alternated at different levels of the
 construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. 
