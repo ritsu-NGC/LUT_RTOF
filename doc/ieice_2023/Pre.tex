@@ -53,7 +53,7 @@ A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG).
 % whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
 A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes in the network without fanouts. 
 
-A logic function can be decomposed into such a Boolean logic network. Its nodes can be subsequently implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are numbered 1-5 to 
+A logic function can be decomposed into such a Boolean logic network. Its nodes can subsequently be implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are numbered 1-5 to 
 abstract away the functions inside of them, the primary outputs are labeled $y_1$ and $y_2$, and the primary 
 inputs are labeled $x_1,\cdots,x_5$
 
@@ -97,9 +97,8 @@ operation F in the breakdown of the larger operation.
 
 To summarize:
 \begin{itemize}
-\item Replacing pairs of computing and uncomputing gates with the RTOF gate and its inverse will lead to T gate savings in most cases.
+\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if you implement the inverse to have the opposite relative phase, thereby removing the extra T-gates associated with implementing an exact implementation.
 \item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
-\item Using a recursive RTOF implementation, we get a recursive procedure to generate MCT gates up to a relative phase.
 \end{itemize}
 
 

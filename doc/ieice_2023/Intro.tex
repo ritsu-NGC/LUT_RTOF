@@ -60,7 +60,7 @@ with relative phase methods.
 
 Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results ~\cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for. 
 
-Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit.
+Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit. In particular, we leverage a method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio Expansions. While previously, Shannon's Decomposition and Davio Expansions have been used to synthesize purely reversible gates ~\ref{bib-pkrm}, we utilize them in this work to enable explicitly relative phase constructions.
 
 \noindent {\bf Our Contribution.} 
 We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit by generating relative phase quantum circuits. Among our contributions:

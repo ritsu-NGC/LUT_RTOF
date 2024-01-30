@@ -230,7 +230,7 @@ resulting algorithm is described in Algorithm~\ref{algo-new}
 %    \State BF $\leftarrow$ A Boolean Function
     \State QC $\leftarrow$ an empty quantum circuit with registers
     \State Output $\leftarrow$ the output bit of the Boolean Function
-    \State order $\leftarrow$ the optimal variable order for BF.
+    \State order $\leftarrow$ the indices of the optimal variable order for BF.
     \State $BF_{{variable}\leftarrow value}$ $\leftarrow$ BF with the value of $variable$ set to $value$
     \If{$BF == True$}
     \State return CNOT
@@ -250,9 +250,9 @@ resulting algorithm is described in Algorithm~\ref{algo-new}
     \State    $F_2$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
     \State                       !balanced)
     \State
-    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ in a balanced manner if $balanced$ is true or unbalanced if not.
-    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ in a balanced manner if $balanced$ is true or unbalanced if not.
-    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ in a balanced manner if $balanced$ is true or unbalanced if not.
+    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-amy-unb} if not.
+    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-pos} if $balanced$ is true or Fig.~\ref{app-davio-pos-unb} if not.
+    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-neg} if $balanced$ is true or Fig.~\ref{app-davio-neg-unb} if not.
     \State    return one of $[shannon, davio_{pos},davio_{neg}]$ with the min T-count
     \EndIf
     \State Repeat for every variable order and pick the minimum
@@ -317,7 +317,8 @@ resulting algorithm is described in Algorithm~\ref{algo-new}
     \State lut\_net $\leftarrow$ a LUT network
     \State esop (Boolean Function) $\leftarrow$ a method to generate
     an exact QC to calculate a Boolean function implemented as a FCNOT gate 
-    \For{every node in lut\_net according to some node traversal algorithm}
+    \State node\_traversal $\leftarrow$ a method to traverse lut\_net
+    \While {node\_traversal returns a valid node}
     \If{node is intermediate node}
     \State QC $\leftarrow$ add relative\_phase(node's Boolean function) acting on a dirty ancilla
     \State QC $\leftarrow$ add inverse of relative\_phase(node's 
@@ -325,7 +326,7 @@ resulting algorithm is described in Algorithm~\ref{algo-new}
     \ElsIf{node is output node}
     \State QC $\leftarrow$ add esop (node's Boolean function) acting on a dirty ancilla
     \EndIf
-    \EndFor
+    \EndWhile
   \end{algorithmic}
 %\vspace*{-0.25cm}
 \end{algorithm}
