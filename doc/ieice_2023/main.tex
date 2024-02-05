@@ -14,7 +14,7 @@
 \usepackage{algorithm, algpseudocode} % texlive-science
 \usepackage[braket, qm]{qcircuit}
 \usepackage{newtxtext}
-
+\usepackage[normalem]{ulem}
 
 \usepackage{nameref}
 \usepackage[braket, qm]{qcircuit}
@@ -39,6 +39,9 @@
 %    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
 \newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+
+\newcommand{\Del}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\Add}[1]{\textcolor{blue}{\emph{#1}}}
 
 \newcount\NGCcolor
 \NGCcolor=1
@@ -117,7 +120,7 @@ relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit 
 
 %\vspace{-5mm}
 
-\profile[accel.jpg]{Naoya Asada}{received his bachelor's degree from
+\profile[accel.JPG]{Naoya Asada}{received his bachelor's degree from
 College of Information Science and Engineering, Ritsumeikan
 University in 2021. He received his master's degree from
 Graduate School of Information Science and Engineering, Ritsumeikan

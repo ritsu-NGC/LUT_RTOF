@@ -1,9 +1,9 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }  & \multigate{5}{x \cdot U} & \qw      & \multigate{5}{\bar{x} \cdot U'}&\qw\\
-          \push{{x}_{1} }  & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{{x}_{0} }  & \multigate{5}{x_k \cdot F} & \qw      & \multigate{5}{\bar{x_k} \cdot F'}&\qw\\
+          \push{{x}_{1} }  & \ghost{x \cdot F}        & \qw      & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{k} }  & \ghost{x \cdot U}        & \gate{X} & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{{x}_{k} }  & \ghost{x \cdot F}        & \gate{X} & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{n} }  & \ghost{x \cdot U}        & \qw      & \ghost{\bar{x} \cdot U'}       &\qw\\
+          \push{{x}_{n} }  & \ghost{x \cdot F}        & \qw      & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{{\ket{0}}} & \targ\qwx[-1]            & \qw      & \targ\qwx[-1]                  &\qw\\
 }
