@@ -1,8 +1,10 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-  \push{\phantom{{x}_{0} }} & & \multigate{2}{U} & \qw & \qw         & \qw & \multigate{2}{U^{\dagger}} \\
-  \push{\phantom{{x}_{0} }} & & \ghost{U}        & \qw & \qw         & \qw & \ghost{U^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \ghost{U}        & \qw & \ctrl{2}    & \qw & \ghost{U^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \targ\qwx[-1]    & \qw & \control\qw & \qw & \targ\qwx[-1]\qw         \\
-  \push{\phantom{{x}_{0} }} & & \qw              & \qw & \targ       & \qw & \qw                      \\
+  \push{\ket{{x}_{0}} } & & \multigate{4}{F} & &   & & \multigate{2}{F} & \qw & \qw           & \qw & \multigate{2}{F^{\dagger}} & \rstick{\ket{{x}_{0}}} \\
+  \push{\ket{{x}_{1}} } & & \ghost{F}        & &   & & \ghost{F'}       & \qw & \qw           & \qw & \ghost{F'^{\dagger}}       & \rstick{\ket{{x}_{1}}}  \\
+  \push{\ket{{x}_{2}} } & & \ghost{F}        & &   & & \ghost{F'}\qwx[1]& \qw &               & \qw & \ghost{F'^{\dagger}}\qwx[1]& \rstick{\ket{{x}_{2}}}  \\
+  \push{\vdots}         & & \push{\vdots}    & & = & & \push{\vdots}    &     & \push{\vdots} &     & \push{\vdots}              & \rstick{\vdots }    \\       
+  \push{\ket{{x}_{n}} } & & \ghost{F}        & &   & &  \qw             & \qw & \ctrl{2}      & \qw & \qw                        & \rstick{\ket{{x}_{n} }} \\
+  \push{\ket{0} }       & &                  & &   & & \targ\qwx[-2]    & \qw & \control\qw   & \qw & \targ\qwx[-2]              & \rstick{\ket{0} }  \\    
+  \push{\ket{0} }       & & \targ\qwx[-2]    & &   & & \qw              & \qw & \targ         & \qw & \qw                        & \rstick{\ket{F} } \\
 }
 

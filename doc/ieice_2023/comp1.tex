@@ -1,0 +1,1461 @@
+\documentclass[paper]{ieice}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL main.tex                       Sun Feb  4 10:00:28 2024
+%DIF ADD ../ieice_2023_edits/main.tex   Wed Jan 31 16:57:17 2024
+\usepackage{float}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,amssymb,amsfonts}
+% \usepackage{algorithmic}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[T1]{fontenc}
+\usepackage{mdframed}
+\usepackage{algorithm, algpseudocode} % texlive-science
+\usepackage[braket, qm]{qcircuit}
+%DIF 16a16-17
+\usepackage{newtxtext} %DIF > 
+\usepackage[normalem]{ulem} %DIF > 
+%DIF -------
+
+%DIF 17a19
+\usepackage{nameref} %DIF > 
+%DIF -------
+\usepackage[braket, qm]{qcircuit}
+\usepackage{tikz}
+%
+\newcommand*\rtofstarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,minimum width=16pt] (char) {S};}}
+\newcommand*\rtofsdgtarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt] (char) {S$^{\dagger}$};}}
+\newcommand*\rtoftarg{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=-0.5pt,fill=none] (char) {$\oplus$};}}
+\newcommand*\rtofsctrl{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,fill=black, minimum width=3pt] (char) {};}}
+\newcommand*\rtofsctrlo{\tikz[baseline=(char.base)]{
+            \node[shape=circle,double,draw,inner sep=1pt,fill=white, minimum width=3pt] (char) {};}}
+
+\newcommand*\ctrlrtofs[1]{\push{\rtofsctrl}\qwx[#1]\qw}
+\newcommand*\ctrlortofs[1]{\push{\rtofsctrlo}\qwx[#1]\qw}
+\newcommand*\targrtofs{\push{\rtofstarg}\qw}
+\newcommand*\targrtof{\push{\rtoftarg}\qw}
+
+
+%DIF 37a40-45
+%\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}} %DIF > 
+ %DIF > 
+\makeatletter %DIF > 
+\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}} %DIF > 
+\makeatother %DIF > 
+\captionsetup{subrefformat=parens} %DIF > 
+%DIF -------
+\algrenewcommand\algorithmicindent{0.5em}%
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+%DIF 44-45c53-54
+%DIF < \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%DIF <     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%DIF -------
+%\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em %DIF > 
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}} %DIF > 
+%DIF -------
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+
+%DIF 49a58-60
+\newcommand{\Del}[1]{\textcolor{red}{\sout{#1}}} %DIF > 
+\newcommand{\Add}[1]{\textcolor{blue}{\emph{#1}}} %DIF > 
+ %DIF > 
+%DIF -------
+\newcount\NGCcolor
+\NGCcolor=1
+%\NGCcolor=0
+\ifnum\NGCcolor<1
+  \newcommand{\redout}[1]{\textcolor{red}{\bf #1}}
+  \newcommand{\blueout}[1]{\textcolor{blue}{\bf #1}}
+  \newcommand{\greenout}[1]{\textcolor{green}{\bf #1}}
+  \newcommand{\cyannout}[1]{\textcolor{cyan}{\bf #1}}
+  \newcommand{\magentaout}[1]{\textcolor{magenta}{\bf #1}}
+  \newcommand{\yellowout}[1]{\textcolor{yellow}{\bf #1}}
+\else
+  \newcommand{\redout}[1]{#1}
+  \newcommand{\blueout}[1]{#1}
+  \newcommand{\greenout}[1]{#1}
+  \newcommand{\cyannout}[1]{#1}
+  \newcommand{\magentaout}[1]{#1}
+  \newcommand{\yellowout}[1]{#1}
+\fi
+
+\setcounter{page}{1}
+
+\field{A}
+\title{Leveraging Different Boolean Function Decompositions to \DIFdelbegin \DIFdel{Optimize }\DIFdelend \DIFaddbegin \DIFadd{Reduce T-Count in }\DIFaddend LUT-based Quantum Circuit Synthesis}
+\authorlist{%
+ \authorentry[dizzy@ngc.is.ritsumei.ac.jp]{David Clarino}{n}{rits}\MembershipNumber{}
+ \authorentry[accel@ngc.is.ritsumei.ac.jp]{Naoya Asada}{n}{rits}\MembershipNumber{}
+  \authorentry[matsuoa@jp.ibm.com]{Atsushi Matsuo}{n}{ibm}\MembershipNumber{}
+ \authorentry[ger@cs.ritsumei.ac.jp]{Shigeru Yamashita}{e}{rits}\MembershipNumber{}
+}
+\affiliate[rits]{The author is with the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, 525-8577 Japan.
+}
+%DIF 80c92-93
+%DIF < \affiliate[ibm]{The author is with IBM Quantum, IBM Research - Tokyo, Tokyo, 103-8510 Japan
+%DIF -------
+\affiliate[ibm]{The author is with IBM Quantum, IBM Research - Tokyo, Tokyo, 103-8510 Japan. \\ %DIF > 
+\hspace*{0.5cm}A preliminary version of this paper is presented in ICCAD 2023.  %DIF > 
+%DIF -------
+}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue}{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+\maketitle
+
+\begin{summary}
+  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits in a qubit-constrained environment. Other recent 
+  research has demonstrated the possibility of using {\it relative phase} quantum circuits in tandem has an advantage in minimizing T-count in the fault-tolerant quantum 
+  computing paradigm. To generate such arbitrary Boolean functions, we utilize Shannon's Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative
+  phase circuits. Experimental results demonstrate that our method can reduce the T-count
+  to an average of 24\% of the conventional method. 
+
+\end{summary}
+\begin{keywords}
+relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit synthesis
+\end{keywords}
+\setlength\textfloatsep{4pt}
+\setlength\floatsep{0pt}
+\setlength\abovecaptionskip{4pt}
+
+
+\begin{figure*}[t]
+    \centering
+    \begin{minipage}{0.6\textwidth}
+        \begin{subfigure}[b][15mm]{0.9\textwidth}
+            \centering
+             \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \lstick{\ket{x_1}} & \ctrl{2}   & \qw &          &  & & \qw               & \qw      & \qw                       & \ctrl{2} & \qw               & \qw      & \qw                       & \ctrl{2} & \ctrl{1}          & \gate{\mathrm{T}}         & \ctrl{1} & \qw & \qw & & \ket{x_1}\\
+          \lstick{\ket{x_2}} & \ctrl{1}   & \qw & \push{=} &  & & \qw               & \ctrl{1} & \qw                       & \qw      & \qw               & \ctrl{1} & \gate{\mathrm{T}}         & \qw      & \targ             & \gate{\mathrm{T^\dagger}} & \targ    & \qw & \qw & & \ket{x_2}\\
+          \lstick{\ket{x_3}} & \targ \qw  & \qw &          &  & & \gate{\mathrm{H}} & \targ    & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T}} & \gate{\mathrm{H}}         & \qw      & \qw & \qw & & \push{\ket{x_1}\ket{x_1 \cdot x_2 \oplus x_3}}\\
+}
+
+            \caption{A Toffoli gate in Clifford+T basis}
+            \DIFdelbeginFL %DIFDELCMD < \label{fig-toffoli}
+%DIFDELCMD <         %%%
+\DIFdelendFL \DIFaddbeginFL \sublabel{fig-toffoli}
+        \DIFaddendFL \end{subfigure}
+
+        \vspace{10mm}
+        \begin{subfigure}[b][15mm]{0.9\textwidth}
+            \centering
+             \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \lstick{\ket{x_1}} & \ctrl{2}\qw         & \qw &          & & \qw               & \qw                       & \qw      & \qw                       & \ctrl{2} & \qw               & \qw      & \qw                         & \qw               & \qw & \ket{x_1}\\
+          \lstick{\ket{x_2}} & \ctrl{1}            & \qw & \push{=} & & \qw               & \qw                       & \ctrl{1} & \qw                       & \qw      & \qw               & \ctrl{1} & \qw                         & \qw               & \qw & \ket{x_2}\\
+          \lstick{\ket{x_3}} & \push{\rtoftarg}\qw & \qw &          & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^{\dagger}}} & \targ    & \gate{\mathrm{T}} & \gate{\mathrm{H}} & \qw & \push{e^{i\Delta\theta}\ket{x_1 \cdot x_2 \oplus x_3}}\\
+}
+
+            \caption{An RTOF gate in Clifford+T basis}
+            \sublabel{fig-rtof}
+        \end{subfigure}
+    \end{minipage}
+    \hspace{10mm}
+    \begin{minipage}{0.3\textwidth}
+    \vspace{10mm}
+        \begin{subfigure}[b][30mm]{\textwidth}
+        \centering
+        \begin{tabular}{c|c}      
+            \hline
+            {x1,x2,x3} & $\Delta\theta$  \\  
+            \hline
+            000   & 0      \\
+            001   & 0      \\
+            010   & 0      \\
+            011   & 0      \\
+            100   & 0      \\
+            101   & $+\pi$          \\
+            110   & $+\pi/2$   \\
+            111   & $-\pi/2$ \\
+            \hline
+        \end{tabular}
+        \caption{Phases added by an RTOF gate}
+        \sublabel{table-rtof}
+        \end{subfigure}
+    \end{minipage}
+    \caption{A Toffoli gate and an RTOF gate}
+    \label{fig-tof-rtof}
+\end{figure*}
+
+\section{Introduction}
+
+{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such as oracles in Grover's algorithm and cost functions in VQE. To realize such quantum Boolean circuits, a Toffoli gate is an essential logic primitive in a universal gate set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT, CNOT, and T gates (e.g., the Clifford + T~\cite{bib-barenco-elementary} basis gate set), as depicted in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost than so-called Clifford gates. It is therefore useful to consider ways to reduce this {\it T-count}\DIFaddbegin \DIFadd{, which is the number of both the T-gates and their inverse in the circuit}\DIFaddend .
+
+One of the methods that has been proposed to reduce the T-count is to implement Boolean functions only up to a {\it relative phase}~\cite{bib-barenco-elementary}\DIFaddbegin \DIFadd{, which is an input dependent phase on the output}\DIFaddend . Some recent work \cite{bib-rtof-maslov,bib-selinger-rtof,bib-amy-phase-state} has proposed relative phase versions of common Boolean functions, particularly the Relative Phase Toffoli Gate (RTOF). 
+The work in~\cite{bib-rtof-maslov} showed that the method of constructing circuits \DIFaddbegin \DIFadd{in this relative phase manner }\DIFaddend offers advantages in T-count.
+
+Both~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed methods to generalize the 
+construction of relative phase versions of quantum circuits that were introduced in~\cite{bib-selinger-rtof}. 
+\DIFaddbegin \DIFadd{These identify matching pairs of compute/uncompute logic as a possible application of relative phase 
+circuits, because any relative phase introduced can be canceled out by simply using the inverse of the
+gate in the uncompute logic. }\DIFaddend Because of these findings, cascading logic, such as those 
+produced by Lookup Table (LUT) based synthesis methods, thus present an interesting candidate to integrate 
+with relative phase methods.
+
+Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results \cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced by such a method is exactly the type that can be improved by synthesizing relative phase versions of its component logic. In addition, the fact that relative phase versions can be implemented without any additional ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that such methods are intended for. 
+
+Our research seeks to leverage recent results in relative phase implementations of Boolean functions and LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit. \DIFaddbegin \DIFadd{In particular, we leverage a method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio Expansions. While previously, Shannon's Decomposition and Davio Expansions have been used to synthesize purely reversible gates ~\ref{bib-pkrm}, we utilize them in this work to enable explicitly relative phase constructions.
+}\DIFaddend 
+
+\noindent {\bf Our Contribution.} 
+We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit by generating relative phase quantum circuits. Among our contributions:
+\begin{itemize}
+\item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio Expansions, as well as balanced and unbalanced constructions of relative phase gates.
+\item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the above method to reduce T-count.
+\end{itemize}
+
+The paper is structured as follows. Section~\ref{Sec:prelim} gives preliminary information to understand this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method for performing functions up to a relative phase without any additional ancilla and its use with LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} compare the proposed method to a simplistic relative phase method, as well as the naive method, and find a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
+
+
+
+
+% \begin{figure*}[ht]
+
+%   \begin{minipage}{.46\linewidth}
+%     \begin{center}
+%       \input{img/fig-urtof}
+%     \end{center}
+%     \caption{U-controlled RTOF gate}
+%     \label{fig-urtof}
+%   \end{minipage}
+%   %\vspace*{0.25cm}
+% \end{figure*}
+% \vspace*{0.1cm}
+\section{Preliminary}
+\label{Sec:prelim}
+\subsection{Quantum Boolean Circuits}
+
+In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. We will implement them using the fault-tolerant set of \DIFdelbegin \DIFdel{Clifford gates, T gates, and S gates}\DIFdelend \DIFaddbegin \DIFadd{the X gate ($\ket{x} \rightarrow \ket{~x}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} * x$) and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$)}\DIFaddend .
+
+We denote the \DIFdelbegin \DIFdel{primary inputs }\DIFdelend \DIFaddbegin \DIFadd{input qubits }\DIFaddend of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ \DIFdelbegin \DIFdel{primary inputs}\DIFdelend \DIFaddbegin \DIFadd{input qubits}\DIFaddend . Each qubit state in a circuit can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
+
+An example of such a quantum Boolean operation is the Toffoli gate depicted in
+Fig\DIFaddbegin \DIFadd{. }\DIFaddend ~\ref{fig-toffoli}. It inverts the basis state of the target bit that is, $\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the two control bits are $\ket{11}$. This provides us with a way to realize the AND operation in a quantum circuit.
+
+\subsection{Relative-Phase Boolean Functions}
+
+A typical decomposition of the Toffoli gate into the Clifford + T basis
+consists of seven T gates, as shown in Fig.~\ref{fig-toffoli}.
+A Relative-Phase Toffoli (RTOF) gate~\cite{bib-rtof-maslov}, in contrast,
+implements the same function using only four T gates as shown in
+Fig.~\ref{fig-rtof}. However, it does this at the cost of a {\it{relative phase}.
+Note the double circle on the target of Fig.~\ref{fig-rtof}: We will be
+using this notation to denote a relative phase version of a quantum logic
+gate in this paper. It may be noticed that the version of the RTOF gate used here is similar to the $n$-controlled-iX gate
+from~\cite{bib-selinger-rtof} for $n=2$, with one fewer CNOT gate. As
+noted in~\cite{bib-rtof-maslov}, removing this gate only affects the
+phase, so it only transforms an RTOF gate into another RTOF gate with
+the same T-count. We will consider analogs of both types of
+relative phase gates in Section ~\ref{Sec:proposed}.
+
+As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
+to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
+logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added
+phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is
+added.
+
+\DIFdelbegin \DIFdel{One of the results from~\mbox{%DIFAUXCMD
+\cite{bib-rtof-maslov} }\hskip0pt%DIFAUXCMD
+is that when larger functions are broken down into compute/uncompute pairs, such as in the Barenco style Toffoli decompositions, it is almost always more advantageous to implement each ``half'' of the compute/uncompute pair into a relative phase construction. We will next go into one such construction.
+}\DIFdelend %\vspace{-0.25cm}
+\subsection{Boolean Logic Network}
+
+A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG)\DIFdelbegin \DIFdel{whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
+}%DIFDELCMD < 
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{.
+%DIF >  whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
+}\DIFaddend A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes \DIFdelbegin \DIFdel{of }\DIFdelend \DIFaddbegin \DIFadd{in }\DIFaddend the network without fanouts. 
+
+A logic function can be decomposed into such a Boolean logic network\DIFdelbegin \DIFdel{, and its nodes subsequently }\DIFdelend \DIFaddbegin \DIFadd{. Its nodes can subsequently be }\DIFaddend implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. \DIFaddbegin \DIFadd{Here, the nodes are numbered 1-5 to 
+abstract away the functions inside of them, the primary outputs are labeled $y_1$ and $y_2$, and the primary 
+inputs are labeled $x_1,\cdots,x_5$
+}\DIFaddend 
+
+\begin{figure}[tbp]
+    \centering
+    \usetikzlibrary{positioning}
+\definecolor{offwhite}{HTML}{F2EDED}
+%% \tikzset{
+%%     > = stealth,
+%%     every node/.append style = {
+%%         draw = none,
+%%         text = offwhite
+%%     },
+%%     every path/.append style = {
+%%         arrows = ->,
+%%         draw = offwhite,
+%%         fill = offwhite
+%%     },
+%%     hidden/.style = {
+%%         draw = offwhite,
+%%         shape = circle,
+%%         inner sep = 1pt
+%%     }
+%% }
+%% \tikz{
+%%     \node (x) {$X$};
+%%     \node[hidden] (z) [above right = of x] {$Z$};
+%%     \node (y) [below right = of z] {$Y$};
+%%     \path (x) edge (y);
+%%     \path (z) edge (x);
+%%     \path (z) edge (y);
+%% }
+\tikzset{
+  > = stealth,
+  every node/.append style = {
+    draw      = black,
+    shape     = circle,
+    inner sep = 1
+  },
+  every path/.append style = {
+        arrows = ->,
+        draw = black,
+        fill = offwhite
+  },  
+  input/.style = {
+    draw = none
+  }
+}
+
+\tikz{
+  \node[input] (x1) at (0,0) {$x1$};
+  \node[input] (x2) at (1,0) {$x2$};
+  \node[input] (x3) at (2,0) {$x3$};
+  \node[input] (x4) at (3,0) {$x4$};
+  \node[input] (x5) at (4,0) {$x5$};
+  \node[input] (y1) at (1,3) {$y1$};
+  \node[input] (y2) at (3,4) {$y2$};
+  \node (1) at (1,1) {$1$};
+  \node (2) at (3,1) {$2$};
+  \node (3) at (1,2) {$3$};
+  \node (4) at (3,2) {$4$};
+  \node (5) at (3,3) {$5$};      
+  \path (x1) edge (3);
+  \path (x2) edge (1);
+  \path (x3) edge (1);
+  \path (x4) edge (1);
+  \path (x4) edge (2);
+  \path (x5) edge (2);
+  \path (x5) edge (5);
+  \path (1)  edge (3);
+  \path (1)  edge (4);    
+  \path (2)  edge (4);
+  \path (4)  edge (5);
+  \path (3)  edge (y1);
+  \path (5)  edge (y2);  
+}
+
+    \caption{A Boolean logic network}
+    \label{fig-lut-network}
+\end{figure}
+
+\subsection{Using RTOF Gates to Decompose MCT Gates}
+Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advantage to using RTOF gates in
+synthesizing and decomposing logic functions, particularly \DIFaddbegin {\it \DIFaddend Multiply-Controlled Toffoli\DIFdelbegin \DIFdel{Gates (MCTs) }\DIFdelend \DIFaddbegin } \DIFadd{(MCT) Gates, which
+are Toffoli gates controlled by the AND of three or more control bits}\DIFaddend .
+
+\DIFaddbegin \DIFadd{One of the results from~\mbox{%DIFAUXCMD
+\cite{bib-rtof-maslov} }\hskip0pt%DIFAUXCMD
+is that when larger functions, such as MCT, are broken down
+into compute/uncompute pairs that act on ancilla, such as in the Barenco style Toffoli decompositions from 
+~\mbox{%DIFAUXCMD
+\cite{bib-barenco-elementary}}\hskip0pt%DIFAUXCMD
+, it is almost always more advantageous to implement each ``half'' of the 
+compute/uncompute pair into a relative phase construction. }\DIFaddend In particular, Maslov proposes the decomposition 
+shown in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here \DIFdelbegin \DIFdel{$U$ is a unitary }\DIFdelend \DIFaddbegin \DIFadd{$F'$ is a Boolean }\DIFaddend operation implemented up 
+to a relative phase. \DIFdelbegin %DIFDELCMD < %DIFDELCMD < %%%
+\DIFdel{Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate, and then repeating recursively. However, as Amy et. al.~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state} }\hskip0pt%DIFAUXCMD
+note, the form of this RTOF gate generates a target-dependent phase which, when combined with the Hadamard gate at the end, adds the terms of its phase function to the Boolean function to the output, such that it takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$}\DIFdelend \DIFaddbegin \DIFadd{It uses the operation $F'$ and its inverse $F'^\dagger$ to implement the intermediate
+operation F in the breakdown of the larger operation}\DIFaddend .
+
+%DIF > Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate and then repeating recursively. However, as Amy et al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate cannot be used directly in a recursive procedure to generate an arbitrarily sized MCT. The same work  takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$, where $x_k$ is a variable that F is dependent on, and $F_{k-1}$ and $F_{k-2}$ is the same form for $x_{k-1}$ and $x_{k-2}$. We will cover how to apply this later in Section ~\ref{Sec:proposed}.
+\DIFaddbegin 
+
+
+\DIFaddend \begin{figure}[tbp]
+    \centering
+    \scalebox{1}{
+      \Qcircuit @C=0.5em @R=0.2em @!R { \\
+  \push{\phantom{{x}_{0} }} & & \multigate{3}{F} &   & \multigate{2}{F} & \qw & \qw         & \qw & \multigate{2}{F^{\dagger}} \\
+  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     &   & \ghost{F'}        & \qw & \qw         & \qw & \ghost{F'^{\dagger}}        \\
+  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     & = & \ghost{F'}        & \qw & \ctrl{2}    & \qw & \ghost{F'^{\dagger}}        \\
+  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     &   & \targ\qwx[-1]    & \qw & \control\qw & \qw & \targ\qwx[-1]\qw         \\
+  \push{\phantom{{x}_{0} }} & & \targ\qwx[-1]    &   & \qw              & \qw & \targ       & \qw & \qw                      \\
+      }
+
+}
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
+    \label{fig-maslov-decomp}
+\end{figure}
+
+
+\begin{figure}[tbp]
+    \centering
+    \DIFdelbeginFL %DIFDELCMD < \scalebox{1}{\Qcircuit @C=0.5em @R=0.2em @!R { \\
+%DIFDELCMD <   \lstick{\ket{{x}_{1}}} & \qw  & \qw                          & \qw                          & \multigate{5}{3} & \qw                           & \qw              & \qw                         & \qw                         & \qw                          & \ghost{x_1}  & \lstick{\ket{{x}_{1}}} \\
+%DIFDELCMD <   \lstick{\ket{{x}_{2}}} & \qw  & \multigate{2}{1}             & \qw                          & \qw              & \qw                           & \qw              & \qw                         & \qw                         & \multigate{2}{1^{\dagger}}   & \ghost{x_2}  & \lstick{\ket{{x}_{2}}} \\
+%DIFDELCMD <   \lstick{\ket{{x}_{3}}} & \qw  & \ghost{1}                    & \qw                          & \qw              & \qw                           & \qw              & \qw                         & \qw                         & \ghost{1^{\dagger}}          & \ghost{x_3}  & \lstick{\ket{{x}_{3}}} \\
+%DIFDELCMD <   \lstick{\ket{{x}_{4}}} & \qw  & \ghost{1}                    & \multigate{1}{2}             & \qw              & \qw                           & \qw              & \qw                         & \multigate{1}{2^{\dagger}}  & \ghost{1^{\dagger}}          & \ghost{x_4}  & \lstick{\ket{{x}_{4}}} \\
+%DIFDELCMD <   \lstick{\ket{{x}_{5}}} & \qw  & \qw                          & \ghost{2}                    & \qw              & \qw                           & \multigate{4}{5} & \qw                         & \ghost{2^{\dagger}}         & \qw                          & \ghost{x_5}  & \lstick{\ket{{x}_{5}}} \\
+%DIFDELCMD <   \lstick{\ket{0}     }  & \qw  & \push{\rtoftarg}\qwx[-2]\qw  & \qw                          & \ghost{3}\qw     & \multigate{2}{4}              & \ghost{5}        & \multigate{2}{4^{\dagger}}  & \qw                         & \push{\rtoftarg}\qwx[-2]\qw  & \ghost{0}    & \lstick{\ket{0}     }    \\
+%DIFDELCMD <   \lstick{\ket{0}     }  & \qw  & \qw                          & \push{\rtoftarg}\qwx[-2]\qw  & \qw              & \ghost{4}                     & \ghost{5}        & \ghost{4^{\dagger}}         & \push{\rtoftarg}\qwx[-2]\qw & \qw                          &  \qw         & \lstick{\ket{0}     }  \\
+%DIFDELCMD <   \lstick{\ket{0}     }  & \qw  & \qw                          & \qw                          & \targ\qwx[-2]\qw & \ghost{4}                     & \ghost{5}        & \ghost{4^{\dagger}}         & \qw                         & \qw                          & \ghost{y_1}  & \lstick{\ket{y_1}   }  \\      
+%DIFDELCMD <   \lstick{\ket{0}     }  & \qw  & \qw                          & \qw                          & \qw              & \push{\rtoftarg}\qwx[-1]\qw   & \ghost{5}        & \push{\rtoftarg}\qwx[-1]\qw & \qw                         & \qw                          & \ghost{0}    & \lstick{\ket{0}     }    \\
+%DIFDELCMD <   \lstick{\ket{0}     }  & \qw  & \qw                          & \qw                          & \qw              & \qw                           & \targ\qwx[-1]\qw & \qw                         & \qw                         & \qw                          & \ghost{y_2}  & \lstick{\ket{y_2}     }  \\
+%DIFDELCMD < }
+%DIFDELCMD < }
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \scalebox{1}{\Qcircuit @C=0.5em @R=0.2em @!R { \\
+  \lstick{\ket{{x}_{1}}} & \qw  & \qw               & \qw               & \multigate{5}{3} & \qw                & \qw              & \qw                        & \qw                        & \qw                         & \ghost{x_1}  & \lstick{\ket{{x}_{1}}} \\
+  \lstick{\ket{{x}_{2}}} & \qw  & \multigate{2}{1}  & \qw               & \qw              & \qw                & \qw              & \qw                        & \qw                        & \multigate{2}{1^{\dagger}}  & \ghost{x_2}  & \lstick{\ket{{x}_{2}}} \\
+  \lstick{\ket{{x}_{3}}} & \qw  & \ghost{1}         & \qw               & \qw              & \qw                & \qw              & \qw                        & \qw                        & \ghost{1^{\dagger}}         & \ghost{x_3}  & \lstick{\ket{{x}_{3}}} \\
+  \lstick{\ket{{x}_{4}}} & \qw  & \ghost{1}         & \multigate{1}{2}  & \qw              & \qw                & \qw              & \qw                        & \multigate{1}{2^{\dagger}} & \ghost{1^{\dagger}}         & \ghost{x_4}  & \lstick{\ket{{x}_{4}}} \\
+  \lstick{\ket{{x}_{5}}} & \qw  & \qw               & \ghost{2}         & \qw              & \qw                & \multigate{4}{5} & \qw                        & \ghost{2^{\dagger}}        & \qw                         & \ghost{x_5}  & \lstick{\ket{{x}_{5}}} \\
+  \lstick{\ket{0}     }  & \qw  & \targ\qwx[-2]\qw  & \qw               & \ghost{3}\qw     & \multigate{1}{4}   & \qw              & \multigate{1}{4^{\dagger}} & \qw                        & \targ\qwx[-2]\qw            & \ghost{0}    & \lstick{\ket{0}     }    \\
+  \lstick{\ket{0}     }  & \qw  & \qw               & \targ\qwx[-2]\qw  & \qw              & \ghost{4}          & \qw              & \ghost{4^{\dagger}}        & \targ\qwx[-2]\qw           & \qw                         &  \qw            & \lstick{\ket{0}     }  \\
+  \lstick{\ket{0}     }  & \qw  & \qw               & \qw               & \targ\qwx[-2]\qw & \qw                & \qw              & \qw                        & \qw                        & \qw                         & \ghost{y_1}  & \lstick{\ket{y_1}   }  \\      
+  \lstick{\ket{0}     }  & \qw  & \qw               & \qw               & \qw              & \targ\qwx[-2]\qw   & \ghost{5}        & \targ\qwx[-2]\qw           & \qw                        & \qw                         & \ghost{0}    & \lstick{\ket{0}     }    \\
+  \lstick{\ket{0}     }  & \qw  & \qw               & \qw               & \qw              & \qw                & \targ\qwx[-1]\qw & \qw                        & \qw                        & \qw                         & \ghost{y_2}  & \lstick{\ket{y_2}     }  \\
+}
+}
+    \DIFaddendFL \caption{The quantum circuit implementing the Boolean logic network in Fig.~\ref{fig-lut-network} using the LHRS. }
+    \label{fig-lut-qc}
+\end{figure}
+
+To summarize:
+\begin{itemize}
+\item \DIFdelbegin \DIFdel{Replacing pairs }\DIFdelend \DIFaddbegin \DIFadd{Pairs }\DIFaddend of computing and uncomputing gates \DIFdelbegin \DIFdel{with RTOF gate and its inverse will lead to T gate savings in most cases}\DIFdelend \DIFaddbegin \DIFadd{can tolerate a relative phase in the compute portion if you implement the inverse to have the opposite relative phase, thereby removing the extra T-gates associated with implementing an exact implementation}\DIFaddend .
+\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
+\DIFdelbegin %DIFDELCMD < \item %%%
+\item%DIFAUXCMD
+\DIFdel{By utilizing a relative UCNOT implementation, we get a recursive procedure to generate MCT gates up to a relative phase.
+}\DIFdelend \end{itemize}
+
+
+
+\subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
+\label{Subsec:lhrs}
+
+Previous research~\cite{bib-lhrs-soeken} has detailed a \DIFdelbegin \DIFdel{way to leverage }\DIFdelend \DIFaddbegin \DIFadd{method to use Boolean Logic
+Networks to generate quantum circuits in a manner similar classical }\DIFaddend LUT-based \DIFdelbegin \DIFdel{synthesis of Boolean functions to create reversible logic networks that will be essential to quantum Boolean circuits . The overall flow maps each node in the Boolean network to }\DIFdelend \DIFaddbegin \DIFadd{logic 
+synthesis. In this paradigm, each of the nodes is interpreted as a lookup table, 
+where the inputs are interpreted as indices, and the outputs are entries, according 
+to its truth table. As a quantum circuit, they are implemented as }\DIFaddend a \DIFdelbegin \DIFdel{function-controlled NOT gate (UCNOT), a }\DIFdelend NOT gate controlled
+\DIFdelbegin \DIFdel{not just by the value of a variable but that of a Boolean function , and then cascades them together to create the output}\DIFdelend \DIFaddbegin \DIFadd{by an arbitrary function (FCNOT)}\DIFaddend .
+
+The result of the method is shown in Fig.~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig.~\ref{fig-lut-qc}, first, we take as input a Boolean logic network synthesized from a Boolean expression using existing Boolean logic network decomposition methods. Then this Boolean logic network is parsed by the algorithm to create a quantum circuit of \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend gates. Any intermediate node is decomposed as two \DIFdelbegin \DIFdel{UCNOTs}\DIFdelend \DIFaddbegin \DIFadd{FCNOTs}\DIFaddend : one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one \DIFdelbegin \DIFdel{UCNOT}\DIFdelend \DIFaddbegin \DIFadd{FCNOT}\DIFaddend .
+
+
+Because the \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+
+\begin{example}
+  \label{ex-lut}
+  We start at node 1. Since this is an intermediate node, we place a \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend on an ancilla, and place its inverse on the same ancilla to uncompute. We do the same for node 2. For node 4, we cascade the ancilla from nodes 1 and 2 into it as input, and place its LUT, as well as its uncompute logic, on another ancilla. Finally, nodes 3 and 5 are output nodes, so we only generate their compute logic. 
+
+\end{example}
+
+
+%%% Local Variables:
+%%% mode: japanese-latex
+%%% TeX-master: "main"
+%%% End:
+
+%% \begin{figure}
+%%   \label{fig-maslov-decomp}
+%% \end{figure}
+
+
+%% \section{Existing Research and Motivation}
+
+%% Because not all Boolean functions can be implemented as unitaries, from the very early days of Quantum Computing~\cite{bib-barenco-elementary}, it has been known that in addition to adding ancilla to the circuit to store temporary values, allowing the final states to have differing phases ({\it relative phase}) with respect to each other is also a valid way to implementa Boolean function.
+
+%% Relative phase versions of quantum operations, such as the {\it Relative-phase Toffoli gates (RTOF)}~\cite{bib-rtof-maslov} ~\cite{bib-selinger-rtof} have been proposed as an alternative . One of the proposed implementations of the RTOF depicted in Fig.~\ref{fig-rtof} can calculate the same logic function as a Toffoli gate and reduces the T-gate count by 3. However it introduces a {\it relative phase} among its output quantum states, (enumerated in Table ~\ref{table-rtof}. Because of the introduced relative phase, we cannot simply replace a Toffoli gate with an RTOF in general. Rather, RTOFs can be utilized when we decompose a multiple-control Toffoli gate because the relative phase errors can be canceled between two RTOFs in the decomposition ~\cite{bib-rtof-maslov}.
+
+%% Maslov further posits that not just Toffoli gates but generalized controlled U functions can take advantage of the fact that Boolean functions implemented up to a relative phase used in tandem can optimize the overall circuit.
+
+%% Meanwhile, LUT-based quantum circuit synthesis has been proposed as a way to synthesize quantum circuits in an environment where available clean ancillae for use as intermediate qubits is limited. Methods such as the LHRS ~\cite{bib-lhrs-soeken}  synthesize each of these LUTs is implemented as a U-controlled NOT function. Naturally, this leads to a cascading series of gates, along with their uncompute pairs. This structure naturally lends itself to the construction from Maslov, where alternating pairs of gates can cancel their relative phases.
+
+%% In light of these facts, it is easy to imagine a method that utilizes relative phase Boolean functions to reduce the cost of gates in the LUT network, all while adding no additional ancillae. The key will be a method to generate relative phase Quantum Boolean Circuits from arbitrary Boolean functions. We propose such a method in this work.
+
+
+
+
+
+%% \begin{figure*}[t]
+%%   \label{fig-cx-star}
+%%   \begin{center}
+%%   \end{center}
+%%   \caption{The $C-X^{*}$ gate from \cite{bib-amy-phase-state}}
+%% \end{figure*}
+%% \begin{figure*}[t]
+%%   \begin{minipage}{.46\linewidth}[t]
+%%     \label{fig-lut-network}
+%%     \begin{center}
+%%       \input{img/fig-lut-network}
+%%     \end{center}
+%%   \end{minipage}
+
+%% \end{figure*}
+%\vspace*{0.25cm}
+
+\section{Proposed Method}
+\label{Sec:proposed}
+\subsection{Realizing Arbitrary Boolean Functions Up To A Relative Phase}
+\DIFdelbegin %DIFDELCMD < \label{Subsec:UNOT}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \label{Subsec:FNOT}
+\DIFaddend 
+
+\begin{figure}[tbp]
+    \centering
+    \DIFdelbeginFL %DIFDELCMD < \scalebox{0.8}{\Qcircuit @C=0.5em @R=0.2em @!R { \\
+%DIFDELCMD <           \push{{x}_{0} }   & & \multigate{3}{x_k \cdot U}  & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw      & \qw                       & \multigate{3}{U}              & \qw               & \qw      & \qw                         & \qw               & \qw & \\
+%DIFDELCMD <           \push{{x}_{1} }   & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw      & \qw                       & \ghost{U}                      & \qw               & \qw      & \qw                         & \qw               & \qw & \\
+%DIFDELCMD <           \push{\vdots}     & &                             &       &     & &\push{=} & &     &                   & \push{\vdots}             &          &  \push{\vdots}            &                                & \push{\vdots}     &          &                             & \push{\vdots}     &     & \\
+%DIFDELCMD <           \push{{x}_{n-1} } & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \ctrl{1} & \qw                       & \ghost{U}                      & \qw               & \ctrl{1} & \qw                         & \qw               & \qw & \\
+%DIFDELCMD <           \push{{x}_{n} }   & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \qw & \gate{\mathrm{H}} & \gate{\mathrm{T}}         & \targ    & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} & \qw & \qw\\
+%DIFDELCMD < }
+%DIFDELCMD <                             
+
+%DIFDELCMD < }
+%DIFDELCMD <     %%%
+\DIFdelendFL \DIFaddbeginFL \scalebox{0.8}{\Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }   & & \multigate{5}{x_k \cdot F}  & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw        & \qw                       & \multigate{5}{F} & \qw               & \qw        & \qw                         & \qw               & \qw & \\
+          \push{{x}_{1} }   & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw        & \qw                       & \ghost{F}        & \qw               & \qw        & \qw                         & \qw               & \qw & \\
+          \push{\vdots}     & &                             &       &     & &\push{=} & &     &                   & \push{\vdots}             &            &  \push{\vdots}            &                  & \push{\vdots}     &            &                             & \push{\vdots}     &     & \\
+          \push{{x}_{k} }   & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \ctrl{3}   & \qw                       & \ghost{F}        & \qw               & \ctrl{3}   & \qw                         & \qw               & \qw & \\
+          \push{\vdots}     & &                             &       &     & &\push{=} & &     &                   & \push{\vdots}             &            &  \push{\vdots}            &                  & \push{\vdots}     &            &                             & \push{\vdots}     &     & \\
+          \push{{x}_{n-1} } & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw & \qw               & \qw                       & \qw        & \qw                       & \ghost{F}        & \qw               & \qw        & \qw                         & \qw               & \qw & \\
+          \push{{x}_{n} }   & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \qw & \gate{\mathrm{H}} & \gate{\mathrm{T}}         & \targ      & \gate{\mathrm{T^\dagger}} & \targ\qwx[-1]    & \gate{\mathrm{T}} & \targ      & \gate{\mathrm{T^{\dagger}}} & \gate{\mathrm{H}} & \qw & \qw\\     
+                            & &                             &       &     & &         & &     & \push{g_0}        & \push{g_1}                & \push{g_2} & \push{g_3}                & \push{g_4}       & \push{g_5}        & \push{g_6} & \push{g_7}                  & \push{g_8}        &     &    \\
+}
+
+}
+    \DIFaddendFL \caption{A \DIFdelbeginFL \DIFdelFL{U-controlled }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{F-controlled }\DIFaddendFL RTOF gate}
+    \label{fig-urtof}
+\end{figure}
+
+%DIF > To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with an MCT gate or a FCNOT as depicted in Fig.~\ref{fig-urtof}, which was observed by Maslov~\cite{bib-rtof-maslov}. However, as noted in~\cite{bib-amy-phase-state}, the introduction of a {\it target bit dependent} relative phase here has an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the Controlled-$iX$ construction that is depicted in Fig.~\ref{fig-f-dot-g}. This is a form of the RTOF which realizes the same Boolean function, but with a relative phase that is only present when $x_k$ and $U$ are true. This means that it is {\it independent} of the initial state of the target bit.
+To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF \DIFdelbegin \DIFdel{depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with a $n$-input Toffoli gate or U-controlled NOT (UCNOT) as }\DIFdelend \DIFaddbegin \DIFadd{can roughly be generalized to the construction that is }\DIFaddend depicted in Fig.~\DIFdelbegin \DIFdel{\ref{fig-urtof} which was observed by Maslov~\mbox{%DIFAUXCMD
+\cite{bib-rtof-maslov}}\hskip0pt%DIFAUXCMD
+. However, as noted in~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state}}\hskip0pt%DIFAUXCMD
+, the introduction of a relative phase here has an effect on the final Boolean functionas the final Hadamard gate rotates the relative phaseback into state space. Therefore, we take the $C-X^*$ construction that isdepicted in~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state}}\hskip0pt%DIFAUXCMD
+. 
+We can generalize this $n$-input Toffoli gate to an arbitrarily controlled NOT gate as depicted in Fig.~\ref{fig-urtof}. 
+}\DIFdelend \DIFaddbegin \DIFadd{\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary variable and $F'$ is an arbitrary Boolean function, up to a relative phase. We will go into why this is in Sec ~\ref{Subsec:balanced}, but for this section we will take this construction as is. 
+}\DIFaddend 
+
+\begin{figure}[tb]
+    \centering
+    \scalebox{0.8} {
+    \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }    & & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{x_k \cdot U}  %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{x_k \cdot F}  \DIFaddendFL & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{U}                %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{F}                \DIFaddendFL & \qw               & \qw        & \qw                         & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{U^{\dagger}}       %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{F^{\dagger}}       \DIFaddendFL & \qw              & \qw & \\
+          \push{{x}_{1} }    & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \ghost{f}                       & \qw               & \qw        & \qw                         & \ghost{f}                        & \qw              & \qw & \\
+          \push{\vdots}      & &                             &       &     & &\push{=} & &                    & \push{\vdots}            &          &  \push{\vdots}            &                                 & \push{\vdots}     &            &                             &                                  & \push{\vdots}    &     & \\
+          \push{{x}_{k} }    & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \ctrl{3} & \qw                       & \ghost{f}                       & \qw               & \ctrl{3}   & \qw                         & \ghost{f}                        & \qw              & \qw & \\
+          \push{\vdots}      & &                             &       &     & &\push{=} & &                    & \push{\vdots}            &          &  \push{\vdots}            &                                 & \push{\vdots}     &            &                             &                                  & \push{\vdots}    &     & \\
+          \DIFdelbeginFL %DIFDELCMD < \push{{x}_{n} }    %%%
+\DIFdelendFL \DIFaddbeginFL \push{{x}_{n-1} }  \DIFaddendFL & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \ghost{f}                       & \qw               & \qw        & \qw                         & \ghost{f}                        & \qw              & \qw & \\
+          \DIFdelbeginFL %DIFDELCMD < \push{{\ket{0}}   }%%%
+\DIFdelendFL \DIFaddbeginFL \push{{x}_{n}   }  \DIFaddendFL & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]     & \gate{\mathrm{T}} & \targ      & \gate{\mathrm{T^{\dagger}}} & \push{\rtoftarg}\qw\qwx[-1]\qw   &\gate{\mathrm{H}} & \qw & \\
+                             \DIFaddbeginFL & &                             &       &     & &         & & \push{g_0}        & \push{g_1}                & \push{g_2} & \push{g_5}              & \push{g_6}                      & \push{g_7}        & \push{g_8} & \push{g_9}                  & \push{g_{10}}                    &\push{g_{11}}     &     & \\     
+\DIFaddendFL }
+
+
+    }
+    \caption{\DIFdelbeginFL \DIFdelFL{Generalization of Fig.~\ref{fig-urtof}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The Controlled-$iX$ construction}\DIFaddendFL , which \DIFdelbeginFL \DIFdelFL{also implements the Boolean product of two functions}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{realizes $x_k \cdot F$ up to a relative phase.}\DIFaddendFL }
+    \label{fig-f-dot-g}
+\end{figure}
+
+We can further generalize this. Recall from Section \ref{Sec:prelim} } that a Toffoli gate realizes a Boolean product of its inputs on its output. Just like above, we can use the same reasoning to generalize both inputs into arbitrary Boolean functions~\cite{bib-amy-phase-state}. This means that we can use the construction in Fig.~\ref{fig-f-dot-g} to realize a product between two arbitrary Boolean functions up to a relative phase. 
+% \begin{figure*}[t]
+%   \begin{minipage}{0.45\linewidth}
+%     \begin{center}
+%       \scalebox{0.5} {
+%         \input{img/fig-shannon-amy}
+%       }
+%     \end{center}
+%     \caption{Balanced Shannon's Decomposition}
+%     \label{fig-shannon}
+%   \end{minipage}
+%   \hspace{0.5cm}
+%   \begin{minipage}{0.45\linewidth}
+%     \begin{center}
+%       \scalebox{0.5} {
+%         \input{img/fig-davio-pos-unb}
+%       }
+%     \end{center}
+%     \caption{Unbalanced Positive Davio Decomposition}
+%     \label{fig-davio-pos-unb}
+%   \end{minipage}
+% %\vspace*{0.5cm}
+% \end{figure*}
+
+\subsection{Using Shannon's Decomposition To Realize Arbitrarily Controlled Single Target Gates}
+\label{Subsec:shannon}
+
+\begin{figure}[tbp]
+    \centering
+      \scalebox{0.7} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }  & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{x \cdot U} %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{x_k \cdot F} \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{\bar{x} \cdot U'}%%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{\bar{x_k} \cdot F'}\DIFaddendFL &\qw\\
+          \push{{x}_{1} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{\vdots}    &                          &          &                                &   \\
+          \push{{x}_{k} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \gate{X} & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{\vdots}    &                          &          &                                &   \\
+          \push{{x}_{n} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
+\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{{\ket{0}}} & \targ\qwx[-1]            & \qw      & \targ\qwx[-1]                  &\qw\\
+}
+
+      }
+    \caption{A generalized way of conducting the OR for the \DIFaddbeginFL \DIFaddFL{quantum }\DIFaddendFL Shannon\DIFaddbeginFL \DIFaddFL{'s }\DIFaddendFL decomposition}
+    \label{fig-bool-or}
+\end{figure}
+
+Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
+Using the constructions mentioned in Section\ref{Subsec:FNOT} , we thus have a way to recursively construct
+arbitrary Boolean functions up to a relative phase as an FCNOT gate.
+
+As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
+This means that we can implement this function as a series of Toffoli gates. Generalizing to \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend gates, we get
+the construction shown in Fig.~\ref{fig-bool-or}, which we will be using to construct our implementations in the
+next two sections.
+
+
+First, from the Shannon's decomposition
+formula~$f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$
+where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As always with
+Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
+determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
+we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each
+\DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend in it with one of the terms in the Shannon's decomposition that we just made. As noted in Section~\ref{Subsec:FNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
+of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we
+are left with a simple CNOT as our \DIFdelbegin \DIFdel{U-controlled }\DIFdelend \DIFaddbegin \DIFadd{F-controlled }\DIFaddend NOT expression.
+
+If the function is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
+the Shannon decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
+identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the
+function. As we will see in the next example, we can express the relative phase Toffoli gate construction
+in~\cite{bib-amy-phase-state} as a special case of this construction\DIFaddbegin \DIFadd{.
+}\DIFaddend 
+
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
+meaning, a NOT function. Because the Shannon decomposition now evaluates to either $x_k \cdot F_{x=1} + \bar{x}$ or
+$x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
+$\bar{x_k}$ controlled~CNOT gate. 
+
+\begin{example}
+  \label{ex-bool}
+  We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.
+
+  For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks exactly like the decomposition in Fig.~\ref{fig-rtof} . We can see that if we continue Shannon's decomposition, one or the other side of the equation will always evaluate to 0. Therefore\DIFaddbegin \DIFadd{, }\DIFaddend it is easy to see that it simplifies to the
+  decomposition in Fig~\ref{fig-f-dot-g}, which is the decomposition in ~\cite{bib-amy-phase-state}.
+  (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input
+  case without any additional information). %The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
+
+  For the $F(x_3 = 0,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term.
+  We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method; we will treat the optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$
+  and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$.
+  This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$
+  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose
+  the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
+
+  Finally, we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 0,x_2,x_1)$ as in Fig.~\ref{fig-bool-or} again. The result is depicted in Fig.~\ref{app-func-decomp} in ~\ref{App:FuncDecomp}.
+\end{example}
+
+However, as we shall see later in Section \ref{Sec:exp} , some expressions are not amenable to a purely Shannon-based decomposition. Several of them have highly complex representations through Shannon's decomposition.
+We must then introduce a different representation to take these into account.
+
+\subsection{Integrating Davio Expansions}
+\label{Subsec:davio}
+As can be seen in the previous section, a significant portion of the cost comes from multiplication.
+Therefore, it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
+expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_n \cdot F_2$ and the corresponding
+negative Davio expansion $F=F_1 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$,
+and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that, at every level, only one
+multiplication takes place, which already reduces the maximum possible T-gate use at any node from
+8 to 4.  
+
+\subsection{Using Balanced and Unbalanced Relative Phase Functions}
+\label{Subsec:balanced}
+\DIFdelbegin \DIFdel{As Amy et al.~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state} }\hskip0pt%DIFAUXCMD
+pointed out, because any multiplication is first ``constructed''
+in phasespace and }\DIFdelend \DIFaddbegin 
+
+\DIFadd{Now, we move on to explain Fig.~\ref{fig-f-dot-g} and how we can further get T-count savings from modifying this
+construction. As a prelude to our discussion, let's first take a look at what an RTOF would look like if we replace
+the middle CNOT with an FCNOT. We get Fig.~\ref{fig-urtof}. Just like Fig.~\ref{fig-f-dot-g}, this gate also
+implements $F=x_k \cdot F'$, up to a relative phase. However, in Fig.~\ref{fig-urtof} the FCNOT in this
+construction, $g_4$, is not balanced by a similar gate to uncompute its output just like its CNOTs $g_2$ and $g_6$
+are. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and }\DIFaddend then rotated
+back \DIFdelbegin \DIFdel{into state space }\DIFdelend with a Hadamard \DIFdelbegin \DIFdel{gate, adding a relative phase circuit
+inside that logic with a }\emph{\DIFdel{target dependent}} %DIFAUXCMD
+\DIFdel{phase (meaning one whose value depends }\DIFdelend \DIFaddbegin \DIFadd{without returning the target qubit to the same computational basis states it had just after
+the first Hadamard, an }\emph{\DIFadd{unbalanced}} \DIFadd{construction.This means that its resulting state just before the final
+Hadamard gate at $g_8$ will have some dependence on $F'$. When the Hadamard gate acts on this state, its phase now
+has a dependence }\DIFaddend on the target bit\DIFdelbegin \DIFdel{of the function) in an }\DIFdelend \DIFaddbegin \DIFadd{. We call this a }\DIFaddend \emph{\DIFdelbegin \DIFdel{unbalanced}\DIFdelend \DIFaddbegin \DIFadd{target dependent}\DIFaddend } \DIFdelbegin \DIFdel{construction, such as in Fig~\ref{fig-urtof}}\DIFdelend \DIFaddbegin \DIFadd{phase. 
+}
+
+\DIFadd{To see why a target dependent phase complicates ~Fig.~\ref{fig-urtof}'s use in our algorithms, let's imagine its
+recursive use within itself. That is, imagine ~Fig.~\ref{fig-urtof} is also used to implement the FCNOT inside it
+up to a relative phase. This means that the relative phase from $g_4$ now has a dependence on the output of $g_2$.
+This dependence, after the second Hadamard gate, now turns into a skew in the final function of the form
+$F=F+\Delta F$, where $\Delta F$ is the skew.
+}
+
+\DIFadd{To get around this}\DIFaddend , \DIFdelbegin \DIFdel{will see its
+relative
+phase added on to the main Boolean function as a residue i.e. it will take the form of $F=x \cdot F_k + F_{k-1}$.
+To keep thisfrom happening, a }\emph{\DIFdel{balanced}} %DIFAUXCMD
+\DIFdel{construction such as in Fig~\ref{fig-f-dot-g} is used, with pairs
+of relative phase circuits and their inverses to cancel out the target dependence that the
+Hadamard gate on the bit will act on. In the
+process, such a construction creates a function with a }\emph{\DIFdel{target independent}}%DIFAUXCMD
+\DIFdel{relative
+phase. This means that it can be used inside an unbalanced construction without incurring residue since the Hadamard gate now does not
+have any
+dependence to act on }\DIFdelend \DIFaddbegin \DIFadd{we observe that in Fig.~\ref{fig-f-dot-g}, every action on $x_3$, besides the T-gates, is
+uncomputed. For example, $g_2$ is uncomputed by $g_8$ and $g_6$ is uncomputed by $g_{10}$. The idea is that the
+computational basis states after $g_0$ are restored before the final Hadamard transformation in $g_11$. This type
+of construction, where the target bit is first rotated using a Hadamard gate, is operated on, and then the
+computational basis state is restored to the its state just after the first Hadamard before finally rotating it
+back using another Hadamard gate, we will call a }{\it \DIFadd{balanced}} \DIFadd{construction}\DIFaddend . \DIFaddbegin \DIFadd{As noted in
+~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state}}\hskip0pt%DIFAUXCMD
+, this construction gives us a }{\it \DIFadd{target independetn}} \DIFadd{phase, where the phase does not
+depend on the target's computational basis state. With a target independent phase, we no longer add any
+dependencies on the target qubit with the internal relative phase, avoiding the skew problem we described earlier.
+}\DIFaddend 
+
+%DIF > % As already pointed out, the presence of a target-dependent phase on any internal logic will 
+%DIF > % create a skew in the final Boolean function of the form $F=x \cdot F_k + F_{k-1}$. Such 
+%DIF > % target-dependent phases are created using \emph{unbalanced} construction, such as in 
+%DIF > % Fig.~\ref{fig-urtof}. In this construction, the state just before the second Hadamard gate is different from the one just after the first one. In this construction, the two $x_{n-1}$ CNOT gates cancel their effect on each other, but the middle FCNOT gate's effect remains. The final Hadamard gate will turn this state into a target dependent phase.
+\DIFaddbegin 
+
+%DIF > % To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
+%DIF > % phase. This means that it can be used inside an unbalanced construction without incurring residue since the
+%DIF > % Hadamard gate now does not have any dependence to act on.
+
+\DIFaddend Amy et al. \DIFaddbegin \DIFadd{~\mbox{%DIFAUXCMD
+\cite{bib-amy-phase-state} }\hskip0pt%DIFAUXCMD
+}\DIFaddend propose a method where balanced and unbalanced constructions are alternated at different levels of the
+construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. 
+Unbalanced constructions can be used inside balanced constructions,
+and vice versa. We can easily extend this to our method of constructing arbitrary Boolean functions above. We start at the root node
+with an unbalanced construction, and \DIFdelbegin \DIFdel{any }\DIFdelend \DIFaddbegin \DIFadd{its immediate }\DIFaddend children that are constructed recursively will have to be constructed
+in a balanced manner. The children of those in turn can be unbalanced, and so on. 
+
+In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite
+a significant reduction in the regime we are working with. Merely introducing this methodology results in significant savings for larger LUT-sizes, though
+its effect could be diminished for smaller ones.
+
+This has additional ramifications when combined with the Davio expansions. Since there is only one multiplication
+performed, the non-multiplied term ($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can
+be implemented as an \emph{unbalanced} relative phase circuit, provided the parent construction can also be
+unbalanced. This means there is no need to double the logic inside to cancel the residue, and so the exponential
+is further mitigated. 
+
+\subsection{Relative Phase Synthesis Algorithm}
+\label{Subsec:Pro:Improved}
+We now integrate Sec~\ref{Subsec:shannon}, Sec~\ref{Subsec:davio}, and Sec~\ref{Subsec:balanced} into a synthesis function up to a relative phase.
+
+
+First, we determine the variable order to decompose the function. As the details of the variable order
+computation are not important to the algorithm itself, we will defer discussion of how we determine
+this variable order to our discussion of the implementation in Section~\ref{Sec:exp}.
+
+If the function is neither ``True'' nor ``False'', the function is expanded using the Shannon, Positive
+Davio, or Negative Davio expansions, independently. We go over constructions for them in ~\ref{App:ManyDecomp}. The constituent subfunctions of each expansion are then processed in the same way by
+recursing the function with the decomposed Boolean function as input. When the logic can be implemented as an
+unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is
+relayed to the next level of the recursion via an input.
+
+If it is ``False'', we have a False-controlled-NOT, meaning an identity function. In this case we remove the term
+with this function entirely.
+
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{x=1}$ in Shannon's Decomposition or $\bar{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\bar{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
+
+As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
+compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
+The process is then repeated with all of the variable orders\DIFaddbegin \DIFadd{, }\DIFaddend and the minimum is picked from the results. The
+resulting algorithm is described in Algorithm ~\ref{algo-new}
+
+
+\begin{algorithm}[tb]
+  \caption{relative\_phase(BF: a Boolean function, balanced: Boolean indicating whether this function is balanced)}
+  \label{algo-new}
+  \begin{algorithmic}
+%    \State BF $\leftarrow$ A Boolean Function
+    \State QC $\leftarrow$ an empty quantum circuit with registers
+    \State Output $\leftarrow$ the output bit of the Boolean Function
+    \State order $\leftarrow$ \DIFdelbegin \DIFdel{BF.find\_optimal \_order ()
+    }\DIFdelend \DIFaddbegin \DIFadd{the indices of the optimal variable order for BF.
+    }\State \DIFadd{$BF_{{variable}\leftarrow value}$ $\leftarrow$ BF with the value of $variable$ set to $value$
+    }\DIFaddend \If{$BF == True$}
+    \State return CNOT
+    \ElsIf{$BF == False$}
+    \State return QC $\leftarrow$ Identity(Output)
+    \DIFdelbegin %DIFDELCMD < \ElsIf{$BF$ is a leaf node}
+%DIFDELCMD <     %%%
+\DIFdelend \DIFaddbegin \ElsIf{$BF$ only consists of the first variable in {\it order}}
+    \DIFaddend \State return CNOT
+    \Else
+    \State    //The Shannon $F_0$ and $F_1$ alternate balanced and unbalanced
+    \State    $F_0$ $\leftarrow$ relative\_phase(\DIFdelbegin \DIFdel{$BF_{x_{order[first]}\leftarrow 0)}$}\DIFdelend \DIFaddbegin \DIFadd{$BF_{x_{k = first\ in\ order}\leftarrow 0)}$}\DIFaddend ,!balanced) 
+    \State    $F_1$ $\leftarrow$ relative\_phase(\DIFdelbegin \DIFdel{$BF_{x_{order[first]}\leftarrow 1}$}\DIFdelend \DIFaddbegin \DIFadd{$BF_{x_{k = first\ in\ order}\leftarrow 1}$}\DIFaddend ,!balanced) 
+    \State
+    \State    //The Davio $F_0$ and $F_1$ inherit the parent's balanced attribute
+    \State    $(F_0)_{dav}$ $\leftarrow$ relative\_phase(\DIFdelbegin \DIFdel{$BF_{x_{order[first]}\leftarrow 0)}$}\DIFdelend \DIFaddbegin \DIFadd{$BF_{x_{k = first\ in\ order}\leftarrow 0)}$}\DIFaddend ,balanced) 
+    \State    $(F_1)_{dav}$ $\leftarrow$ relative\_phase(\DIFdelbegin \DIFdel{$BF_{x_{order[first]}\leftarrow 1}$}\DIFdelend \DIFaddbegin \DIFadd{$BF_{x_{k = first\ in\ order}\leftarrow 1}$}\DIFaddend ,balanced) 
+    \State
+    \State    $F_2$ $\leftarrow$ relative\_phase(\DIFdelbegin \DIFdel{$BF_{x_{order[first]}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$}\DIFdelend \DIFaddbegin \DIFadd{$BF_{x_{k = first\ in\ order}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$}\DIFaddend ,
+    \State                       !balanced)
+    \State
+    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ \DIFdelbegin \DIFdel{in a balanced manner if balanced or unbalanced }\DIFdelend \DIFaddbegin \DIFadd{according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-amy-unb} }\DIFaddend if not.
+    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ \DIFdelbegin \DIFdel{in a balanced manner if balanced }\DIFdelend \DIFaddbegin \DIFadd{according to Fig.~\ref{app-davio-pos} if $balanced$ }\DIFaddend is true or \DIFdelbegin \DIFdel{unbalanced }\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{app-davio-pos-unb} }\DIFaddend if not.
+    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ \DIFdelbegin \DIFdel{in a balanced manner if balanced }\DIFdelend \DIFaddbegin \DIFadd{according to Fig.~\ref{app-davio-neg} if $balanced$ }\DIFaddend is true or \DIFdelbegin \DIFdel{unbalanced }\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{app-davio-neg-unb} }\DIFaddend if not.
+    \State    return one of $[shannon, davio_{pos},davio_{neg}]$ with the min T-count
+    \EndIf
+    \State Repeat for every variable order and pick the minimum
+  \end{algorithmic}
+
+\end{algorithm}
+
+
+\begin{example}
+  \label{ex-davio}
+    We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.
+    Just as before, we first take the positive Davio expansion about $x_3$ (for simplicity, we will only follow the Davio branches
+  in this example. However, as  we will see later, they turn out to be optimal for this function). We get $F_0 = x_1 + x_2$ and
+  $F_2 = F_0 \oplus F_1 = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$. Note that for this level we can tolerate an unbalanced
+  function, so for the $F_0$ branch we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
+
+  We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
+  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \bar{x_1}$
+  Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
+  these similarly to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
+  there are four T-gates.
+
+  We now go to the $F_2$ branch. Here, since $x_1 \oplus x_2$ can be implemented using an $x_1$ controlled CNOT and $x_2$ controlled CNOT
+  in series, we synthesize that and terminate the recursion.
+
+  Back at the top level, we compose the subcircuits for $F_0$ and $F_2$ as a negative unbalanced Davio construction, adding an additional four
+  T-gates. This brings us to a total of 8 T-gates. Compare this to the 24 T-gates of our original methodology, 1/3 the size. We omit
+  the computation of the other branches and variable orders in the interest of space, but the reader can perform them  quickly to
+  see that the branch we followed is the optimal branch (or one of them. In this function there are multiple because $x_1$  and
+  $x_2$ are symmetric, and several Davio branches have similar costs). 
+  The resulting circuit is depicted in Fig.~\ref{fig-func-decomp-davio} in \ref{App:FuncDecomp}.
+
+\end{example}
+
+\begin{algorithm}[tb]
+  \caption{lut\_synthesis}
+  \label{algo-lut}
+  \begin{algorithmic}
+    \State lut\_net $\leftarrow$ a LUT network
+    \State esop (Boolean Function) $\leftarrow$ a method to generate
+    an exact QC to calculate a Boolean function implemented as a \DIFdelbegin \DIFdel{UCNOT gate 
+    }%DIFDELCMD < \For{every node in lut\_net}
+%DIFDELCMD <     %%%
+\DIFdelend \DIFaddbegin \DIFadd{FCNOT gate 
+    }\State \DIFadd{node\_traversal $\leftarrow$ a method to traverse lut\_net
+    }\While {\DIFadd{node\_traversal returns a valid node}}
+    \DIFaddend \If{node is intermediate node}
+    \State QC $\leftarrow$ add relative\_phase(node's Boolean function) \DIFaddbegin \DIFadd{acting }\DIFaddend on a dirty ancilla
+    \State QC $\leftarrow$ add inverse of relative\_phase(node's 
+    Boolean function) where we restore the state of the same dirty ancilla
+    \ElsIf{node is output node}
+    \State QC $\leftarrow$ add esop (node's Boolean function) acting on a dirty ancilla
+    \EndIf
+    \DIFdelbegin %DIFDELCMD < \EndFor
+%DIFDELCMD <   %%%
+\DIFdelend \DIFaddbegin \EndWhile
+  \DIFaddend \end{algorithmic}
+%\vspace*{-0.25cm}
+\end{algorithm}
+
+\subsection{Synthesizing A Boolean Function Using Boolean Logic Networks and Shannon Decomposition }
+
+Using Algorithm~\ref{algo-new} we are now ready to propose our LUT-based synthesis method 
+
+First we compose the circuit as in Sec.~\ref{Subsec:lhrs}. However, this time, we replace the alternating pairs of compute/uncompute gates with the respective relative phase version using Algorithm~\ref{algo-new} as well as its associated inverse. If there is no matching uncompute logic i.e., a node acting on an output qubit, we generate the logic exactly. The method is enumerated explicitly in Algorithm~\ref{algo-lut}.
+
+This QC is then parsed by our algorithm, synthesizing each \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\DIFaddend into relative phase versions of the partial Boolean functions in each intermediate node (as well as their inverse), and exact versions in each output node. These are then recombined into a quantum circuit. 
+
+\begin{table*}[ht]
+  \begin{center}
+    \caption{Experimental Results}
+    \label{table-results}
+    \scalebox{0.90}{
+      \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
+        \hline
+          Circuit             & \multicolumn{4}{c}{ESOP-based method}      &  \multicolumn{4}{|c}{Shannon-Only}    &  \multicolumn{4}{|c|}{Proposed method} \\ \cline{2-13}
+                              & LUT6 (T-count) & LUT5 & LUT4 & LUT3        & LUT6 & LUT5  & LUT4 & LUT3            & LUT6 & LUT5 & LUT4 & LUT3              \\ \hline                              
+        priority\_size\_2022  & 98664          & 0.56 & 0.32 & 0.26        & 0.27 & 0.51 & 0.19 & 0.16             & 0.14 & 0.08 & 0.06 & {\bf 0.05}        \\ \hline            
+        int2float\_size\_2022 & 22592          & 1.14 & 0.49 & 0.38        & 0.94 & 0.94 & 0.4 & 0.35              & 0.27 & 0.17 & 0.1  & {\bf 0.06}        \\ \hline             
+        i2c\_size\_2022       & 89288          & 0.69 & 0.4 & 0.27         & 0.94 & 0.68 & 0.31 & 0.23             & 0.61 & 0.27 & 0.18 & {\bf 0.13}        \\ \hline             
+        dec\_size\_2018       & 57344          & 0.5 & 0.41 & 0.2          & 1 & 0.41 & 0.31 & 0.16                & 1 & 0.39 & 0.3 & {\bf 0.15}            \\ \hline                
+        ctrl\_size\_2022      & 7560           & 1.17 & 0.84 & 0.68        & 0.99 & 1.12 & 0.51 & 0.41             & 0.99 & 0.88 & 0.35 & {\bf 0.24}        \\ \hline              
+        cavlc\_size\_2022     & 116896         & 0.8 & 0.49 & 0.41         & 0.63 & 0.6 & 0.3 & 0.29               & 0.13 & 0.1 & 0.07 & {\bf 0.06}         \\ \hline               
+        bar\_size\_2015       & 176400         & 0.94 & 0.03 & {\bf 0.03}  & 7.15 & 1.4 & 0.21 & 0.21              & 0.15 & 0.21 & 0.07 & 0.07              \\ \hline               
+        arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28        & 0.35 & 0.63 & 0.27 & 0.17             & 0.21 & 0.13 & 0.11 & {\bf 0.05}        \\ \hline             
+        adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94        & 1 & 7.16 & 4.06 & 2.54                & 1 & 1.91 & 1.95 & 1.66                 \\ \hline
+        Average               & \multicolumn{4}{c}{1.13}                   & \multicolumn{4}{|c}{0.72}             & \multicolumn{4}{|c}{0.24}              \\ \hline
+      \end{tabular}
+   }
+  \end{center}
+%\vspace*{0.25cm}
+\end{table*}
+
+\DIFdelbegin %DIFDELCMD < \begin{table*}[ht]
+%DIFDELCMD <   %%%
+\DIFdelendFL %DIF > \begin{table*}[ht]
+\DIFaddbeginFL \begin{table*}[tbp]
+  \DIFaddendFL \begin{center}
+    \caption{Runtime of Proposed Method}
+    \label{table-runtime}
+    \scalebox{0.90}{
+      \begin{tabular}{c|c|c|c|c}
+        \hline
+          Circuit             &  \multicolumn{4}{c|}{CPU time of the proposed method (sec)}  \\ \cline{1-5}
+                              & LUT6 & LUT5  & LUT4 & LUT3 \\ \cline{1-5}
+        priority\_size\_2022  & 14.01 & 4.61 & 0.33 & 1.03 \\ \cline{1-5}
+        int2float\_size\_2022 & 10.57 & 2.03 & 0.94 & 0.6 \\ \cline{1-5}
+        i2c\_size\_2022       & 89.33 & 18.57 & 2.17 & 0.71 \\ \cline{1-5}
+        dec\_size\_2018       & 5.14 & 0.33 & 1.17 & 1.21 \\ \cline{1-5}
+        ctrl\_size\_2022      & 9.87 & 4.52 & 0.45 &0.37 \\ \cline{1-5}
+        cavlc\_size\_2022     & 16.46 & 3.24 & 2.72 & 0.22 \\ \cline{1-5}
+        bar\_size\_2015       & 340.25 & 119.99 & 1.46 & 0.99 \\ \cline{1-5}
+        arbiter\_size\_2022   & 33.74 & 1.78 & 4.01 & 0.02 \\ \cline{1-5}
+        adder\_size\_2022     & 129.88 & 63.09 & 2.37 & 1.07 \\\cline{1-5}
+      \end{tabular}
+   }
+  \end{center}
+%\vspace*{0.25cm}
+\end{table*}
+%DIF > \vspace{10mm}
+
+
+
+
+
+
+
+
+
+
+%\vspace*{0.5cm}
+\section{Experimental Results}
+\label{Sec:exp}
+\subsection{\DIFdelbegin \DIFdel{Methodology}\DIFdelend \DIFaddbegin \DIFadd{Implementation}\DIFaddend }
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and Boolean logic networks are generated from them using the ABC tool~\cite{bib-abc}. \DIFdelbegin \DIFdel{We choose }\DIFdelend \DIFaddbegin \DIFadd{In particular, we choose circuits with input sizes many times larger than 6 in order to get a decent number of intermediate nodes. We synthesize these with }\DIFaddend LUT-sizes of 3, 4, 5, and 6, variables. \DIFdelbegin \DIFdel{as }\DIFdelend \DIFaddbegin \DIFadd{As }\DIFaddend in~\cite{bib-barenco-elementary}, this \DIFdelbegin \DIFdel{is theorized as the upper bound to the tractableimplementations of Boolean functions in the quantum space. This LUT }\DIFdelend \DIFaddbegin \DIFadd{represents a range where the T-count remains tractable. This Boolean logic }\DIFaddend network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
+
+%The Shannon Decomposition algorithm uses the Tulip Control BDD library~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm~\cite{bib-rudell}).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
+The algorithm is implemented in Python. Any exact (non-relative phase) synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}. 
+%DIF < In addition to the algorithm described in Algorithm~\ref{algo-imp}, we also compare several modified versions. A version that only utilizes the balanced and unbalanced constructions(noDavio) and one that only utilizes the Davio expansion (noBalance) are compared to the original to measure the contribution of each of these respective elements. 
+
+\DIFdelbegin \DIFdel{These results (Proposed method) }\DIFdelend \DIFaddbegin \DIFadd{In our implementation, we do an exhaustive search by executing our algorithm through every variable order to find the one with the lowest T-count. As we can see from Table~\ref{table-runtime}, this is tractable for $n < 6$.
+}
+
+\vspace{5mm}
+\subsection{\DIFadd{Methodology}} 
+
+The results from generating using the {\it Proposed method}  are then compared to a naive implementation of the LUT-based synthesis method (\DIFaddbegin {\it \DIFaddend ESOP-based method\DIFaddbegin }\DIFaddend ), wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. We also run a version of the algorithm described in Sec ~\ref{Subsec:shannon} using only Shannon's Decomposition (Shannon Only), to test the efficacy of merely using a naive relative phase implementation without the optimization of introducing the Davio's expansions and balanced/unbalanced constructions. In the ESOP-based method, because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time. This means that any MPMCT Multiple Polarity Multiply-Controlled Toffoli) gates\DIFdelbegin \DIFdel{are }\DIFdelend \DIFaddbegin \DIFadd{, which are MCT gates that allow for negated inputs, are }\DIFaddend synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method\DIFaddbegin \DIFadd{, both described in }\DIFaddend ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.
+
+As in~\cite{bib-barenco-elementary}, we note that for values of $n<5$, the T-count in a direct implementation of the Toffoli gate (i.e. using a Gray-code sequence of operations) scales with $2^{n-1}$.
+
+Our experimental results are displayed in Table~\ref{table-results}. We compare the ratio of the T-count for
+each mapped \DIFdelbegin \DIFdel{LUT-size }\DIFdelend \DIFaddbegin \DIFadd{LUT }\DIFaddend generated by either the ESOP-based method or the proposed method \DIFdelbegin \DIFdel{to that of the }\DIFdelend \DIFaddbegin \DIFadd{with that of }\DIFaddend LUT6\DIFaddbegin \DIFadd{, which is the upper bound of our range, }\DIFaddend in the second column generated by the ESOP-based method as a baseline.  \DIFaddbegin \DIFadd{This should give us the least optimized circuit with the least amount of ancilla. }\DIFaddend Recall that in the previous paragraph, we noted that the cost of each relative phase LUT scales with $2^n$. This measures the contribution of decreasing the LUT-size at the cost of increasing the number of gates and ancilla used. \DIFaddbegin \DIFadd{We take the arithmetic mean of the gain of all circuits and display it in the "Average" row. }\DIFaddend Finally, we also measure the execution time in seconds of our proposed method for each LUT-size. Additionally, we display the average runtimes for each circuit for each iteration of the proposed method in Table ~\ref{table-runtime}\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{. While we do not measure ancilla directly because their number is directly related to the decomposition of the overall Boolean function in to Boolean logic networks, which is outside the scope of this work. However, because LUT size is one of our variables, we note the effect of this on ancilla in qualitative terms in our analysis in Sec. ~\ref{Subsec:Analysis}.
+%DIF > \vspace{5mm}
+}\DIFaddend \subsection{Analysis}
+\DIFaddbegin \label{Subsec:Analysis}
+\DIFaddend In Table~\ref{table-results}, the best result for each circuit is written in bold. Just as before, the
+Proposed method sees the largest gain over the baseline LUT6 ESOP-based numbers in LUT3. However, whereas
+the Shannon Only method saw only modest gains here over the ESOP-based LUT3 numbers (i.e., merely reducing the
+maximum LUT-size with the naive method), we see a much more significant advantage for the Proposed method.
+Of note, Proposed method shows an absolute advantage over the Shannon Only method over all the cases tested.
+
+Of particular note is bar\_size\_2015, which contains many highly complex, maximum size nodes. The Shannon Only
+method suffered from its $2^n$ proportionality here and severely underperformed the ESOP-based method.
+However, the Proposed method shows a better ability to break down the complex functions into something
+with tractable T-cost. This seems to be due to the introduction of the Davio expansion and its ability
+to create a more natural ESOP expansion of the original functions, which lends itself to fewer multiplications
+and thus fewer T-gates used.
+
+However, adder\_size\_2022 remains an exception because it is a particularly interesting case. At LUT6 size,
+all of the logic for every output bit fits into a single node, and thus, as is evident from the table,
+both the Proposed method and Shannon Only method at LUT6 are identical to the naive case. What is more telling is
+that reducing the LUT-size does NOT help in this case. While the Proposed method outperforms both the ESOP-based
+method and Shannon Only method at smaller LUT-sizes, it still remains inferior to the LUT6 case. Speaking in terms
+of the Boolean logic network, the LUT6 case is simply a set of independent output nodes. An interesting further topic of research would be
+to synthesize Boolean logic networks that explicitly aim for this type of construction and again do the same experiments. 
+
+
+
+%DIF > \vspace{5mm}
+\vspace*{-0.25cm}
+\section{Conclusion and Future Research}
+\label{Sec:concl}
+\DIFdelbegin %DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend This paper proposed the use of \DIFaddbegin \DIFadd{Shannon's Decomposition, }\DIFaddend Davio expansions and \DIFaddbegin \DIFadd{alternating
+balanced/}\DIFaddend unbalanced relative phase constructions to optimize relative phase constructions
+in their usage in LUT-based quantum circuit synthesis. \DIFdelbegin \DIFdel{These were meant to improve the $2^n$ proportionality of an earlier, Shannon Decomposition based method. }\DIFdelend The experimental results showed a
+clear advantage over \DIFdelbegin \DIFdel{this previous method, as well as a significant advantage over the naive method}\DIFdelend \DIFaddbegin \DIFadd{the naive case, and Davio Expansions and balanced/unblanced constructions
+prove effective at dealing with corner cases that hinder the Shannon Only case}\DIFaddend . There remains 
+one interesting exception where the proposed method underperforms the naive method, however, 
+and it relates to a special form of \DIFdelbegin \DIFdel{LUT network }\DIFdelend \DIFaddbegin \DIFadd{Boolean logic network which consists of independent output gates}\DIFaddend .
+
+The results of this paper show a clear advantage to using our proposed method, as well as possible further avenues of inquiry for related research. As the experimental results show, there remain many variables to control to optimize in this method, and researching those further could prove fruitful.
+%DIF < This paper proposed the use of relative phase Boolean functions to optimize LUT-based quantum circuit synthesis while maintaining a minimum of ancillae. While the Shannon decomposition allows us to the cost remains exponential with respect to the number of LUT inputs, limiting the LUT-size to under 6 inputs allows us to see a significant T-count advantage in the proposed method using relative phase Boolean functions.
+
+
+%DIF < There still remain some cases where it underperforms the naive case so further research will be needed there. Furthermore, it remains an open question whether we can get better than exponential cost for the LUTs. As shown in~\cite{bib-lhrs-soeken}, increasing LUT size has possible advantages in gate count and depth. Furthermore, our research has shown that decreasing LUT-size has an advantage in T-count. Existing research in this topic has now uncovered several variables with which to toggle to minimize the T-count, and points to potential further research in the topic.
+%DIF > \vspace{10mm}
+
+\DIFdelbegin %DIFDELCMD < \bibliographystyle{ieicetr}%%%
+%DIF < 
+\DIFdelend %DIF > \bibliographystyle{ieicetr}%
+\begin{thebibliography}{10}
+
+\bibitem{bib-rtof-maslov}
+D.~Maslov, ``Advantages of using relative-phase toffoli gates with an
+  application to multiple control toffoli optimization,'' Physical Review A,
+  vol.93, no.2, p.022311, 2016.
+
+\bibitem{bib-ddmf}
+S.~Yamashita, S.i. Minato, and D.M. Miller, ``Ddmf: An efficient decision
+  diagram structure for design verification of quantum circuits under a
+  practical restriction,'' IEICE transactions on fundamentals of electronics,
+  communications and computer sciences, vol.91, no.12, pp.3793--3802, 2008.
+
+\bibitem{bib-barenco-elementary}
+A.~Barenco, C.H. Bennett, R.~Cleve, D.P. DiVincenzo, N.~Margolus, P.~Shor,
+  T.~Sleator, J.A. Smolin, and H.~Weinfurter, ``Elementary gates for quantum
+  computation,'' Phys. Rev. A, vol.52, pp.3457--3467, Nov\ 1995.
+
+\bibitem{bib-mike-and-ike}
+M.A. Nielsen and I.~Chuang, Quantum Computation, 2010.
+
+\bibitem{bib-selinger-rtof}
+B.~Giles and P.~Selinger, ``Exact synthesis of multiqubit clifford+$t$
+  circuits,'' Phys. Rev. A, vol.87, p.032332, Mar\ 2013.
+
+\bibitem{bib-amy-phase-state}
+M.~Amy and N.J. Ross, ``Phase-state duality in reversible circuit design,''
+  Phys. Rev. A, vol.104, p.052602, Nov\ 2021.
+
+\bibitem{bib-sousai-rtof}
+S.~Kuroda and S.~Yamashita, ``Optimization of t-count in quantum circuits using
+  alternate forms of the relative phase toffoli gate,'' Reversible Computation,
+  2022.
+
+\bibitem{bib-dizzy-rtof}
+D.~Clarino, S.~Kuroda, and S.~Yamashita, ``Optimization of t-count in quantum
+  circuits using alternate forms of the relative phase toffoli gate,'' IEEE
+  International Symposium on Multiple-Valued Logic, 2023.
+
+\bibitem{bib-lhrs-soeken}
+M.~Soeken, M.~Roetteler, N.~Wiebe, and G.~De~Micheli, ``Lut-based hierarchical
+  reversible logic synthesis,'' IEEE Transactions on Computer-Aided Design of
+  Integrated Circuits and Systems, vol.38, no.9, pp.1675--1688, 2018.
+
+\bibitem{bib-epfl}
+L.~Amaru, P.E. Gaillardon, and G.~De~Micheli Proceedings of the 24th
+  International Workshop on Logic \& Synthesis (IWLS), 2015.
+
+\bibitem{bib-abc}
+R.~Brayton and A.~Mishchenko, ``Abc: An academic industrial-strength
+  verification tool,'' Computer Aided Verification, ed.~T.~Touili, B.~Cook, and
+  P.~Jackson, Berlin, Heidelberg, pp.24--40, Springer Berlin Heidelberg, 2010.
+
+\bibitem{bib-qiskit}
+{Qiskit contributors}, ``Qiskit: An open-source framework for quantum
+  computing,'' 2023.
+
+\bibitem{bib-pkrm}
+R.~Drechsler, ``Pseudo-kronecker expressions for symmetric functions,'' IEEE
+  Transactions on Computers, vol.48, no.9, pp.987--990, 1999.
+
+\end{thebibliography}
+%
+
+\DIFdelbegin %DIFDELCMD < \vspace{-22mm}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \vspace{-10mm}
+\DIFaddend 
+
+\profile[img/clarino.pdf]{David Clarino}{received his BS EECS and BA Physics from UC Berkeley and MS from Santa Clara University. He is currently a student at the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, Japan. His research interests include quantum circuit design and quantum circuit verification and he has previously worked on SoC design verification}
+
+\DIFdelbegin %DIFDELCMD < \vspace{-5mm}
+%DIFDELCMD < %%%
+\DIFdelend %DIF > \vspace{-5mm}
+
+\profile[accel.jpg]{Naoya Asada}{received his bachelor's degree from
+College of Information Science and Engineering, Ritsumeikan
+University in 2021. He received his master's degree from
+Graduate School of Information Science and Engineering, Ritsumeikan
+University in 2023. He is currently with Mitsubishi Electric Corp. 
+}
+
+\DIFdelbegin %DIFDELCMD < \vspace{-5mm}
+%DIFDELCMD < %%%
+\DIFdelend %DIF > \vspace{-5mm}
+
+\profile[img/matsuo.pdf]{Atsushi Matsuo}{received his B.E., M.E. and Ph.D. degrees in Information Science and Engineering from Ritsumeikan University, Shiga, Japan in 2011, 2013, and 2023, respectively. His research interests include quantum circuit design, compilers for quantum circuits, and variational quantum algorithms.}
+
+\DIFdelbegin %DIFDELCMD < \vspace{-5mm}
+%DIFDELCMD < %%%
+\DIFdelend %DIF > \vspace{-5mm}
+
+\DIFdelbegin %DIFDELCMD < \profile[img/Yamashita.pdf]{Shigeru Yamashita}{is a professor at the
+%DIFDELCMD < Department of Computer Science, College
+%DIFDELCMD < of Information Science and Engineering,
+%DIFDELCMD < Ritsumeikan University. He received
+%DIFDELCMD < his B.E., M.E. and Ph.D. degrees in Information
+%DIFDELCMD < Science from Kyoto University,
+%DIFDELCMD < Kyoto, Japan, in 1993, 1995 and 2001, respectively.
+%DIFDELCMD < His research interests include
+%DIFDELCMD < new types of computation and logic synthesis for them. He received
+%DIFDELCMD < the 2000 IEEE Circuits and Systems Society Transactions
+%DIFDELCMD < on Computer-Aided Design of Integrated Circuits and Systems
+%DIFDELCMD < Best Paper Award, SASIMI 2010 Best Paper Award, 2010 IPSJ
+%DIFDELCMD < Yamashita SIG Research Award, and 2010 Marubun Academic
+%DIFDELCMD < Achievement Award of the Marubun Research Promotion Foundation.
+%DIFDELCMD < He is a senior member of IEEE, and a member of IPSJ.}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \profile[img/Yamashita.pdf]{Shigeru Yamashita}{is a professor at the
+Department of Computer Science, College
+of Information Science and Engineering,
+Ritsumeikan University. He received
+his B.E., M.E. and Ph.D. degrees in Information
+Science from Kyoto University,
+Kyoto, Japan, in 1993, 1995 and 2001, respectively.
+His research interests include
+new types of computation and logic synthesis for them. He received
+the 2000 IEEE Circuits and Systems Society Transactions
+on Computer-Aided Design of Integrated Circuits and Systems
+Best Paper Award, SASIMI 2010 Best Paper Award, 2010 IPSJ
+Yamashita SIG Research Award, and 2010 Marubun Academic
+Achievement Award of the Marubun Research Promotion Foundation.
+He is a senior member of IEEE and a senior member of IPSJ.}
+\DIFaddend 
+
+
+
+
+\pagebreak
+
+\onecolumn
+
+\appendix
+%DIF > \counterwithin{figure}{section}
+%DIF > \newcommand*{\currentname}{\@currentlabelname}
+\DIFaddbegin \newcommand{\thenewsection}{\Alph{section}}
+\renewcommand\thefigure{\thenewsection\arabic{figure}}
+\DIFaddend 
+
+\section{Function Decomposition}
+\label{App:FuncDecomp}
+\begin{figure}[h]
+  \centering
+  \scalebox{0.8}{%\Qcircuit @C=0.5em @R=0.2em @!R { \\
+\Qcircuit @C=0.5em @R=0.2em { \\
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    & \ustick{x_3 \cdot F(x_3=1,x_2,x_1)}   &                    &                    &          &            &                    &           &          &          &                    &          &           &          &                    & \\
+          \push{\ket{x_1}}  & \qw      & \qw       & \qw      & \qw                & \qw                & \qw       & \qw       & \qw                & \ctrl{3} & \qw                         & \qw                & \qw                                   & \ctrl{3}           & \qw                & \qw      & \qw        & \qw                & \qw       & \qw      & \qw      & \qw                & \ctrl{3} & \qw       & \qw      & \qw                & \ctrl{3} & \qw & \cdots  \\
+          \push{\ket{x_2}}  & \qw      & \qw       & \qw      & \qw                & \qw                & \qw       & \ctrl{2}  & \qw                & \qw      & \qw                         & \ctrl{2}           & \qw                                   & \qw                & \qw                & \qw      & \qw        & \qw                & \qw       & \qw      & \ctrl{2} & \qw                & \qw      & \qw       & \ctrl{2} & \qw                & \qw      & \qw & \cdots  \\
+          \push{\ket{x_3}}  & \qw      & \qw       & \ctrl{1} & \qw                & \qw                & \qw       & \qw       & \qw                & \qw      & \qw                         & \qw                & \qw                                   & \qw                & \qw                & \qw      & \ctrl{1}   & \qw                & \qw       & \qw      & \qw      & \qw                & \qw      & \qw       & \qw      & \qw                & \qw      & \qw & \cdots  \\
+          \push{{\ket{0}}}  & \gate{H} & \gate{T}  & \targ    & \gate{T^{\dagger}} & \gate{H}           & \gate{T}  & \targ     & \gate{T^{\dagger}} & \targ    & \gate{T}                    &\targ               & \gate{T^{\dagger}}                    &\targ               &\gate{H}            & \gate{T} & \targ      & \gate{T^{\dagger}} & \gate{H}  & \gate{T} &\targ     & \gate{T^{\dagger}} &\targ     & \gate{T}  &\targ     & \gate{T^{\dagger}} &\targ     & \qw & \cdots  \\
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    &                                       & \push{\phantom{X}} &                    &          &            &                    & \\         
+          \push{{x}_{1} }   & \cdots   &           & \qw      & \qw                & \qw                & \qw       & \qw       & \qw                & \qw      & \qw                         & \ctrl{3}           & \qw                                   & \qw                & \qw                & \ctrl{3} & \qw        & \cdots             &\\           
+          \push{{x}_{2} }   & \cdots   &           & \qw      & \qw                & \qw                & \ctrl{2}  & \qw       & \gate{X}           & \ctrl{2} & \qw                         & \qw                & \qw                                   & \ctrl{2}           & \gate{X}           & \qw      & \qw        & \cdots             &\\
+          \push{{x}_{3} }   & \cdots   &           & \gate{X} & \ctrl{1}           & \qw                & \qw       & \qw       & \qw                & \qw      & \qw                         & \qw                & \qw                                   & \qw                & \qw                & \qw      & \qw        & \cdots             &\\
+          \push{F}          & \cdots   &           & \gate{T} & \targ              & \gate{T^{\dagger}} & \targ     & \gate{H}  & \gate{T}           & \targ    & \gate{T^{\dagger}}          & \targ              & \gate{T}                              &\targ               & \gate{T^{\dagger}} & \targ    & \gate{H}   & \cdots             &\\
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    &                                       & \push{\phantom{X}} &                    &          &            &                    & \\                
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    &                                       & \push{\phantom{X}} &                    &          &            &                    &           & \rstick{\bar{x_3} \cdot F(x_3=0,x_2,x_1)}\\         
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    &                                       & \push{\phantom{X}} &                    &          &            &                    &           & \\         
+                            &          &           &          &                    &                    &           &           &                    &          & \ustick{F(x_3=0,x_2,x_1)}   &                    &                                       & \push{\phantom{X}} &                    &          &            &                    &           & \\         
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    &                                       & \push{\phantom{X}} &                    &          &            &                    &           & \\                
+          \push{{x}_{1} }   & \cdots   &           & \qw      & \qw                & \qw                & \qw       & \qw       & \qw                & \qw      & \qw                         & \ctrl{3}           & \qw                                   & \qw                & \qw                & \ctrl{3} &\qw         &\qw                 & \lstick{x_1}\\ 
+          \push{{x}_{2} }   & \cdots   &           & \qw      & \qw                & \qw                & \ctrl{2}  & \qw       & \gate{X}           & \ctrl{2} & \qw                         & \qw                & \qw                                   & \ctrl{2}           & \gate{X}           & \qw      &\qw         &\qw                 & \lstick{x_2}\\     
+          \push{{x}_{3} }   & \cdots   &           & \qw      & \ctrl{1}           & \gate{X}           & \qw       & \qw       & \qw                & \qw      & \qw                         & \qw                & \qw                                   & \qw                & \qw                & \qw      &\qw         &\qw                 & \lstick{x_3}\\     
+          \push{F}          & \cdots   &           & \gate{T} & \targ              & \gate{T^{\dagger}} &\targ      & \gate{H}  & \gate{T}           &\targ     & \gate{T^{\dagger}}          &\targ               & \gate{T}                              &\targ               & \gate{T^{\dagger}} &\targ     &\gate{H}\qw &\qw                 & \lstick{F}\\
+                            &          &           &          &                    &                    &           &           &                    &          &                             &                    & \push{\phantom{X}} \gategroup{2}{2}{5}{27}{.7em}{^\}} \gategroup{7}{7}{11}{17}{.7em}{_\}} \gategroup{7}{7}{11}{17}{.7em}{--} \gategroup{17}{7}{18}{18}{.7em}{^\}} \gategroup{17}{7}{20}{18}{.7em}{--} \gategroup{9}{3}{20}{19}{.7em}{\}} & &          &     & & 
+}
+}
+      \caption{Decomposition of the function in Example ~\ref{ex-bool}}
+      \label{app-func-decomp}
+% \vspace*{-0.15cm}
+% \end{figure}
+% \begin{figure}[h]
+  \centering
+  \scalebox{0.8}{%\Qcircuit @C=0.5em @R=0.2em @!R { \\
+\Qcircuit @C=0.5em @R=0.2em { \\
+          \push{\ket{x_1}}  & \ctrl{3} & \qw      & \gate{X} & \ctrl{3} & \qw                   & \qw      & \qw      & \ctrl{3} & \gate{X}           & \qw         & \qw      & \qw      & \qw                & \ctrl{3} & \qw      & \qw      & \qw      & \qw                & \qw      &\qw  \\
+          \push{\ket{x_2}}  & \qw      & \qw      & \qw      & \qw      & \qw                   & \ctrl{2} & \qw      & \qw      & \qw                & \ctrl{2}    & \qw      & \qw      & \qw                & \qw      & \ctrl{2} & \qw      & \qw      & \qw                & \qw      &\qw  \\
+          \push{\ket{x_3}}  & \qw      & \qw      & \qw      & \qw      & \qw                   & \qw      & \qw      & \qw      & \qw                & \qw         & \qw      & \ctrl{1} & \qw                & \qw      & \qw      & \qw      & \ctrl{1} & \qw                & \qw      &\qw  \\
+          \push{{\ket{0}}}  & \targ    & \gate{H} & \gate{T} & \targ    & \gate{T^{\dagger}}    & \targ    & \gate{T} & \targ    & \gate{T^{\dagger}} & \targ       & \gate{T} & \targ    & \gate{T^{\dagger}} & \targ    & \targ    & \gate{T} & \targ    & \gate{T^{\dagger}} & \gate{H} &\qw  
+}
+%                            &          &          &           &          &                    &                    &           &           &                    &          &                             &                    & \ustick{x_3 \cdot F(x_3=1,x_2,x_1)}   &                    &                    &          &            &                    &           &          &          &                    &          &           &          &                    & \\
+}
+      \caption{Decomposition of the function in Example ~\ref{ex-davio}}
+      \label{fig-func-decomp-davio}
+\end{figure}
+
+\section{Various Balanced and Unbalanced Shannon's and Davio Decompositions from Section \ref{Subsec:Pro:Improved}}
+\label{App:ManyDecomp}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F} & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \multigate{5}{F_{x_k=1}} & \qw               & \qw           & \qw                         & \multigate{5}{F_{x_k=1}} & \qw           & \qw & \qw              & \qw            & \qw                       & \multigate{5}{F_{x_k=0}} & \qw               & \qw           & \qw                          & \multigate{5}{F_{x_k=0}}& \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}        & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \ghost{F_{x_k=1}}\qw     & \qw               & \qw           & \qw                         & \ghost{F_{x_k=1}}        & \qw           & \qw & \qw              & \qw            & \qw                       & \ghost{F_{x_k=1}}        & \qw               & \qw           & \qw                          & \ghost{F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{\vdots}       & &                  &      & \qw & &         & &                   & \push{\vdots}     &               &  \push{\vdots}            &                          & \push{\vdots}     &               &                             &                          & \push{\vdots} &     &                  &                &  \push{\vdots}            &                          & \push{\vdots}     &               &                              &                         & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}                      & \qw  & \qw & &         & & \qw               & \qw               & \ctrl{3}      & \qw                       & \ghost{F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                         & \ghost{F_{x_k=1}}        & \qw           & \qw & \gate{X}         & \ctrl{3}       & \qw                       & \ghost{F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                          & \ghost{F_{x_k=1}}\qw    & \gate{X}          & \qw\\
+          \push{\vdots}       & &                                &      & \qw & &\push{=} & &                   & \push{\vdots}     &               & \push{\vdots}             &                          & \push{\vdots}     &               &                             &                          & \push{\vdots} &     &                  &                &  \push{\vdots}            &                          & \push{\vdots}     &               &                              &                         & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}                      & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \ghost{F_{x_k=1}}\qw     & \qw               & \qw           & \qw                         & \ghost{F_{x_k=1}}        & \qw           & \qw & \qw              & \qw            & \qw                       & \ghost{F_{x_k=1}}\qw     & \qw               & \qw           & \qw                          & \ghost{F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \push{\rtoftarg}\qw\qwx[-1]    & \qw  & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ\qwx[-3] & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]            & \gate{\mathrm{T}} & \targ\qwx[-3] & \gate{\mathrm{T^{\dagger}}} & \push{\rtoftarg}\qw\qwx[-1]            & \qw           & \qw & \gate{\mathrm{T}} & \targ\qwx[-1]  & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]            & \gate{\mathrm{T}} & \targ\qwx[-1] & \gate{\mathrm{T^{\dagger}}}  & \push{\rtoftarg}\qw\qwx[-1]           & \gate{\mathrm{H}} & \qw\\
+\DIFdelbeginFL %DIFDELCMD < \push{{\ket{0}}   } & & \push{g_1}                   &      &     & &         & & \push{g_2}        & \push{g_2}        & \push{g_3}    & \push{g_4}                & \push{g_5}                  & \push{g_6}        & \push{g_7}    & \push{g_8}                  & \push{g_9}                  &               &     & \push{g_{10}}     & \push{g_{11}}  & \push{g_{12}}             & \push{g_{12}}               & \push{g_{13}}     & \push{g_{14}} & \push{g_{15}}                & \push{g_{16}}               & \push{g_{17}}     &    \\
+%DIFDELCMD < %%%
+\DIFdelendFL }
+
+      }
+    \end{center}
+    \caption{Balanced Shannon's Decomposition}
+    \label{app-shannon}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F}            & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \multigate{5}{F_{x_k=1}}    & \qw               & \qw           & \qw                         & \qw           & \qw & \qw               & \qw            & \qw                       & \multigate{5}{F_{x_k=0}}    & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}                   & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \ghost{F_{x_k=1}}\qw        & \qw               & \qw           & \qw                         & \qw           & \qw & \qw               & \qw            & \qw                       & \ghost{F_{x_k=1}}           & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &         & &                   & \push{\vdots}     &               &  \push{\vdots}            &                             & \push{\vdots}     &               &                             & \push{\vdots} &     &                   &                &  \push{\vdots}            &                             & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}                   & \qw  & \qw & &         & & \qw               & \qw               & \ctrl{3}      & \qw                       & \ghost{F_{x_k=1}}\qw        & \qw               & \ctrl{3}      & \qw                         & \qw           & \qw & \gate{X}          & \ctrl{3}       & \qw                       & \ghost{F_{x_k=1}}\qw        & \qw               & \ctrl{3}      & \qw                          & \gate{X}          & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &\push{=} & &                   & \push{\vdots}     &               & \push{\vdots}             &                             & \push{\vdots}     &               &                             & \push{\vdots} &     &                   &                &  \push{\vdots}            &                             & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}                   & \qw  & \qw & &         & & \qw               & \qw               & \qw           & \qw                       & \ghost{F_{x_k=1}}\qw        & \qw               & \qw           & \qw                         & \qw           & \qw & \qw               & \qw            & \qw                       & \ghost{F_{x_k=1}}\qw        & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \push{\rtoftarg}\qw\qwx[-1] & \qw  & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ         & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1] & \gate{\mathrm{T}} & \targ         & \gate{\mathrm{T^{\dagger}}} & \qw           & \qw & \gate{\mathrm{T}} & \targ          & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1] & \gate{\mathrm{T}} & \targ         & \gate{\mathrm{T^{\dagger}}}  & \gate{\mathrm{H}} & \qw\\
+                              & &                             &      &     & &         & & \push{g_1}        & \push{g_2}        & \push{g_3}    & \push{g_4}                & \push{g_5}                  & \push{g_6}        & \push{g_7}    & \push{g_8}                  &               &     & \push{g_9}        & \push{g_{10}}  & \push{g_{11}}             & \push{g_{12}}               & \push{g_{13}}     & \push{g_{14}} & \push{g_{15}}                & \push{g_{16}}     & \\
+}
+
+      }
+    \end{center}
+    \caption{Unbalanced Shannon's Decomposition}
+    \label{app-shannon-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F}            & \qw  & \qw & &         & & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{F_{x_k=1}}    %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{F_{x_k=0}}    \DIFaddendFL & \qw               & \qw               & \qw            & \qw                       & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}} & \qw               & \qw           & \qw                          & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}}& \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=1}}\qw        & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}        & \qw               & \qw           & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &         & &                             &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              &                                          & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=1}}\qw        & \qw               & \qw               & \ctrl{3}       & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &\push{=} & &                             &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              &                                          & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=1}}\qw        & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \qw           & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \push{\rtoftarg}\qw\qwx[-1] & \qw  & \qw & &         & & \push{\rtoftarg}\qw\qwx[-1] & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ\qwx[-1]  & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]               & \gate{\mathrm{T}} & \targ\qwx[-1] & \gate{\mathrm{T^{\dagger}}}  & \push{\rtoftarg}\qw\qwx[-1]              & \gate{\mathrm{H}} & \qw\\
+}
+
+      }
+    \end{center}
+    \caption{Balanced \DIFaddbeginFL \DIFaddFL{positive }\DIFaddendFL Davio Expansion}
+    \label{app-davio-pos}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F}            & \qw  & \qw & &         & & \multigate{5}{F_{x_k=0}}    & \qw               & \qw               & \qw      & \qw                       & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}} & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \qw               & \qw      & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}        & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &         & &                             &                   &                   &          &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \qw               & \ctrl{3} & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                          & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &\push{=} & &                             &                   &                   &          &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \qw               & \qw      & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \push{\rtoftarg}\qwx[-1]\qw & \qw  & \qw & &         & & \push{\rtoftarg}\qw\qwx[-1] & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]               & \gate{\mathrm{T}} & \targ         & \gate{\mathrm{T^{\dagger}}}  & \gate{\mathrm{H}} & \qw\\
+}
+
+      }
+    \end{center}
+    \caption{Unbalanced positive Davio Expansion}
+    \label{app-davio-pos-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F} & \qw  & \qw & &         & & \multigate{5}{F_{x_k=1}} & \qw               & \qw               & \qw            & \qw                       & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}} & \qw               & \qw           & \qw                          & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}}& \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}        & \qw  & \qw & &         & & \ghost{F_{x_k=1}}\qw     & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}        & \qw               & \qw           & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{\vdots}       & &                  &      & \qw & &         & &                          &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              &                                          & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}        & \qw  & \qw & &         & & \DIFdelbeginFL %DIFDELCMD < \ghost{F_{x_k=1}}%%%
+\DIFdelendFL \DIFaddbeginFL \ghost{F_{x_k=0}}\DIFaddendFL \qw     & \qw               & \gate{X}          & \ctrl{3}       & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \gate{X}          & \qw\\
+          \push{\vdots}       & &                  &      & \qw & &\push{=} & &                          &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              &                                          & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}        & \qw  & \qw & &         & & \ghost{F_{x_k=1}}\qw     & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \qw           & \qw                          & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw    & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \DIFdelbeginFL %DIFDELCMD < \targ%%%
+\DIFdelendFL \DIFaddbeginFL \push{\rtoftarg}\qw\DIFaddendFL \qwx[-1]    & \qw  & \qw & &         & & \DIFdelbeginFL %DIFDELCMD < \targ%%%
+\DIFdelendFL \DIFaddbeginFL \push{\rtoftarg}\qw\DIFaddendFL \qwx[-1]            & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ\qwx[-1]  & \gate{\mathrm{T^\dagger}} & \DIFdelbeginFL %DIFDELCMD < \targ%%%
+\DIFdelendFL \DIFaddbeginFL \push{\rtoftarg}\qw\DIFaddendFL \qwx[-1]                             & \gate{\mathrm{T}} & \targ\qwx[-1] & \gate{\mathrm{T^{\dagger}}}  & \DIFdelbeginFL %DIFDELCMD < \targ%%%
+\DIFdelendFL \DIFaddbeginFL \push{\rtoftarg}\qw\DIFaddendFL \qwx[-1]                            & \gate{\mathrm{H}} & \qw\\
+}
+
+      }
+    \end{center}
+    \caption{Balanced negative Davio Expansion}
+    \label{app-davio-neg}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \Qcircuit @C=0.5em @R=0.2em @!R { \\
+          \push{{x}_{0} }     & & \multigate{5}{F}            & \qw  & \qw & &         & & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{F_{x_k=0}}    %%%
+\DIFdelendFL \DIFaddbeginFL \multigate{5}{F_{x_k=1}}    \DIFaddendFL & \qw               & \qw               & \qw            & \qw                       & \multigate{5}{F_{x_k=0} \oplus F_{x_k=1}} & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{x}_{1} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}        & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &         & &                             &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{k} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \DIFdelbeginFL %DIFDELCMD < \qw               %%%
+\DIFdelendFL \DIFaddbeginFL \gate{X}          \DIFaddendFL & \ctrl{3}       & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \ctrl{3}      & \qw                          & \DIFdelbeginFL %DIFDELCMD < \qw               %%%
+\DIFdelendFL \DIFaddbeginFL \gate{X}          \DIFaddendFL & \qw\\
+          \push{\vdots}       & &                             &      & \qw & &\push{=} & &                             &                   &                   &                &  \push{\vdots}            &                                           & \push{\vdots}     &               &                              & \push{\vdots}     &    \\
+          \push{{x}_{n} }     & & \ghost{F}                   & \qw  & \qw & &         & & \ghost{F_{x_k=0}}\qw        & \qw               & \qw               & \qw            & \qw                       & \ghost{F_{x_k=0} \oplus F_{x_k=1}}\qw     & \qw               & \qw           & \qw                          & \qw               & \qw\\
+          \push{{\ket{0}}   } & & \push{\rtoftarg}\DIFdelbeginFL %DIFDELCMD < \qwx[-1]%%%
+\DIFdelendFL \qw\DIFaddbeginFL \qwx[-1] \DIFaddendFL & \qw  & \qw & &         & & \push{\rtoftarg}\qw\qwx[-1] & \gate{\mathrm{H}} & \gate{\mathrm{T}} & \targ\DIFaddbeginFL \qwx[-1]  \DIFaddendFL & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]               & \gate{\mathrm{T}} & \targ\DIFaddbeginFL \qwx[-1] \DIFaddendFL & \gate{\mathrm{T^{\dagger}}}  & \gate{\mathrm{H}} & \qw\\
+}
+
+      }
+    \end{center}
+    \caption{Unbalanced negative Davio Expansion}
+    \label{app-davio-neg-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+
+
+
+
+\end{document}
+
+
+

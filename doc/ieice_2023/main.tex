@@ -84,13 +84,15 @@
 \maketitle
 
 \begin{summary}
-  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits in a qubit-constrained environment. Other recent 
-  research has demonstrated the possibility of using {\it relative phase} quantum 
-  circuits in tandem has an advantage in minimizing T-count in the fault-tolerant quantum 
-  computing paradigm. To generate such arbitrary Boolean functions, we utilize Shannon's 
-  Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative
-  phase circuits. Experimental results demonstrate that our method can reduce the T-count
-  to an average of 24\% of the conventional method. 
+  
+  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
+  in a qubit-constrained environment. Other recent research has demonstrated the possibility of using {\it relative phase}
+  quantum circuits when compute/uncompute logic is used in tandem, reducing T-count in quantum Boolean circuits in
+  the fault-tolerant quantum computing paradigm. Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
+  qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes
+  in a relative phase manner could reduce the T-count. To generate such arbitrary Boolean functions, we utilize Shannon's
+  Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative  phase circuits. Experimental results
+  demonstrate that our method can reduce the T-count to an average of 24\% of the conventional method. 
   
 \end{summary}
 \begin{keywords}
@@ -111,7 +113,7 @@ relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit 
 
 %\vspace{10mm}
 
-%\bibliographystyle{ieicetr}%
+\bibliographystyle{ieicetr}%
 \bibliography{ref}%
 
 \vspace{-10mm}

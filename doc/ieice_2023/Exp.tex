@@ -61,11 +61,7 @@
 %\vspace*{0.5cm}
 \section{Experimental Results}
 \label{Sec:exp}
-\Del{\subsection{Implementation}
 
-Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and LUT Networks are generated from them using the ABC tool~\cite{bib-abc}. We choose LUT-sizes of 3, 4, 5, and 6, variables. as in~\cite{bib-barenco-elementary}, this is theorized as the upper bound to the tractable implementations of Boolean functions in the quantum space. This LUT network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic. The algorithm is implemented in Python. Any exact (non-relative phase) synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
-}
-\Add{
 \subsection{Implementation}
 Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and Boolean logic networks are generated from them using the ABC tool~\cite{bib-abc}. In particular, we choose circuits with input sizes many times larger than 6 in order to get a decent number of intermediate nodes. We synthesize these with LUT-sizes of 3, 4, 5, and 6, variables. As in~\cite{bib-barenco-elementary}, this represents a range where the T-count remains tractable. This Boolean logic network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
 
@@ -73,7 +69,7 @@ Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bi
 The algorithm is implemented in Python. Any exact (non-relative phase) synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}. 
 
 In our implementation, we do an exhaustive search by executing our algorithm through every variable order to find the one with the lowest T-count. As we can see from Table~\ref{table-runtime}, this is tractable for $n < 6$.
-}
+
 \vspace{5mm}
 \subsection{Methodology} 
 
