@@ -195,11 +195,16 @@
 \maketitle
 
 \begin{summary}
-  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits in a qubit-constrained environment. Other recent 
-  research has demonstrated the possibility of using {\it relative phase} quantum circuits in tandem has an advantage in minimizing T-count in the fault-tolerant quantum 
-  computing paradigm. To generate such arbitrary Boolean functions, we utilize Shannon's Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative
-  phase circuits. Experimental results demonstrate that our method can reduce the T-count
-  to an average of 24\% of the conventional method. 
+  \DIFaddbegin 
+
+  \DIFaddend Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
+  in a qubit-constrained environment. Other recent research has demonstrated the possibility of using {\it relative phase}
+  quantum circuits \DIFdelbegin \DIFdel{in tandem has an advantage in minimizing }\DIFdelend \DIFaddbegin \DIFadd{when compute/uncompute logic is used in tandem, reducing }\DIFaddend T-count in \DIFaddbegin \DIFadd{quantum Boolean circuits in
+  }\DIFaddend the fault-tolerant quantum computing paradigm. \DIFaddbegin \DIFadd{Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
+  qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes
+  in a relative phase manner could reduce the T-count. }\DIFaddend To generate such arbitrary Boolean functions, we utilize Shannon's
+  Decomposition, Davio expansions, as well as alternating balanced and unbalanced relative  phase circuits. Experimental results
+  demonstrate that our method can reduce the T-count to an average of 24\% of the conventional method. 
 
 \end{summary}
 \begin{keywords}
@@ -230,12 +235,11 @@ relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit 
         \vspace{10mm}
         \begin{subfigure}[b][15mm]{0.9\textwidth}
             \centering
-             \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \lstick{\ket{x_1}} & \ctrl{2}\qw         & \qw &          & & \qw               & \qw                       & \qw      & \qw                       & \ctrl{2} & \qw               & \qw      & \qw                         & \qw               & \qw & \ket{x_1}\\
-          \lstick{\ket{x_2}} & \ctrl{1}            & \qw & \push{=} & & \qw               & \qw                       & \ctrl{1} & \qw                       & \qw      & \qw               & \ctrl{1} & \qw                         & \qw               & \qw & \ket{x_2}\\
-          \lstick{\ket{x_3}} & \push{\rtoftarg}\qw & \qw &          & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^{\dagger}}} & \targ    & \gate{\mathrm{T}} & \gate{\mathrm{H}} & \qw & \push{e^{i\Delta\theta}\ket{x_1 \cdot x_2 \oplus x_3}}\\
-}
-
+            \Qcircuit @C=0.5em @R=0.2em @!R { \\
+              \lstick{\ket{x_1}} & \ctrl{2}\qw         & \qw &          & & \qw               & \qw                       & \qw      & \qw                       & \ctrl{2} & \qw               & \qw      & \qw                         & \qw               & \qw & \ket{x_1}\\
+              \lstick{\ket{x_2}} & \ctrl{1}            & \qw & \push{=} & & \qw               & \qw                       & \ctrl{1} & \qw                       & \qw      & \qw               & \ctrl{1} & \qw                         & \qw               & \qw & \ket{x_2}\\
+              \lstick{\ket{x_3}} & \push{\rtoftarg}\qw & \qw &          & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T}} & \targ    & \gate{\mathrm{T^{\dagger}}} & \targ    & \gate{\mathrm{T}} & \gate{\mathrm{H}} & \qw & \push{e^{i\Delta\theta}\ket{x_1 \cdot x_2 \oplus x_3}}\\
+            }
             \caption{An RTOF gate in Clifford+T basis}
             \sublabel{fig-rtof}
         \end{subfigure}
@@ -364,7 +368,7 @@ inputs are labeled $x_1,\cdots,x_5$
 
 \begin{figure}[tbp]
     \centering
-    \usetikzlibrary{positioning}
+\usetikzlibrary{positioning}
 \definecolor{offwhite}{HTML}{F2EDED}
 %% \tikzset{
 %%     > = stealth,
@@ -424,7 +428,6 @@ inputs are labeled $x_1,\cdots,x_5$
   \path (x1) edge (3);
   \path (x2) edge (1);
   \path (x3) edge (1);
-  \path (x4) edge (1);
   \path (x4) edge (2);
   \path (x5) edge (2);
   \path (x5) edge (5);
@@ -435,7 +438,6 @@ inputs are labeled $x_1,\cdots,x_5$
   \path (3)  edge (y1);
   \path (5)  edge (y2);  
 }
-
     \caption{A Boolean logic network}
     \label{fig-lut-network}
 \end{figure}
@@ -468,15 +470,16 @@ operation F in the breakdown of the larger operation}\DIFaddend .
     \centering
     \scalebox{1}{
       \Qcircuit @C=0.5em @R=0.2em @!R { \\
-  \push{\phantom{{x}_{0} }} & & \multigate{3}{F} &   & \multigate{2}{F} & \qw & \qw         & \qw & \multigate{2}{F^{\dagger}} \\
-  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     &   & \ghost{F'}        & \qw & \qw         & \qw & \ghost{F'^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     & = & \ghost{F'}        & \qw & \ctrl{2}    & \qw & \ghost{F'^{\dagger}}        \\
-  \push{\phantom{{x}_{0} }} & & \ghost{F}\qw     &   & \targ\qwx[-1]    & \qw & \control\qw & \qw & \targ\qwx[-1]\qw         \\
-  \push{\phantom{{x}_{0} }} & & \targ\qwx[-1]    &   & \qw              & \qw & \targ       & \qw & \qw                      \\
+        \push{\ket{{x}_{0}} } & & \multigate{4}{F} & &   & & \multigate{2}{F} & \qw & \qw           & \qw & \multigate{2}{F^{\dagger}} & \rstick{\ket{{x}_{0}}} \\
+        \push{\ket{{x}_{1}} } & & \ghost{F}        & &   & & \ghost{F'}       & \qw & \qw           & \qw & \ghost{F'^{\dagger}}       & \rstick{\ket{{x}_{1}}}  \\
+        \push{\ket{{x}_{2}} } & & \ghost{F}        & &   & & \ghost{F'}\qwx[1]& \qw &               & \qw & \ghost{F'^{\dagger}}\qwx[1]& \rstick{\ket{{x}_{2}}}  \\
+        \push{\vdots}         & & \push{\vdots}    & & = & & \push{\vdots}    &     & \push{\vdots} &     & \push{\vdots}              & \rstick{\vdots }    \\       
+        \push{\ket{{x}_{n}} } & & \ghost{F}        & &   & &  \qw             & \qw & \ctrl{2}      & \qw & \qw                        & \rstick{\ket{{x}_{n} }} \\
+        \push{\ket{0} }       & &                  & &   & & \targ\qwx[-2]    & \qw & \control\qw   & \qw & \targ\qwx[-2]              & \rstick{\ket{0} }  \\    
+        \push{\ket{0} }       & & \targ\qwx[-2]    & &   & & \qw              & \qw & \targ         & \qw & \qw                        & \rstick{\ket{F} } \\
       }
-
-}
-    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
+    }
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}, where $F$ is the function $F(\bar{x})=x_0 \cdot x_1 \cdot \cdots x_n$ and $F'$ is some decomposition of it, usually $F(\bar{x})=x_0 \cdot x_1 \cdot \cdots x_{n-1}$}
     \label{fig-maslov-decomp}
 \end{figure}
 
@@ -593,10 +596,7 @@ Because the \DIFdelbegin \DIFdel{UCNOT }\DIFdelend \DIFaddbegin \DIFadd{FCNOT }\
 \section{Proposed Method}
 \label{Sec:proposed}
 \subsection{Realizing Arbitrary Boolean Functions Up To A Relative Phase}
-\DIFdelbegin %DIFDELCMD < \label{Subsec:UNOT}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \label{Subsec:FNOT}
-\DIFaddend 
+\label{Subsec:FNOT}
 
 \begin{figure}[tbp]
     \centering
@@ -643,20 +643,15 @@ We can generalize this $n$-input Toffoli gate to an arbitrarily controlled NOT g
     \centering
     \scalebox{0.8} {
     \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }    & & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{x_k \cdot U}  %%%
-\DIFdelendFL \DIFaddbeginFL \multigate{5}{x_k \cdot F}  \DIFaddendFL & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{U}                %%%
-\DIFdelendFL \DIFaddbeginFL \multigate{5}{F}                \DIFaddendFL & \qw               & \qw        & \qw                         & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{U^{\dagger}}       %%%
-\DIFdelendFL \DIFaddbeginFL \multigate{5}{F^{\dagger}}       \DIFaddendFL & \qw              & \qw & \\
+          \push{{x}_{0} }    & & \multigate{5}{x_k \cdot F}  & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \multigate{5}{F} & \qw               & \qw        & \qw                         & \multigate{5}{F^{\dagger}}        & \qw              & \qw & \\
           \push{{x}_{1} }    & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \ghost{f}                       & \qw               & \qw        & \qw                         & \ghost{f}                        & \qw              & \qw & \\
           \push{\vdots}      & &                             &       &     & &\push{=} & &                    & \push{\vdots}            &          &  \push{\vdots}            &                                 & \push{\vdots}     &            &                             &                                  & \push{\vdots}    &     & \\
           \push{{x}_{k} }    & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \ctrl{3} & \qw                       & \ghost{f}                       & \qw               & \ctrl{3}   & \qw                         & \ghost{f}                        & \qw              & \qw & \\
           \push{\vdots}      & &                             &       &     & &\push{=} & &                    & \push{\vdots}            &          &  \push{\vdots}            &                                 & \push{\vdots}     &            &                             &                                  & \push{\vdots}    &     & \\
-          \DIFdelbeginFL %DIFDELCMD < \push{{x}_{n} }    %%%
-\DIFdelendFL \DIFaddbeginFL \push{{x}_{n-1} }  \DIFaddendFL & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \ghost{f}                       & \qw               & \qw        & \qw                         & \ghost{f}                        & \qw              & \qw & \\
-          \DIFdelbeginFL %DIFDELCMD < \push{{\ket{0}}   }%%%
-\DIFdelendFL \DIFaddbeginFL \push{{x}_{n}   }  \DIFaddendFL & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]     & \gate{\mathrm{T}} & \targ      & \gate{\mathrm{T^{\dagger}}} & \push{\rtoftarg}\qw\qwx[-1]\qw   &\gate{\mathrm{H}} & \qw & \\
-                             \DIFaddbeginFL & &                             &       &     & &         & & \push{g_0}        & \push{g_1}                & \push{g_2} & \push{g_5}              & \push{g_6}                      & \push{g_7}        & \push{g_8} & \push{g_9}                  & \push{g_{10}}                    &\push{g_{11}}     &     & \\     
-\DIFaddendFL }
+          \push{{x}_{n-1} }  & & \ghost{x_k \cdot f}         & \qw   & \qw & &         & & \qw               & \qw                       & \qw      & \qw                       & \ghost{f}                       & \qw               & \qw        & \qw                         & \ghost{f}                        & \qw              & \qw & \\
+          \push{{x}_{n}   }  & & \push{\rtoftarg}\qw\qwx[-1] & \qw   & \qw & &         & & \gate{\mathrm{H}} & \gate{\mathrm{T^\dagger}} & \targ    & \gate{\mathrm{T^\dagger}} & \push{\rtoftarg}\qw\qwx[-1]     & \gate{\mathrm{T}} & \targ      & \gate{\mathrm{T^{\dagger}}} & \push{\rtoftarg}\qw\qwx[-1]\qw   &\gate{\mathrm{H}} & \qw & \\
+                             & &                             &       &     & &         & & \push{g_0}        & \push{g_1}                & \push{g_2} & \push{g_5}              & \push{g_6}                      & \push{g_7}        & \push{g_8} & \push{g_9}                  & \push{g_{10}}                    &\push{g_{11}}     &     & \\     
+ }
 
 
     }
@@ -695,20 +690,12 @@ We can further generalize this. Recall from Section \ref{Sec:prelim} } that a To
     \centering
       \scalebox{0.7} {
         \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }  & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{x \cdot U} %%%
-\DIFdelendFL \DIFaddbeginFL \multigate{5}{x_k \cdot F} \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \multigate{5}{\bar{x} \cdot U'}%%%
-\DIFdelendFL \DIFaddbeginFL \multigate{5}{\bar{x_k} \cdot F'}\DIFaddendFL &\qw\\
-          \push{{x}_{1} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{{x}_{0} }  & \multigate{5}{x_k \cdot F} & \qw      & \multigate{5}{\bar{x_k} \cdot F'} &\qw\\
+          \push{{x}_{1} }  & \ghost{x \cdot F}          & \qw      & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{k} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \gate{X} & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{{x}_{k} }  & \ghost{x \cdot F}        & \gate{X} & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{n} }  & \DIFdelbeginFL %DIFDELCMD < \ghost{x \cdot U}        %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{x \cdot F}        \DIFaddendFL & \qw      & \DIFdelbeginFL %DIFDELCMD < \ghost{\bar{x} \cdot U'}       %%%
-\DIFdelendFL \DIFaddbeginFL \ghost{\bar{x} \cdot F'}       \DIFaddendFL &\qw\\
+          \push{{x}_{n} }  & \ghost{x \cdot F}        & \qw      & \ghost{\bar{x} \cdot F'}       &\qw\\
           \push{{\ket{0}}} & \targ\qwx[-1]            & \qw      & \targ\qwx[-1]                  &\qw\\
 }
 
@@ -1081,8 +1068,8 @@ each mapped \DIFdelbegin \DIFdel{LUT-size }\DIFdelend \DIFaddbegin \DIFadd{LUT }
 \DIFdelend \DIFaddbegin \DIFadd{. While we do not measure ancilla directly because their number is directly related to the decomposition of the overall Boolean function in to Boolean logic networks, which is outside the scope of this work. However, because LUT size is one of our variables, we note the effect of this on ancilla in qualitative terms in our analysis in Sec. ~\ref{Subsec:Analysis}.
 %DIF > \vspace{5mm}
 }\DIFaddend \subsection{Analysis}
-\DIFaddbegin \label{Subsec:Analysis}
-\DIFaddend In Table~\ref{table-results}, the best result for each circuit is written in bold. Just as before, the
+\label{Subsec:Analysis}
+In Table~\ref{table-results}, the best result for each circuit is written in bold. Just as before, the
 Proposed method sees the largest gain over the baseline LUT6 ESOP-based numbers in LUT3. However, whereas
 the Shannon Only method saw only modest gains here over the ESOP-based LUT3 numbers (i.e., merely reducing the
 maximum LUT-size with the naive method), we see a much more significant advantage for the Proposed method.

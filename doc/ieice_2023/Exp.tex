@@ -70,7 +70,7 @@ The algorithm is implemented in Python. Any exact (non-relative phase) synthesis
 
 In our implementation, we do an exhaustive search by executing our algorithm through every variable order to find the one with the lowest T-count. As we can see from Table~\ref{table-runtime}, this is tractable for $n < 6$.
 
-\vspace{5mm}
+%\vspace{5mm}
 \subsection{Methodology} 
 
 The results from generating using the {\it Proposed method} are then compared to a naive implementation of the LUT-based synthesis method ({\it ESOP-based method}), wherein each LUT is synthesized as an exact (non relative phase) implementation of their Boolean functions. We also run a version of the algorithm described in Sec ~\ref{Subsec:shannon} using only Shannon's Decomposition (Shannon Only), to test the efficacy of merely using a naive relative phase implementation without the optimization of introducing the Davio's expansions and balanced/unbalanced constructions. In the ESOP-based method, because the relative phase functions are constructed without any ancilla, we assume that there are plenty of bits to be reused at any time. This means that any MPMCT (Multiple Polarity Multiply-Controlled Toffoli) gates, which are MCT gates that allow for negated inputs, are synthesized directly using Gray-code sequence of operations for $n<5$, or decomposed according to the Barenco dirty ancilla method, both described in ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output node that requires an exact implementation.

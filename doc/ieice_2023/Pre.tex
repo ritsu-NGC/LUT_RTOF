@@ -73,9 +73,9 @@ One of the results from~\cite{bib-rtof-maslov} is that when larger functions, su
 into compute/uncompute pairs that act on ancilla, such as in the Barenco style Toffoli decompositions from 
 ~\cite{bib-barenco-elementary}, it is almost always more advantageous to implement each ``half'' of the 
 compute/uncompute pair into a relative phase construction. In particular, Maslov proposes the decomposition 
-shown in Fig.~\ref{fig-maslov-decomp}~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation implemented up 
-to a relative phase. It uses the operation $F'$ and its inverse $F'^\dagger$ to implement the intermediate
-operation F in the breakdown of the larger operation.
+shown in Fig.~\ref{fig-maslov-decomp} ~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation such that $F=x_n \cdot F'$.
+The gate $F'_g$ implements the function $F'$ to a relative phase. It uses the operation ${F'}_g$ and its inverse ${F'}_{g}^\dagger$ to implement the intermediate
+operation $F'$ in the breakdown of the larger operation $F$.
 
 %Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate and then repeating recursively. However, as Amy et al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate cannot be used directly in a recursive procedure to generate an arbitrarily sized MCT. The same work  takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$, where $x_k$ is a variable that F is dependent on, and $F_{k-1}$ and $F_{k-2}$ is the same form for $x_{k-1}$ and $x_{k-2}$. We will cover how to apply this later in Section ~\ref{Sec:proposed}.
 
@@ -83,7 +83,7 @@ operation F in the breakdown of the larger operation.
 \begin{figure}[tbp]
     \centering
     \scalebox{1}{\input{img/fig-maslov-decomp}}
-    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}, where $F$ is the function $F(\bar{x})=x_0 \cdot x_1 \cdot \cdots x_n$ and $F'$ is some decomposition of it, usually $F(\bar{x})=x_0 \cdot x_1 \cdot \cdots x_{n-1}$}
     \label{fig-maslov-decomp}
 \end{figure}
 
