@@ -33,12 +33,7 @@ implements the same function using only four T gates as shown in
 Fig.~\ref{fig-rtof}. However, it does this at the cost of a relative phase.
 Note the double circle on the target of Fig.~\ref{fig-rtof}: We will be
 using this notation to denote a relative phase version of a quantum logic
-gate in this paper. It may be noticed that the version of the RTOF gate used here is similar to the $n$-controlled-iX gate
-from~\cite{bib-selinger-rtof} for $n=2$, with one fewer CNOT gate. As
-noted in~\cite{bib-rtof-maslov}, removing this gate only affects the
-phase, so it only transforms an RTOF gate into another RTOF gate with
-the same T-count. We will consider analogs of both types of
-relative phase gates in Section ~\ref{Sec:proposed}.
+gate in this paper. 
 
 As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
 to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
@@ -53,9 +48,13 @@ A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG).
 % whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
 A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes in the network without fanouts. 
 
-A logic function can be decomposed into such a Boolean logic network. Its nodes can subsequently be implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are numbered 1-5 to 
-abstract away the functions inside of them, the primary outputs are labeled $y_1$ and $y_2$, and the primary 
-inputs are labeled $x_1,\cdots,x_5$
+A logic function can be decomposed into such a Boolean logic network. Its nodes can subsequently be
+implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are
+numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
+$y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
+dependent on $x_2$ and $x_3$, and node 2 is dependent on $x_4$ and $x_5$. node 3 is in turn dependent
+on node 1 and $x_2$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 is dependent on both
+node 4 and $x_5$.
 
 \begin{figure}[tbp]
     \centering
@@ -66,8 +65,9 @@ inputs are labeled $x_1,\cdots,x_5$
 
 \subsection{Using RTOF Gates to Decompose MCT Gates}
 Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advantage to using RTOF gates in
-synthesizing and decomposing logic functions, particularly {\it Multiply-Controlled Toffoli} (MCT) Gates, which
-are Toffoli gates controlled by the AND of three or more control bits.
+synthesizing and decomposing logic functions, particularly {\it Multiple Control Toffoli} (MCT) Gates, which
+are analogous to Toffoli gates in that they apply a NOT to the target bit if the AND of three or more control
+bits is true.
 
 One of the results from~\cite{bib-rtof-maslov} is that when larger functions, such as MCT, are broken down
 into compute/uncompute pairs that act on ancilla, such as in the Barenco style Toffoli decompositions from 
@@ -120,7 +120,9 @@ Because the FCNOT gates act on ancilla, there is a need to uncompute them, so th
 
 \begin{example}
   \label{ex-lut}
-  We start at node 1. Since this is an intermediate node, we place a FCNOT on an ancilla, and place its inverse on the same ancilla to uncompute. We do the same for node 2. For node 4, we cascade the ancilla from nodes 1 and 2 into it as input, and place its LUT, as well as its uncompute logic, on another ancilla. Finally, nodes 3 and 5 are output nodes, so we only generate their compute logic. 
+  We start at node 1. Since this is an intermediate node, we place a FCNOT on an ancilla, and place its inverse on the same ancilla to uncompute. We do the same for node 2. For node 4, we cascade the ancilla from nodes 1 and 2 into it as input, and place its LUT, as well as its uncompute logic, on another ancilla. Finally, nodes 3 and 5 are output nodes, so we only generate their compute logic.
+
+  Note in this diagram we denote qubits that a gate does not act on as dashed lines running across the gate, as opposed to qubits it acts on which terminate at the edges.
 
 \end{example}
 

@@ -8,6 +8,10 @@
             \node[shape=circle,double,draw,inner sep=1pt,fill=black, minimum width=3pt] (char) {};}}
 \newcommand*\rtofsctrlo{\tikz[baseline=(char.base)]{
             \node[shape=circle,double,draw,inner sep=1pt,fill=white, minimum width=3pt] (char) {};}}
+%\newcommand*\rtofsctrlo{\tikz[baseline=(char.base)]{
+%            \node[shape=circle,double,draw,inner sep=1pt,fill=white, minimum width=3pt] (char) {};}}
+\newcommand*\dashedwire{\tikz{
+            \draw[dashed] (0,0) -- (0.5,0); }}
 
 \newcommand*\ctrlrtofs[1]{\push{\rtofsctrl}\qwx[#1]\qw}
 \newcommand*\ctrlortofs[1]{\push{\rtofsctrlo}\qwx[#1]\qw}
