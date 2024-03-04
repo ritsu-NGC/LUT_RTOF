@@ -109,9 +109,7 @@ in~\cite{bib-amy-phase-state} as a special case of this construction.
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
 meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x=1} + \bar{x}$ or
 $x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
-$\bar{x_k}$ controlled~CNOT gate.
-
-We show the results of this in Fig.~\ref{app-shannon}.
+$\bar{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{app-shannon}.
 
 \begin{example}
   \label{ex-bool}
@@ -249,7 +247,8 @@ computation are not important to the algorithm itself, we will defer discussion 
 this variable order to our discussion of the implementation in Section~\ref{Sec:exp}.
 
 If the function is neither ``True'' nor ``False'', the function is expanded using the Shannon, Positive
-Davio, or Negative Davio expansions, independently. We go over constructions for them in ~\ref{App:ManyDecomp}.
+Davio, or Negative Davio expansions, independently about the first variable in the variable order.
+We go over constructions for them in ~\ref{App:ManyDecomp}.
 The constituent subfunctions of each expansion are then processed in the same way by
 recursing the function with the decomposed Boolean function as input. When the logic can be implemented as an
 unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is
@@ -277,7 +276,7 @@ The process is then repeated with all of the variable orders, and the minimum is
     \If{$BF == True$}
     \State return CNOT
     \ElsIf{$BF == False$}
-    \State return QC $\leftarrow$ Identity(Output)
+    \State return QC $\leftarrow$ identity map from input to output
     \ElsIf{$BF$ only consists of the first variable in {\it order}}
     \State return CNOT
     \Else
