@@ -17,7 +17,7 @@
         arbiter\_size\_2022   & 175640         & 0.68 & 0.42 & 0.28        & 0.35 & 0.63 & 0.27 & 0.17             & 0.21 & 0.13 & 0.11 & {\bf 0.05}        \\ \hline             
         adder\_size\_2022     & 4992           & 9.75 & 6.38 & 1.94        & 1 & 7.16 & 4.06 & 2.54                & 1 & 1.91 & 1.95 & 1.66                 \\ \hline
         \hline
-        Per LUT Average       &                & 1.80 & 1.08 & 0.49        & 0.5 & 0.46 & 0.35 & 0.27              & 1.47 & 1.49 & .73 & 0.50              \\ \hline
+        Per LUT Average       &                & 1.80 & 1.08 & 0.49        & 0.5 & 0.46 & 0.35 & 0.27              & 1.47 & 1.49 & 0.73 & 0.50              \\ \hline
         Average               &                &\multicolumn{3}{c}{1.13}   & \multicolumn{4}{|c}{0.72}             & \multicolumn{4}{|c}{0.24}              \\ \hline
       \end{tabular}
    }
@@ -82,7 +82,7 @@ in Sec ~\ref{Subsec:shannon} using only Shannon's Decomposition (Shannon Only), 
 using a naive relative phase implementation without the optimization of introducing the Davio's expansions and
 balanced/unbalanced constructions. In the ESOP-based method, because the relative phase functions are constructed
 without any ancilla, we assume that there are plenty of bits to be reused at any time. This means that any
-MPMCT (Multiple Polarity Multiple Control Toffoli) gates, which are MCT gates which also implement functions
+MPMCT (Multiple Polarity Multi-Controlled Toffoli) gates, which are MCT gates that also implement functions
 including negated inputs e.g. $x_0\bar{x_1}x_2$ etc., are synthesized directly using Gray-code sequence of
 operations for $n<5$, or decomposed according to the Barenco dirty ancilla method, both described in
 ~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output
@@ -91,7 +91,7 @@ node that requires an exact implementation.
 As in~\cite{bib-barenco-elementary}, we note that for values of $n<5$, the T-count in a direct implementation of
 the Toffoli gate (i.e. using a Gray-code sequence of operations) scales with $2^{n-1}$.
 
-Note that because, according to ~\cite{bib-lhrs}, the number of ancilla is completely determined by the logic
+Note that because, according to ~\cite{bib-lhrs-soeken}, the number of ancilla is completely determined by the logic
 network and the traversal algorithm we use there, the ancilla will be identical across ESOP-based, Shannon-Only
 and Proposed. As we are only concerned with relative performance of the three methods, we do not include them
 in the table. However, because changing the LUT size also changes the logic network, there will be some
@@ -106,12 +106,12 @@ circuit with the least amount of ancilla. Recall that in the previous paragraph,
 relative phase LUT scales with $2^n$. This measures the contribution of decreasing the LUT-size at the cost of
 increasing the number of gates and ancilla used. In particular, this is useful for comparison because it measures
 how the tradeoff between T-count and ancilla relates to the Shannon-Only and Proposed methods. For each LUT$x$
-column, we have an average of the performance for that particular method right below it in the ``Per LUT Average''
-row. We take the arithmetic mean of the gain of all circuits, and display it in the "Average" row. Note however
-that these numbers exempt adder\_size\_2022 from their numbers: we will explain why this circuit is interesting
-and also why it should not be included in these averages in Sec. ~\ref{Subsec:Analysis}. Finally, we also measure
-the execution time in seconds of our proposed method for each LUT-size. Additionally, we display the average
-runtimes for each circuit for each iteration of the Proposed method in Table ~\ref{table-runtime}.
+column, we take the arithmetic mean of the gain of each circuit for that particular LUT size for that particular
+method right below it in the ``Per LUT Average'' row. We take the arithmetic mean of the gain of all circuits for
+a particular method, across all LUT-sizes, and display it in the "Average" row for that method. Note however that
+these numbers exempt adder\_size\_2022 from their numbers: we will explain why this circuit is interesting and
+also why it should not be included in these averages in Sec. ~\ref{Subsec:Analysis}. Additionally, we display
+the average runtimes for each circuit for each iteration of the Proposed method in Table ~\ref{table-runtime}.
 
 %\vspace{5mm}
 \subsection{Analysis}

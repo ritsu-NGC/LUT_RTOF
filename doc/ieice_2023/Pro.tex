@@ -101,17 +101,17 @@ of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat
 are left with a simple CNOT as our F-controlled NOT expression.
 
 If the function is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
-the Shannon decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
+the Shannon's decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
 identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the
 function. As we will see in the next example, we can express the relative phase Toffoli gate construction
 in~\cite{bib-amy-phase-state} as a special case of this construction.
 
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
-meaning, a NOT function. Because the Shannon decomposition now evaluates to $x_k \cdot F_{x=1} + \bar{x}$ or
+meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x=1} + \bar{x}$ or
 $x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
 $\bar{x_k}$ controlled~CNOT gate.
 
-We show the results of this in Fig.~\ref{app-shannon}
+We show the results of this in Fig.~\ref{app-shannon}.
 
 \begin{example}
   \label{ex-bool}
@@ -158,15 +158,15 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 \label{Subsec:balanced}
 
 To realize a savings in T-count, we again observe that Fig.~\ref{fig-f-dot-g} doubles the T-count
-at every level of the Shannon decomposition. This is because of gate $g_{10}$ in the diagram which
+at every level of the Shannon's decomposition. This is because of gate $g_{8}$ in the diagram which
 serves to uncompute the effects of gate $g_6$ on the target bit. Observe that the CNOT gate $g_8$
 does the same thing with $g_2$. In general, we will call these types of constructions, where all
-effects of CNOT gates on the target bits are reversed by uncomputing it with a similar gate,
+effects of CNOT and FCNOT gates on the target bits are reversed by uncomputing it with a similar gate,
 \emph{balanced}.
 
 We take again a different type of construction from Ref.~\cite{bib-amy-phase-state}, this time
-depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous $g_{10}$ gate is missing
-such that the computation from $g_6$ is not reversed. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and then rotated
+depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous $g_{8}$ gate is missing
+such that the computation from $g_4$ is not reversed. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and then rotated
 back with a Hadamard without returning the target qubit to the same computational basis states it had just after
 the first Hadamard, an \emph{unbalanced} construction. In this type of construction, there is
 no need to double the T-count to cancel out the logic. However, it cannot be used
@@ -177,7 +177,7 @@ limitations of its use in our application with the following statement: unbalanc
 can be used to implement arbitrary gates (e.g. Fig.~\ref{fig-f-dot-g}) used in multiplication
 only when done in a balanced construction.
 
-In Appendix ~\ref{App:ManyDecomp}, we enumerate balanced and unbalanced implementations
+In ~\ref{App:ManyDecomp}, we enumerate balanced and unbalanced implementations
 of Shannon's Decomposition, Positive Davio Expansion, and Negative Davio Expansion. We will be using these
 later to define our algorithm.
 
@@ -189,7 +189,7 @@ and vice versa. We can easily extend this to our method of constructing arbitrar
 about our first variable with an unbalanced construction, and its immediate children that are constructed recursively will have to be constructed
 in a balanced manner. The children of those in turn can be unbalanced, and so on. 
 
-In doing so, we can reduce the dependency from $2^n$ to $2^{\frac{n}{2}}$. While still exponential, this has quite
+In doing so, we can reduce the dependency from $2^(n-1)$ to $2^{\frac{n-1}{2}}$. While still exponential, this has quite
 a significant reduction in the regime we are working with. Merely introducing this methodology results in significant savings for larger LUT-sizes, though
 its effect could be diminished for smaller ones.
 
@@ -292,7 +292,7 @@ The process is then repeated with all of the variable orders, and the minimum is
     \State    $F_2$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
     \State                       !balanced)
     \State
-    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-amy-unb} if not.
+    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-unb} if not.
     \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-pos} if $balanced$ is true or Fig.~\ref{app-davio-pos-unb} if not.
     \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-neg} if $balanced$ is true or Fig.~\ref{app-davio-neg-unb} if not.
     \State    return one of $[shannon, davio_{pos},davio_{neg}]$ with the min T-count
@@ -373,7 +373,7 @@ The process is then repeated with all of the variable orders, and the minimum is
 %\vspace*{-0.25cm}
 \end{algorithm}
 
-\subsection{Synthesizing A Boolean Function Using Boolean logic networks and Shannon Decomposition}
+\subsection{Synthesizing A Boolean Function Using Boolean logic networks and Shannon's decomposition}
 
 Using Algorithm~\ref{algo-new} we are now ready to propose our LUT-based synthesis
 method, described in Algorithm~\ref{algo-lut}.
@@ -381,8 +381,8 @@ method, described in Algorithm~\ref{algo-lut}.
 Like Sec.~\ref{Subsec:lhrs}, we query a node traversal algorithm to get the next
 node. We then check if this node is an output node or an intermediate node. If it is an
 intermediate node, we generate the compute logic as an FCNOT using Algorithm~\ref{algo-new},
-and then invert that output to generate the uncompute logic, then add those nodes to the
-algorithm. If the node is an output node, we generate the FCNOT using exact logic and add
+and then invert that output to generate the uncompute logic, then add those gates to the
+circuit. If the node is an output node, we generate the FCNOT using exact logic and add
 it to the circuit. We continue until there are no more nodes to process from the node
 traversal algorithm and terminate.
 

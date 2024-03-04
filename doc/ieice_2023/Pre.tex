@@ -14,7 +14,7 @@
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
 
-In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. We will implement them using the fault-tolerant set of the X gate ($\ket{x} \rightarrow \ket{~x}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} * x$) and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$).
+In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. We will implement them using the fault-tolerant set of the X gate ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$) and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$).
 
 We denote the input qubits of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ input qubits. Each qubit state in a circuit can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
 
@@ -53,7 +53,7 @@ implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-netwo
 numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
 $y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
 dependent on $x_2$ and $x_3$, and node 2 is dependent on $x_4$ and $x_5$. node 3 is in turn dependent
-on node 1 and $x_2$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 is dependent on both
+on node 1 and $x_1$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 is dependent on both
 node 4 and $x_5$.
 
 \begin{figure}[tbp]
@@ -65,7 +65,7 @@ node 4 and $x_5$.
 
 \subsection{Using RTOF Gates to Decompose MCT Gates}
 Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advantage to using RTOF gates in
-synthesizing and decomposing logic functions, particularly {\it Multiple Control Toffoli} (MCT) Gates, which
+synthesizing and decomposing logic functions, particularly {\it Multi-Controlled Toffoli} (MCT) Gates, which
 are analogous to Toffoli gates in that they apply a NOT to the target bit if the AND of three or more control
 bits is true.
 
@@ -73,9 +73,10 @@ One of the results from~\cite{bib-rtof-maslov} is that when larger functions, su
 into compute/uncompute pairs that act on ancilla, such as in the Barenco style Toffoli decompositions from 
 ~\cite{bib-barenco-elementary}, it is almost always more advantageous to implement each ``half'' of the 
 compute/uncompute pair into a relative phase construction. In particular, Maslov proposes the decomposition 
-shown in Fig.~\ref{fig-maslov-decomp} ~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation such that $F=x_n \cdot F'$.
-The gate $F'_g$ implements the function $F'$ to a relative phase. It uses the operation ${F'}_g$ and its inverse ${F'}_{g}^\dagger$ to implement the intermediate
-operation $F'$ in the breakdown of the larger operation $F$.
+shown in Fig.~\ref{fig-maslov-decomp} ~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation such that
+$F=x_n \cdot F'$. The gate $F'$ implements the function $F'$ to a relative phase. It uses the operation ${F'}$
+and its inverse ${F'}^\dagger$ to implement the intermediate operation $F'$ in the breakdown of the larger
+operation $F$.
 
 %Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate and then repeating recursively. However, as Amy et al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate cannot be used directly in a recursive procedure to generate an arbitrarily sized MCT. The same work  takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$, where $x_k$ is a variable that F is dependent on, and $F_{k-1}$ and $F_{k-2}$ is the same form for $x_{k-1}$ and $x_{k-2}$. We will cover how to apply this later in Section ~\ref{Sec:proposed}.
 
@@ -97,7 +98,7 @@ operation $F'$ in the breakdown of the larger operation $F$.
 
 To summarize:
 \begin{itemize}
-\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if you implement the inverse to have the opposite relative phase, thereby removing the extra T-gates associated with implementing an exact implementation.
+\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if the inverse is implemented to have the opposite relative phase, thereby removing the need for extra T-gates associated with implementing an exact implementation.
 \item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
 \end{itemize}
 
