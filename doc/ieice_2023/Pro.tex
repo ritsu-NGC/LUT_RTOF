@@ -36,7 +36,9 @@
 To get to a point where we can realize arbitrary Boolean functions up to a relative
 phase, from ~\cite{bib-amy-phase-state}, we take the circuit depicted in
 Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary
-variable and $F'$ is an arbitrary Boolean function, up to a relative phase. We use this
+variable and $F'$ is an arbitrary Boolean function, up to a relative phase. This is called
+the Controlled-$iX$ because it implements the operation $iX$ on the target bit when the
+Boolean statement is true. We use this
 to implement the Boolean AND that we need for Shannon's decomposition. Observe that when
 $F'=x_0$ and $x_k = x_1$, i.e. $F'$ is a mere CNOT gate controlled by $x_0$, we simply
 get Fig.\ref{fig-rtof}. This means that it is a generalized form of the RTOF gate that we
@@ -84,7 +86,7 @@ Using the constructions mentioned in Section~\ref{Subsec:FNOT}, we thus have a w
 arbitrary Boolean functions up to a relative phase as a FCNOT gate.
 
 As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
-This means that we can implement this function as a series of Toffoli gates. Generalizing to FCNOT gates, we get
+This means that we can implement this function as a series of FCNOT gates. Generalizing to FCNOT gates, we get
 the construction shown in Fig.~\ref{fig-bool-or}, which we will be using to construct our implementations in the
 next two sections.
 
@@ -148,7 +150,7 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 \begin{figure}[t]
     \centering
     \scalebox{0.8}{\input{img/fig-urtof}}
-    \caption{A gate implementing $x_k \cdot F$}
+    \caption{A gate implementing $x_k \cdot F'$}
     \label{fig-urtof}
 \end{figure}
 
@@ -157,7 +159,7 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 
 To realize a savings in T-count, we again observe that Fig.~\ref{fig-f-dot-g} doubles the T-count
 at every level of the Shannon's decomposition. This is because of gate $g_{8}$ in the diagram which
-serves to uncompute the effects of gate $g_6$ on the target bit. Observe that the CNOT gate $g_8$
+serves to uncompute the effects of gate $g_4$ on the target bit. Observe that the CNOT gate $g_8$
 does the same thing with $g_2$. In general, we will call these types of constructions, where all
 effects of CNOT and FCNOT gates on the target bits are reversed by uncomputing it with a similar gate,
 \emph{balanced}.
@@ -257,7 +259,7 @@ relayed to the next level of the recursion via an input.
 If it is ``False'', we have a False-controlled-NOT, meaning an identity function. In this case we remove the term
 with this function entirely.
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{x=1}$ in Shannon's Decomposition or $\bar{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\bar{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\bar{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\bar{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
 
 As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
 compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
