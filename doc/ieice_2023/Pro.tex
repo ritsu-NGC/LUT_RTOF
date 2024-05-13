@@ -76,31 +76,27 @@ saw earlier.
       \scalebox{0.7} {
         \input{img/fig-bool-or}
       }
-    \caption{A generalized way of conducting the OR for the quantum Shannon's decomposition}
+    \caption{A generalized way of conducting the Boolean sum for the quantum Shannon's decomposition}
     \label{fig-bool-or}
 \end{figure}
 
 
-Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
+Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \overline{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
 Using the constructions mentioned in Section~\ref{Subsec:FNOT}, we thus have a way to recursively construct
-arbitrary Boolean functions up to a relative phase as a FCNOT gate.
+arbitrary Boolean functions up to a relative phase as an FCNOT gate.
 
-As a prelude to our discussion, we observe that $x \cdot a  + \bar{x} \cdot b = x \cdot a \oplus \bar{x} \cdot b$.
-This means that we can implement this function as a series of FCNOT gates. Generalizing to FCNOT gates, we get
-the construction shown in Fig.~\ref{fig-bool-or}, which we will be using to construct our implementations in the
-next two sections.
+As a prelude to our discussion, we observe that $x \cdot a  + \overline{x} \cdot b = x \cdot a \oplus \overline{x} \cdot b$.
+This means that we can implement this function as a series of FCNOT gates. This means that to implement the function $x_k \cdot {F'}_1 + \overline{x_k} \cdot {F'}_0$ for some arbitrary Boolean functions ${F'}_1$ and ${F'}_0$, we can use Fig.~\ref{fig-f-dot-g} to implement the products $x_k \cdot {F'}_1$ and $\overline{x_k} \cdot {F'}_0$, and put them together using the construction shown in Fig.~\ref{fig-bool-or}.
 
 
 First, from the Shannon's decomposition
-formula~$f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \bar{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$
-where we can take $g=f(x_n=1,x_{n-1},\cdots,x_0)$ and $g^{\prime}=f(x_n=0,x_{n-1},\cdots,x_0)$. As always with
+formula $f(x_n,\cdots,x_k,\cdots,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \overline{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$, for some variable order $\{x_n,x_{n-1}As always with
 Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
 determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
-we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and replace each
-FCNOT in it with one of the terms in the Shannon's decomposition that we just made. As noted in
+we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and $F'$ with either  that we just made. As noted in
 Section~\ref{Subsec:FNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
-of Shannon's decomposition. We then take each of $g$ and $g^{\prime}$ and repeat the process recursively until we
-are left with a simple CNOT as our F-controlled NOT expression.
+of Shannon's decomposition. 
+
 
 If the function is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
 the Shannon's decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
@@ -109,13 +105,13 @@ function. As we will see in the next example, we can express the relative phase 
 in~\cite{bib-amy-phase-state} as a special case of this construction.
 
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
-meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x=1} + \bar{x}$ or
-$x_k + \bar{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
-$\bar{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{app-shannon}.
+meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x=1} + \overline{x}$ or
+$x_k + \overline{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
+$\overline{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{app-shannon}.
 
 \begin{example}
   \label{ex-bool}
-  We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.
+  We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
 
   For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks exactly like the decomposition in Fig.~\ref{fig-rtof}. We can see that if we continue Shannon's decomposition, one or the other side of the equation will always evaluate to 0. Therefore, it is easy to see that it simplifies to the
   decomposition in Fig~\ref{fig-f-dot-g}, which is the decomposition in ~\cite{bib-amy-phase-state}.
@@ -142,7 +138,7 @@ As can be seen in the previous section, a significant portion of the cost comes 
 (For the remainder of this paper, we will refer to \emph{Boolean multiplication} simply as multiplication).
 Therefore, it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
 expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_n \cdot F_2$ and the corresponding
-negative Davio expansion $F=F_1 \oplus \bar{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$,
+negative Davio expansion $F=F_1 \oplus \overline{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$,
 and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that, at every level, only one
 multiplication takes place, which already reduces the maximum possible T-gate use at any node from
 8 to 4. 
@@ -259,7 +255,7 @@ relayed to the next level of the recursion via an input.
 If it is ``False'', we have a False-controlled-NOT, meaning an identity function. In this case we remove the term
 with this function entirely.
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\bar{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\bar{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\bar{x_k}$ controlled~CNOT gate. 
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\overline{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\overline{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\overline{x_k}$ controlled~CNOT gate. 
 
 As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
 compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
@@ -306,14 +302,14 @@ The process is then repeated with all of the variable orders, and the minimum is
 
 \begin{example}
   \label{ex-davio}
-    We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \bar{x_3}(x_1 + x_2)$ as its relative phase equivalent.
+    We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
     Just as before, we first take the positive Davio expansion about $x_3$ (for simplicity, we will only follow the Davio branches
   in this example. However, as  we will see later, they turn out to be optimal for this function). We get $F_0 = x_1 + x_2$ and
   $F_2 = F_0 \oplus F_1 = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$. Note that for this level we can tolerate an unbalanced
   function, so for the $F_0$ branch we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
 
   We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
-  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \bar{x_1}$
+  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \overline{x_1}$
   Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
   these similarly to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
   there are four T-gates.

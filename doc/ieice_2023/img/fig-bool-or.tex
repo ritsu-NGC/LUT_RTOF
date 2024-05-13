@@ -1,9 +1,9 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{{x}_{0} }  & \multigate{5}{x_k \cdot F} & \qw      & \multigate{5}{\bar{x_k} \cdot F'}&\qw\\
-          \push{{x}_{1} }  & \ghost{x_k \cdot F}        & \qw      & \ghost{\bar{x_k} \cdot F'}       &\qw\\
-          \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{k} }  & \ghost{x_k \cdot F}        & \gate{X} & \ghost{\bar{x_k} \cdot F'}       &\qw\\
-          \push{\vdots}    &                          &          &                                &   \\
-          \push{{x}_{n} }  & \ghost{x_k \cdot F}        & \qw      & \ghost{\bar{x_k} \cdot F'}       &\qw\\
-          \push{{\ket{0}}} & \targ\qwx[-1]            & \qw      & \targ\qwx[-1]                  &\qw\\
+          \push{{x}_{0} }  & \multigate{5}{x_k \cdot {F'}_1} & \qw      & \multigate{5}{\overline{x_k} \cdot {F'}_0} &\qw\\
+          \push{{x}_{1} }  & \ghost{x_k \cdot {F'}_1}        & \qw      & \ghost{\overline{x_k} \cdot {F'}_0}        &\qw\\
+          \push{\vdots}    &                                 &          &                                            &   \\
+          \push{{x}_{k} }  & \ghost{x_k \cdot {F'}_1}        & \qw      & \ghost{\overline{x_k} \cdot {F'}_0}        &\qw\\
+          \push{\vdots}    &                                 &          &                                            &   \\
+          \push{{x}_{n} }  & \ghost{x_k \cdot {F'}_1}        & \qw      & \ghost{\overline{x_k} \cdot {F'}_0}        &\qw\\
+          \push{{\ket{0}}} & \targ\qwx[-1]                   & \qw      & \targ\qwx[-1]                              &\qw\\
 }
