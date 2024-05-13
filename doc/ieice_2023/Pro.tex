@@ -90,7 +90,7 @@ This means that we can implement this function as a series of FCNOT gates. This 
 
 
 First, from the Shannon's decomposition
-formula $f(x_n,\cdots,x_k,\cdots,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \overline{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$, for some variable order $\{x_n,x_{n-1}As always with
+formula $f(x_{n-1},\cdots,x_1) = x_{n-1} \cdot f(x_{n-1}=1,x_{n-2},\cdots,x_0) + \overline{x_{n-1}} \cdot f(x_{n-1}=0,x_{n-2},\cdots,x_0)$, for some variable order $\{x_{n-1},x_{n-2},x_0\}$. As always with
 Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
 determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
 we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and $F'$ with either  that we just made. As noted in
