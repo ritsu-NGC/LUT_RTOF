@@ -272,7 +272,7 @@ The process is then repeated with all of the variable orders, and the minimum is
     \State order $\leftarrow$ the indices of the optimal variable order for BF.
     \State $BF_{{variable}\leftarrow value}$ $\leftarrow$ BF with the value of $variable$ set to $value$
     \If{$BF == True$}
-    \State return CNOT
+    \State return NOT
     \ElsIf{$BF == False$}
     \State return QC $\leftarrow$ identity map from input to output
     \ElsIf{$BF$ only consists of the first variable in {\it order}}
