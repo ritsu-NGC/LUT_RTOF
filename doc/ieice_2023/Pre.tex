@@ -14,15 +14,14 @@
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
 
-In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. We will implement them using the fault-tolerant set of the X gate ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$) and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$).
-
-We denote the input qubits of a circuit by $x_1, x_2, \cdots,x_{n}$  when we have $n$ input qubits. Each qubit state in a circuit can be represented by a Boolean function with respect to $x_1, x_2, \cdots,x_{n}$.
+In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. The input qubits of a quantum Boolean circuit are assigned to states $\ket{x_n}, \cdots,\ket{x_{1}}$  when we have $n$ input qubits. These $\{x_n,\cdots,x_1\}$ are Boolean variables for the given Boolean function $F(x_1, x_2, \cdots,x_{n})$ that the quantum Boolean circuit implements.
 
 An example of such a quantum Boolean operation is the Toffoli gate depicted in
-Fig. ~\ref{fig-toffoli}. It inverts the basis state of the target bit (that is,
-$\ket{1}$ to $\ket{0}$ and $\ket{0}$ to $\ket{1}$) when the states of the two
-control bits are $\ket{11}$. This provides us with a way to realize the AND
-operation in a quantum circuit.
+Fig. ~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
+
+
+We implement quantum Boolean circuits using the fault-tolerant set of the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more ti implement.
+
 
 \subsection{Relative-Phase Boolean Functions}
 
@@ -38,8 +37,7 @@ gate in this paper.
 As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
 to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
 logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added
-phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $+\pi/2$ is
-added.
+phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $e^{i\frac{\pi}{2}}$ is added.
 
 %\vspace{-0.25cm}
 \subsection{Boolean Logic Network}
@@ -74,9 +72,7 @@ into compute/uncompute pairs that act on ancilla, such as in the Barenco style T
 ~\cite{bib-barenco-elementary}, it is almost always more advantageous to implement each ``half'' of the 
 compute/uncompute pair into a relative phase construction. In particular, Maslov proposes the decomposition 
 shown in Fig.~\ref{fig-maslov-decomp} ~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation such that
-$F=x_n \cdot F'$. The gate $F'$ implements the function $F'$ to a relative phase. It uses the operation ${F'}$
-and its inverse ${F'}^\dagger$ to implement the intermediate operation $F'$ in the breakdown of the larger
-operation $F$.
+$F=x_n \cdot F'$. We have a gate $F'$ that implements the function $F'$ up to a relative phase; we can also have a gate $F'^{\dagger}$ that implements $F'$ but up to the opposite relative phase from the gate $F'$. The deconstruction uses the gate ${F'}$ and its gate ${F'}^\dagger$ to implement the intermediate operation $F'$ in the breakdown of the larger operation $F$.
 
 %Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate and then repeating recursively. However, as Amy et al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate cannot be used directly in a recursive procedure to generate an arbitrarily sized MCT. The same work  takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$, where $x_k$ is a variable that F is dependent on, and $F_{k-1}$ and $F_{k-2}$ is the same form for $x_{k-1}$ and $x_{k-2}$. We will cover how to apply this later in Section ~\ref{Sec:proposed}.
 
@@ -108,7 +104,7 @@ To summarize:
 \label{Subsec:lhrs}
 
 Previous research~\cite{bib-lhrs-soeken} has detailed a method to use Boolean Logic
-Networks to generate quantum circuits in a manner similar classical LUT-based logic 
+Networks to generate quantum circuits in a manner similar to classical LUT-based logic 
 synthesis. In this paradigm, each of the nodes is interpreted as a lookup table, 
 where the inputs are interpreted as indices, and the outputs are entries, according 
 to its truth table. As a quantum circuit, they are implemented as a NOT gate controlled

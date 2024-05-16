@@ -21,24 +21,23 @@
 \subsection{Realizing Arbitrary Boolean Functions Up To A Relative Phase}
 \label{Subsec:FNOT}
 
-%To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF depicted in Fig.~\ref{fig-rtof} can replace the center CNOT with an MCT gate or a FCNOT as depicted in Fig.~\ref{fig-urtof}, which was observed by Maslov~\cite{bib-rtof-maslov}. However, as noted in~\cite{bib-amy-phase-state}, the introduction of a {\it target bit dependent} relative phase here has an effect on the final Boolean function as the final Hadamard gate rotates the relative phase back into state space. Therefore, we take the Controlled-$iX$ construction that is depicted in Fig.~\ref{fig-f-dot-g}. This is a form of the RTOF which realizes the same Boolean function, but with a relative phase that is only present when $x_k$ and $U$ are true. This means that it is {\it independent} of the initial state of the target bit.
-
-%To get to a point where we can realize arbitrary Boolean functions up to a relative phase, we first observe that the RTOF can roughly be generalized to the construction that is depicted in Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary variable and $F'$ is an arbitrary Boolean function, up to a relative phase. We will go into why this is in Sec ~\ref{Subsec:balanced}, but for this section we will take this construction as is. 
 \begin{figure}[t]
     \centering
     \scalebox{0.8} {
     \input{img/fig-f-dot-g-in}
     }
-    \caption{The Controlled-$iX$ construction, which realizes $x_k \cdot F$ up to a relative phase.}
+    \caption{The Controlled-$iX$ construction, which realizes $x_k \cdot F'$ up to a relative phase.}
     \label{fig-f-dot-g}
 \end{figure}
 
 To get to a point where we can realize arbitrary Boolean functions up to a relative
 phase, from ~\cite{bib-amy-phase-state}, we take the circuit depicted in
 Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary
-variable and $F'$ is an arbitrary Boolean function, up to a relative phase. This is called
+variable and $F$ and $F'$ is an arbitrary Boolean function of the variables $\{x_n,\cdots,x_k,\cdots,x_0\}$.
+Fig.~\ref{fig-f-dot-g} is called
 the Controlled-$iX$ because it implements the operation $iX$ on the target bit when the
-Boolean statement is true. We use this
+Boolean statement is true. In other words, this implements the Toffoli gate up to a relative phase of
+$e^{i\frac{\pi}{2}}$ when $x_k \cdot F'$ is true. We use this
 to implement the Boolean AND that we need for Shannon's decomposition. Observe that when
 $F'=x_0$ and $x_k = x_1$, i.e. $F'$ is a mere CNOT gate controlled by $x_0$, we simply
 get Fig.\ref{fig-rtof}. This means that it is a generalized form of the RTOF gate that we
@@ -81,7 +80,7 @@ saw earlier.
 \end{figure}
 
 
-Recall Shannon's decomposition $f(x_n,...,x_1) = x_n \cdot f(x_n=1,x_{n-1},\cdots,x_0) + \overline{x_n} \cdot f(x_n=0,x_{n-1},\cdots,x_0)$.
+Recall Shannon's decomposition $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F(x_n,\cdots x_k=1,\cdots,x_1) + \overline{x_k} \cdot F(x_n,\cdots x_k=0,\cdots,x_1)$.
 Using the constructions mentioned in Section~\ref{Subsec:FNOT}, we thus have a way to recursively construct
 arbitrary Boolean functions up to a relative phase as an FCNOT gate.
 
@@ -90,7 +89,7 @@ This means that we can implement this function as a series of FCNOT gates. This 
 
 
 First, from the Shannon's decomposition
-formula $f(x_{n-1},\cdots,x_1) = x_{n-1} \cdot f(x_{n-1}=1,x_{n-2},\cdots,x_0) + \overline{x_{n-1}} \cdot f(x_{n-1}=0,x_{n-2},\cdots,x_0)$, for some variable order $\{x_{n-1},x_{n-2},x_0\}$. As always with
+formula $F(x_n,\cdots x_k,\cdots,x_1) = x_{k} \cdot F(x_n,\cdots x_k=1,\cdots,x_1) + \overline{x_k} \cdot F(x_n\cdots,x_k=0,\cdots,x_1)$, for $x_k \in {x_n,\cdots,x_1}$. As always with
 Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
 determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
 we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and $F'$ with either  that we just made. As noted in
@@ -105,8 +104,8 @@ function. As we will see in the next example, we can express the relative phase 
 in~\cite{bib-amy-phase-state} as a special case of this construction.
 
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
-meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x=1} + \overline{x}$ or
-$x_k + \overline{x_k} \cdot F_{x=0}$, we can just implement the side with a True expression using an $x_k$ or
+meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x_k=1} + \overline{x}$ or
+$x_k + \overline{x_k} \cdot F_{x_k=0}$, we can just implement the side with a True expression using an $x_k$ or
 $\overline{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{app-shannon}.
 
 \begin{example}
@@ -137,8 +136,9 @@ We must then introduce a different representation to take these into account.
 As can be seen in the previous section, a significant portion of the cost comes from Boolean multiplication.
 (For the remainder of this paper, we will refer to \emph{Boolean multiplication} simply as multiplication).
 Therefore, it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
-expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_n \cdot F_2$ and the corresponding
-negative Davio expansion $F=F_1 \oplus \overline{x_n} \cdot F_2$ where $F_0 = F(x_n=0)$,$F_1 = F(x_n=1)$,
+expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_k \cdot F_2$ and the corresponding
+negative Davio expansion $F=F_1 \oplus \overline{x_k} \cdot F_2$ where $F$ is some function of variables $(x_n,\cdots,x_k,\cdots,x_0)$,
+$F_0 = F(x_k=0)$,$F_1 = F(x_k=1)$,
 and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that, at every level, only one
 multiplication takes place, which already reduces the maximum possible T-gate use at any node from
 8 to 4. 
@@ -154,22 +154,22 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 \label{Subsec:balanced}
 
 To realize a savings in T-count, we again observe that Fig.~\ref{fig-f-dot-g} doubles the T-count
-at every level of the Shannon's decomposition. This is because of gate $g_{8}$ in the diagram which
-serves to uncompute the effects of gate $g_4$ on the target bit. Observe that the CNOT gate $g_8$
+at every level of the Shannon's decomposition. This is because of gate $g_{8}$ in Fig.~\ref{fig-f-dot-g} which
+serves to uncompute the effects of gate $g_4$ on the target bit. Observe that the CNOT gate $g_6$
 does the same thing with $g_2$. In general, we will call these types of constructions, where all
 effects of CNOT and FCNOT gates on the target bits are reversed by uncomputing it with a similar gate,
 \emph{balanced}.
 
 We take again a different type of construction from Ref.~\cite{bib-amy-phase-state}, this time
-depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous $g_{8}$ gate is missing
+depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous $g_{8}$ gate from Fig.~\ref{fig-f-dot-g} is missing
 such that the computation from $g_4$ is not reversed. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and then rotated
 back with a Hadamard without returning the target qubit to the same computational basis states it had just after
 the first Hadamard, an \emph{unbalanced} construction. In this type of construction, there is
 no need to double the T-count to cancel out the logic. However, it cannot be used
 recursively inside itself. That is, Fig.~\ref{fig-urtof} cannot also be used to implement the FCNOT
 inside itself up to a relative phase. In the interest of keeping this paper focused on the proposed
-method, we refer the reader to ~\cite{bib-amy-phase-state} for the reason. We summarize the
-limitations of its use in our application with the following statement: unbalanced constructions
+method, we refer the reader to ~\cite{bib-amy-phase-state} for further details. We summarize the
+limitations of Fig.~\ref{fig-urtof}'s use in our application with the following statement: unbalanced constructions
 can be used to implement arbitrary gates (e.g. Fig.~\ref{fig-f-dot-g}) used in multiplication
 only when done in a balanced construction.
 
@@ -269,7 +269,7 @@ The process is then repeated with all of the variable orders, and the minimum is
 %    \State BF $\leftarrow$ A Boolean Function
     \State QC $\leftarrow$ an empty quantum circuit with registers
     \State Output $\leftarrow$ the output bit of the Boolean Function
-    \State order $\leftarrow$ the indices of the optimal variable order for BF.
+    \State order $\leftarrow$ the indices of a given variable order for BF.
     \State $BF_{{variable}\leftarrow value}$ $\leftarrow$ BF with the value of $variable$ set to $value$
     \If{$BF == True$}
     \State return NOT

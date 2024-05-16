@@ -91,13 +91,14 @@
 
 \section{Introduction}
 
-{\it Quantum Boolean circuits}~\cite{bib-ddmf} are common components of many quantum algorithms such
-as oracles in Grover's algorithm and cost functions in VQE. To realize such quantum Boolean circuits,
+{\it Quantum Boolean circuits}~\cite{bib-ddmf} implement Boolean operations as quantum circuits and
+are common components of many quantum algorithms such
+as oracles in Grover's algorithm and cost functions. To realize such quantum Boolean circuits,
 a Toffoli gate, which implements the Boolean AND, is an essential logic primitive in a universal gate
 set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT,
 CNOT, and T gates (e.g., the Clifford + T~\cite{bib-barenco-elementary} basis gate set), as depicted
 in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost
-than so-called Clifford gates. It is therefore useful to consider ways to reduce this {\it T-count},
+than so-called the NOT and CNOT gates. It is therefore useful to consider ways to reduce this {\it T-count},
 which is the number of both the T-gates and their inverse in the circuit.
 
 One of the methods that has been proposed to reduce the T-count is to implement Boolean functions only
@@ -107,12 +108,14 @@ relative phase versions of common Boolean functions, which achieve T-count savin
 T gates that only affect the phase.
 
 Both ~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed applications of relative
-phase circuits, such as the ones proposed in~\cite{bib-selinger-rtof}, in a way that can achieve. 
-These identify matching pairs of compute/uncompute logic as a possible application of relative phase 
+phase circuits, such as the ones proposed in~\cite{bib-selinger-rtof}, as components in the composition
+of larger circuits. 
+These tend to use matching pairs of relative phase gates as a possible application of relative phase 
 circuits, because any relative phase introduced can be canceled out by simply using the inverse of the
-gate in the uncompute logic. Because of these findings, cascading logic, such as those 
-produced by Lookup Table (LUT) based synthesis methods, thus present an interesting candidate to integrate 
-with relative phase methods.
+gate in instances where the effects of the gate have to be reversed. Because of these findings,
+logic which uses pairs of identical quantum Boolean circuits such as that produced by
+Lookup Table (LUT) based synthesis methods ~\cite{bib-lhrs-soeken}, thus present an interesting
+candidate to integrate with relative phase methods.
 
 Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results
 ~\cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced
@@ -122,10 +125,9 @@ ancilla means that it works well to synthesize Boolean functions in the qubit co
 such methods are intended for. 
 
 Our research seeks to leverage recent results in relative phase implementations of Boolean functions and
-LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit. In particular, we leverage
-a method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and
-Davio Expansions. While previously, Shannon's Decomposition and Davio Expansions have been used to synthesize
-purely reversible gates ~\cite{bib-pkrm}, we utilize them in this work to enable explicitly relative phase
+LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit. In particular, we propose
+a method to generate arbitrary Boolean functions up to a relative phase its use to generate gates. This method uses Shannon's Decomposition and Davio Expansions which have been used to synthesize
+purely reversible gates ~\cite{bib-pkrm}. We utilize them in this work to enable explicitly relative phase
 constructions.
 
 \noindent {\bf Our Contribution.} 
@@ -133,12 +135,12 @@ We propose a method that reduces the number of T-gates in a LUT-based synthesize
 by generating relative phase quantum circuits. Among our contributions:
 \begin{itemize}
 \item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio
-  Expansions, as well as balanced and unbalanced constructions of relative phase gates.
+  Expansions, as well as balanced and unbalanced constructions of relative phase gates
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the
-  above method to reduce T-count.
+  above method to reduce T-count
 \end{itemize}
 
-The paper is structured as follows. Section~\ref{Sec:prelim} gives preliminary information to understand this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method for performing functions up to a relative phase without any additional ancilla and its use with LUT-based synthesis. Then, our experimental results in Section~\ref{Sec:exp} compare the proposed method to a simplistic relative phase method, as well as the naive method, and find a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
+The paper is structured as follows. Section~\ref{Sec:prelim} gives preliminary information to understand this paper. Section~\ref{Sec:proposed} follows with our proposed method, including both the method for implementing functions up to a relative phase without any additional ancilla, and the method for constructing this . Then, our experimental results in Section~\ref{Sec:exp} compare the proposed method to a simplistic relative phase method, as well as the naive method, and find a clear advantage in its use. Finally Section~\ref{Sec:concl} contains our conclusions and future work.
 
 
 
