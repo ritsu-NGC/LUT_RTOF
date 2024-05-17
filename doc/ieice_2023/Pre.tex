@@ -42,11 +42,10 @@ phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state 
 %\vspace{-0.25cm}
 \subsection{Boolean Logic Network}
 
-A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG).
-% whose vertices are primary inputs, primary outputs, and nodes which represent logic gates, whose arcs connect gates to inputs, outputs, and other gates.
-A node has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} i.e. outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes in the network without fanouts. 
+A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG). It has nodes, edges, primary outputs, and primary inputs.
+A \emph{node} has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} or outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes in the network without fanouts. 
 
-A logic function can be decomposed into such a Boolean logic network. Its nodes can subsequently be
+A Boolean function can be decomposed into such a Boolean logic network. Its nodes can subsequently be
 implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are
 numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
 $y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
