@@ -26,9 +26,9 @@ We implement quantum Boolean circuits using the fault-tolerant set of the X ($\k
 \subsection{Relative-Phase Boolean Functions}
 
 A typical decomposition of the Toffoli gate into the Clifford + T basis
-consists of seven T gates, as shown in Fig.~\ref{fig-toffoli}.
+consists of seven T-gates, as shown in Fig.~\ref{fig-toffoli}.
 A Relative-Phase Toffoli (RTOF) gate~\cite{bib-selinger-rtof}, in contrast,
-implements the same function using only four T gates as shown in
+implements the same function using only four T-gates as shown in
 Fig.~\ref{fig-rtof}. However, it does this at the cost of a relative phase.
 Note the double circle on the target of Fig.~\ref{fig-rtof}: We will be
 using this notation to denote a relative phase version of a quantum logic
@@ -67,20 +67,20 @@ synthesizing and decomposing logic functions, particularly {\it Multiple Control
 are analogous to Toffoli gates in that they apply a NOT to the target bit if the AND of three or more control
 bits is true.
 
-One of the results from~\cite{bib-rtof-maslov} is that when larger functions, such as MCT, are broken down
-into compute/uncompute pairs that act on ancilla, such as in the Barenco style Toffoli decompositions from 
-~\cite{bib-barenco-elementary}, it is almost always more advantageous to implement each ``half'' of the 
-compute/uncompute pair into a relative phase construction. In particular, Maslov proposes the decomposition 
-shown in Fig.~\ref{fig-maslov-decomp} ~\cite{bib-rtof-maslov}. Here $F'$ is a Boolean operation such that
-$F=x_n \cdot F'$. We have a gate $F'$ that implements the function $F'$ up to a relative phase; we can also have a gate $F'^{\dagger}$ that implements $F'$ but up to the opposite relative phase from the gate $F'$. The deconstruction uses the gate ${F'}$ and its gate ${F'}^\dagger$ to implement the intermediate operation $F'$ in the breakdown of the larger operation $F$.
+In Fig.~\ref{fig-maslov-decomp}, we see a decomposition of an MCT gate from \ref{bib-rtof-maslov}. Here, introduce several notions. First, we have the $F$-controlled NOT ($F$-CNOT)
+gate on the left of the equals sign. This is a gate that inverts the target qubit when the Boolean function $F$ is true. In Fig.~\ref{fig-maslov-decomp},
+$F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$. However, we will see later that we can set this $F$ to other Boolean functions.
 
-%Maslov further posits a way to construct $n$-input RTOF gates by replacing the middle CNOT gate in Fig.~\ref{fig-rtof} with an $n$-input RTOF gate and then repeating recursively. However, as Amy et al.~\cite{bib-amy-phase-state} note, the form of this RTOF gate cannot be used directly in a recursive procedure to generate an arbitrarily sized MCT. The same work  takes the form $F = x_k \cdot F_{k-1} + F_{k-2}$, where $x_k$ is a variable that F is dependent on, and $F_{k-1}$ and $F_{k-2}$ is the same form for $x_{k-1}$ and $x_{k-2}$. We will cover how to apply this later in Section ~\ref{Sec:proposed}.
+In Fig.~\ref{fig-maslov-decomp}, we also see the first $F'$-CNOT gate acts on the ancilla bit $q_6$, where $F'$ is some arbitrary Boolean function. Because of the rules of quantum circuits, we need to return this $q_6$ to its original $\ket{0}$ state. We use an analogous gate, the $F'^{\dagger}$-CNOT, which also implements the same Boolean function $F'$, to reverse the actions of $F'$-CNOT such that the final state is also $\ket{0}$. We call the action of $F'$-CNOT on $q_6$ \emph{compute} and the action of $F'^{\dagger}$-CNOT on $q_6$, \emph{uncompute}. For $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$, we have $F'(x_n,\cdots,x_1) = x_{n-1} \cdots x_0$ such that $F(x_n,\cdots,x_1) = x_n \cdot F'(x_n,\cdots,x_1)$.
 
+One of the results from~\cite{bib-rtof-maslov} is that when larger Boolean functions, such as MCT, are broken down
+into smaller $F$-CNOT gates that implement compute/uncompute pairs that act on ancilla,  it is always more advantageous to implement the $F'$-CNOT and
+$F'^{\dagger}$-CNOT gates up to a relative phase, but with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, the $F'$-CNOT turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_0)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_0) \in [0,2\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n-1},\cdots,x_0$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_0) \neq 0$ will have lower T-count than $\theta(x_{n-1},\cdots,x_0) = 0$. Similarly $F'^{\dagger}$-CNOT only implemented up to $-\theta(x_{n-1},\cdots,x_0) \neq 0$ similarly has a lower T-count than the analogous $\theta(x_{n-1},\cdots,x_0) = 0$ case. Using the relative phase $F'$-CNOT and $F'^{\dagger}$-CNOT in tandem thus results in lower T-count than the same tandem without a relative phase.
 
 \begin{figure}[tbp]
     \centering
     \scalebox{1}{\input{img/fig-maslov-decomp}}
-    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}, where $F$ is the function $F(\textbf{x})=x_0 \cdot x_1 \cdot \cdots x_{n-1}$ and $F'$ is some decomposition of it, usually $F'(\textbf{x})=x_0 \cdot x_1 \cdot \cdots x_{n-1}$}
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
     \label{fig-maslov-decomp}
 \end{figure}
 
@@ -88,14 +88,14 @@ $F=x_n \cdot F'$. We have a gate $F'$ that implements the function $F'$ up to a 
 \begin{figure}[tbp]
     \centering
     \scalebox{1}{\input{img/fig-lut-network}}
-    \caption{The quantum circuit implementing the Boolean logic network in Fig.~\ref{fig-lut-network} using the LHRS. }
+    \caption{The quantum circuit implementing the Boolean logic network in Fig.~\ref{fig-lut-network} using the LHRS }
     \label{fig-lut-qc}
 \end{figure}
 
 To summarize:
 \begin{itemize}
 \item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if the inverse is implemented to have the opposite relative phase, thereby removing the need for extra T-gates associated with implementing an exact implementation.
-\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T gates than the known methods.
+\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T-gates than the known methods.
 \end{itemize}
 
 
