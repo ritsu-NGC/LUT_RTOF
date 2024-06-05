@@ -1,0 +1,162 @@
+\documentclass[paper]{ieice}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{amsmath,amssymb,amsfonts}
+% \usepackage{algorithmic}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage[T1]{fontenc}
+\usepackage{mdframed}
+\usepackage{algorithm, algpseudocode} % texlive-science
+\usepackage[braket, qm]{qcircuit}
+\usepackage{newtxtext}
+\usepackage[normalem]{ulem}
+
+\usepackage{nameref}
+\usepackage[braket, qm]{qcircuit}
+\usepackage{tikz}
+%
+\input{img/defs}
+
+%\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}}
+
+\makeatletter
+\newcommand{\sublabel}[1]{\protected@edef\@currentlabel{\thefigure(\thesubfigure)}\label{#1}}
+\makeatother
+\captionsetup{subrefformat=parens}
+\algrenewcommand\algorithmicindent{0.5em}%
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+%\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+
+\newcommand{\Del}[1]{\textcolor{red}{\sout{#1}}}
+\newcommand{\Add}[1]{\textcolor{blue}{\emph{#1}}}
+
+\newcount\NGCcolor
+\NGCcolor=1
+%\NGCcolor=0
+\ifnum\NGCcolor<1
+  \newcommand{\redout}[1]{\textcolor{red}{\bf #1}}
+  \newcommand{\blueout}[1]{\textcolor{blue}{\bf #1}}
+  \newcommand{\greenout}[1]{\textcolor{green}{\bf #1}}
+  \newcommand{\cyannout}[1]{\textcolor{cyan}{\bf #1}}
+  \newcommand{\magentaout}[1]{\textcolor{magenta}{\bf #1}}
+  \newcommand{\yellowout}[1]{\textcolor{yellow}{\bf #1}}
+\else
+  \newcommand{\redout}[1]{#1}
+  \newcommand{\blueout}[1]{#1}
+  \newcommand{\greenout}[1]{#1}
+  \newcommand{\cyannout}[1]{#1}
+  \newcommand{\magentaout}[1]{#1}
+  \newcommand{\yellowout}[1]{#1}
+\fi
+
+\setcounter{page}{1}
+
+\field{A}
+\title{Leveraging Different Boolean Function Decompositions to Reduce T-Count in LUT-based Quantum Circuit Synthesis}
+\authorlist{%
+ \authorentry[dizzy@ngc.is.ritsumei.ac.jp]{David Clarino}{n}{rits}\MembershipNumber{}
+ \authorentry[accel@ngc.is.ritsumei.ac.jp]{Naoya Asada}{n}{rits}\MembershipNumber{}
+  \authorentry[matsuoa@jp.ibm.com]{Atsushi Matsuo}{n}{ibm}\MembershipNumber{}
+ \authorentry[ger@cs.ritsumei.ac.jp]{Shigeru Yamashita}{e}{rits}\MembershipNumber{}
+}
+\affiliate[rits]{The author is with the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, 525-8577 Japan.
+}
+\affiliate[ibm]{The author is with IBM Quantum, IBM Research - Tokyo, Tokyo, 103-8510 Japan. \\
+\hspace*{0.5cm}A preliminary version of this paper is presented in ICCAD 2023. 
+}
+
+
+
+\begin{document}
+\maketitle
+
+\begin{summary}
+  
+  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
+  in a qubit-constrained environment. Other recent research has demonstrated the possibility of using {\it relative phase}
+  quantum circuits when compute/uncompute logic is used in tandem, reducing T-count in quantum Boolean circuits in
+  the fault-tolerant quantum computing paradigm. Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
+  qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes
+  in a relative phase manner could reduce the T-count. To generate such arbitrary Boolean functions, we utilize Shannon's
+  decomposition, Davio expansions, as well as alternating balanced and unbalanced relative  phase circuits. Experimental results
+  demonstrate that our method can reduce the T-count to an average of 24\% of the existing method. 
+  
+\end{summary}
+\begin{keywords}
+relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit synthesis
+\end{keywords}
+\setlength\textfloatsep{4pt}
+\setlength\floatsep{0pt}
+\setlength\abovecaptionskip{4pt}
+
+
+\input{Intro.tex}
+\input{Pre.tex}
+\input{Mot.tex}
+\input{Pro.tex}
+\input{Exp.tex}
+%\vspace{5mm}
+\input{Concl.tex}
+
+%\vspace{10mm}
+
+\bibliographystyle{ieicetr}%
+\bibliography{ref}%
+
+\vspace{-22mm}
+
+\profile[img/clarino.pdf]{David Clarino}{received his BS EECS and BA Physics from UC Berkeley and MS from Santa Clara University. He is currently a student at the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, Japan. His research interests include quantum circuit design and quantum circuit verification and he has previously worked on SoC design verification}
+
+%\vspace{-5mm}
+
+\profile[accel.JPG]{Naoya Asada}{received his bachelor's degree from
+College of Information Science and Engineering, Ritsumeikan
+University in 2021. He received his master's degree from
+Graduate School of Information Science and Engineering, Ritsumeikan
+University in 2023. He is currently with Mitsubishi Electric Corp. 
+}
+
+%\vspace{-5mm}
+
+\profile[img/matsuo.pdf]{Atsushi Matsuo}{received his B.E., M.E. and Ph.D. degrees in Information Science and Engineering from Ritsumeikan University, Shiga, Japan in 2011, 2013, and 2023, respectively. His research interests include quantum circuit design, compilers for quantum circuits, and variational quantum algorithms.}
+
+%\vspace{-5mm}
+
+\profile[img/Yamashita.pdf]{Shigeru Yamashita}{is a professor at the
+Department of Computer Science, College
+of Information Science and Engineering,
+Ritsumeikan University. He received
+his B.E., M.E. and Ph.D. degrees in Information
+Science from Kyoto University,
+Kyoto, Japan, in 1993, 1995 and 2001, respectively.
+His research interests include
+new types of computation and logic synthesis for them. He received
+the 2000 IEEE Circuits and Systems Society Transactions
+on Computer-Aided Design of Integrated Circuits and Systems
+Best Paper Award, SASIMI 2010 Best Paper Award, 2010 IPSJ
+Yamashita SIG Research Award, and 2010 Marubun Academic
+Achievement Award of the Marubun Research Promotion Foundation.
+He is a senior member of IEEE and a senior member of IPSJ.}
+
+
+
+
+\input{App.tex}
+
+\end{document}
+
+
+

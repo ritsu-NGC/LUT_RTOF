@@ -1,0 +1,131 @@
+% \begin{figure*}[ht]
+  
+%   \begin{minipage}{.46\linewidth}
+%     \begin{center}
+%       \input{img/fig-urtof}
+%     \end{center}
+%     \caption{U-controlled RTOF gate}
+%     \label{fig-urtof}
+%   \end{minipage}
+%   %\vspace*{0.25cm}
+% \end{figure*}
+% \vspace*{0.1cm}
+\section{Preliminary}
+\label{Sec:prelim}
+\subsection{Quantum Boolean Circuits}
+
+In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. The input qubits of a quantum Boolean circuit are assigned to states $\ket{x_n}, \cdots,\ket{x_{1}}$  when we have $n$ input qubits. These $\{x_n,\cdots,x_1\}$ are Boolean variables for the given Boolean function $F(x_1, x_2, \cdots,x_{n})$ that the quantum Boolean circuit implements.
+
+An example of such a quantum Boolean operation is the Toffoli gate depicted in
+Fig. ~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
+
+
+We implement quantum Boolean circuits using the fault-tolerant set of the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more ti implement.
+
+
+\subsection{Relative-Phase Boolean Functions}
+
+A typical decomposition of the Toffoli gate into the Clifford + T basis
+consists of seven T-gates, as shown in Fig.~\ref{fig-toffoli}.
+A Relative-Phase Toffoli (RTOF) gate~\cite{bib-selinger-rtof}, in contrast,
+implements the same function using only four T-gates as shown in
+Fig.~\ref{fig-rtof}. However, it does this at the cost of a relative phase.
+Note the double circle on the target of Fig.~\ref{fig-rtof}: We will be
+using this notation to denote a relative phase version of a quantum logic
+gate in this paper. 
+
+As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
+to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
+logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added
+phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $e^{i\frac{\pi}{2}}$ is added.
+
+%\vspace{-0.25cm}
+\subsection{Boolean Logic Network}
+
+A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG). It has nodes, edges, primary outputs, and primary inputs.
+A \emph{node} has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} or outgoing edges. The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a subset of nodes in the network without fanouts. 
+
+A Boolean function can be decomposed into such a Boolean logic network. Its nodes can subsequently be
+implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are
+numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
+$y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
+dependent on $x_2$ and $x_3$, and node 2 is dependent on $x_4$ and $x_5$. node 3 is in turn dependent
+on node 1 and $x_1$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 is dependent on both
+node 4 and $x_5$.
+
+\begin{figure}[tbp]
+    \centering
+    \input{img/lut_network}
+    \caption{A Boolean logic network}
+    \label{fig-lut-network}
+\end{figure}
+
+\subsection{Using RTOF Gates to Decompose MCT Gates}
+Existing research~\cite{bib-rtof-maslov}~\cite{bib-selinger-rtof} finds an advantage to using RTOF gates in
+synthesizing and decomposing logic functions, particularly {\it Multiple Control Toffoli} (MCT) Gates, which
+are analogous to Toffoli gates in that they apply a NOT to the target bit if the AND of three or more control
+bits is true.
+
+In Fig.~\ref{fig-maslov-decomp}, we see a decomposition of an MCT gate from \ref{bib-rtof-maslov}. Here, introduce several notions. First, we have the $F$-controlled NOT ($F$-CNOT)
+gate on the left of the equals sign. This is a gate that inverts the target qubit when the Boolean function $F$ is true. In Fig.~\ref{fig-maslov-decomp},
+$F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$. However, we will see later that we can set this $F$ to other Boolean functions.
+
+In Fig.~\ref{fig-maslov-decomp}, we also see the first $F'$-CNOT gate acts on the ancilla bit $q_6$, where $F'$ is some arbitrary Boolean function. Because of the rules of quantum circuits, we need to return this $q_6$ to its original $\ket{0}$ state. We use an analogous gate, the $F'^{\dagger}$-CNOT, which also implements the same Boolean function $F'$, to reverse the actions of $F'$-CNOT such that the final state is also $\ket{0}$. We call the action of $F'$-CNOT on $q_6$ \emph{compute} and the action of $F'^{\dagger}$-CNOT on $q_6$, \emph{uncompute}. For $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$, we have $F'(x_n,\cdots,x_1) = x_{n-1} \cdots x_0$ such that $F(x_n,\cdots,x_1) = x_n \cdot F'(x_n,\cdots,x_1)$.
+
+One of the results from~\cite{bib-rtof-maslov} is that when larger Boolean functions, such as MCT, are broken down
+into smaller $F$-CNOT gates that implement compute/uncompute pairs that act on ancilla,  it is always more advantageous to implement the $F'$-CNOT and
+$F'^{\dagger}$-CNOT gates up to a relative phase, but with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, the $F'$-CNOT turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_0)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_0) \in [0,2\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n-1},\cdots,x_0$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_0) \neq 0$ will have lower T-count than $\theta(x_{n-1},\cdots,x_0) = 0$. Similarly $F'^{\dagger}$-CNOT only implemented up to $-\theta(x_{n-1},\cdots,x_0) \neq 0$ similarly has a lower T-count than the analogous $\theta(x_{n-1},\cdots,x_0) = 0$ case. Using the relative phase $F'$-CNOT and $F'^{\dagger}$-CNOT in tandem thus results in lower T-count than the same tandem without a relative phase.
+
+\begin{figure}[tbp]
+  3.
+  
+    \centering
+    \scalebox{1}{\input{img/fig-maslov-decomp}}
+    \caption{Toffoli gate decomposition from~\cite{bib-rtof-maslov}}
+    \label{fig-maslov-decomp}
+\end{figure}
+
+
+\begin{figure}[tbp]
+    \centering
+    \scalebox{1}{\input{img/fig-lut-network}}
+    \caption{The quantum circuit implementing the Boolean logic network in Fig.~\ref{fig-lut-network} using the LHRS }
+    \label{fig-lut-qc}
+\end{figure}
+
+To summarize:
+\begin{itemize}
+\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if the inverse is implemented to have the opposite relative phase, thereby removing the need for extra T-gates associated with implementing an exact implementation.
+\item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T-gates than the known methods.
+\end{itemize}
+
+
+
+\subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
+\label{Subsec:lhrs}
+
+Previous research~\cite{bib-lhrs-soeken} has detailed a method to use Boolean Logic
+Networks to generate quantum circuits in a manner similar to classical LUT-based logic 
+synthesis. In this paradigm, each of the nodes is interpreted as a lookup table, 
+where the inputs are interpreted as indices, and the outputs are entries, according 
+to its truth table. As a quantum circuit, they are implemented as a NOT gate controlled
+by an arbitrary function (FCNOT).
+
+The result of the method is shown in Fig.~\ref{fig-lut-qc}. To get from Fig.~\ref{fig-lut-network} to Fig.~\ref{fig-lut-qc}, first, we take as input a Boolean logic network synthesized from a Boolean expression using existing Boolean logic network decomposition methods. Then this Boolean logic network is parsed by the algorithm to create a quantum circuit of FCNOT gates. Any intermediate node is decomposed as two FCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one FCNOT.
+
+
+Because the FCNOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. 
+
+\begin{example}
+  \label{ex-lut}
+  We start at node 1. Since this is an intermediate node, we place a FCNOT on an ancilla, and place its inverse on the same ancilla to uncompute. We do the same for node 2. For node 4, we cascade the ancilla from nodes 1 and 2 into it as input, and place its LUT, as well as its uncompute logic, on another ancilla. Finally, nodes 3 and 5 are output nodes, so we only generate their compute logic.
+
+  Note in this diagram we denote qubits that a gate does not act on as dashed lines running across the gate, as opposed to qubits it acts on which terminate at the edges.
+
+\end{example}
+
+
+%%% Local Variables:
+%%% mode: japanese-latex
+%%% TeX-master: "main"
+%%% End:

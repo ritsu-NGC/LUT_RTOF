@@ -1,0 +1,53 @@
+\begin{thebibliography}{10}
+
+\bibitem{bib-ddmf}
+S.~Yamashita, S.~Minato, and D.M. Miller, ``{DDMF}: {A}n {E}fficient {D}ecision
+  {D}iagram {S}tructure for {D}esign {V}erification of {Q}uantum {C}ircuits
+  {U}nder a {P}ractical {R}estriction,'' IEICE transactions on fundamentals of
+  electronics, communications and computer sciences, vol.91, no.12,
+  pp.3793--3802, 2008.
+
+\bibitem{bib-barenco-elementary}
+A.~Barenco, C.H. Bennett, R.~Cleve, D.P. DiVincenzo, N.~Margolus, P.~Shor,
+  T.~Sleator, J.A. Smolin, and H.~Weinfurter, ``{E}lementary {G}ates for
+  {Q}uantum {C}omputation,'' Phys. Rev. A, vol.52, pp.3457--3467, Nov\ 1995.
+
+\bibitem{bib-rtof-maslov}
+D.~Maslov, ``{A}dvantages of {U}sing {R}elative-phase {T}offoli {G}ates with an
+  {A}pplication to {M}ultiple {C}ontrol toffoli {O}ptimization,'' Physical
+  Review A, vol.93, no.2, p.022311, 2016.
+
+\bibitem{bib-selinger-rtof}
+B.~Giles and P.~Selinger, ``{E}xact {S}ynthesis of {M}ultiqubit {C}lifford+$t$
+  {C}ircuits,'' Phys. Rev. A, vol.87, p.032332, Mar\ 2013.
+
+\bibitem{bib-amy-phase-state}
+M.~Amy and N.J. Ross, ``{P}hase-state {D}uality in {R}eversible {C}ircuit
+  {D}esign,'' Phys. Rev. A, vol.104, p.052602, Nov\ 2021.
+
+\bibitem{bib-lhrs-soeken}
+M.~Soeken, M.~Roetteler, N.~Wiebe, and G.~De~Micheli, ``{LUT-based}
+  {H}ierarchical {R}eversible {L}ogic {S}ynthesis,'' IEEE Transactions on
+  Computer-Aided Design of Integrated Circuits and Systems, vol.38, no.9,
+  pp.1675--1688, 2018.
+
+\bibitem{bib-pkrm}
+R.~Drechsler, ``{P}seudo-{K}ronecker {E}xpressions for {S}ymmetric
+  {F}unctions,'' IEEE Transactions on Computers, vol.48, no.9, pp.987--990,
+  1999.
+
+\bibitem{bib-epfl}
+L.~Amaru, P.E. Gaillardon, and G.~De~Micheli Proceedings of the 24th
+  International Workshop on Logic \& Synthesis (IWLS), 2015.
+
+\bibitem{bib-abc}
+R.~Brayton and A.~Mishchenko, ``{ABC}: {A}n {A}cademic {I}ndustrial-strength
+  {V}erification {T}ool,'' Computer Aided Verification, ed.~T.~Touili, B.~Cook,
+  and P.~Jackson, Berlin, Heidelberg, pp.24--40, Springer Berlin Heidelberg,
+  2010.
+
+\bibitem{bib-qiskit}
+{Qiskit contributors}, ``{Q}iskit: {A}n {O}pen-source {F}ramework for {Q}uantum
+  {C}omputing,'' 2023.
+
+\end{thebibliography}

@@ -1,0 +1,96 @@
+\pagebreak
+
+\onecolumn
+
+\appendix
+%\counterwithin{figure}{section}
+%\newcommand*{\currentname}{\@currentlabelname}
+\newcommand{\thenewsection}{\Alph{section}}
+\renewcommand\thefigure{\thenewsection\arabic{figure}}
+
+\section{Function Decomposition}
+\label{App:FuncDecomp}
+\begin{figure}[h]
+  \centering
+  \scalebox{0.8}{\input{img/fig-func-decomp}}
+      \caption{Decomposition of the function in Example ~\ref{ex-bool}}
+      \label{app-func-decomp}
+% \vspace*{-0.15cm}
+% \end{figure}
+% \begin{figure}[h]
+  \centering
+  \scalebox{0.8}{\input{img/fig-func-decomp-davio}}
+      \caption{Decomposition of the function in Example ~\ref{ex-davio}}
+      \label{fig-func-decomp-davio}
+\end{figure}
+
+\section{Various Balanced and Unbalanced Shannon's and Davio Decompositions from Section \ref{Subsec:Pro:Improved}}
+\label{App:ManyDecomp}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-shannon-amy}
+      }
+    \end{center}
+    \caption{Balanced Shannon's Decomposition}
+    \label{app-shannon}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-shannon-amy-unb}
+      }
+    \end{center}
+    \caption{Unbalanced Shannon's Decomposition}
+    \label{app-shannon-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-davio-pos}
+      }
+    \end{center}
+    \caption{Balanced positive Davio Expansion}
+    \label{app-davio-pos}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-davio-pos-unb}
+      }
+    \end{center}
+    \caption{Unbalanced positive Davio Expansion}
+    \label{app-davio-pos-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+\begin{figure}[h]
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-davio-amy}
+      }
+    \end{center}
+    \caption{Balanced negative Davio Expansion}
+    \label{app-davio-neg}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}{0.45\linewidth}
+    \begin{center}
+      \scalebox{0.5} {
+        \input{img/fig-davio-neg-unb}
+      }
+    \end{center}
+    \caption{Unbalanced negative Davio Expansion}
+    \label{app-davio-neg-unb}
+  \end{minipage}
+%\vspace*{0.5cm}
+\end{figure}
+
+
