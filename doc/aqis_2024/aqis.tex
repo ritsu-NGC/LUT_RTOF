@@ -1,0 +1,169 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Example of \TeX Format for AQIS Pre-Proceedings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper]{article}
+\usepackage{aqis}
+
+\begin{document}
+
+\title{
+   Example of \TeX\ Format for AQIS Pre-Proceedings
+}
+
+\author{
+  David Clarino
+  \affiliation{1}
+  \email{username1@domainname1}
+  \and
+ Atsushi Matsuo
+   \affiliation{2}
+  \email{username2@domainname2}
+  \and
+ Shigeru Yamashita
+   \affiliation{1}
+  \email{username3@domainname3}
+  }
+  
+\address{1}{
+  Ritsumeikan University, Graduate School of Information Science and Engineering
+}
+\address{2}{
+  IBM Research, Tokyo
+}
+
+
+\abstract{
+  Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
+  in a qubit-constrained environment. Other recent research has demonstrated the possibility of using {\it relative phase}
+  quantum circuits when compute/uncompute logic is used in tandem, reducing T-count in quantum Boolean circuits in
+  the fault-tolerant quantum computing paradigm. Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
+  qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes
+  in a relative phase manner could reduce the T-count. To generate such arbitrary Boolean functions, we utilize Shannon's
+  decomposition, Davio expansions, as well as alternating balanced and unbalanced relative  phase circuits. Experimental results
+  demonstrate that our method can reduce the T-count to an average of 24\% of the existing method. 
+}
+
+\keywords{relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit synthesis}
+
+
+\maketitle
+
+%########### body
+
+\section{Introduction}
+{\it Quantum Boolean circuits}~\cite{bib-ddmf} implement Boolean operations as quantum circuits and
+are common components of many quantum algorithms such
+as oracles in Grover's algorithm and cost functions. To realize such quantum Boolean circuits,
+a Toffoli gate, which implements the Boolean AND, is an essential logic primitive in a universal gate
+set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT,
+CNOT, and T gates (e.g., the Clifford + T~\cite{bib-barenco-elementary} basis gate set), as depicted
+in Fig.~\ref{fig-toffoli}. However, in the fault-tolerant paradigm, T-gates incur much higher cost
+than the NOT and CNOT gates. It is therefore useful to consider ways to reduce this {\it T-count},
+which is the number of both the T-gates and their inverse in the circuit.
+
+One of the methods that has been proposed to reduce the T-count is to implement Boolean functions only
+up to a {\it relative phase}~\cite{bib-barenco-elementary}, which is an input dependent phase on the
+output. Some recent work~\cite{bib-rtof-maslov,bib-selinger-rtof,bib-amy-phase-state} has proposed
+relative phase versions of common Boolean functions, which achieve T-count savings by removing the
+T gates that only affect the phase.
+
+Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results
+~\cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced
+by such a method is exactly the type that can be improved by synthesizing relative phase versions of its
+component logic. In addition, the fact that relative phase versions can be implemented without any additional
+ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that
+such methods are intended for. 
+
+In this work we attempt to 
+\paragraph{Basic Format:}
+
+\begin{itemize}
+  \item
+      When you create PDF file from your manuscript source
+      (especially from MS-Word), please select fonts carefully for
+      some fonts cannot be handled well by PDF creating system.
+  \item
+    The manuscript should
+    not exceed three pages including the title page,
+    using A4-sized papers.
+  \item
+    No page of the manuscript should contain page numbers/page headings.
+\end{itemize}
+
+\paragraph{Layout:}
+
+\begin{itemize}
+  \item
+    The manuscript should
+    have top-, foot-, and side-margins of 2cm, 2.5cm, and 1.5cm,
+    respectively (the title page should have top margin of 3cm).
+  \item
+    The manuscript should begin with a title,
+    followed by names, affiliations and postal addresses of authors,
+    followed by a 100-word abstract and keywords.
+    The main body should use two-column style.
+    E-mail addresses of authors should be placed in footnotes.
+\end{itemize}
+
+\section{Theorems and Proofs}
+
+Our style file prepares the following environments.
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Environment name & Heading\\
+\hline
+{\tt definition} & {\bf Definition}\\
+{\tt theorem} & {\bf Theorem}\\
+{\tt lemma} & {\bf Lemma}\\
+{\tt corollary} & {\bf Corollary}\\
+{\tt proposition} & {\bf Proposition}\\
+{\tt example} & {\bf Example}\\
+{\tt remark} & {\bf Remark}\\
+{\tt fact} & {\bf Fact}\\
+{\tt conjecture} & {\bf Conjecture}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Figures and Tables}
+
+For figures and tables, the captions should be placed
+below figures and above tables.
+
+\section{Bibliography Styles}
+
+The following bibliography style used in this document is preferable.
+The authors may use common abbreviations for journal and conference names.
+
+\begin{thebibliography}{9}
+
+\bibitem{Grover96}
+L.~K.~Grover.
+\newblock A fast quantum mechanical algorithm for database search.
+\newblock In {\em Proc.\ of the 28th ACM STOC}, pages 212--219, 1996.
+
+\bibitem{Gruska99}
+J.~Gruska.
+\newblock {\em Quantum Computing}.
+\newblock McGraw-Hill, 1999.
+
+\bibitem{Holevo96}
+A.~S.~Holevo.
+\newblock The capacity of quantum channel with general signal states.
+\newblock quant-ph/9611023, 1996.
+
+\bibitem{Sho97SIComp}
+P.~W.~Shor.
+\newblock Polynomial-time algorithms for prime factorization
+and discrete logarithms on a quantum computer.
+\newblock {\em SIAM J. on Comp.}, 26(5):1484--1509, 1997.
+
+\end{thebibliography}
+
+\end{document}
+% end of file
