@@ -1,4 +1,4 @@
-% \begin{figure*}[ht]
+ % \begin{figure*}[ht]
   
 %   \begin{minipage}{.46\linewidth}
 %     \begin{center}
@@ -20,7 +20,7 @@ An example of such a quantum Boolean operation is the Toffoli gate depicted in
 Fig. ~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
 
 
-We implement quantum Boolean circuits using the fault-tolerant set of the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more ti implement.
+We implement quantum Boolean circuits using the fault-tolerant set of the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more to implement.
 
 
 \subsection{Relative-Phase Boolean Functions}
@@ -66,7 +66,7 @@ synthesizing and decomposing logic functions, particularly {\it Multiple Control
 are analogous to Toffoli gates in that they apply a NOT to the target bit if the AND of three or more control
 bits is true.
 
-In Fig.~\ref{fig-maslov-decomp}, we see a decomposition of an MCT gate from \ref{bib-rtof-maslov}. Here, introduce several notions. First, we have the $F$-controlled NOT ($F$-CNOT)
+In Fig.~\ref{fig-maslov-decomp}, we see a decomposition of an MCT gate from \cite{bib-rtof-maslov}. Here, introduce several notions. First, we have the $F$-controlled NOT ($F$-CNOT)
 gate on the left of the equals sign. This is a gate that inverts the target qubit when the Boolean function $F$ is true. In Fig.~\ref{fig-maslov-decomp},
 $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$. However, we will see later that we can set this $F$ to other Boolean functions.
 

@@ -105,7 +105,10 @@ One of the methods that has been proposed to reduce the T-count is to implement 
 up to a {\it relative phase}~\cite{bib-barenco-elementary}, which is an input dependent phase on the
 output. Some recent work~\cite{bib-rtof-maslov,bib-selinger-rtof,bib-amy-phase-state} has proposed
 relative phase versions of common Boolean functions, which achieve T-count savings by removing the
-T gates that only affect the phase.
+T gates that only affect the phase. However, because quantum Boolean circuits are often used as
+subroutines inside larger quantum algorithms, the introduced relative phase is in general problematic.
+It can only be used inside applications where the relative phase on the output is erased before the
+output is used elsewhere.
 
 Both ~\cite{bib-rtof-maslov}~and~\cite{bib-amy-phase-state} have also proposed applications of relative
 phase circuits, such as the ones proposed in~\cite{bib-selinger-rtof}, as components in the composition
@@ -132,7 +135,7 @@ constructions.
 
 \noindent {\bf Our Contribution.} 
 We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit
-by generating relative phase quantum circuits. Among our contributions:
+by generating relative phase quantum Boolean circuits. Among our contributions:
 \begin{itemize}
 \item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio
   Expansions, as well as balanced and unbalanced constructions of relative phase gates

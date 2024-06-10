@@ -33,7 +33,7 @@
 To get to a point where we can realize arbitrary Boolean functions up to a relative
 phase, from ~\cite{bib-amy-phase-state}, we take the circuit depicted in
 Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary
-variable and $F$ and $F'$ is an arbitrary Boolean function of the variables $\{x_n,\cdots,x_k,\cdots,x_0\}$.
+variable and $F'$ is an arbitrary Boolean function of the variables $\{x_n,\cdots,x_k,\cdots,x_0\}$.
 Fig.~\ref{fig-f-dot-g} is called
 the Controlled-$iX$ because it implements the operation $iX$ on the target bit when the
 Boolean statement is true. In other words, this implements the Toffoli gate up to a relative phase of
@@ -113,7 +113,7 @@ $\overline{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{
   We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
 
   For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks exactly like the decomposition in Fig.~\ref{fig-rtof}. We can see that if we continue Shannon's decomposition, one or the other side of the equation will always evaluate to 0. Therefore, it is easy to see that it simplifies to the
-  decomposition in Fig~\ref{fig-f-dot-g}, which is the decomposition in ~\cite{bib-amy-phase-state}.
+  decomposition in Fig.~\ref{fig-f-dot-g}, which is the decomposition in ~\cite{bib-amy-phase-state}.
   (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input
   case without any additional information). %The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
   
@@ -121,7 +121,7 @@ $\overline{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{
   We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method; we will treat the optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$
   and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$.
   This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$
-  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose
+  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig.~\ref{fig-bool-or} to compose
   the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
   
   Finally, we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 0,x_2,x_1)$ as in Fig.~\ref{fig-bool-or} again. The result is depicted in Fig.~\ref{app-func-decomp} in ~\ref{App:FuncDecomp}.
@@ -229,7 +229,7 @@ and so the exponential is further mitigated.
 %% target-dependent phases are created using \emph{unbalanced} construction, such as in 
 %% Fig.~\ref{fig-urtof}. In this construction, the state just before the second Hadamard gate is different from the one just after the first one. In this construction, the two $x_{n-1}$ CNOT gates cancel their effect on each other, but the middle FCNOT gate's effect remains. The final Hadamard gate will turn this state into a target dependent phase.
 
-%% To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
+%% To keep this from happening, a \emph{balanced} construction such as in Fig.~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
 %% phase. This means that it can be used inside an unbalanced construction without incurring residue since the
 %% Hadamard gate now does not have any dependence to act on.
 
