@@ -33,14 +33,14 @@
 To get to a point where we can realize arbitrary Boolean functions up to a relative
 phase, from ~\cite{bib-amy-phase-state}, we take the circuit depicted in
 Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary
-variable and $F'$ is an arbitrary Boolean function of the variables $\{x_n,\cdots,x_k,\cdots,x_0\}$.
+variable and $F\{x_n,\cdots,x_k,\cdots,x_0\}$ and $F'\{x_n,\cdots,x_k,\cdots,x_0\}$ are arbitrary Boolean functions. 
 Fig.~\ref{fig-f-dot-g} is called
 the Controlled-$iX$ because it implements the operation $iX$ on the target bit when the
 Boolean statement is true. In other words, this implements the Toffoli gate up to a relative phase of
 $e^{i\frac{\pi}{2}}$ when $x_k \cdot F'$ is true. We use this
 to implement the Boolean AND that we need for Shannon's decomposition. Observe that when
 $F'=x_0$ and $x_k = x_1$, i.e. $F'$ is a mere CNOT gate controlled by $x_0$, we simply
-get Fig.\ref{fig-rtof}. This means that it is a generalized form of the RTOF gate that we
+get Fig.~\ref{fig-rtof}. This means that it is a generalized form of the RTOF gate that we
 saw earlier.
 
 %We can further generalize this. Recall from Section~\ref{Sec:prelim} that a Toffoli gate realizes a Boolean product of its inputs on its output. Just like above, we can use the same reasoning to generalize both inputs into arbitrary Boolean functions~\cite{bib-amy-phase-state}. This means that we can use the construction in Fig.~\ref{fig-f-dot-g} to realize a product between two arbitrary Boolean functions up to a relative phase. 
@@ -75,7 +75,7 @@ saw earlier.
       \scalebox{0.7} {
         \input{img/fig-bool-or}
       }
-    \caption{A generalized way of conducting the Boolean sum for the quantum Shannon's decomposition}
+    \caption{A generalized way of conducting the Boolean XOR for the quantum Shannon's decomposition}
     \label{fig-bool-or}
 \end{figure}
 
@@ -257,7 +257,7 @@ with this function entirely.
 
 Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\overline{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\overline{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\overline{x_k}$ controlled~CNOT gate. 
 
-As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
+As the recursion terminates, the T-counts of each of the Shannon, Positive Davio, or Negative Davio expansions is
 compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
 The process is then repeated with all of the variable orders, and the minimum is picked from the results. 
 
@@ -309,7 +309,7 @@ The process is then repeated with all of the variable orders, and the minimum is
   function, so for the $F_0$ branch we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
 
   We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
-  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \overline{x_1}$
+  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \overline{x_1}$.
   Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
   these similarly to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
   there are four T-gates.

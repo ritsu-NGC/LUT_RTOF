@@ -68,7 +68,7 @@ bits is true.
 
 In Fig.~\ref{fig-maslov-decomp}, we see a decomposition of an MCT gate from \cite{bib-rtof-maslov}. Here, introduce several notions. First, we have the $F$-controlled NOT ($F$-CNOT)
 gate on the left of the equals sign. This is a gate that inverts the target qubit when the Boolean function $F$ is true. In Fig.~\ref{fig-maslov-decomp},
-$F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$. However, we will see later that we can set this $F$ to other Boolean functions.
+$F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_1$. However, we will see later that we can set this $F$ to other Boolean functions.
 
 In Fig.~\ref{fig-maslov-decomp}, we also see the first $F'$-CNOT gate acts on the ancilla bit $q_6$, where $F'$ is some arbitrary Boolean function. Because of the rules of quantum circuits, we need to return this $q_6$ to its original $\ket{0}$ state. We use an analogous gate, the $F'^{\dagger}$-CNOT, which also implements the same Boolean function $F'$, to reverse the actions of $F'$-CNOT such that the final state is also $\ket{0}$. We call the action of $F'$-CNOT on $q_6$ \emph{compute} and the action of $F'^{\dagger}$-CNOT on $q_6$, \emph{uncompute}. For $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_0$, we have $F'(x_n,\cdots,x_1) = x_{n-1} \cdots x_0$ such that $F(x_n,\cdots,x_1) = x_n \cdot F'(x_n,\cdots,x_1)$.
 
