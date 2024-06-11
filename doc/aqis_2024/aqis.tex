@@ -133,7 +133,7 @@ One of the methods that has been proposed to reduce the T-count is to implement 
 up to a {\it relative phase}~\cite{bib-barenco-elementary}, which is an input dependent phase on the
 output. We display a Relative Phase Toffoli gate (RTOF) in Fig.~\ref{fig-rtof}, which has a T-count of 4,
 compared to a T-count of 7 with the normal Toffoli gate. However, because quantum Boolean circuits are often
-used as subroutines inside larger quantum algorithms, the introduced relative phase is in general problematic.
+used as subroutines inside larger quantum algorithms, the introduced relative phase is, in general, problematic.
 It can only be used inside applications where the relative phase on the output is erased before the
 output is used elsewhere. 
 
@@ -161,10 +161,10 @@ output is used elsewhere.
     %  \end{minipage}
 \end{figure}
 
-When larger quantum Boolean circuits are decomposed to use smaller quantum Boolean circuits, there is
+A Boolean function is implemented with several smaller quantum Boolean circuits, there is
 often a need to make these smaller quantum Boolean circuits act on ancilla qubits. However, when a circuit
-acts on ({\textit{computes}) an ancilla qubit, there is a need to reverse its effects on the ancilla. This means there is a
-need to apply the same quantum Boolean circuit twice to the same qubit to reverse the effects. This reversal is called {\textit{uncomputation}}.
+acts on ({\textit{compute}) an ancilla qubit, there is a need to reverse its effects on the ancilla. This means there is a
+need to apply the same quantum Boolean circuit twice to the same qubit to reverse the effects. When we reverse these states we say we {\textit{uncompute}} them.
 One of the results from~\cite{bib-rtof-maslov} is that these pairs of compute/uncompute
 logic can be implemented only up to a relative phase in order to save on T-count, without changing
 the overall function. This is because when we generate the compute logic only up to a relative phase,
@@ -205,10 +205,11 @@ Previous research~\cite{bib-lhrs-soeken} has detailed a method to use Boolean Lo
 Networks to generate quantum circuits in a manner similar to classical LUT-based logic 
 synthesis. In this paradigm, each of the nodes is interpreted as a lookup table, 
 where the inputs are interpreted as indices, and the outputs are entries, according 
-to its truth table. As a quantum circuit, they are implemented as a NOT gate controlled
-by an arbitrary function (FCNOT).
+to its truth table. As a quantum circuit, they are implemented as an $F$-controlled NOT (FCNOT) gate,
+which is a gate that inverts its target qubit if the Boolean function $F$ it is supposed to
+implement is true.
 
-The result of the method is shown in Fig.~\ref{fig-lut-qc}. To get from a Boolean logic network to Fig.~\ref{fig-lut-qc}, first, we take as input a Boolean logic network synthesized from a Boolean expression using existing Boolean logic network decomposition methods. Then this Boolean logic network is parsed by the algorithm to create a quantum circuit of FCNOT gates. Any intermediate node is decomposed as two FCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node i.e., an endpoint to the cascading logic) is given only one FCNOT.
+The result of the method is shown in Fig.~\ref{fig-lut-qc}. To get from a Boolean logic network to Fig.~\ref{fig-lut-qc}, first, we take as input a Boolean logic network synthesized from a Boolean expression using existing Boolean logic network decomposition methods. Then this Boolean logic network is parsed by the algorithm to create a quantum circuit of FCNOT gates. Any intermediate node is decomposed as two FCNOTs: one to compute, and the other to uncompute, acting on the same dirty ancilla. Any node that acts only on output qubits (output node) is given only one FCNOT.
 
 
 Because the FCNOT gates act on ancilla, there is a need to uncompute them, so the flow next produces uncompute logic. This produces the compute/uncompute pair that a relative-phase based construction of the function can take advantage of. If we have a function that implements, for example, gate 1 and 1$^{\dagger}$ as relative phase functions
@@ -220,7 +221,7 @@ following section.
     \scalebox{1}{\input{img/fig-lut-network}}
     \caption{A quantum circuit implementing a Boolean logic network using LHRS }
     \label{fig-lut-qc}
-\vspace*{-0.5cm}
+\vspace*{-1cm}
 \end{figure}
 \begin{figure}[t]
   \begin{minipage}{0.8\linewidth}
@@ -249,7 +250,7 @@ following section.
 \begin{figure}[t]
   \begin{minipage}{0.45\textwidth}
     \begin{center}
-      \scalebox{0.5} {
+      \scalebox{0.6} {
         \input{img/fig-davio-pos-unb}
       }
     \end{center}
@@ -298,7 +299,7 @@ following section.
     \scalebox{0.90}{
       \begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
         \hline
-          Circuit             & \multicolumn{4}{c}{IBM \emph{classicalfunction}}      &  \multicolumn{4}{|c}{Shannon-Only}    &  \multicolumn{4}{|c|}{Proposed method} \\ \cline{2-13}
+          Circuit             & \multicolumn{4}{c}{No Relative Phase}      &  \multicolumn{4}{|c}{Shannon-Only}    &  \multicolumn{4}{|c|}{Proposed method} \\ \cline{2-13}
                               & LUT6 (T-count) & LUT5 & LUT4 & LUT3        & LUT6 & LUT5  & LUT4 & LUT3            & LUT6 & LUT5 & LUT4 & LUT3              \\ \hline                              
         priority\_size\_2022  & 98664          & 0.56 & 0.32 & 0.26        & 0.27 & 0.51 & 0.19 & 0.16             & 0.14 & 0.08 & 0.06 & {\bf 0.05}        \\ \hline            
         int2float\_size\_2022 & 22592          & 1.14 & 0.49 & 0.38        & 0.94 & 0.94 & 0.4 & 0.35              & 0.27 & 0.17 & 0.1  & {\bf 0.06}        \\ \hline             
@@ -326,7 +327,7 @@ Recall Shannon's decomposition $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F(x_n,\
 However, observe from Fig.~\ref{app-shannon}, that there is significant cost associated with doing the Boolean AND. Each multiplication costs at least 4 T-gates, along with the associated cost of the decomposed function.
 Therefore, it is useful to consider a method that takes advantage of
 {\it Exclusive Sum of Products} (ESOP) expressions to reduce the number of multiplications in the decomposition multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_k \cdot F_2$ and the corresponding
-negative Davio expansion $F=F_1 \oplus \overline{x_k} \cdot F_2$ where $F$ is some function of variables $(x_n,\cdots,x_k,\cdots,x_0)$,
+negative Davio expansion $F=F_1 \oplus \overline{x_k} \cdot F_2$ where $F$ is Boolean function of variables $\{x_n,\cdots,x_k,\cdots,x_0\}$,
 $F_0 = F(x_k=0)$,$F_1 = F(x_k=1)$,
 and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that, at every level, only one
 multiplication takes place, which already reduces the maximum possible T-gate use at any node from
@@ -337,14 +338,14 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 
 To realize a further savings in T-count, we again observe the the part of Fig.~\ref{app-davio-pos} that calculates
 $x_k \cdot (F_{x_k = 0} \oplus F_{x_k = 1})$, indicated by the dashed box. In this construction, note that the
-gates $g_{6}$ and $g_{10}$ calculate identical Boolean functions. Gate $g_{10}$ serves to uncompute the effects of $g_6$ on the state, leaving only the phase. We call this type of construction \emph{balanced}. In a balanced construction, the cost of the decomposition doubles the cost of implementing the decompositions below it in the hierarchy. This means that even in the best case T-count is proportional to $2^{(n-1)}$.
+gates $g_{6}$ and $g_{10}$ calculate identical Boolean functions. Gate $g_{10}$ serves to uncompute the effects of $g_6$ on the state, leaving only the phase. We call this type of construction \emph{balanced}. In a balanced construction, the cost of the decomposition doubles the cost of implementing the decompositions below it in the hierarchy. This means that even in the best case, T-count is proportional to $2^{(n-1)}$.
 
 We can remove $g_{10}$ and get the construction in Fig.~\ref{app-davio-pos-unb}. Here, we calculate the same
 Boolean function but without the cost of the decomposition in the recursive levels below $x_k$. We call this type
 of construction \emph{unbalanced}. These types of constructions can only be used in a restricted manner when doing
 the Boolean AND however~\cite{bib-amy-phase-state}. We summarize the limitations of the use of the unbalanced
 construction in our application with the following statement: unbalanced constructions can be used to implement
-FCNOTs used in Boolean AND of two functions only when done in a balanced construction. Therefore we devise a method
+FCNOTs used in the Boolean AND of two functions only when done in a balanced construction. Therefore we devise a method
 to use balanced and unbalanced constructions at alternating levels of the hierarchy. In doing so, we can reduce the
 dependency from $2^{(n-1)}$ to $2^{\frac{n-1}{2}}$. While still exponential, this has quite a significant reduction
 in the regime we are working with. 
@@ -395,7 +396,7 @@ in T-count.
 \section{Proposed Method}
 
 We now integrate Sec~\ref{Subsec:shannon} and Sec~\ref{Subsec:balanced}
-into a synthesis algorithm up to a relative phase. We use this relative phase
+into a synthesis algorithm to implement a Boolean function up to a relative phase. We use this relative phase
 algorithm as a subroutine in the following process.
 
 %% \begin{algorithm}[tb]
@@ -423,43 +424,51 @@ We query a node traversal algorithm to get the next
 node. We then check if this node is an output node or an intermediate node. If it is an
 intermediate node, we generate the compute logic as an FCNOT with a relative phase,
 and then invert that circuit to generate the uncompute logic, which generates a relative phase
-FCNOT with the opposite relative phase. We set the two gates to act on ancilla If the node is
-an output node, we generate the FCNOT using exact logic and add it to the circuit. We continue
+FCNOT with the opposite relative phase. We set the two gates to act on ancilla. If the node is
+an output node, we generate the FCNOT without relative phase and add it to the circuit. We continue
 until there are no more nodes to process from the node traversal algorithm and terminate.
 
 \section{Experimental Results}
-\subsection{Methodology}
 \label{Subsec:Analysis}
-In Table~\ref{table-results}, we generate the the quantum Boolean circuit using several methods to
-generate the intermediate nodes. ``IBM \emph{classicalfunction}'' uses the IBM Qiskit's \emph{classicalfunction}
-functionality to generate a reversible network, which does not have a relative phase. ``Shannon-Only''
-is a simplified version of the proposed method which only uses Shannon's Decomposition to generate its
-relative phase quantum Boolean circuits. This is meant to show a ``naive'' implementation of a relative
-phase generation procedure. Finally we have our ``Proposed'' method, which adds in the Davio Expansions
-and the balanced/unbalanced constructions.
 
-Additionally, we feed four different classes of Boolean Logic Networks to the LUT-based synthesis:
-LUT3, LUT4, LUT5, and LUT6. Each LUT$x$ has intermediate nodes with at most $x$ inputs. Because LUT$x$
-for smaller $x$ implicitly use more ancilla qubits, this is meant to show the tradeoff between more ancilla and
-bigger FCNOT gates. However, we do not measure the number of ancilla explicitly as they are dependent
-on the node traversal algorithm used ~\cite{bib-lhrs-soeken}. We use the T-count of the LUT6 networks generated
-using IBM classicalfunction as our baseline, and the rest of the numbers are ratios such that ((LUT$x$ Method T-count) - (LUT6 classicalfunction T-count))/(LUT6classicalfunction T-count).
+We find that using our method, we generate quantum Boolean circuits with an average of 24\% of
+the T-count of the case without relative phase. We also compare our proposed method to a simplified
+method using only Shannon's Decomposition and balanced compositions. We find that this simplified
+method (Shannon-Only) has corner cases which have higher T-count than the non-relative phase case. This is because
+Shannon's Decomposition and balanced constructions create FCNOT gates that have a large T-count.
+Introducing Davio Expansions and unbalanced constructions allows the proposed method to take
+care of these cases. In fact, the full proposed method has an absolute advantage over this simplified
+method.
+%% In Table~\ref{table-results}, we generate the the quantum Boolean circuit using several methods to
+%% generate the intermediate nodes. ``IBM \emph{classicalfunction}'' uses the IBM Qiskit's \emph{classicalfunction}
+%% functionality to generate a reversible network, which does not have a relative phase. We have our ``Proposed''
+%% method, which adds in the Davio Expansions and the balanced/unbalanced constructions. Finally, ``Shannon-Only''
+%% is a simplified version of the proposed method which only uses Shannon's Decomposition to generate its
+%% relative phase quantum Boolean circuits. This is meant to show a ``naive'' implementation of a relative
+%% phase generation procedure. 
 
-The best result for each circuit is written in bold. The
-Proposed method sees the largest gain over the baseline LUT6 classicalfunction numbers in LUT3. However, whereas
-the Shannon-Only method saw only modest gains here over the classicalfunction LUT3 numbers (i.e., merely reducing the
-maximum LUT-size with the naive method), we see a much more significant advantage for the Proposed method.
-Of note, Proposed method shows an absolute advantage over the Shannon-Only method over all the cases tested.
+%% Additionally, we feed four different classes of Boolean Logic Networks to the LUT-based synthesis:
+%% LUT3, LUT4, LUT5, and LUT6. Each LUT$x$ has intermediate nodes with at most $x$ inputs. Because LUT$x$
+%% for smaller $x$ implicitly use more ancilla qubits, this is meant to show the tradeoff between more ancilla and
+%% bigger FCNOT gates, because of the relative phase synthesis algorithm's. However, we do not measure the number of ancilla explicitly as they are dependent
+%% on the node traversal algorithm used ~\cite{bib-lhrs-soeken}. We use the T-count of the LUT6 networks generated
+%% using IBM classicalfunction as our baseline, and the rest of the numbers are ratios such that (LUT$x$ Method T-count)/(LUT6classicalfunction T-count).
 
-Of particular note is bar\_size\_2015, which contains many highly complex, maximum size nodes. The Shannon-Only
-method suffered from its $2^{n-1}$ proportionality here and generated far higher T-count than the classicalfunction
-method. However, the Proposed method shows a better ability to break down the complex functions into something
-with tractable T-count. This seems to be due to the introduction of the Davio expansion and its ability
-to create a more natural ESOP expansion of the original functions, which lends itself to fewer multiplications,
-and thus to fewer T-gates used.
+%% The best result for each circuit is written in bold. The
+%% Proposed method sees the largest gain over the baseline LUT6 classicalfunction numbers in LUT3. However, whereas
+%% the Shannon-Only method saw only modest gains here over the classicalfunction LUT3 numbers (i.e., merely reducing the
+%% maximum LUT-size with the naive method), we see a much more significant advantage for the Proposed method.
+%% Of note, Proposed method shows an absolute advantage over the Shannon-Only method over all the cases tested.
+
+%% Of particular note is bar\_size\_2015, which contains many highly complex, maximum size nodes. The Shannon-Only
+%% method suffered from its $2^{n-1}$ proportionality here and generated far higher T-count than the classicalfunction
+%% method. However, the Proposed method shows a better ability to break down the complex functions into something
+%% with tractable T-count. This seems to be due to the introduction of the Davio expansion and its ability
+%% to create a more natural ESOP expansion of the original functions, which lends itself to fewer multiplications,
+%% and thus to fewer T-gates used.
 
 
-\subsection{Analysis and Conclusion}
+\section{Conclusion}
 \label{Sec:concl}
 This paper proposed the use of Shannon's Decomposition, Davio expansions and alternating
 balanced/unbalanced relative phase constructions to optimize relative phase constructions
