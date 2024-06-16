@@ -45,14 +45,15 @@
 
 \newcount\NGCcolor
 \NGCcolor=1
-%\NGCcolor=0
+\NGCcolor=0
 \ifnum\NGCcolor<1
-  \newcommand{\redout}[1]{\textcolor{red}{\bf #1}}
-  \newcommand{\blueout}[1]{\textcolor{blue}{\bf #1}}
-  \newcommand{\greenout}[1]{\textcolor{green}{\bf #1}}
-  \newcommand{\cyannout}[1]{\textcolor{cyan}{\bf #1}}
-  \newcommand{\magentaout}[1]{\textcolor{magenta}{\bf #1}}
+  \newcommand{\redout}[1]{\textcolor{red}{#1}}
+  \newcommand{\blueout}[1]{\textcolor{blue}{#1}}
+  \newcommand{\greenout}[1]{\textcolor{green}{#1}}
+  \newcommand{\cyannout}[1]{\textcolor{cyan}{#1}}
+  \newcommand{\magentaout}[1]{\textcolor{magenta}{#1}}
   \newcommand{\yellowout}[1]{\textcolor{yellow}{\bf #1}}
+  \newcommand{\algblueout}[1]{\leavevmode\color{blue}{#1}}
 \else
   \newcommand{\redout}[1]{#1}
   \newcommand{\blueout}[1]{#1}
@@ -60,6 +61,7 @@
   \newcommand{\cyannout}[1]{#1}
   \newcommand{\magentaout}[1]{#1}
   \newcommand{\yellowout}[1]{#1}
+  \newcommand{\algblueout}[1]{\leavevmode {#1}}
 \fi
 
 \setcounter{page}{1}
