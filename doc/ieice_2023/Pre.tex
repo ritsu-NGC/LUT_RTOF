@@ -36,7 +36,7 @@ using this notation to denote a relative phase version of a quantum logic
 gate in this paper. 
 
 As depicted in Fig.~\ref{fig-rtof}, an RTOF gate has three inputs; the input quantum basis states are $\ket{000}$
-to $\ket{111}$. Similar to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
+to $\ket{111}$. Similarly to Toffoli gates, an RTOF gate swaps $\ket{110}$ and $\ket{111}$. In addition to this
 logic operation, RTOF gates add phases to some output states that the equivalent Toffoli gate does not. The added
 phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state is $\ket{110}$, a phase $e^{i\frac{\pi}{2}}$ is added.
 
@@ -62,7 +62,7 @@ implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-netwo
 numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
 $y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
 dependent on $x_2$ and $x_3$, and node 2 is dependent on $x_4$ and $x_5$. node 3 is in turn dependent
-on node 1 and $x_1$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 is dependent on both
+on node 1 and $x_1$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 depends on both
 node 4 and $x_5$.
 
 \subsection{Using RTOF Gates to Decompose MCT Gates}

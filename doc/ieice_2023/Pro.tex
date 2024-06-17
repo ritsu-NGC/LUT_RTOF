@@ -26,7 +26,7 @@
     \scalebox{0.8} {
     \input{img/fig-f-dot-g-in}
     }
-    \caption{\blueout{A relative phase version of $x_k \cdot F$}}
+    \caption{\blueout{A gate implementing $x_k \cdot F$ up to a relative phase}}
     \label{fig-f-dot-g}
 \end{figure}
 
@@ -82,7 +82,7 @@ arbitrary Boolean functions up to a relative phase.
 
 \blueout{
 As a prelude to our discussion, we observe that $x \cdot a  + \overline{x} \cdot b = x \cdot a \oplus \overline{x} \cdot b$.
-This means that we can implement an analogous function as a series of single target gates. Suppose we have two \blueout{single-target} gates $U_{x_k \cdot {F'}_{x_k=1}}$ and $U_{\overline{x_k} \cdot {F'}_{x_k=0}}$, which implement the Boolean functions $x_k \cdot {F'}_{x_k=1}$ and $x_k \cdot {F'}_{x_k=0}$ respectively. This means that to implement the function $x_k \cdot {F'}_{x_k=1} + \overline{x_k} \cdot {F'}_{x_k=0}$, we can place the aforementioned gates in series to compute their OR. We can use Fig.~\ref{fig-f-dot-g} to implement the products $x_k \cdot {F'}_1$ and $\overline{x_k} \cdot {F'}_0$. We put them together using the construction shown in Fig.~\ref{fig-bool-or}.
+This means that we can implement an analogous function as a series of single-target gates. Suppose we have two \blueout{single-target} gates $U_{x_k \cdot {F'}_{x_k=1}}$ and $U_{\overline{x_k} \cdot {F'}_{x_k=0}}$, which implement the Boolean functions $x_k \cdot {F'}_{x_k=1}$ and $x_k \cdot {F'}_{x_k=0}$ respectively. This means that to implement the function $x_k \cdot {F'}_{x_k=1} + \overline{x_k} \cdot {F'}_{x_k=0}$, we can place the aforementioned gates in series to compute their OR. We can use Fig.~\ref{fig-f-dot-g} to implement the products $x_k \cdot {F'}_1$ and $\overline{x_k} \cdot {F'}_0$. We put them together using the construction shown in Fig.~\ref{fig-bool-or}.
 }
 
 First, from the Shannon's decomposition
@@ -303,14 +303,14 @@ The process is then repeated with all of the variable orders, and the minimum is
   \label{ex-davio}
     We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
     Just as before, we first take the positive Davio expansion about $x_3$ (for simplicity, we will only follow the Davio branches
-  in this example. However, as  we will see later, they turn out to be optimal for this function). We get $F_0 = x_1 + x_2$ and
-  $F_2 = F_0 \oplus F_1 = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$. Note that for this level we can tolerate an unbalanced
-  function, so for the $F_0$ branch we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
+  in this example. However, as we will see later, they turn out to be optimal for this function). We get $F_0 = x_1 + x_2$ and
+  $F_2 = F_0 \oplus F_1 = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$. Note that for this level, we can tolerate an unbalanced
+  function, so for the $F_0$ branch, we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
 
   We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
   controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \overline{x_1}$.
   Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
-  these similarly to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
+these in a way similar to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
   there are four T-gates.
 
   We now go to the $F_2$ branch. Here, since $x_1 \oplus x_2$ can be implemented using an $x_1$ controlled CNOT and $x_2$ controlled CNOT
@@ -319,7 +319,7 @@ The process is then repeated with all of the variable orders, and the minimum is
   Back at the top level, we compose the subcircuits for $F_0$ and $F_2$ as a negative unbalanced Davio construction, adding an additional four
   T-gates. This brings us to a total of 8 T-gates. Compare this to the 24 T-gates of our original methodology, 1/3 the size. We omit
   the computation of the other branches and variable orders in the interest of space, but the reader can perform them  quickly to
-  see that the branch we followed is the optimal branch (or one of them. In this function there are multiple because $x_1$  and
+  see that the branch we followed is the optimal branch (or one of them. In this function, there are multiple because $x_1$  and
   $x_2$ are symmetric, and several Davio branches have similar costs). 
   The resulting circuit is depicted in Fig.~\ref{fig-func-decomp-davio} in \ref{App:FuncDecomp}.
 
