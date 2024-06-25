@@ -20,7 +20,7 @@ An example of such a quantum Boolean operation is the Toffoli gate depicted in
 Fig. ~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
 
 
-We implement quantum Boolean circuits using of the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. This set is used
+We implement quantum Boolean circuits using the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. This set is used
 to implement fault-tolerant quantum computing. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more to implement.
 
 
@@ -28,7 +28,7 @@ to implement fault-tolerant quantum computing. The X, CNOT, S, and H gates are w
 
 A typical decomposition of the Toffoli gate into the Clifford + T basis
 consists of seven T-gates, as shown in Fig.~\ref{fig-toffoli}.
-A Relative-Phase Toffoli (RTOF) gate~\cite{bib-selinger-rtof}, in contrast,
+A Relative-Phase Toffoli gate (RTOF)~\cite{bib-selinger-rtof}, in contrast,
 implements the same function using only four T-gates as shown in
 Fig.~\ref{fig-rtof}. However, it does this at the cost of a relative phase.
 Note the double circle on the target of Fig.~\ref{fig-rtof}: We will be
@@ -52,14 +52,14 @@ phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state 
 
 A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG). It has nodes, edges, primary outputs, and
 primary inputs.
-A \emph{node} has zero or more {\it fanins}, or incoming edges, and zero or more {\it fanouts} or outgoing edges.
+A \emph{node} represents a decomposition of a Boolean function. It has zero or more {\it fanins}, or incoming edges, as well as zero or more {\it fanouts} or outgoing edges.
 The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a
 subset of nodes in the network without fanouts. \blueout{The maximum number of fanins that any node in the network has is
 called the network's {\it LUT-size}. }
 
 A Boolean function can be decomposed into such a Boolean logic network. Its nodes can subsequently be
 implemented as LUTs or logic gates. We see an example in Fig.~\ref{fig-lut-network}. Here, the nodes are
-numbered 1-5 to abstract away the functions inside of them, the primary outputs are labeled $y_1$ and
+numbered 1-5 to abstract away the Boolean functions inside of them. The primary outputs are labeled $y_1$ and
 $y_2$, and the primary inputs are labeled $x_1,\cdots,x_5$. We read this graph as follows: node 1 is
 dependent on $x_2$ and $x_3$, and node 2 is dependent on $x_4$ and $x_5$. node 3 is in turn dependent
 on node 1 and $x_1$, and node 4 is dependent on both nodes 1 and 2. Finally, node 5 depends on both
@@ -72,16 +72,16 @@ are analogous to Toffoli gates in that they apply a NOT to the target bit if the
 bits is true.
 
 In Fig.~\ref{fig-maslov-decomp}, we depict a decomposition of an MCT gate from \cite{bib-rtof-maslov}. The gate
-$U_F$ is a single-target quantum gate, which conducts an X operation on its target bit when the Boolean expression
-$F$ is true. For an MCT gate $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_1$. Likewise, the component $U_{F'}$
-gate acts on the ancilla qubit $q_6$, and is used to implement $U_F$, where $F'(x_{n-1},\cdots,x_1) = x_{n-1} \cdots x_0$.
-$U_{F'}$ implements $F'$ Likewise, $U_{F'}^{\dagger}$ is another single-target gate, which also implements $F'$
+$U_F$ is a single-target quantum gate, conducts an X operation on its target bit when the Boolean expression
+$F$ is true. For an MCT gate, $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_1$. Likewise, the component $U_{F'}$
+gate acts on the ancilla qubit $q_6$, and is used to decompose $U_F$. $U_{F'}$  implements $F'(x_{n-1},\cdots,x_1) = x_{n-1} \cdot \cdots \cdot x_0$.
+Likewise, $U_{F'}^{\dagger}$ is another single-target gate, which also implements $F'$.
 $U_{F'}^{\dagger}$ reverses the effects of $U_{F'}$ on $q_6$, to preserve the effects of interference
 in the output bits. We call the action of $U_{F'}$ \emph{compute}, and the action of $U_{F'}^{\dagger}$
 \emph{uncompute}. Fig.~\ref{fig-maslov-decomp} implements $x_n \cdot F'$, which gives us a circuit that implements
 the MCT.
 
-When larger Boolean functions, such as MCT, are broken down into smaller single-target gates that implement compute/uncompute pairs that act on ancilla, it is always more advantageous to implement the smaller gates up to a relative phase \cite{bib-rtof-maslov}. We can implement each compute/uncompute half with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, $U_{F'}$ turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_0)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_0) \in [-\pi,\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n-1},\cdots,x_0$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_0) \neq 0$ will have lower T-count than when $\theta(x_{n-1},\cdots,x_0) = 0$. Similarly, when $U_{F'}^{\dagger}$ implements ${F'^{\dagger}}$ up to $-\theta(x_{n-1},\cdots,x_0) \neq 0$ similarly has a lower T-count than the analogous $\theta(x_{n-1},\cdots,x_0) = 0$ case. Using the relative phase $U_{F'}$ and $U_{F'^{\dagger}}$ in tandem thus results in lower T-count than the same tandem without a relative phase.
+In \cite{bib-rtof-maslov}, it was found that when decomposing larger Boolean functions, such as MCT, into compute/uncompute pairs of smaller gates that act on ancilla, it is always more advantageous to implement the smaller gates up to a relative phase. We can implement each compute/uncompute half with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, $U_{F'}$ turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_0)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_0) \in [-\pi,\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n},\cdots,x_1$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_0) \neq 0$ will have lower T-count than when $\theta(x_{n},\cdots,x_1) = 0$. Similarly, when $U_{F'}^{\dagger}$ implements ${F'}$ up to $-\theta(x_{n},\cdots,x_1) \neq 0$ similarly has a lower T-count than the analogous $\theta(x_{n},\cdots,x_1) = 0$ case. Using the relative phase $U_{F'}$ and $U_{F'^{\dagger}}$ in tandem thus results in lower T-count than the same tandem without a relative phase.
 
 \begin{figure}[t]
     \centering
@@ -100,7 +100,7 @@ When larger Boolean functions, such as MCT, are broken down into smaller single-
 
 To summarize:
 \begin{itemize}
-\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if the inverse is implemented to have the opposite relative phase. This removes the need for extra T-gates that only 
+\item Pairs of computing and uncomputing gates can tolerate a relative phase in the compute portion if the inverse is implemented to have the opposite relative phase. This removes the need for extra T-gates that only return the phase to 0.
 \item Using the above, it is possible to use clean ancilla to decompose an MCT with fewer T-gates than the known methods.
 \end{itemize}
 
@@ -109,12 +109,12 @@ To summarize:
 \subsection{LUT-based Hierarchical Reversible Logic Synthesis (LHRS)}
 \label{Subsec:lhrs}
 
-Previous research~\cite{bib-lhrs-soeken} has detailed a method to use Boolean Logic
-Networks to generate quantum circuits \blueout{in a manner similar to classical} LUT-based logic 
-synthesis. In this paradigm, each of primary inputs is mapped to an input qubit, and each
-of the primary outputs is mapped to an output qubit. the nodes is interpreted as a lookup table, 
+Previous research~\cite{bib-lhrs-soeken} has detailed a method to use Boolean logic
+networks to generate quantum circuits \blueout{in a manner similar to classical} LUT-based logic 
+synthesis. \blueout{In this paradigm, each of the primary inputs is mapped to an input qubit, and each
+of the primary outputs is mapped to an output qubit.} The nodes are interpreted as a lookup table, 
 where the inputs are interpreted as indices, and the outputs are entries, according 
-to its truth table. As a quantum circuit, each node, which represents a Boolean function $F$
+to its truth table. As a quantum circuit, each node, which represents a Boolean function $F$,
 is implemented as a single-target gate $U_{F}$, such that $U_{F}$ applies the X operation to
 the target bit when the Boolean function $F$ is true.
 

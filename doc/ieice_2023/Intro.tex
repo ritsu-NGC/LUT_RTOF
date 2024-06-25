@@ -12,7 +12,7 @@
         \begin{subfigure}[b][15mm]{0.9\textwidth}
             \centering
              \input{img/rtofb}
-            \caption{An RTOF gate in Clifford+T basis}
+            \caption{An RTOF in Clifford+T basis}
             \sublabel{fig-rtof}
         \end{subfigure}
     \end{minipage}
@@ -92,8 +92,7 @@
 \section{Introduction}
 
 {\it Quantum Boolean circuits}~\cite{bib-ddmf} implement Boolean operations as quantum circuits and
-are common components of many quantum algorithms such
-as oracles in Grover's algorithm and cost functions. To realize such quantum Boolean circuits,
+are common components of many quantum algorithms. To realize such quantum Boolean circuits,
 a Toffoli gate, which implements the Boolean AND, is an essential logic primitive in a universal gate
 set. These Toffoli gates have to be, in turn, composed of physically realizable gates, such as NOT,
 CNOT, and T gates (e.g., the Clifford + T~\cite{bib-barenco-elementary} basis gate set), as depicted
@@ -106,7 +105,7 @@ up to a {\it relative phase}~\cite{bib-barenco-elementary}, which is an input de
 output. Some recent work~\cite{bib-rtof-maslov,bib-selinger-rtof,bib-amy-phase-state} has proposed
 relative phase versions of common Boolean functions, which achieve T-count savings by removing the
 T gates that only affect the phase. However, because quantum Boolean circuits are often used as
-subroutines inside larger quantum algorithms, the introduced relative phase is in general problematic.
+subroutines inside larger quantum algorithms, the introduced relative phase is, in general, problematic.
 It can only be used inside applications where the relative phase on the output is erased before the
 output is used elsewhere.
 
@@ -121,7 +120,7 @@ Lookup Table (LUT) based synthesis methods ~\cite{bib-lhrs-soeken}, thus present
 candidate to integrate with relative phase methods.
 
 Recent attempts to synthesize quantum circuits using LUT-based methods have shown some promising results
-~\cite{bib-lhrs-soeken}. As intermediate nodes {\it cascade} their outputs into output nodes, logic produced
+~\cite{bib-lhrs-soeken}. As intermediate nodes pass their outputs through each other into output nodes, logic produced
 by such a method is exactly the type that can be improved by synthesizing relative phase versions of its
 component logic. In addition, the fact that relative phase versions can be implemented without any additional
 ancilla means that it works well to synthesize Boolean functions in the qubit constrained environment that
@@ -129,7 +128,7 @@ such methods are intended for.
 
 Our research seeks to leverage recent results in relative phase implementations of Boolean functions and
 LUT-based quantum circuit synthesis to reduce the T-count in a quantum circuit. In particular, we propose
-a method to generate arbitrary Boolean functions up to a relative phase its use to generate gates. This method uses Shannon's Decomposition and Davio Expansions which have been used to synthesize
+a method to generate arbitrary Boolean functions up to a relative phase which we use to generate gates. This method uses Shannon's decomposition and Davio expansions which have been used to synthesize
 purely reversible gates ~\cite{bib-pkrm}. We utilize them in this work to enable explicitly relative phase
 constructions.
 
@@ -137,8 +136,8 @@ constructions.
 We propose a method that reduces the number of T-gates in a LUT-based synthesized quantum Boolean circuit
 by generating relative phase quantum Boolean circuits. Among our contributions:
 \begin{itemize}
-\item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's Decomposition and Davio
-  Expansions, as well as balanced and unbalanced constructions of relative phase gates
+\item A method to generate arbitrary Boolean functions up to a relative phase using Shannon's ecomposition and Davio
+  expansions, as well as balanced and unbalanced constructions of relative phase gates
 \item A method to generate a quantum Boolean circuit from a Boolean logic network representation leveraging the
   above method to reduce T-count
 \end{itemize}
