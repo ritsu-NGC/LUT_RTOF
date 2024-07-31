@@ -1,0 +1,6 @@
+{
+    "ltex.enabled" : true,
+    "ltex.language" : "en-US",
+    "ltex.dictionary" : {"en-US" : ["Clarino","rits","Naoya","Asada","Matsuo","Atsushi","IBM","Shiga","Decompositions","IBM","Shigeru","Yamashita","ICCAD","uncompute","ancilla","Davio","Toffoli","RTOF","img","ibm","e rits","Marubun","IPSJ","Ritsumeikan","qubits","EECS","SASIMI","qubit-constrained"]},
+    "ltex.hiddenFalsePositives" : {"en-US" : [ "{ \"rule\": \"UPPERCASE_SENTENCE_START\", \"sentence\" : \"^relative-phase.*\"}"]}
+}

@@ -14,14 +14,14 @@
 \label{Sec:prelim}
 \subsection{Quantum Boolean Circuits}
 
-In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. The input qubits of a quantum Boolean circuit are assigned to states $\ket{x_n}, \cdots,\ket{x_{1}}$  when we have $n$ input qubits. These $\{x_n,\cdots,x_1\}$ are Boolean variables for the given Boolean function $F(x_1, x_2, \cdots,x_{n})$ that the quantum Boolean circuit implements.
+In this paper, we consider {\it quantum Boolean circuits}~\cite{bib-ddmf} that implement Boolean functions. The input qubits of a quantum Boolean circuit are assigned to states $\ket{x_n}, \cdots,\ket{x_{1}}$  when we have $n$ input qubits. These $\{x_n,\cdots,x_1\}$ are Boolean variables for the given Boolean function $F(x_n,\cdots,x_1)$ that the quantum Boolean circuit implements.
 
 An example of such a quantum Boolean operation is the Toffoli gate depicted in
-Fig. ~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
+Fig.~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
 
 
-We implement quantum Boolean circuits using the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4} * x}\ket{x}$) gates. This set is used
-to implement fault-tolerant quantum computing. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more to implement.
+We implement quantum Boolean circuits using the X ($\ket{x} \rightarrow \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \rightarrow \ket{x}\ket{x \oplus y}$), S ($\ket{x} \rightarrow e^{i \frac{\pi}{2}} \ket{x}$), H ($\ket{x} \rightarrow \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \rightarrow e^{i \frac{\pi}{4}x}\ket{x}$) gates. This set is the
+basic set of gates in fault-tolerant quantum computing. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more to implement.
 
 
 \subsection{Relative-Phase Boolean Functions}
@@ -51,8 +51,8 @@ phases are as shown in Fig.~\ref{table-rtof}. For example, when the input state 
 \subsection{Boolean Logic Network}
 
 A {\it Boolean logic network} is a simple Directed Acyclic Graph (DAG). It has nodes, edges, primary outputs, and
-primary inputs.
-A \emph{node} represents a decomposition of a Boolean function. It has zero or more {\it fanins}, or incoming edges, as well as zero or more {\it fanouts} or outgoing edges.
+primary inputs. Each Boolean logic network represents a Boolean function, and a
+a \emph{node} represents a subfunction used to decompose that Boolean function. It has zero or more {\it fanins}, or incoming edges, as well as zero or more {\it fanouts} or outgoing edges.
 The {\it primary inputs (PIs)} are nodes without fanins in the current network. The {\it primary outputs} are a
 subset of nodes in the network without fanouts. \blueout{The maximum number of fanins that any node in the network has is
 called the network's {\it LUT-size}. }
@@ -72,16 +72,16 @@ are analogous to Toffoli gates in that they apply a NOT to the target bit if the
 bits is true.
 
 In Fig.~\ref{fig-maslov-decomp}, we depict a decomposition of an MCT gate from \cite{bib-rtof-maslov}. The gate
-$U_F$ is a single-target quantum gate, conducts an X operation on its target bit when the Boolean expression
+$U_F$ is a single-target quantum gate, which conducts an X operation on its target bit when the Boolean expression
 $F$ is true. For an MCT gate, $F(x_n,\cdots,x_1) = x_n \cdot x_{n-1} \cdots x_1$. Likewise, the component $U_{F'}$
-gate acts on the ancilla qubit $q_6$, and is used to decompose $U_F$. $U_{F'}$  implements $F'(x_{n-1},\cdots,x_1) = x_{n-1} \cdot \cdots \cdot x_0$.
+gate acts on the ancilla qubit $q_6$, and is used to decompose $U_F$. $U_{F'}$  implements $F'(x_{n-1},\cdots,x_1) = x_{n-1} \cdot \cdots \cdot x_1$.
 Likewise, $U_{F'}^{\dagger}$ is another single-target gate, which also implements $F'$.
 $U_{F'}^{\dagger}$ reverses the effects of $U_{F'}$ on $q_6$, to preserve the effects of interference
 in the output bits. We call the action of $U_{F'}$ \emph{compute}, and the action of $U_{F'}^{\dagger}$
 \emph{uncompute}. Fig.~\ref{fig-maslov-decomp} implements $x_n \cdot F'$, which gives us a circuit that implements
 the MCT.
 
-In \cite{bib-rtof-maslov}, it was found that when decomposing larger Boolean functions, such as MCT, into compute/uncompute pairs of smaller gates that act on ancilla, it is always more advantageous to implement the smaller gates up to a relative phase. We can implement each compute/uncompute half with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, $U_{F'}$ turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_0)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_0) \in [-\pi,\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n},\cdots,x_1$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_0) \neq 0$ will have lower T-count than when $\theta(x_{n},\cdots,x_1) = 0$. Similarly, when $U_{F'}^{\dagger}$ implements ${F'}$ up to $-\theta(x_{n},\cdots,x_1) \neq 0$ similarly has a lower T-count than the analogous $\theta(x_{n},\cdots,x_1) = 0$ case. Using the relative phase $U_{F'}$ and $U_{F'^{\dagger}}$ in tandem thus results in lower T-count than the same tandem without a relative phase.
+In \cite{bib-rtof-maslov}, it was found that when decomposing larger Boolean functions, such as MCT, into compute/uncompute pairs of smaller gates that act on ancilla, it is always more advantageous to implement the smaller gates up to a relative phase. We can implement each compute/uncompute half with relative phases defined such that the relative phases cancel each other out. In Fig.~\ref{fig-maslov-decomp}, $U_{F'}$ turns $q_6$ into $e^{i\theta(x_{n-1},\cdots,x_1)}\ket{F'}$, where $\theta(x_{n-1},\cdots,x_1) \in [-\pi,\pi]$ is some phase that is dependent on the Boolean primary inputs $x_{n},\cdots,x_1$. $F'$ implemented only up to a relative phase $\theta(x_{n-1},\cdots,x_1) \neq 0$ will have lower T-count than when $\theta(x_{n},\cdots,x_1) = 0$. Similarly, when $U_{F'}^{\dagger}$ implements ${F'}$ up to a relative phase of $-\theta(x_{n},\cdots,x_1) \neq 0$. This similarly has a lower T-count than the analogous $-\theta(x_{n},\cdots,x_1) = 0$ case. Using the relative phase $U_{F'}$ and $U_{F'^{\dagger}}$ in tandem thus results in lower T-count than the same tandem without a relative phase.
 
 \begin{figure}[t]
     \centering
