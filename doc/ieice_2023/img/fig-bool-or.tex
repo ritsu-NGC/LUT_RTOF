@@ -1,9 +1,9 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-          \push{\ket{{x}_{1}} }  & \multigate{5}{U_{x_k \cdot {F}_1}} & \qw      & \multigate{5}{U_{\overline{x_k} \cdot {F}_0}} &\qw\\
-          \push{\ket{{x}_{2}} }  & \ghost{U_{x_k \cdot {F}_1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_0}}        &\qw\\
-          \push{\vdots}          &                                     &          &                                                &   \\
-          \push{\ket{{x}_{k}} }  & \ghost{U_{x_k \cdot {F}_1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_0}}        &\qw\\
-          \push{\vdots}          &                                     &          &                                                &   \\
-          \push{\ket{{x}_{n-1}} }& \ghost{U_{x_k \cdot {F}_1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_0}}        &\qw\\
-          \push{{\ket{0}}}       & \rtoftarg\qwx[-1]\qw                & \qw      & \rtoftarg\qwx[-1]\qw                           &\qw\\
+          \push{\ket{{x}_{1}} }  & \multigate{5}{U_{x_k \cdot {F}_{x_k=}1}} & \qw      & \multigate{5}{U_{\overline{x_k} \cdot {F}_{x_k=0}}} &\qw\\
+          \push{\ket{{x}_{2}} }  & \ghost{U_{x_k \cdot {F}_{x_k=}1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_{x_k=0}}}        &\qw\\
+          \push{\vdots}          &                                          &          &                                                     &   \\
+          \push{\ket{{x}_{k}} }  & \ghost{U_{x_k \cdot {F}_{x_k=}1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_{x_k=0}}}        &\qw\\
+          \push{\vdots}          &                                          &          &                                                     &   \\
+          \push{\ket{{x}_{n-1}} }& \ghost{U_{x_k \cdot {F}_{x_k=}1}}        & \qw      & \ghost{U_{\overline{x_k} \cdot {F}_{x_k=0}}}        &\qw\\
+          \push{{\ket{0}}}       & \rtoftarg\qwx[-1]\qw                     & \qw      & \rtoftarg\qwx[-1]\qw                                &\qw\\
 }
