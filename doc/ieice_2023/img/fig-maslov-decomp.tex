@@ -1,9 +1,9 @@
 \Qcircuit @C=0.5em @R=0.2em @!R { \\
-  \push{q_1 : \ket{{x}_{1}} }   & & \multigate{5}{U_F} & \qw & &   & & \multigate{4}{U_{F'}} & \qw & \qw           & \qw & \multigate{4}{{U^{\dagger}_{F'}}} & \qw & \rstick{\ket{{x}_{1}}} \\
-  \push{q_2 : \ket{{x}_{2}} }   & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}        & \qw & \qw           & \qw & \ghost{{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{2}}}  \\
-  \push{q_3 : \ket{{x}_{3}} }   & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}        & \qw & \qw           & \qw & \ghost{{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{3}}}  \\
+  \push{q_1 : \ket{{x}_{1}} }   & & \multigate{5}{U_F} & \qw & &   & & \multigate{4}{U_{F'}} & \qw & \qw           & \qw & \multigate{4}{\blueoutt{U^{\dagger}_{F'}}} & \qw & \rstick{\ket{{x}_{1}}} \\
+  \push{q_2 : \ket{{x}_{2}} }   & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}        & \qw & \qw           & \qw & \ghost{\blueoutt{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{2}}}  \\
+  \push{q_3 : \ket{{x}_{3}} }   & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}        & \qw & \qw           & \qw & \ghost{\blueoutt{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{3}}}  \\
   \push{\vdots}                 & &                    &     & & = & & \push{\vdots}         &     & \push{\vdots} &     & \push{\vdots}                     &     & \rstick{\vdots }    \\       
-  \push{q_4 : \ket{{x}_{n-1}}}  & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}\qwx[1] & \qw & \qw           & \qw & \ghost{{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{n-1} }} \\
+  \push{q_4 : \ket{{x}_{n-1}}}  & & \ghost{U_F}        & \qw & &   & & \ghost{U_{F'}}\qwx[1] & \qw & \qw           & \qw & \ghost{\blueoutt{U^{\dagger}_{F'}}}        & \qw & \rstick{\ket{{x}_{n-1} }} \\
   \push{q_5 : \ket{{x}_{n}} }   & & \ghost{U_F}        & \qw & &   & &  \qw                  & \qw & \ctrl{2}      & \qw & \qw                               & \qw & \rstick{\ket{{x}_{n} }} \\
   \push{q_6 : \ket{0} }         & & \qw                & \qw & &   & & \rtoftarg\qwx[-2]\qw  & \qw & \ctrl{1}\qw   & \qw & \rtoftarg\qwx[-2]\qw              & \qw & \rstick{\ket{0} }  \\    
   \push{q_7 : \ket{0} }         & & \targ\qwx[-2]      & \qw & &   & & \qw                   & \qw & \targ         & \qw & \qw                               & \qw & \rstick{\ket{F} } \\

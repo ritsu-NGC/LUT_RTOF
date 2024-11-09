@@ -20,7 +20,7 @@ An example of such a quantum Boolean operation is the Toffoli gate depicted in
 Fig.~\ref{fig-toffoli}. Because it implements the mapping $\ket{x_1}\ket{x_2}\ket{x_3} \rightarrow \ket{x_1} \ket{x_2} \ket{x_1 \cdot x_2 \oplus x_3}$, it gives us a way to implement the Boolean AND operation, a fundamental building block for building arbitrary Boolean functions.
 
 
-We implement quantum Boolean circuits using the X ($\ket{x} \mapsto \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \mapsto \ket{x}\ket{x \oplus y}$), S ($\ket{x} \mapsto e^{i \frac{\pi}{2}x} \ket{x}$), H ($\ket{x} \mapsto \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \mapsto e^{i \frac{\pi}{4}x}\ket{x}$) gates. This set is the
+We implement quantum Boolean circuits using the \blueoutt{X ($\ket{x} \mapsto \ket{\bar{x}}$), CNOT ($\ket{x}\ket{y} \mapsto \ket{x}\ket{x \oplus y}$), S ($\ket{x} \mapsto e^{i \frac{\pi}{2}x} \ket{x}$), H ($\ket{x} \mapsto \ket{0} + (-1)^x\ket{1}$), and T ($\ket{x} \mapsto e^{i \frac{\pi}{4}x}\ket{x}$) gates}. This set is the
 basic set of gates in fault-tolerant quantum computing. The X, CNOT, S, and H gates are what are known as Clifford gates, which are efficiently implementable in the fault-tolerant paradigm. The T-gate, however, is not a Clifford gate, and costs substantially more to implement.
 
 

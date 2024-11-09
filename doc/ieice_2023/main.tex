@@ -45,7 +45,15 @@
 
 \newcount\NGCcolor
 \NGCcolor=1
+\newcount\NGCcolortwo
+\NGCcolortwo=1
 %\NGCcolor=0
+\ifnum\NGCcolortwo<1
+  \newcommand{\blueoutt}[1]{\textcolor{blue}{#1}}  
+\else
+  \newcommand{\blueoutt}[1]{#1}
+\fi
+  
 \ifnum\NGCcolor<1
   \newcommand{\redout}[1]{\textcolor{red}{#1}}
   \newcommand{\blueout}[1]{\textcolor{blue}{#1}}
@@ -88,7 +96,7 @@
 \begin{summary}
   
   Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
-  in a qubit-constrained environment. Other recent research papers have demonstrated the possibility of using {\it relative phase}
+  in a qubit-constrained environment. \blueoutt{Other recent research papers} have demonstrated the possibility of using {\it relative phase}
   quantum circuits when compute/uncompute logic is used in tandem, reducing T-count in quantum Boolean circuits in
   the fault-tolerant quantum computing paradigm. Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
   qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes

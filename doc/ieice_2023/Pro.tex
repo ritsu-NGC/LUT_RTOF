@@ -101,7 +101,7 @@ arbitrary Boolean functions up to a relative phase.
 Then, from the Shannon's decomposition
 formula $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F_{x_k=1} + \overline{x_k} \cdot F_{x_k=0}$, for $x_k \in \{x_n,\cdots,x_1\}$.
 As always with Shannon's decomposition, we can decompose using an arbitrary variable order. We create a circuit by taking
-Fig.~\ref{fig-f-dot-g} and substituting $F_{x_k=1}$ for $f$, and repeat it to create a separate circuit for $F_{x_k=0}$. We then take the two circuits we just created and place them in series just as in \blueout{Fig.~\ref{fig-bool-or}}. We then get the construction as shown in Fig.~\ref{app-shannon} from
+Fig.~\ref{fig-f-dot-g} and substituting \blueoutt{$F_{x_k=1}$} for $f$, and repeat it to create a separate circuit for $F_{x_k=0}$. We then take the two circuits we just created and place them in series just as in \blueout{Fig.~\ref{fig-bool-or}}. We then get the construction as shown in Fig.~\ref{app-shannon} from
 ~\ref{App:ManyDecomp}.  
 \blueout{It is easy to see that this expression implements the Sum of Products (SOP) expression of Shannon's
   decomposition. }
@@ -181,9 +181,9 @@ computational basis states it had just after the first Hadamard. We call this ty
 \emph{unbalanced} construction. In this type of construction, there is no need to double the T-count 
 to return the target bit to its original state. However, it cannot be used
 recursively inside itself. That is, Fig.~\ref{fig-urtof} cannot also be used to implement $U_f$
-inside itself up to a relative phase. This is because the unbalanced constructions creates a target qubit dependent
-relative phase. When the relative phase is dependent on the target qubit, the final Hadamard transformation changes the
-function in state space as well. In the interest of keeping this paper focused on the proposed method, we refer the reader
+inside itself up to a relative phase. \blueoutt{This is because the unbalanced constructions create a target qubit dependent
+relative phase. When the relative phase is dependent on the target qubit, the final Hadamard transformation, $g_8$ in Fig.~\ref{fig-urtof}, changes the
+function in state space as well.} In the interest of keeping this paper focused on the proposed method, we refer the reader
 to~\cite{bib-amy-phase-state} for further details. We summarize the limitations of Fig.~\ref{fig-urtof}'s use in
 our application with the following statement: unbalanced constructions can be used to implement arbitrary
 single-target gates (e.g. Fig.~\ref{fig-f-dot-g}) used in multiplication only when done in a balanced construction.
