@@ -27,7 +27,7 @@
 \end{table*}
 
 %\begin{table*}[ht]
-\begin{table*}[tbp]
+\begin{table}[t]
   \begin{center}
     \caption{Runtime of Proposed Method}
     \label{table-runtime}
@@ -48,8 +48,8 @@
       \end{tabular}
    }
   \end{center}
-\vspace*{-6mm}
-\end{table*}
+%\vspace*{-6mm}
+\end{table}
 %\vspace{10mm}
 
 
@@ -66,7 +66,7 @@
 \label{Sec:exp}
 
 \subsection{Implementation}
-Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and Boolean logic networks are generated from them using the ABC tool~\cite{bib-abc}. In particular, we choose circuits with input sizes many times larger than 6 in order to get a decent number of intermediate nodes. We synthesize these with maximums of 3, 4, 5, and 6 variables for each node, which we will denote LUT3, LUT4, LUT5, and LUT6 respectively. Each of these LUT3, LUT4, LUT5, and LUT6 will be individually called a \emph{LUT-size}. As in~\cite{bib-barenco-elementary}, this represents a range where the T-count remains tractable. This Boolean logic network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
+Boolean functions are taken from the EPFL Combinational Benchmark Suite~\cite{bib-epfl} and Boolean logic networks are generated from them using the ABC tool~\cite{bib-abc}. In particular, we choose circuits with numbers of primary inputs much larger than 6 to get a decent number of intermediate nodes. \blueout{We synthesize these Boolean logic networks with LUT-sizes of 3, 4, 5, and 6 variables for each node, which we will denote LUT3, LUT4, LUT5, and LUT6 respectively.} As in~\cite{bib-barenco-elementary}, this represents a range where the T-count remains tractable. This Boolean logic network is converted to a quantum circuit implemented in Qiskit~\cite{bib-qiskit}, including any uncomputation logic.
 
 %The Shannon Decomposition algorithm uses the Tulip Control BDD library~\cite{bib-tulip-dd} to implement its Boolean functions, as well as reorder the variables for optimality (reordering is done using Rudell's Sifting Algorithm~\cite{bib-rudell}).Any exact synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}.
 The algorithm is implemented in Python. Any exact (non-relative phase) synthesis of Boolean functions is conducted using Qiskit's ClassicalFunction functionality, which uses the ESOP-based PKRM algorithm~\cite{bib-pkrm}. 
@@ -76,43 +76,45 @@ In our implementation, we do an exhaustive search by executing our algorithm thr
 %\vspace{5mm}
 \subsection{Methodology} 
 
-The results from generating using the {\it Proposed method} are then compared to a naive implementation of the
-LUT-based synthesis method ({\it ESOP-based method}), wherein each LUT is synthesized as an exact
+\blueoutt{The results generated using the {\it Proposed method}} are then compared to a naive implementation of the
+LUT-based synthesis method ({\it ESOP-based method}), where each LUT is synthesized as an exact
 (non relative phase) implementation of their Boolean functions. We also run a version of the algorithm described
-in Sec ~\ref{Subsec:shannon} using only Shannon's Decomposition (Shannon Only), to test the efficacy of merely
+in Sec.~\ref{Subsec:shannon} using only Shannon's decomposition (Shannon Only), to test the efficacy of merely
 using a naive relative phase implementation without the optimization of introducing the Davio's expansions and
 balanced/unbalanced constructions. In the ESOP-based method, because the relative phase functions are constructed
-without any ancilla, we assume that there are plenty of bits to be reused at any time. This means that any
+without any ancilla, we assume that there are plenty of bits to be reused at any time. These contain
 MPMCT (Multiple Polarity Multiple Control Toffoli) gates, which are MCT gates that also implement functions
-including negated inputs e.g. $F(x_0,x_1,x_2)=x_0\bar{x_1}x_2$ etc., are synthesized directly using Gray-code sequence of
-operations for $n<5$, or decomposed according to the Barenco dirty ancilla method, both described in
-~\cite{bib-barenco-elementary}. This same decomposition method is also used in the proposed method for any output
-node that requires an exact implementation.
+including negated inputs e.g. $F(x_0,x_1,x_2)=x_0\bar{x_1}x_2$ etc. This means that any such MPMCT gates are either
+synthesized directly using a Gray-code sequence of operations for $n<5$, or synthesized according to the Barenco
+dirty ancilla method otherwise (both are described in~\cite{bib-barenco-elementary}). This same decomposition method is also
+used in the proposed method for any output node that requires an exact implementation.
 
 As in~\cite{bib-barenco-elementary}, we note that for values of $n<5$, the T-count in a direct implementation of
 the Toffoli gate (i.e. using a Gray-code sequence of operations) scales with $2^{n-1}$.
 
-Note that because, according to ~\cite{bib-lhrs-soeken}, the number of ancilla is completely determined by the logic
+Note that because, according to~\cite{bib-lhrs-soeken}, the number of ancilla is completely determined by the logic
 network and the traversal algorithm we use there, the ancilla will be identical across ESOP-based, Shannon-Only
-and Proposed. As we are only concerned with relative performance of the three methods, we do not include them
+and Proposed. As we are only concerned with the relative performance of the three methods, we do not include them
 in the table. However, because changing the LUT size also changes the logic network, there will be some
 corresponding change in the number of ancilla used. We note the effect of this on ancilla in qualitative terms
 later.
 
 Our experimental results are displayed in Table~\ref{table-results}. We compare the ratio of the T-count for
 each mapped LUT generated by either the ESOP-based method or the proposed method with that of LUT6, which is
-the upper bound of the range of variable lengths of tractable T-count proposed in ~\cite{bib-barenco-elementary},
-in the second column generated by the ESOP-based method as a baseline.  This should give us the least optimized
-circuit with the least amount of ancilla. Recall that in the previous paragraph, we noted that the T-count of each
-relative phase LUT scales with $2^{n-1}$. This measures the contribution of decreasing the LUT-size at the cost of
+the upper bound of the range of variable lengths of tractable T-count proposed in~\cite{bib-barenco-elementary},
+in the second column generated by the ESOP-based method as a baseline. The LUT6 should give us the
+largest T-count for each node, and having the largest nodes should give us the least amount of ancilla. Recall that
+in the previous paragraph, we noted that the T-count of each
+relative phase LUT scales with $2^{n-1}$. Synthesizing using Boolean logic networks with different LUT-sizes
+measures the contribution of decreasing the LUT-size at the cost of
 increasing the number of gates and ancilla used. In particular, this is useful for comparison because it measures
-how the tradeoff between T-count and ancilla relates to the Shannon-Only and Proposed methods. For columns LUT3, LUT4, LUT5, LUT6,
-we take the arithmetic mean of the gain of each circuit for that particular LUT size for that particular
-method right below it in the ``Per LUT Average'' row. We take the arithmetic mean of the gain of all circuits for
-a particular method, across all LUT-sizes, and display it in the "Average" row for that method. Note however that
-these numbers exempt adder\_size\_2022 from their numbers: we will explain why this circuit is interesting and
-also why it should not be included in these averages in Sec. ~\ref{Subsec:Analysis}. Additionally, we display
-the average runtimes for each circuit for each iteration of the Proposed method in Table ~\ref{table-runtime}.
+how the tradeoff between T-count and ancilla relates to the Shannon-Only and Proposed methods. \blueout{For each columns
+LUT3, LUT4, LUT5, and LUT6 under each method, we take the arithmetic mean of the values of each column right below
+it in the ``Per LUT Average'' row.} For each method, we take the arithmetic average of the columns of the Per LUT
+Average row it in the "Average" row for that method. Note, however, that these numbers exempt adder\_size\_2022
+from their numbers: we will explain why this circuit is interesting and also why it should not be included in these
+averages in Sec.~\ref{Subsec:Analysis}. Additionally, we display the average runtimes for each circuit for each
+iteration of the Proposed method in Table~\ref{table-runtime}.
 
 %\vspace{5mm}
 \subsection{Analysis}
@@ -127,8 +129,7 @@ Of particular note is bar\_size\_2015, which contains many highly complex, maxim
 method suffered from its $2^{n-1}$ proportionality here and severely underperformed the ESOP-based method.
 However, the Proposed method shows a better ability to break down the complex functions into something
 with tractable T-count. This seems to be due to the introduction of the Davio expansion and its ability
-to create a more natural ESOP expansion of the original functions, which lends itself to fewer multiplications
-and thus fewer T-gates used.
+to create a more natural ESOP expansion of the original functions, which lends itself to fewer multiplications, and thus to fewer T-gates used.
 
 However, adder\_size\_2022 remains an exception because it is a particularly interesting case. At LUT6 size,
 all of the logic for every output bit fits into a single node, and thus, as is evident from the table,

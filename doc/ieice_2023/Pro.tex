@@ -26,23 +26,18 @@
     \scalebox{0.8} {
     \input{img/fig-f-dot-g-in}
     }
-    \caption{The Controlled-$iX$ construction, which realizes $x_k \cdot F'$ up to a relative phase.}
+    \caption{\blueout{A gate implementing $x_k \cdot f$ up to a relative phase}}
     \label{fig-f-dot-g}
 \end{figure}
 
-To get to a point where we can realize arbitrary Boolean functions up to a relative
-phase, from ~\cite{bib-amy-phase-state}, we take the circuit depicted in
-Fig.~\ref{fig-f-dot-g}, which implements $F=x_k \cdot F'$, where $x_k$ is an arbitrary
-variable and $F$ and $F'$ is an arbitrary Boolean function of the variables $\{x_n,\cdots,x_k,\cdots,x_0\}$.
-Fig.~\ref{fig-f-dot-g} is called
-the Controlled-$iX$ because it implements the operation $iX$ on the target bit when the
-Boolean statement is true. In other words, this implements the Toffoli gate up to a relative phase of
-$e^{i\frac{\pi}{2}}$ when $x_k \cdot F'$ is true. We use this
-to implement the Boolean AND that we need for Shannon's decomposition. Observe that when
-$F'=x_0$ and $x_k = x_1$, i.e. $F'$ is a mere CNOT gate controlled by $x_0$, we simply
-get Fig.\ref{fig-rtof}. This means that it is a generalized form of the RTOF gate that we
+\blueout{To get to a point where we can realize arbitrary Boolean functions up to a relative
+phase, from~\cite{bib-amy-phase-state}, we take the circuit depicted in
+Fig.~\ref{fig-f-dot-g}. \blueout{This circuit implements the Boolean function $x_k \cdot f$, where $x_k$ is an arbitrary
+variable and $f(x_n,\cdots,x_{k+1},x_{k-1},\cdots,x_1)$ is an arbitrary Boolean function.}
+Observe that when $f=x_1$ and $x_k = x_2$, $U_{f}$ and $U_{f}^{\dagger}$ can be implemented by CNOTs controlled by $x_1$ and $x_2$ respectively. We then get Fig.~\ref{fig-rtof}.
+This means that Fig.~\ref{fig-f-dot-g} is a generalized form of the RTOF gate that we
 saw earlier.
-
+}
 %We can further generalize this. Recall from Section~\ref{Sec:prelim} that a Toffoli gate realizes a Boolean product of its inputs on its output. Just like above, we can use the same reasoning to generalize both inputs into arbitrary Boolean functions~\cite{bib-amy-phase-state}. This means that we can use the construction in Fig.~\ref{fig-f-dot-g} to realize a product between two arbitrary Boolean functions up to a relative phase. 
 % \begin{figure*}[t]
 %   \begin{minipage}{0.45\linewidth}
@@ -75,56 +70,75 @@ saw earlier.
       \scalebox{0.7} {
         \input{img/fig-bool-or}
       }
-    \caption{A generalized way of conducting the Boolean sum for the quantum Shannon's decomposition}
+    \caption{\blueout{Conducting the Boolean OR for Shannon's decomposition using single-target gates}}
     \label{fig-bool-or}
 \end{figure}
 
-
-Recall Shannon's decomposition $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F(x_n,\cdots x_k=1,\cdots,x_1) + \overline{x_k} \cdot F(x_n,\cdots x_k=0,\cdots,x_1)$.
-Using the constructions mentioned in Section~\ref{Subsec:FNOT}, we thus have a way to recursively construct
-arbitrary Boolean functions up to a relative phase as an FCNOT gate.
-
-As a prelude to our discussion, we observe that $x \cdot a  + \overline{x} \cdot b = x \cdot a \oplus \overline{x} \cdot b$.
-This means that we can implement this function as a series of FCNOT gates. This means that to implement the function $x_k \cdot {F'}_1 + \overline{x_k} \cdot {F'}_0$ for some arbitrary Boolean functions ${F'}_1$ and ${F'}_0$, we can use Fig.~\ref{fig-f-dot-g} to implement the products $x_k \cdot {F'}_1$ and $\overline{x_k} \cdot {F'}_0$, and put them together using the construction shown in Fig.~\ref{fig-bool-or}.
+Recall Shannon's decomposition $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F_{x_k=1} + \overline{x_k} \cdot F_{x_k=0}$, where
+$F_{x_k=1} = F(x_n,\cdots,x_k=1,\cdots,x_1)$ and $F_{x_k=0} = F(x_n,\cdots,x_k=0,\cdots,x_1)$.
+Using the constructions mentioned in Sec.~\ref{Subsec:FNOT}, we thus have a way to recursively construct
+arbitrary Boolean functions up to a relative phase.
 
 
-First, from the Shannon's decomposition
-formula $F(x_n,\cdots x_k,\cdots,x_1) = x_{k} \cdot F(x_n,\cdots x_k=1,\cdots,x_1) + \overline{x_k} \cdot F(x_n\cdots,x_k=0,\cdots,x_1)$, for $x_k \in {x_n,\cdots,x_1}$. As always with
-Shannon's decomposition, we can decompose using an arbitrary variable order. (We will defer discussion of how we
-determine this variable order to Section~\ref{Sec:exp}). We take Fig.~\ref{fig-f-dot-g} to insert our function, and
-we get the construction as shown in Fig.~\ref{app-shannon}. We then take Fig.~\ref{fig-bool-or} and $F'$ with either  that we just made. As noted in
-Section~\ref{Subsec:FNOT}, it is easy to see that this expression implements the Sum of Products (SOP) expression
-of Shannon's decomposition. 
+%% \blueout{
+%% Recall Shannon's decomposition $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F(x_n,\cdots x_k=1,\cdots,x_1) + \overline{x_k} \cdot F(x_n,\cdots x_k=0,\cdots,x_1)$.
+%% Using the constructions mentioned in Sec.~\ref{Subsec:FNOT}, we thus have a way to recursively construct
+%% arbitrary Boolean functions up to a relative phase.
+%% }
 
+\blueout{
+  As a prelude to our discussion, we observe that $x \cdot a  + \overline{x} \cdot b = x \cdot a \oplus \overline{x} \cdot b$. Here, we have two Boolean values $a$ and $b$. If we use them
+  to create two Boolean functions $x \cdot a$ and $\overline{x} \cdot b$, related by multiplication to a Boolean value $x$ and its inverse $\overline{x}$, respectively, we can implement the OR of
+  $x \cdot a$ and $\overline{x} \cdot b$ as an XOR. This means that we can implement functions analogous to $x \cdot a  + \overline{x} \cdot b$ as a series of single-target gates. Suppose we have
+  two \blueout{single-target} gates $U_{x_k \cdot {F}_{x_k=1}}$ and $U_{\overline{x_k} \cdot {F}_{x_k=0}}$, which implement the Boolean functions $x_k \cdot {F}_{x_k=1}$ and
+  $\overline{x_k} \cdot {F}_{x_k=0}$ respectively. This means that to implement the function $x_k \cdot {F}_{x_k=1} + \overline{x_k} \cdot {F}_{x_k=0}$, we can place the aforementioned gates in
+  series to compute their OR. We put them together using the construction shown in Fig.~\ref{fig-bool-or}.
+}
 
-If the function is ``False'', we have a False-controlled-NOT, meaning an identity function. This means that if one side of
-the Shannon's decomposition evaluates to either ``True'' or ``False'', we can merely replace it with a NOT gate or an
-identity (meaning nothing at all), respectively, without expending any additional T-gates to implement the
-function. As we will see in the next example, we can express the relative phase Toffoli gate construction
-in~\cite{bib-amy-phase-state} as a special case of this construction.
+%Suppose we set ${F}_{x_k=1}=F(x_n,\cdots x_k=1,\cdots,x_1)$ and ${F}_{x_k=0}=F(x_n\cdots,x_k=0,\cdots,x_1)$. We can use Fig.~\ref{fig-f-dot-g} to implement the
+%  products $x_k \cdot {F}_{x_k=1}$ and $\overline{x_k} \cdot {F}_{x_k=0}$. 
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT,
-meaning, a NOT function. Because the Shannon's decomposition now evaluates to $x_k \cdot F_{x_k=1} + \overline{x}$ or
-$x_k + \overline{x_k} \cdot F_{x_k=0}$, we can just implement the side with a True expression using an $x_k$ or
-$\overline{x_k}$ controlled~CNOT gate. We show the results of this in Fig.~\ref{app-shannon}.
+Then, from the Shannon's decomposition
+formula $F(x_n,\cdots,x_k,\cdots,x_1) = x_k \cdot F_{x_k=1} + \overline{x_k} \cdot F_{x_k=0}$, for $x_k \in \{x_n,\cdots,x_1\}$.
+As always with Shannon's decomposition, we can decompose using an arbitrary variable order. We create a circuit by taking
+Fig.~\ref{fig-f-dot-g} and substituting \blueoutt{$F_{x_k=1}$} for $f$, and repeat it to create a separate circuit for $F_{x_k=0}$. We then take the two circuits we just created and place them in series just as in \blueout{Fig.~\ref{fig-bool-or}}. We then get the construction as shown in Fig.~\ref{app-shannon} from
+~\ref{App:ManyDecomp}.  
+\blueout{It is easy to see that this expression implements the Sum of Products (SOP) expression of Shannon's
+  decomposition. }
+
+%% \blueout{
+%% Similarly, if $F(x_n,\cdots x_k=0,\cdots,x_1)$ or $F(x_n,\cdots x_k=1,\cdots,x_1)$ is ``False'', we have a
+%% False-controlled-NOT, meaning an identity function. This means that when one of
+%% $F(x_n,\cdots x_k=0,\cdots,x_1)$ or $F(x_n,\cdots x_k=1,\cdots,x_1)$ is ``True'' or ``False'', we can merely
+%% replace it with a NOT gate or an identity (meaning nothing at all), respectively. This allows us to avoid
+%% expending any additional T-gates to implement the function.
+%% }
+%% As we will see in the next example, we can express
+%% the relative phase Toffoli gate construction in~\cite{bib-amy-phase-state} as a special case of this construction.
+%% We show the results of this in Fig.~\ref{app-shannon}.
+
+\blueout{
+  Note that with this decomposition, when $F_{x_k=0}$ or $F_{x_k=1}$ evaluate as ``True'', $\overline{x_k} \cdot F_{x_k=0}$ becomes $\overline{x_k}$ and $x_k \cdot F_{x_k=1}$ becomes $x_k$, respectively. Similarly, if $F_{x_k=0}$ or $F_{x_k=1}$ is ``False'', the products $\overline{x_k} \cdot F_{x_k=0}$ and $x_k \cdot F_{x_k=1}$ evaluate to ``False''. This means that these products
+  can be implemented with at most a CNOT gate in these cases. This allows us to avoid expending any additional T-gates to implement the function here.
+}
 
 \begin{example}
   \label{ex-bool}
   We attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
 
-  For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a 3-input Toffoli gate. The first stage of this decomposition looks exactly like the decomposition in Fig.~\ref{fig-rtof}. We can see that if we continue Shannon's decomposition, one or the other side of the equation will always evaluate to 0. Therefore, it is easy to see that it simplifies to the
-  decomposition in Fig~\ref{fig-f-dot-g}, which is the decomposition in ~\cite{bib-amy-phase-state}.
+  For the $F(x_3 = 1,x_2,x_1)$ case, we note that this construction just looks like a Toffoli gate. The first stage of this decomposition looks exactly like the decomposition in Fig.~\ref{fig-rtof}. We can see that if we continue Shannon's decomposition, one or the other side of the equation will always evaluate to 0. Therefore, it is easy to see that it simplifies to the
+  decomposition in Fig.~\ref{fig-f-dot-g}, which is the decomposition in~\cite{bib-amy-phase-state}.
   (As an aside, it generalizes it slightly as the algorithm also automatically handles the negated input
   case without any additional information). %The result is labeled with a curly brace in Fig.~\ref{fig-func-decomp}. 
   
   For the $F(x_3 = 0,x_2,x_1)$ case, we now have something that is not a straightforward sum of products term.
-  We now move on to the next level (Note: The variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method; we will treat the optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$
+  We now move on to the next level (note: the variable order here, $x_3 \rightarrow x_2 \rightarrow x_1$, is chosen to best illustrate the working of the method; we will treat the optimal variable order later). We see that $F(x_3 = 0,x_2=0,x_1) = x_1$. Following the algorithm here results in something that looks like an $x_2$
   and $x_1$ controlled Toffoli gate. We then move on to $F(x_3 = 0,x_2=1,x_1)$ and find that it is $True$.
   This is one of the special cases in our algorithm, and so we can implement $x_2 \cdot F(x_3 = 0,x_2=1,x_1)$
-  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig~\ref{fig-bool-or} to compose
+  as an $x_2$ controlled NOT gate. We then use the construction depicted in Fig.~\ref{fig-bool-or} to compose
   the two functions. %The result is depicted Fig.~\ref{fig-func-decomp}, indicated by the dashed box. 
   
-  Finally, we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 0,x_2,x_1)$ as in Fig.~\ref{fig-bool-or} again. The result is depicted in Fig.~\ref{app-func-decomp} in ~\ref{App:FuncDecomp}.
+  Finally, we compose $F(x_3 = 1,x_2,x_1)$ and $F(x_3 = 0,x_2,x_1)$ as in Fig.~\ref{fig-bool-or} again. The result is depicted in Fig.~\ref{app-func-decomp} in~\ref{App:FuncDecomp}.
 \end{example}
 
 However, as we shall see later in Section \ref{Sec:exp}, some expressions are not amenable to a purely Shannon-based
@@ -134,19 +148,18 @@ We must then introduce a different representation to take these into account.
 \subsection{Integrating Davio Expansions}
 \label{Subsec:davio}
 As can be seen in the previous section, a significant portion of the cost comes from Boolean multiplication.
-(For the remainder of this paper, we will refer to \emph{Boolean multiplication} simply as multiplication).
-Therefore, it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
-expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_0\oplus x_k \cdot F_2$ and the corresponding
-negative Davio expansion $F=F_1 \oplus \overline{x_k} \cdot F_2$ where $F$ is some function of variables $(x_n,\cdots,x_k,\cdots,x_0)$,
-$F_0 = F(x_k=0)$,$F_1 = F(x_k=1)$,
-and $F_2 = F_0 \oplus F_1$. These expansions have the advantage that, at every level, only one
+(For the remainder of this paper, we will refer to \emph{Boolean multiplication} \blueout{simply as multiplication}\blueout{).}
+\blueout{Therefore}, it is useful to consider a method that takes advantage of {\it Exclusive Sum of Products} (ESOP)
+expressions to reduce this multiplication cost. Recall the positive Davio Expansion $F=F_{x_k=0}\oplus x_k \cdot F_2$ and the corresponding
+negative Davio expansion $F=F_{x_k=1} \oplus \overline{x_k} \cdot F_2$ where $F$ is some function of variables $(x_n,\cdots,x_k,\cdots,x_0)$,
+and $F_2 = F_{x_k=0} \oplus F_{x_k=1}$. These expansions have the advantage that, at every level, only one
 multiplication takes place, which already reduces the maximum possible T-gate use at any node from
 8 to 4. 
 
 \begin{figure}[t]
     \centering
     \scalebox{0.8}{\input{img/fig-urtof}}
-    \caption{A gate implementing $x_k \cdot F'$}
+    \caption{An unbalanced construction implementing $x_k \cdot f$ up to a relative phase}
     \label{fig-urtof}
 \end{figure}
 
@@ -154,46 +167,48 @@ multiplication takes place, which already reduces the maximum possible T-gate us
 \label{Subsec:balanced}
 
 To realize a savings in T-count, we again observe that Fig.~\ref{fig-f-dot-g} doubles the T-count
-at every level of the Shannon's decomposition. This is because of gate $g_{8}$ in Fig.~\ref{fig-f-dot-g} which
-serves to uncompute the effects of gate $g_4$ on the target bit. Observe that the CNOT gate $g_6$
+at every level of the Shannon's decomposition. This is because of gate \blueout{$g_{8}$} in Fig.~\ref{fig-f-dot-g} which
+serves to uncompute the effects of gate \blueout{$g_4$} on the target bit. Observe that the \blueout{CNOT gate $g_6$}
 does the same thing with $g_2$. In general, we will call these types of constructions, where all
-effects of CNOT and FCNOT gates on the target bits are reversed by uncomputing it with a similar gate,
+effects of CNOT and \blueout{single-target} gates on the target bits are reversed by uncomputing it with a similar gate,
 \emph{balanced}.
 
-We take again a different type of construction from Ref.~\cite{bib-amy-phase-state}, this time
-depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous $g_{8}$ gate from Fig.~\ref{fig-f-dot-g} is missing
-such that the computation from $g_4$ is not reversed. We call this type of construction, where the target qubit is rotated by a Hadamard, acted on, and then rotated
-back with a Hadamard without returning the target qubit to the same computational basis states it had just after
-the first Hadamard, an \emph{unbalanced} construction. In this type of construction, there is
-no need to double the T-count to cancel out the logic. However, it cannot be used
-recursively inside itself. That is, Fig.~\ref{fig-urtof} cannot also be used to implement the FCNOT
-inside itself up to a relative phase. In the interest of keeping this paper focused on the proposed
-method, we refer the reader to ~\cite{bib-amy-phase-state} for further details. We summarize the
-limitations of Fig.~\ref{fig-urtof}'s use in our application with the following statement: unbalanced constructions
-can be used to implement arbitrary gates (e.g. Fig.~\ref{fig-f-dot-g}) used in multiplication
-only when done in a balanced construction.
+We again take a different type of construction from ~\cite{bib-amy-phase-state}, this time
+depicted in Fig.~\ref{fig-urtof}. In this construction, the analogous \blueout{$g_{8}$ gate from Fig.~\ref{fig-f-dot-g}} is
+missing such that the computation from \blueout{$g_4$} is not reversed. Here, the target qubit is rotated by
+a Hadamard, acted on, and then rotated back with a Hadamard without returning the target qubit to the same
+computational basis states it had just after the first Hadamard. We call this type of construction, an
+\emph{unbalanced} construction. In this type of construction, there is no need to double the T-count 
+to return the target bit to its original state. However, it cannot be used
+recursively inside itself. That is, Fig.~\ref{fig-urtof} cannot also be used to implement $U_f$
+inside itself up to a relative phase. \blueoutt{This is because the unbalanced constructions create a target qubit dependent
+relative phase. When the relative phase is dependent on the target qubit, the final Hadamard transformation, $g_8$ in Fig.~\ref{fig-urtof}, changes the
+function in state space as well.} In the interest of keeping this paper focused on the proposed method, we refer the reader
+to~\cite{bib-amy-phase-state} for further details. We summarize the limitations of Fig.~\ref{fig-urtof}'s use in
+our application with the following statement: unbalanced constructions can be used to implement arbitrary
+single-target gates (e.g. Fig.~\ref{fig-f-dot-g}) used in multiplication only when done in a balanced construction.
 
-In ~\ref{App:ManyDecomp}, we enumerate balanced and unbalanced implementations
+In~\ref{App:ManyDecomp}, we enumerate balanced and unbalanced implementations
 of Shannon's Decomposition, Positive Davio Expansion, and Negative Davio Expansion. We will be using these
 later to define our algorithm.
 
 
-Amy et al. ~\cite{bib-amy-phase-state} propose a method where balanced and unbalanced constructions are alternated at different levels of the
+Amy et al.~\cite{bib-amy-phase-state} propose a method where balanced and unbalanced constructions are alternated at different levels of the
 construction of an MCT to reduce the amount of times a function has to be doubled to cancel itself out. 
 Unbalanced constructions can be used inside balanced constructions,
 and vice versa. We can easily extend this to our method of constructing arbitrary Boolean functions above. We start by implementing the decomposition
 about our first variable with an unbalanced construction, and its immediate children that are constructed recursively will have to be constructed
 in a balanced manner. The children of those in turn can be unbalanced, and so on. 
 
-In doing so, we can reduce the dependency from $2^(n-1)$ to $2^{\frac{n-1}{2}}$. While still exponential, this has quite
-a significant reduction in the regime we are working with. Merely introducing this methodology results in significant savings for larger LUT-sizes, though
-its effect could be diminished for smaller ones.
+In doing so, we can reduce the dependency from $2^{n-1}$ to $2^{\frac{n-1}{2}}$. While still exponential, this has
+a significant reduction in the regime we are working with. Merely introducing this methodology results in
+significant savings for larger LUT-sizes, though its effect could be diminished for smaller ones.
 
 This has additional ramifications when combined with the Davio expansions. Recall that we have only specified a limitation for
 the unbalanced construction's use within multiplication i.e. when it is used between a pair of Hadamard gates. There is no such
 restriction when we are not doing any multiplication. Since there is only one multiplication performed, the non-multiplied term
-($F_0$ in the positive Davio case and $F_1$ in the negative Davio case) can be implemented as an unbalanced relative phase circuit,
-provided the parent construction can also be unbalanced. This means there is no need to double the logic inside to cancel the residue,
+($F_{x_k=0}$ in the positive Davio case and $F_{x_k=1}$ in the negative Davio case) can be implemented as an unbalanced relative phase circuit,
+provided the parent construction can also be unbalanced. This means there is no need to double the logic inside to return the target states,
 and so the exponential is further mitigated. 
 
 
@@ -208,8 +223,8 @@ and so the exponential is further mitigated.
 %% Hadamard gate at $g_8$ will have some dependence on $F'$. When the Hadamard gate acts on this state, its phase now
 %% has a dependence on the target bit. We call this a \emph{target dependent} phase. 
 
-%% To see why a target dependent phase complicates ~Fig.~\ref{fig-urtof}'s use in our algorithms, let's imagine its
-%% recursive use within itself. That is, imagine ~Fig.~\ref{fig-urtof} is also used to implement the FCNOT inside it
+%% To see why a target dependent phase complicates~Fig.~\ref{fig-urtof}'s use in our algorithms, let's imagine its
+%% recursive use within itself. That is, imagine~Fig.~\ref{fig-urtof} is also used to implement the FCNOT inside it
 %% up to a relative phase. This means that the relative phase from $g_4$ now has a dependence on the output of $g_2$.
 %% This dependence, after the second Hadamard gate, now turns into a skew in the final function of the form
 %% $F=F+\Delta F$, where $\Delta F$ is the skew.
@@ -220,16 +235,16 @@ and so the exponential is further mitigated.
 %% of construction, where the target bit is first rotated using a Hadamard gate, is operated on, and then the
 %% computational basis state is restored to the its state just after the first Hadamard before finally rotating it
 %% back using another Hadamard gate, we will call a {\it balanced} construction. As noted in
-%% ~\cite{bib-amy-phase-state}, this construction gives us a {\it target independetn} phase, where the phase does not
+%%~\cite{bib-amy-phase-state}, this construction gives us a {\it target independetn} phase, where the phase does not
 %% depend on the target's computational basis state. With a target independent phase, we no longer add any
 %% dependencies on the target qubit with the internal relative phase, avoiding the skew problem we described earlier.
 
 %% As already pointed out, the presence of a target-dependent phase on any internal logic will 
 %% create a skew in the final Boolean function of the form $F=x \cdot F_k + F_{k-1}$. Such 
 %% target-dependent phases are created using \emph{unbalanced} construction, such as in 
-%% Fig.~\ref{fig-urtof}. In this construction, the state just before the second Hadamard gate is different from the one just after the first one. In this construction, the two $x_{n-1}$ CNOT gates cancel their effect on each other, but the middle FCNOT gate's effect remains. The final Hadamard gate will turn this state into a target dependent phase.
+%% Fig.~\ref{fig-urtof}. In this construction, the state just before the second Hadamard gate is different from the one just after the first one. In this construction, the two $x_{n-1}$ CNOT-gates cancel their effect on each other, but the middle FCNOT gate's effect remains. The final Hadamard gate will turn this state into a target dependent phase.
 
-%% To keep this from happening, a \emph{balanced} construction such as in Fig~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
+%% To keep this from happening, a \emph{balanced} construction such as in Fig.~\ref{fig-f-dot-g} is used. In this construction, every action on the target bit is uncomputed such that the quantum state before the last Hadamard is the same as the one after the first one. In the process, such a construction creates a function with a \emph{target independent} relative
 %% phase. This means that it can be used inside an unbalanced construction without incurring residue since the
 %% Hadamard gate now does not have any dependence to act on.
 
@@ -242,11 +257,11 @@ into a synthesis function up to a relative phase, defined in Algorithm~\ref{algo
 
 First, we determine the variable order to decompose the function. As the details of the variable order
 computation are not important to the algorithm itself, we will defer discussion of how we determine
-this variable order to our discussion of the implementation in Section~\ref{Sec:exp}.
+this variable order to our discussion of the implementation in Sec.~\ref{Sec:exp}.
 
 If the function is neither ``True'' nor ``False'', the function is expanded using the Shannon, Positive
 Davio, or Negative Davio expansions, independently about the first variable in the variable order.
-We go over constructions for them in ~\ref{App:ManyDecomp}.
+We go over constructions for them in~\ref{App:ManyDecomp}.
 The constituent subfunctions of each expansion are then processed in the same way by
 recursing the function with the decomposed Boolean function as input. When the logic can be implemented as an
 unbalanced function, such as in the unmultiplied term of the Davio expansion or as balanced logic gates, that is
@@ -255,43 +270,44 @@ relayed to the next level of the recursion via an input.
 If it is ``False'', we have a False-controlled-NOT, meaning an identity function. In this case we remove the term
 with this function entirely.
 
-Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the $x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\overline{x_k} \cdot (F_{x=0} \oplus F_{x=1})$ in the Davio expansion, we simply get $x_k$ or $\overline{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\overline{x_k}$ controlled~CNOT gate. 
+Note that with this decomposition, when the function evaluates as ``True'', we end up with a True-controlled-NOT, meaning, a NOT function. With the multiplied terms such as the \blueout{$x_k \cdot F_{{x_k}=1}$ in Shannon's Decomposition or $\overline{x_k} \cdot (F_{x_k=0} \oplus F_{x_k=1})$} in the Davio expansion, we simply get $x_k$ or $\overline{x_k}$ respectively. This means we can just implement the side with a True expression using an $x_k$ or $\overline{x_k}$ controlled~CNOT gate. 
 
-As the recursion terminates, the cost of each of the Shannon, Positive Davio, or Negative Davio expansions is
+As the recursion terminates, the \blueout{T-counts} of each of the Shannon, Positive Davio, or Negative Davio expansions is
 compared with each other, and the minimum is chosen. The result is then passed on to the recursion level above it.
 The process is then repeated with all of the variable orders, and the minimum is picked from the results. 
 
 
-\begin{algorithm}[tb]
+\begin{algorithm}[t]
   \caption{relative\_phase(BF: a Boolean function, balanced: Boolean indicating whether this function is balanced)}
   \label{algo-new}
   \begin{algorithmic}
 %    \State BF $\leftarrow$ A Boolean Function
     \State QC $\leftarrow$ an empty quantum circuit with registers
     \State Output $\leftarrow$ the output bit of the Boolean Function
-    \State order $\leftarrow$ the indices of a given variable order for BF.
+    \State \blueout{order $\leftarrow$ the indices of a given variable order for BF.}
     \State $BF_{{variable}\leftarrow value}$ $\leftarrow$ BF with the value of $variable$ set to $value$
     \If{$BF == True$}
-    \State return NOT
+    \State return \blueout{NOT}
     \ElsIf{$BF == False$}
     \State return QC $\leftarrow$ identity map from input to output
     \ElsIf{$BF$ only consists of the first variable in {\it order}}
     \State return CNOT
     \Else
-    \State    //The Shannon $F_0$ and $F_1$ alternate balanced and unbalanced
-    \State    $F_0$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 0)}$,!balanced) 
-    \State    $F_1$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1}$,!balanced) 
+    \State    $k$ $\leftarrow$ first variable index in $order$
+    \State    //The Shannon $F_{x_k=0}$ and $F_{x_k=1}$ alternate balanced and unbalanced
+    \State    $F_{x_k=0}$ $\leftarrow$ relative\_phase($BF_{x_k}\leftarrow 0$,!balanced) 
+    \State    $F_{x_k=1}$ $\leftarrow$ relative\_phase($BF_{x_k}\leftarrow 1$,!balanced) 
     \State
-    \State    //The Davio $F_0$ and $F_1$ inherit the parent's balanced attribute
-    \State    $(F_0)_{dav}$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 0)}$,balanced) 
-    \State    $(F_1)_{dav}$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1}$,balanced) 
+    \State    //The Davio $F_{x_k=0}$ and $F_{x_k=1}$ inherit the parent's balanced attribute
+    \State    $(F_{x_k=0})_{dav}$ $\leftarrow$ relative\_phase($BF_{x_k}\leftarrow 0$,balanced) 
+    \State    $(F_{x_k=1})_{dav}$ $\leftarrow$ relative\_phase($BF_{x_k}\leftarrow 1$,balanced) 
     \State
-    \State    $F_2$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1} \oplus BF_{x_{order[first]}\leftarrow 0}$,
+    \State    $F_2$ $\leftarrow$ relative\_phase($BF_{x_{k = first\ in\ order}\leftarrow 1} \oplus BF_{x_{first\ in\ order}\leftarrow 0}$,
     \State                       !balanced)
     \State
-    \State    $shannon$ $\leftarrow$ compose $F_0$ and $F_1$ according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-unb} if not.
-    \State    $davio_{pos}$ $\leftarrow$ compose $(F_0)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-pos} if $balanced$ is true or Fig.~\ref{app-davio-pos-unb} if not.
-    \State    $davio_{neg}$ $\leftarrow$ compose $(F_1)_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-neg} if $balanced$ is true or Fig.~\ref{app-davio-neg-unb} if not.
+    \State    $shannon$ $\leftarrow$ compose $F_{x_k=0}$ and $F_{x_k=1}$ according to Fig.~\ref{app-shannon}  if $balanced$ is true or Fig.~\ref{app-shannon-unb} if not.
+    \State    $davio_{pos}$ $\leftarrow$ compose $(F_{x_k=0})_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-pos} if $balanced$ is true or Fig.~\ref{app-davio-pos-unb} if not.
+    \State    $davio_{neg}$ $\leftarrow$ compose $(F_{x_k=1})_{dav}$ and $F_2$ according to Fig.~\ref{app-davio-neg} if $balanced$ is true or Fig.~\ref{app-davio-neg-unb} if not.
     \State    return one of $[shannon, davio_{pos},davio_{neg}]$ with the min T-count
     \EndIf
     \State Repeat for every variable order and pick the minimum
@@ -302,25 +318,27 @@ The process is then repeated with all of the variable orders, and the minimum is
 
 \begin{example}
   \label{ex-davio}
-    We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its relative phase equivalent.
-    Just as before, we first take the positive Davio expansion about $x_3$ (for simplicity, we will only follow the Davio branches
-  in this example. However, as  we will see later, they turn out to be optimal for this function). We get $F_0 = x_1 + x_2$ and
-  $F_2 = F_0 \oplus F_1 = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$. Note that for this level we can tolerate an unbalanced
-  function, so for the $F_0$ branch we set the ``balanced'' parameter to false and on the $F_2$ branch we set it to true.
+  We again attempt to implement the function $F(x_3,x_2,x_1) = x_3x_2x_1 + \overline{x_3}(x_1 + x_2)$ as its
+  relative phase equivalent. Just as before, we first take the positive Davio expansion about $x_3$ (for
+  simplicity, we will only follow the Davio branches in this example. However, it will be easy to check later
+  that it is optimal for this function). We get $F_{x_3=0} = x_1 + x_2$, $F_{x_3=1} = x_1 \cdot x_2$,
+  and $F_{2_{x_3}} = F_{x_3=0} \oplus F_{x_3=1} = (x_1 + x_2) \oplus x_1 \cdot x_2 = x_1 \oplus x_2$.
+  Note that for this level, we can tolerate an unbalanced function, so for the $F_{x_3=0}$ branch, we set the
+  ``balanced'' parameter to false and on the $F_{2_{x_3}}$ branch we set it to true.
 
-  We then proceed to $x_2$. We decompose $F_0 = (F_0)_0 \oplus x_2 \cdot ((F_0)_2)$. Since $(F_0)_0 = x_1$, we just implement it as an $x_1$
-  controlled CNOT. After calculating $(F_0)_1 = x_1 + 1 = 1$, we get $(F_0)_2 = (F_0)_0 \oplus (F_0)_1 = x_1 \oplus 1 = \overline{x_1}$
-  Thus $x_2 \cdot (F_0)_2$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
-  these similarly to Fig.~\ref{app-davio-pos-unb} but with a balanced construction and terminate the recursion. We can see at this point that
+  We then proceed to $x_2$. We decompose $F_{x_3=0} = F_{x_3=0,x_2=0} \oplus x_2 \cdot F_{2_{x_3=0,x_2}}$ where $F_{2_{x_3=0,x_2}} = F_{x_3=0,x_2=0} \oplus F_{x_3=0,x_2=1}$. Since $F_{x_3=0,x_2=0} = x_1$, we just implement it with an $x_1$
+  controlled CNOT. After calculating $F_{x_3=0,x_2=1} = x_1 + 1 = 1$, we get $F_{2_{x_3=0,x_2}} = F_{x_3=0,x_2=0} \oplus F_{x_3=0,x_2=1} = x_1 \oplus 1 = \overline{x_1}$\blueout{.
+  Thus} $x_2 \cdot F_{2_{x_3=0,x_2}}$ is implemented according to a balanced function multiplication such as in Fig.~\ref{fig-f-dot-g}. We then compose
+these according to Fig.~\ref{app-davio-pos}. We can see at this point that
   there are four T-gates.
 
-  We now go to the $F_2$ branch. Here, since $x_1 \oplus x_2$ can be implemented using an $x_1$ controlled CNOT and $x_2$ controlled CNOT
+  We now go to the $F_{2_{x_3}}$ branch. Here, since $x_1 \oplus x_2$ can be implemented using an $x_1$ controlled CNOT and $x_2$ controlled CNOT
   in series, we synthesize that and terminate the recursion.
 
-  Back at the top level, we compose the subcircuits for $F_0$ and $F_2$ as a negative unbalanced Davio construction, adding an additional four
-  T-gates. This brings us to a total of 8 T-gates. Compare this to the 24 T-gates of our original methodology, 1/3 the size. We omit
-  the computation of the other branches and variable orders in the interest of space, but the reader can perform them  quickly to
-  see that the branch we followed is the optimal branch (or one of them. In this function there are multiple because $x_1$  and
+  Back at the top level, we compose the subcircuits for $F_{x_3=0}$ and $F_{2_{x_3}}$ as a negative unbalanced Davio construction such as in Fig.~\ref{app-davio-neg-unb}, adding an additional four
+  T-gates. This brings us to a total of 8 T-gates. Compare this to the 24 T-gates of using only Shannon's Decomposition, 1/3 the size. We omit
+  the computation of the other branches and variable orders in the interest of space, but the reader can perform them  easily to
+  see that the branch we followed is the optimal branch (or one of them). In this function, there are multiple because $x_1$  and
   $x_2$ are symmetric, and several Davio branches have similar costs). 
   The resulting circuit is depicted in Fig.~\ref{fig-func-decomp-davio} in \ref{App:FuncDecomp}.
 
@@ -355,7 +373,7 @@ The process is then repeated with all of the variable orders, and the minimum is
   \begin{algorithmic}
     \State lut\_net $\leftarrow$ a LUT network
     \State esop (Boolean Function) $\leftarrow$ a method to generate
-    an exact QC to calculate a Boolean function implemented as a FCNOT gate 
+    an exact QC to calculate a Boolean function implemented as a \blueout{single-target} gate 
     \State node\_traversal $\leftarrow$ a method to traverse lut\_net
     \While {node\_traversal returns a valid node}
     \If{node is intermediate node}
@@ -377,9 +395,9 @@ method, described in Algorithm~\ref{algo-lut}.
 
 Like Sec.~\ref{Subsec:lhrs}, we query a node traversal algorithm to get the next
 node. We then check if this node is an output node or an intermediate node. If it is an
-intermediate node, we generate the compute logic as an FCNOT using Algorithm~\ref{algo-new},
+intermediate node, we generate the compute logic as a \blueout{single-target} gate using Algorithm~\ref{algo-new},
 and then invert that output to generate the uncompute logic, then add those gates to the
-circuit. If the node is an output node, we generate the FCNOT using exact logic and add
+circuit. If the node is an output node, we generate the \blueout{single-target} gate using exact logic and add
 it to the circuit. We continue until there are no more nodes to process from the node
 traversal algorithm and terminate.
 

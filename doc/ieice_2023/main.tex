@@ -45,14 +45,23 @@
 
 \newcount\NGCcolor
 \NGCcolor=1
+\newcount\NGCcolortwo
+\NGCcolortwo=1
 %\NGCcolor=0
+\ifnum\NGCcolortwo<1
+  \newcommand{\blueoutt}[1]{\textcolor{blue}{#1}}  
+\else
+  \newcommand{\blueoutt}[1]{#1}
+\fi
+  
 \ifnum\NGCcolor<1
-  \newcommand{\redout}[1]{\textcolor{red}{\bf #1}}
-  \newcommand{\blueout}[1]{\textcolor{blue}{\bf #1}}
-  \newcommand{\greenout}[1]{\textcolor{green}{\bf #1}}
-  \newcommand{\cyannout}[1]{\textcolor{cyan}{\bf #1}}
-  \newcommand{\magentaout}[1]{\textcolor{magenta}{\bf #1}}
+  \newcommand{\redout}[1]{\textcolor{red}{#1}}
+  \newcommand{\blueout}[1]{\textcolor{blue}{#1}}
+  \newcommand{\greenout}[1]{\textcolor{green}{#1}}
+  \newcommand{\cyannout}[1]{\textcolor{cyan}{#1}}
+  \newcommand{\magentaout}[1]{\textcolor{magenta}{#1}}
   \newcommand{\yellowout}[1]{\textcolor{yellow}{\bf #1}}
+  \newcommand{\algblueout}[1]{\leavevmode\color{blue}{#1}}
 \else
   \newcommand{\redout}[1]{#1}
   \newcommand{\blueout}[1]{#1}
@@ -60,6 +69,7 @@
   \newcommand{\cyannout}[1]{#1}
   \newcommand{\magentaout}[1]{#1}
   \newcommand{\yellowout}[1]{#1}
+  \newcommand{\algblueout}[1]{\leavevmode {#1}}
 \fi
 
 \setcounter{page}{1}
@@ -86,7 +96,7 @@
 \begin{summary}
   
   Lookup Table (LUT) based synthesis methods have recently been proposed as a way to synthesize quantum Boolean circuits
-  in a qubit-constrained environment. Other recent research has demonstrated the possibility of using {\it relative phase}
+  in a qubit-constrained environment. \blueoutt{Other recent research papers} have demonstrated the possibility of using {\it relative phase}
   quantum circuits when compute/uncompute logic is used in tandem, reducing T-count in quantum Boolean circuits in
   the fault-tolerant quantum computing paradigm. Because LUT-based synthesis methods use compute/uncompute pairs on ancilla
   qubits, this suggests that implementing the arbitrary Boolean logic that make up the individual Boolean logic network nodes
@@ -116,9 +126,9 @@ relative-phase Toffoli gates (RTOF), circuit optimization, LUT, quantum circuit 
 \bibliographystyle{ieicetr}%
 \bibliography{ref}%
 
-\vspace{-22mm}
+\vspace{-15mm}
 
-\profile[img/clarino.pdf]{David Clarino}{received his BS EECS and BA Physics from UC Berkeley and MS from Santa Clara University. He is currently a student at the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, Japan. His research interests include quantum circuit design and quantum circuit verification and he has previously worked on SoC design verification}
+\profile[img/clarino.pdf]{David Clarino}{received his BS EECS and BA Physics from UC Berkeley and MS from Santa Clara University. He is currently a student at the Graduate School of Information Science and Engineering, Ritsumeikan University, Shiga, Japan. His research interests include quantum circuit design and quantum circuit verification, and he has previously worked on SoC design verification}
 
 %\vspace{-5mm}
 
