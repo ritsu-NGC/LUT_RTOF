@@ -100,8 +100,14 @@ class BlifReadTests(object):
         test_lut = lut_node("test",["x3","x1","x2"],"f")
         test_lut.func = test_lut.bdd.add_expr("(x3 & x1 & x2) | (~x3 & ~(~x1 & ~x2))")
         test_lut.synth()
-        assert test_lut.cost == 16
+        assert test_lut.cost == 24
 
+    def test_lut_node_synth_new(self):
+        test_lut = lut_node("test",["x3","x1","x2"],"f")
+        test_lut.func = test_lut.bdd.add_expr("(x3 & x1 & x2) | (~x3 & ~(~x1 & ~x2))")
+        test_lut.synth()
+        assert test_lut.cost_new == 24
+        
     def test_lut_node_cf_synth(self):
         test_lut = lut_node("test",["x3","x1","x2"],"f")
         test_lut.func = test_lut.bdd.add_expr("(x3 & x1 & x2) | (~x3 & ~(~x1 & ~x2))")

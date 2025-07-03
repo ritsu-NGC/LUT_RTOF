@@ -1,6 +1,7 @@
 from qiskit import QuantumCircuit,QuantumRegister
 from qiskit.circuit.classicalfunction import classical_function,ClassicalFunction
 from qiskit.circuit.classicalfunction.types import Int1
+from qiskit import Aer
 from dd import cudd
 from textwrap import dedent
 import calc_cost
@@ -99,6 +100,40 @@ def synthesize(qc,outputs,regs,constants,standard=0,alt_rtof=1):
     ret_qc    = gen_phase_qc(ret_qc,bdd_func,bdd,regs)
 
     return ret_qc
+
+def gen_phase_qc_new(qc,bdd_func,bdd,regs):
+    ret_qc = qc.copy()
+    #phase_func = bdd_func[1][2]
+    phase_num = 0
+    found = 0
+    #print("DCDEBUG phase_func_len " + str(len(bdd_func)))
+    for phase_func in bdd_func[1]:
+        #print("DCDEBUG phase_num[" + str(phase_num) + "]")
+        #print(list(bdd.pick_iter(phase_func)))
+        if(func_exists_in_logic(phase_func,bdd_func[3]) or phase_func == bdd.add_expr('False')):
+            # raise Exception("not implemented!")
+            #print("DCDEBUG phase_num[" + str(phase_num) + "] is False")
+            found = not phase_func == bdd.add_expr('False')
+            #return [ret_qc,found]
+        elif not phase_num == 0:
+            bdd_pool = bdd_func[3]
+            #print("DCDEBUG")
+            #print(list(bdd.pick_iter(phase_func)))
+            phase_qc = bdd_to_qc(bdd,phase_func,phase_num,qc, bdd_pool)
+            #print("DCDEBUG phase_qc")
+            #print(phase_qc.draw()) #DCDEBUG
+            # print("DCDEBUG ret_qc")
+            #print(ret_qc.draw()) #DCDEBUG
+            ret_qc   = phase_qc.compose(ret_qc,qubits=qc.qubits)
+            # print(ret_qc.draw()) #DCDEBUG
+            # print(ret_qc)
+        phase_num+=1
+
+    # print("DCDEBUG final ret_qc")
+    # print(ret_qc.draw()) #DCDEBUG
+
+    return [ret_qc,found]
+
 
 def gen_phase_qc(qc,bdd_func,bdd,regs):
     ret_qc = qc.copy()
@@ -341,3 +376,28 @@ def pick_a_b(a,b,total_phase,bdd):
         return (a if (min_len == a_count) else b)
     
     return a
+
+def is_same_bool_func(qc_a, qc_b):
+    backend   = Aer.get_backend('unitary_simulator')
+    mat_a  = execute(qc_a, backend).result().get_unitary(qc_a,decimals=3)
+    mat_b  = execute(qc_b, backend).result().get_unitary(qc_b,decimals=3)
+    found_err = 0
+    for i in range(0,len(mat_a)):
+        for j in range(0,len(mat_a[i])):
+            if (mat_a[i][j] == 0 and mat_b[i][j] != 0) or (mat_a[i][j] != 0 and mat_b[i][j] == 0):
+                print("qc_a[" + i + "][" + j + "] = " + mat_a[i][j] + " != qc_b[" + i + "][" + j + "] = " + mat_b[i][j])
+                f = open("qc_a.txt",'w')
+                print(mat_a.to_string(),file=f)
+                f = open("qc_b.txt",'w')
+                print(mat_b.to_string(),file=f)
+                found_err = 1
+            else:
+                found_err = -1
+
+    if found_err == 1:
+        return True
+    elif found_err == -1:
+        return False
+    else:
+        raise Exception("is_same_bool didn't do anything")
+            

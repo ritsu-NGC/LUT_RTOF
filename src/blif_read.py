@@ -48,8 +48,9 @@ def blif_read(fpath):
             keep_reading = 0
             break
         else:
-            print("DCDEBUG line == .end " + str(line == '.end'))
             qc_args = proc_line(qc_args,line)
+            #print("DCDEBUG line == .end " + str(line == '.end'))
+            
     
     if(qc_args["state"] == "func_info"):
         #print("DCDEBUG sizeof node" + str(sys.getsizeof(qc_args["nodes"][-1])))
@@ -74,7 +75,7 @@ def proc_line(qc_args,line):
     elif line.split()[0] == '.names':
         #
         #print("DCDEBUG " + str())
-        print("DCDEBUG " + line)
+        #print("DCDEBUG " + line)
         if line.split()[1] == "$false" or line.split()[1] == "$true" or line.split()[1] == "$undef":
             return qc_args
         if (qc_args["state"] != "node_info"):
@@ -107,12 +108,14 @@ def proc_line(qc_args,line):
     return qc_args
 
 def comp_methods(fpath):
-    qc_args = blif_read(fpath)
-    cost    = 0
-    pr_time = 0
-    cf_cost = 0
-    cf_time = 0
-    us_cost = 0    
+    qc_args  = blif_read(fpath)
+    cost     = 0
+    pr_time  = 0
+    new_time = 0
+    cf_cost  = 0
+    cf_time  = 0
+    us_cost  = 0
+    new_cost = 0
     need_ancilla = 0
     tot_anc  = 0
     ret_vars = {}
@@ -125,16 +128,20 @@ def comp_methods(fpath):
         #gate.synth_cf()
         if gate._fanout in qc_args["outputs"]:
             cost += gate.cf_cost
+            new_cost += gate.cf_cost
             cf_cost += gate.cf_cost
             us_cost += gate.us_cost
             pr_time += gate.cf_time
             cf_time += gate.cf_time
+            new_time += gate.cf_time
             num_out_gates += 1
             tot_gates += 1
         else:
             cost    += gate.cost * 2
+            new_cost += gate.cost_new * 2
             pr_time += gate.time
             cf_time += gate.cf_time
+            new_time += gate.time_new
             cf_cost += gate.cf_cost * 2
             us_cost += gate.us_cost * 2
             tot_gates += 2
@@ -144,9 +151,11 @@ def comp_methods(fpath):
         tot_nodes += gate.num_nodes
         tot_anc += gate.cf_anc
 
-    ret_vars['Proposed']   = cost
+    ret_vars['Previous']   = cost
+    ret_vars['Proposed']   = new_cost    
     ret_vars['ESOP']       = cf_cost
     ret_vars['PrTime']     = pr_time
+    ret_vars['NewTime']    = new_time
     ret_vars['ESOPTime']   = cf_time    
     #ret_vars['UnitarySynthesis'] = us_cost    
     #ret_vars['NeedAncilla'] = need_ancilla
@@ -229,7 +238,7 @@ class lut_node:
                 expr_str += "~" + bdd_vars[count]
             count += 1
         return bdd.add_expr(expr_str)
-
+    
     def synth(self):
         qc = QuantumCircuit(1)
         self.num_nodes = len(self.func)
@@ -241,6 +250,87 @@ class lut_node:
         self.cost = ret_val[1]
         self.qc   = ret_val[0]
         self.time = int((end - start)*1000)
+
+        start = time.time()
+        ret_val = self.do_synth_new(self.func,var_order,qc,unbalanced=True,do_unbalanced=True)
+        end   = time.time()
+        self.cost_new = ret_val[1]
+        self.qc_new   = ret_val[0]
+        self.time_new = int((end - start)*1000)
+
+    def do_synth_new(self,func,var_order,qc,unbalanced=False,do_unbalanced=False):
+        #if len(func) == 1 or len(var_order) == 1:
+        if func == self.bdd.add_expr('True') or len(var_order) == 1:
+            #return CNOT
+            return [qc, 0]
+        else:
+            if unbalanced == True:
+                fact = 1
+            else:
+                fact = 2
+
+
+            ret_arr = [qc,0]
+
+            synth_func0 = self.bdd.let({var_order[0]:False},func)
+            f0_gen = False
+            if synth_func0 == self.bdd.add_expr('True'):
+                f0 = [qc,0]
+            elif synth_func0 != self.bdd.add_expr('False'):
+                f0 = self.do_synth_new(synth_func0,var_order[1:],qc,do_unbalanced ^ unbalanced,do_unbalanced)
+                #print("DCDEBUG f0" + str(f0[1]))
+                f0_gen = True
+            else:
+                f0 = [qc,0]
+
+            f1_gen = False                
+            synth_func1 = self.bdd.let({var_order[0]:True},func)
+            if synth_func1 == self.bdd.add_expr('True'):
+                f1 = [qc,0]
+            elif synth_func1 != self.bdd.add_expr('False'):
+                f1 = self.do_synth_new(synth_func1,var_order[1:],qc,do_unbalanced ^ unbalanced, do_unbalanced)
+                f1_gen = True
+                #print("DCDEBUG f1" + str(f1[1]))
+            else:
+                f1 = [qc,0]
+
+            f0_gen_dav = False
+            if synth_func0 == self.bdd.add_expr('True'):
+                f0_dav = [qc,0]
+            elif synth_func0 != self.bdd.add_expr('False'):
+                f0_dav = self.do_synth_new(synth_func0,var_order[1:],qc,unbalanced,do_unbalanced)
+                f0_gen_dav = True
+            else:
+                f0_dav = [qc,0]
+
+            f1_gen_dav = False                
+            if synth_func1 == self.bdd.add_expr('True'):
+                f1_dav = [qc,0]
+            elif synth_func1 != self.bdd.add_expr('False'):
+                f1_dav = self.do_synth_new(synth_func1,var_order[1:],qc,unbalanced, do_unbalanced)
+                f1_gen_dav = True
+            else:
+                f1_dav = [qc,0]
+
+                
+            f2_gen = False
+            synth_func2 = xor_node(synth_func0,synth_func1,self.bdd)
+            if synth_func2 == self.bdd.add_expr('True'):
+                f2 = [qc,0]
+            elif synth_func2 != self.bdd.add_expr('False'):
+                f2 = self.do_synth_new(synth_func2,var_order[1:],qc,do_unbalanced ^ unbalanced, do_unbalanced)
+                f2_gen = True
+                #print("DCDEBUG f2" + str(f2[1]))
+            else:
+                f2 = [qc,0]
+
+            shannon = [qc, fact * f0[1] + 4 * f0_gen + fact * f1[1] + 4 * f1_gen]
+            davio_p = [qc, f0_dav[1] + fact * f2[1] + 4 * f2_gen]
+            davio_n = [qc, f1_dav[1] + fact * f2[1] + 4 * f2_gen]
+
+            ret_arr = min([shannon,davio_p,davio_n],key=lambda x: x[1])
+
+            return ret_arr
 
     def do_synth(self,func,var_order,qc,unbalanced=False,do_unbalanced=False):
         #if len(func) == 1 or len(var_order) == 1:
@@ -338,3 +428,7 @@ def display_top(snapshot, key_type='lineno', limit=10):
         print("%s other: %.1f KiB" % (len(other), size / 1024))
     total = sum(stat.size for stat in top_stats)
     print("Total allocated size: %.1f KiB" % (total / 1024))
+
+def xor_node(node0,node1,bdd):
+    return ~node0 & node1 | node0 & ~node1
+    
